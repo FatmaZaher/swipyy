@@ -43,14 +43,14 @@ const Location = () => {
               <AddOutlinedIcon />
               Add Location
             </button> */}
-             <FormikControl
+            <FormikControl
               control="input"
               type="text"
               name="yourLink"
               placeholder="Type or paste location address"
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add Location" />
+            <LinkButton type="submit" buttontext="Add Location" icon="yes" />
           </Form>
         )}
       </Formik>

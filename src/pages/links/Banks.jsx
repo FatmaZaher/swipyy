@@ -44,7 +44,11 @@ const Banks = () => {
               options={banksList}
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add Bank Account" />
+            <LinkButton
+              type="submit"
+              buttontext="Add Bank Account"
+              icon="yes"
+            />
           </Form>
         )}
       </Formik>

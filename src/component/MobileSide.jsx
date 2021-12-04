@@ -5,7 +5,9 @@ import ShareIcon from "@mui/icons-material/Share";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
 import FormikControl from "../component/form/FormikControl";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -59,7 +61,7 @@ const MobileSide = () => {
                 name="name"
                 placeholder="your name"
               />
-               <FormikControl
+              <FormikControl
                 control="input"
                 type="email"
                 name="email"
@@ -72,6 +74,10 @@ const MobileSide = () => {
           )}
         </Formik>
       </div>
+      <Link to="/" className="link upgrad-btn">
+        <RemoveRedEyeIcon />
+        View Live
+      </Link>
     </div>
   );
 };

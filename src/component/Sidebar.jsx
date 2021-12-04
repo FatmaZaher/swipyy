@@ -26,7 +26,7 @@ const Sidebar = () => {
     {
       title: "Messages",
       icon: <MailOutlineIcon />,
-      link: "/",
+      link: "/messages",
     },
     {
       title: "Analytic",

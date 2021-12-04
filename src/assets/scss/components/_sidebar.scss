@@ -66,12 +66,6 @@
       .text {
         margin-top: 30px;
       }
-      .upgrad-btn {
-        padding: $btn-input-padding;
-        border-radius: $btn-input-radius;
-        background-color: $main-color;
-        color: $white-color;
-      }
     }
   }
   .shap1 {
@@ -84,4 +78,11 @@
     bottom: 0;
     left: 0;
   }
+}
+.upgrad-btn {
+  padding: $btn-input-padding;
+  border-radius: $btn-input-radius;
+  background-color: $main-color;
+  color: $white-color !important;
+  text-decoration: none;
 }

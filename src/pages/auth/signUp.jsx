@@ -5,7 +5,7 @@ import shap1 from "../../assets/images/shap1.svg";
 import shap2 from "../../assets/images/shap2.svg";
 import google from "../../assets/images/google.png";
 import facebook from "../../assets/images/facebook.png";
-import { Formik, Form} from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
 import LinkButton from "../../component/form/LinkButton";
@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 const initialValues = {
   email: "",
   password: "",
+  repatePassword: "",
   remeberCheckbox: "",
 };
 const onSubmit = (values) => {
@@ -21,11 +22,12 @@ const onSubmit = (values) => {
 };
 const validationSchema = Yup.object({
   email: Yup.string().required("Enter Your Email*"),
-  password: Yup.string().required("Enter Your Password*")
+  password: Yup.string().required("Enter Your Email*"),
+  repeatPassword: Yup.string().required("Repeat Your Password*"),
 });
-const remeberCheckbox = [{ key: "check1", value: "Remember me" }];
+const remeberCheckbox = [{ key: "check1", value: "I agree to the Terms of Service and Privacy Policy" }];
 
-const login = () => {
+const signUp = () => {
   return (
     <div className="login-content">
       <div className="left-side">
@@ -34,7 +36,7 @@ const login = () => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-side">
-        <h2 className="login-head">Sign in</h2>
+        <h2 className="login-head">Sign up</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -54,8 +56,16 @@ const login = () => {
                 control="input"
                 type="password"
                 name="password"
-                label="Enter password*"
+                label="Create password*"
                 placeholder="Password"
+                error="true"
+              />
+              <FormikControl
+                control="input"
+                type="password"
+                name="repeatPassword"
+                label="Repeat password*"
+                placeholder="Repeat password"
                 error="true"
               />
               <div className="remmeber-forget">
@@ -65,12 +75,9 @@ const login = () => {
                   label="Remember me"
                   options={remeberCheckbox}
                 />
-                <Link to="/" className="forget-password">
-                  Forget Password?
-                </Link>
               </div>
               <div className="login-btn">
-                <LinkButton type="submit" buttontext="Sign in" />
+                <LinkButton type="submit" buttontext="Sign up" />
               </div>
             </Form>
           )}
@@ -94,7 +101,7 @@ const login = () => {
           <p>
             Not a member?{" "}
             <Link to="/" className="link sign-login">
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>
@@ -102,4 +109,4 @@ const login = () => {
     </div>
   );
 };
-export default login;
+export default signUp;

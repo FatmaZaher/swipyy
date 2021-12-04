@@ -59,22 +59,22 @@
 }
 .eQWBcd {
   svg {
-    width: 10px;
+    width: 10px !important;
   }
 }
 .hQZhQk {
   svg {
-    width: 20px;
-    fill: $nav-color;
+    width: 20px !important;
+    fill: $nav-color !important;
   }
 }
 .grnfGc {
   background-color: $back-color !important;
   box-shadow: none !important;
-  border-radius: $btn-input-radius;
+  border-radius: $btn-input-radius !important;
 }
 .dnuJgB img {
-  border-radius: $btn-input-radius;
+  border-radius: $btn-input-radius !important;
 }
 
 

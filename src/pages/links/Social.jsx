@@ -76,7 +76,7 @@ const Social = () => {
               placeholder="Paste your social link here"
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add Social Link" />
+            <LinkButton type="submit" buttontext="Add Social Link" icon="yes" />
           </Form>
         )}
       </Formik>

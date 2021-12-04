@@ -4,12 +4,17 @@ import ImageUpload from "image-upload-react";
 import "image-upload-react/dist/index.css";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import HideImageIcon from "@mui/icons-material/HideImage";
+import UpdateIcon from "@mui/icons-material/Update";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import tele from "../../assets/images/tele.png";
 import * as Yup from "yup";
 import SwitchButton from "../../component/SwitchButton";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
+import ImageUploading from "react-images-uploading";
 
 const initialValues = {
   yourLink: "",
@@ -27,6 +32,14 @@ const Link = () => {
     setImageSrc(URL.createObjectURL(e.target.files[0]));
   };
 
+  // const [images, setImages] = React.useState([]);
+  // const maxNumber = 69;
+
+  // const onChange = (imageList, addUpdateIndex) => {
+  //   // data for submit
+  //   console.log(imageList, addUpdateIndex);
+  //   setImages(imageList);
+  // };
   return (
     <div className="link-page">
       <Formik
@@ -43,7 +56,7 @@ const Link = () => {
               placeholder="Paste your link here"
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add your Link" />
+            <LinkButton type="submit" buttontext="Add your Link" icon="yes" />
           </Form>
         )}
       </Formik>
@@ -59,6 +72,51 @@ const Link = () => {
         <div className="single-link mb-3">
           <div className="link-and-icon">
             <SwitchButton />
+            {/* <ImageUploading
+              multiple
+              value={images}
+              onChange={onChange}
+              maxNumber={maxNumber}
+              dataURLKey="data_url"
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps,
+              }) => (
+                // write your building UI
+                <div className="upload__image-wrapper">
+                  <button
+                    style={isDragging ? { color: "red" } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                  >
+                    <AddPhotoAlternateIcon />
+                  </button>
+                  &nbsp;
+                  <button onClick={onImageRemoveAll}>
+                    <HideImageIcon />
+                  </button>
+                  {imageList.map((image, index) => (
+                    <div key={index} className="image-item">
+                      <img src={image["data_url"]} alt="" width="100" />
+                      <div className="image-item__btn-wrapper">
+                        <button onClick={() => onImageUpdate(index)}>
+                          <UpdateIcon />
+                        </button>
+                        <button onClick={() => onImageRemove(index)}>
+                          <DeleteOutlineIcon />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </ImageUploading> */}
             <ImageUpload
               handleImageSelect={handleImageSelect}
               imageSrc={imageSrc}
@@ -90,7 +148,7 @@ const Link = () => {
         <div className="single-link mb-3">
           <div className="link-and-icon">
             <SwitchButton />
-            <ImageUpload
+            {/* <ImageUpload
               handleImageSelect={handleImageSelect}
               imageSrc={imageSrc}
               setImageSrc={setImageSrc}
@@ -99,7 +157,7 @@ const Link = () => {
                 height: 65,
                 margin: 0,
               }}
-            />
+            /> */}
             <div className="single-link-info">
               <p className="name-from-link">sewarsa.com</p>
               <span className="the-link">
@@ -121,7 +179,7 @@ const Link = () => {
         <div className="single-link mb-3">
           <div className="link-and-icon">
             <SwitchButton />
-            <ImageUpload
+            {/* <ImageUpload
               handleImageSelect={handleImageSelect}
               imageSrc={imageSrc}
               setImageSrc={setImageSrc}
@@ -130,7 +188,7 @@ const Link = () => {
                 height: 65,
                 margin: 0,
               }}
-            />
+            /> */}
             <div className="single-link-info">
               <p className="name-from-link">sewarsa.com</p>
               <span className="the-link">
