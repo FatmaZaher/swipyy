@@ -1,0 +1,81 @@
+.link-page,
+.social-page,
+.location-page,
+.banks-page {
+  background-color: $white-color;
+  padding: 30px;
+  border-radius: $btn-input-radius;
+  // .your-links {
+  //   .single-link, {
+  //     padding: 20px;
+  //     border: 1px solid $border-color;
+  //     border-radius: $btn-input-radius;
+  //     @include flex(center, space-between);
+  //     .single-link-icon,
+  //     .single-link-img {
+  //       width: 40px;
+  //       height: 40px;
+  //       background-color: $blue-color;
+  //       color: $white-color;
+  //       border-radius: $btn-input-radius;
+  //       @include flex(center, center);
+  //     }
+  //     .single-link-info, {
+  //       width: 60%;
+  //       .name-from-link {
+  //         font-weight: 700;
+  //         margin-bottom: 5px;
+  //         margin: 0;
+  //       }
+  //       .the-link {
+  //         color: $blue-color;
+  //         font-size: 12px;
+  //         img {
+  //           margin-right: 5px;
+  //         }
+  //       }
+  //     }
+  //     .link-action {
+  //       color: $text-color;
+  //       cursor: pointer;
+  //       .edit-icon,
+  //       .trash-icon {
+  //         padding: 10px;
+  //         background-color: $text-color;
+  //         color: $white-color;
+  //         border-radius: $btn-input-radius;
+  //         margin-right: 5px;
+  //       }
+  //       .trash-icon {
+  //         background-color: $back-color;
+  //         color: $text-color;
+  //       }
+  //       svg {
+  //         width: 18px;
+  //       }
+  //     }
+  //   }
+  // }
+}
+.eQWBcd {
+  svg {
+    width: 10px;
+  }
+}
+.hQZhQk {
+  svg {
+    width: 20px;
+    fill: $nav-color;
+  }
+}
+.grnfGc {
+  background-color: $back-color !important;
+  box-shadow: none !important;
+  border-radius: $btn-input-radius;
+}
+.dnuJgB img {
+  border-radius: $btn-input-radius;
+}
+
+
+

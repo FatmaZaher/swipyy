@@ -1,0 +1,31 @@
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  .my-link {
+    padding: 2px 15px;
+    font-size: 13px;
+    width: 90%;
+  }
+}
+.my-link {
+  line-height: 40px;
+  font-size: 14px;
+  border-radius: $btn-input-radius;
+  background-color: $white-color;
+  .link-text {
+    margin: 0;
+    color: $grad-color;
+    @include flex(center, space-between);
+    span {
+      a {
+        color: $black-color;
+      }
+    }
+    .person-photo {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

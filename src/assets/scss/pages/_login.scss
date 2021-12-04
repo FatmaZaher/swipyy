@@ -1,0 +1,52 @@
+.login-content {
+  .left-side {
+    position: relative;
+    background-color: $main-color;
+    height: 100vh;
+    .logo {
+      width: 350px;
+    }
+    .shap1 {
+      position: absolute;
+      top: 123px;
+      left: 449px;
+    }
+    .shap2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  .right-side {
+    padding: 50px 100px;
+    width: 100%;
+    height: 100%;
+    .login-form {
+      font-size: 15px;
+      .h2 {
+        color: $text-color;
+        margin-bottom: 30px;
+      }
+      .field {
+        // color: $text-color;
+
+        margin-bottom: 20px;
+        & > * {
+          display: block;
+        }
+        label {
+          margin-bottom: 14px;
+        }
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          color: $pargh-color;
+          padding: $btn-input-padding;
+          border-radius: $btn-input-radius;
+        }
+      }
+    }
+  }
+}

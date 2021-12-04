@@ -1,0 +1,60 @@
+// @import "../index.scss";
+// .LinksHeaderList {
+//   width: 100%;
+//   z-index: 1;
+//   @include flex(center, space-between);
+//   .list-item {
+//     a {
+//       text-decoration: none;
+//       padding: $btn-input-padding;
+//       border-radius: $btn-input-radius;
+//       color: $text-color;
+//       background-color: $white-color;
+//       @include flex(center, center);
+//       cursor: pointer;
+//       transition: $transition;
+//       &:hover {
+//         background-color: $text-color;
+//         color: $white-color;
+//       }
+//       &.active {
+//         background-color: $text-color;
+//         color: $white-color;
+//       }
+//       .icon {
+//         margin-right: 10px;
+//       }
+//     }
+//   }
+// }
+.nav {
+  width: 100%;
+  z-index: 1;
+  @include flex(center, space-between);
+  .nav-link {
+      text-decoration: none;
+      padding: $btn-input-padding;
+      border-radius: $btn-input-radius;
+      color: $text-color;
+      background-color: $white-color;
+      @include flex(center, center);
+      cursor: pointer;
+      transition: $transition;
+      min-width: 140px;
+      &:hover {
+        background-color: $text-color;
+        color: $white-color;
+      }
+      &.active {
+        background-color: $text-color;
+        color: $white-color;
+      }
+      .icon {
+        margin-right: 10px;
+      }
+    
+  }
+}
+.nav-tabs{
+  border: none;
+}

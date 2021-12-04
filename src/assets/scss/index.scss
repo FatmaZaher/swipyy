@@ -1,0 +1,23 @@
+.link{
+  text-decoration: none !important;
+}
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0
+}
+@import "./variables";
+@import "./mixin";
+@import "./breakpoint";
+@import "./components/homeHeader.scss";
+@import "./components/sidebar.scss";
+@import "./components/mobileSide.scss";
+@import "./components/linksHeader.scss";
+@import "./pages/home.scss";
+@import "./pages/links.scss";
+@import "./pages/login.scss";
+@import "./formik.scss";
+@import "./switchButton.scss";
+@import "./pages/appearance.scss";
+@import "./components/linksPageHeader.scss";
+@import "./components/singleLink.scss";
