@@ -14,17 +14,15 @@ function App() {
       <Route render={props => (
         <>
 
-          <Switch>
-            <Route path="/" exact>
+          
               <Sidebar />
               <Home />
               <MobileSide />
-            </Route>
-            <Route path="/login" component={login} />
+    
+            {/* <Route path="/login" component={login} />
             <Route path="/signUp" component={signUp} />
-            <Route path="/changePassword" component={changePassword} />
-          </Switch>
-
+            <Route path="/changePassword" component={changePassword} /> */}
+     
         </>
       )} />
     </BrowserRouter>

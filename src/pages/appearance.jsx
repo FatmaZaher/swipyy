@@ -263,7 +263,7 @@ const Appearance = () => {
                         return (
                           <div>
                             {details.map((detail, index) => (
-                              <div key={index}>
+                              <div key={index} className="high-details">
                                 <p className="high-title-head">Detail</p>
                                 <Field
                                   name={`details[${index}]`}

@@ -69,6 +69,28 @@
     color: $pargh-color;
   }
 }
+.highlights{
+  .high-title,
+  .high-details{
+    margin: 15px 0;
+  }
+}
+.field-array{
+  .link-input{
+
+    padding: $btn-input-padding;
+    border-radius: $btn-input-radius;
+    background-color: $back-color;
+    color: $grad-color;
+    outline: none;
+    border: none;
+    width: calc(100% - 215px);
+    // width: 100%;
+    height: 48px;
+    line-height: 48px;
+    margin-right: 15px;
+  }
+}
 // .high-title {
 //   margin-top: 20px;
 //   .link-form{

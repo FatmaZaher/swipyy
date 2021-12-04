@@ -15,6 +15,7 @@ import SwitchButton from "../../component/SwitchButton";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
 import ImageUploading from "react-images-uploading";
+import ImgUpload from "../../component/ImgUpload";
 
 const initialValues = {
   yourLink: "",
@@ -32,7 +33,7 @@ const Link = () => {
     setImageSrc(URL.createObjectURL(e.target.files[0]));
   };
 
-  // const [images, setImages] = React.useState([]);
+  // const [images, setImages] = useState([]);
   // const maxNumber = 69;
 
   // const onChange = (imageList, addUpdateIndex) => {
@@ -72,7 +73,9 @@ const Link = () => {
         <div className="single-link mb-3">
           <div className="link-and-icon">
             <SwitchButton />
-            {/* <ImageUploading
+            {/* <ImgUpload /> */}
+            {/* <div className="image-upload">
+               <ImageUploading
               multiple
               value={images}
               onChange={onChange}
@@ -116,7 +119,9 @@ const Link = () => {
                   ))}
                 </div>
               )}
-            </ImageUploading> */}
+            </ImageUploading>
+            </div> */}
+           
             <ImageUpload
               handleImageSelect={handleImageSelect}
               imageSrc={imageSrc}
