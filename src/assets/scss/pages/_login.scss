@@ -1,11 +1,11 @@
 .login-content {
   @include flex(center, space-between);
-  .left-side {
+  .left-login-side {
     position: fixed;
     top: 0;
     left: 0;
     background-color: $main-color;
-    height: 100vh;
+    height: 100%;
     width: 50%;
     @include flex(center, center);
     .logo {
@@ -22,12 +22,12 @@
       left: 0;
     }
   }
-  .right-side {
+  .right-login-side {
     padding: 50px 100px;
     width: 50%;
     margin-left: auto;
     min-height: 100vh;
-    @include flex(center, unset);
+    @include flex(center, center);
    > div {
       width: 100%;
     }
@@ -37,57 +37,7 @@
       color: $text-color;
       font-weight: 600;
     }
-    .login-form {
-      font-size: 15px;
-      .form-control {
-        width: unset;
-        .link-input {
-          background-color: transparent;
-          color: $grad-color;
-          border: 1px solid $border-color;
-        }
-      }
-      .remmeber-forget {
-        @include flex(center, space-between);
-        input {
-          margin-right: 10px;
-          &:checked {
-            background: $blue-color;
-          }
-        }
-        .forget-password {
-          color: $main-color;
-        }
-      }
-      .login-btn {
-        .link-button {
-          width: 100%;
-          background-color: $main-color;
-          margin: 15px 0;
-        }
-      }
-
-      .field {
-        // color: $text-color;
-
-        margin-bottom: 20px;
-        & > * {
-          display: block;
-        }
-        label {
-          margin-bottom: 14px;
-        }
-        input {
-          width: 100%;
-          border: none;
-          outline: none;
-          background-color: transparent;
-          color: $pargh-color;
-          padding: $btn-input-padding;
-          border-radius: $btn-input-radius;
-        }
-      }
-    }
+    
     .other-login {
       text-align: center;
       .other-link {
@@ -111,6 +61,57 @@
         color: $text-color;
         font-weight: 600;
       }
+    }
+  }
+}
+.login-form {
+  font-size: 15px;
+  .form-control {
+    width: unset;
+    .link-input {
+      background-color: transparent;
+      color: $grad-color;
+      border: 1px solid $border-color;
+    }
+  }
+  .remmeber-forget {
+    @include flex(center, space-between);
+    input {
+      margin-right: 10px;
+      &:checked {
+        background: $blue-color;
+      }
+    }
+    .forget-password {
+      color: $main-color;
+    }
+  }
+  .login-btn {
+    .link-button {
+      width: 100%;
+      background-color: $main-color;
+      margin: 15px 0;
+    }
+  }
+
+  .field {
+    // color: $text-color;
+
+    margin-bottom: 20px;
+    & > * {
+      display: block;
+    }
+    label {
+      margin-bottom: 14px;
+    }
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $pargh-color;
+      padding: $btn-input-padding;
+      border-radius: $btn-input-radius;
     }
   }
 }

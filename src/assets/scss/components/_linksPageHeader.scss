@@ -1,12 +1,13 @@
-.your-links-header,
-.your-links-header,
-.your-links-header,
 .your-links-header {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: $text-color;
   .icon {
     color: $grad-color;
     margin-left: 5px;
   }
+  @include mobile {
+    font-size: 12px
+  }
+
 }

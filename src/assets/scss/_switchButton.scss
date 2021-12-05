@@ -43,4 +43,33 @@
       }
     }
   }
+  @include mobile {
+    width: 20px;
+    .checkbox{
+      width: 20px;
+      height: 10px;
+    }
+    input[type="checkbox"] {
+      &:nth-child(3) {
+        top: 150px;
+        left: 40%;
+      }
+      &:nth-child(2) {
+        top: 220px;
+        left: 40%;
+      }
+      &::before {
+        height: 6px;
+        width: 6px;
+        top: 77%;
+        left: 2px;
+      }
+      &:checked {
+        &::before {
+          left: 100%;
+        }
+      }
+    }
+  }
+
 }

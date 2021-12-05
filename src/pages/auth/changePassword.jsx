@@ -10,6 +10,10 @@ import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const initialValues = {
   newPassword: "",
@@ -24,14 +28,17 @@ const validationSchema = Yup.object({
 });
 
 const changePassword = () => {
+  function sucesesChange() {
+    Swal.fire("Good job!", "Edited successfully!", "success");
+  }
   return (
     <div className="login-content">
-      <div className="left-side">
+      <div className="left-login-side">
         <img src={logo} alt="" className="logo" />
         <img src={shap1} alt="" className="shap1" />
         <img src={shap2} alt="" className="shap2" />
       </div>
-      <div className="right-side">
+      <div className="right-login-side">
         <div>
           <h2 className="login-head">Change Password</h2>
           <Formik
@@ -58,7 +65,13 @@ const changePassword = () => {
                   error="true"
                 />
                 <div className="login-btn">
-                  <LinkButton type="submit" buttontext="Update Password" />
+                  <Link to="/">
+                    <LinkButton
+                      type="submit"
+                      buttontext="Update Password"
+                      onClick={sucesesChange}
+                    />
+                  </Link>
                 </div>
               </Form>
             )}

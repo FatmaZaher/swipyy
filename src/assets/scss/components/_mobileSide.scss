@@ -84,4 +84,7 @@
       outline: none;
     }
   }
+  @include mobile {
+    right: -100%;
+  }
 }

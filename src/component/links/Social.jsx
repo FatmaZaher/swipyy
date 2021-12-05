@@ -8,6 +8,8 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import tele from "../../assets/images/tele.png";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
+import Deleteicon from "../../component/icons/Deleteicon";
+import Editicon from "../../component/icons/Editicon";
 
 const initialValues = {
   yourLink: "",
@@ -81,7 +83,7 @@ const Social = () => {
         )}
       </Formik>
       <div className="your-links pt-4">
-        <p className="your-links-header mb-5">Social Links</p>
+        <p className="your-links-header mb-3 mb-m-5">Social Links</p>
         <div className="single-link mb-3">
           <div className="link-and-icon">
             <div className="single-link-icon">
@@ -110,84 +112,8 @@ const Social = () => {
                 />
               </Form>
             </Formik>
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <div className="single-link-icon">
-              <WhatsAppIcon />
-            </div>
-            <div className="single-link-info">
-              <p className="name-from-link">Whatsapp</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <Formik initialValues={initialValues}>
-              <Form className="link-form">
-                {/* <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> */}
-                <FormikControl
-                  control="select"
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                />
-              </Form>
-            </Formik>
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <div className="single-link-icon">
-              <WhatsAppIcon />
-            </div>
-            <div className="single-link-info">
-              <p className="name-from-link">Whatsapp</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <Formik initialValues={initialValues}>
-              <Form className="link-form">
-                {/* <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> */}
-                <FormikControl
-                  control="select"
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                />
-              </Form>
-            </Formik>
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
+            <Editicon />
+            <Deleteicon />
           </div>
         </div>
       </div>

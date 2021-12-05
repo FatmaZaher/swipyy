@@ -1,5 +1,5 @@
 .sidebar {
-  height: 625px;
+  height: 100%;
   width: 255px;
   padding: 17px;
   position: fixed;
@@ -77,6 +77,9 @@
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+  @include mobile {
+    left: -100%;
   }
 }
 .upgrad-btn {

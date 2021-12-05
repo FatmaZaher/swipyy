@@ -16,7 +16,7 @@ const Sidebar = () => {
     {
       title: "Links",
       icon: <LinkIcon />,
-      link: "/",
+      link: "/links",
     },
     {
       title: "Appearance",
@@ -31,7 +31,7 @@ const Sidebar = () => {
     {
       title: "Analytic",
       icon: <PollOutlinedIcon />,
-      link: "/",
+      link: "/analytic",
     },
     {
       title: "Payments & Subscription",

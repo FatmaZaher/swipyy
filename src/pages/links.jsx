@@ -1,11 +1,10 @@
 import React from "react";
 import { Tabs, Tab } from "react-bootstrap";
-// import LinksHeader from "../component/LinksHeader";
-import Link from "./links/Link";
-import Social from "./links/Social";
-import Location from "./links/Location";
-import Images from "./links/Images";
-import Banks from "./links/Banks";
+import Link from "../component/links/Link";
+import Social from "../component/links/Social";
+import Location from "../component/links/Location";
+import Images from "../component/links/Images";
+import Banks from "../component/links/Banks";
 import LinkIcon from "@mui/icons-material/Link";
 import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";

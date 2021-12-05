@@ -5,6 +5,9 @@
   background-color: $white-color;
   padding: 30px;
   border-radius: $btn-input-radius;
+  @include mobile {
+    padding: 15px;
+  }
   // .your-links {
   //   .single-link, {
   //     padding: 20px;

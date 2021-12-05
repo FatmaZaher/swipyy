@@ -6,6 +6,9 @@
   .link-and-icon {
     @include flex(center, start);
     width: 50%;
+    @include mobile {
+      width: 60%;
+    }
   }
   .single-link-icon,
   .single-link-img {
@@ -16,6 +19,11 @@
     color: $white-color;
     border-radius: $btn-input-radius;
     @include flex(center, center);
+    @include mobile {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
   }
   .single-link-img {
     width: 55px;
@@ -25,6 +33,10 @@
       width: 100%;
       height: 100%;
       border-radius: $btn-input-radius;
+    }
+    @include mobile {
+      width: 25px;
+    height: 25px;
     }
   }
   .single-link-info {
@@ -41,6 +53,16 @@
       img {
         margin-right: 5px;
       }
+      @include mobile {
+        font-size: 7px;
+        img {
+          width: 10px;
+        }
+      }
+    }
+    @include mobile {
+      width: 60%;
+      margin-left: 5px;
     }
   }
   .link-action {
@@ -56,6 +78,14 @@
       background-color: $text-color;
       color: $white-color;
       border-radius: $btn-input-radius;
+      @include mobile {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        svg{
+          width: 10px;
+        }
+      }
     }
     .trash-icon {
       background-color: $back-color;
@@ -67,5 +97,8 @@
     svg {
       width: 18px;
     }
+  }
+  @include mobile {
+    padding: 10px;
   }
 }

@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import ImageUpload from "image-upload-react";
 import "image-upload-react/dist/index.css";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import EditIcon from "@mui/icons-material/Edit";
+// import EditIcon from "@mui/icons-material/Edit";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import HideImageIcon from "@mui/icons-material/HideImage";
@@ -12,10 +12,12 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import tele from "../../assets/images/tele.png";
 import * as Yup from "yup";
 import SwitchButton from "../../component/SwitchButton";
+import Editicon from "../../component/icons/Editicon";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
 import ImageUploading from "react-images-uploading";
 import ImgUpload from "../../component/ImgUpload";
+import Deleteicon from "../../component/icons/Deleteicon";
 
 const initialValues = {
   yourLink: "",
@@ -63,7 +65,7 @@ const Link = () => {
       </Formik>
 
       <div className="your-links pt-4">
-        <p className="your-links-header mb-5">
+        <p className="your-links-header mb-3 mb-m-5">
           Add Header
           <span className="icon">
             <HelpOutlineOutlinedIcon />
@@ -121,38 +123,7 @@ const Link = () => {
               )}
             </ImageUploading>
             </div> */}
-           
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
 
-          <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
             {/* <ImageUpload
               handleImageSelect={handleImageSelect}
               imageSrc={imageSrc}
@@ -171,45 +142,9 @@ const Link = () => {
               </span>
             </div>
           </div>
-
           <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            /> */}
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
+            <Editicon />
+            <Deleteicon />
           </div>
         </div>
       </div>

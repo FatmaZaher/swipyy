@@ -6,6 +6,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
+import Deleteicon from "../../component/icons/Deleteicon";
+import Editicon from "../../component/icons/Editicon";
 
 const initialValues = {
   yourLink: "",
@@ -55,18 +57,14 @@ const Location = () => {
         )}
       </Formik>
       <div className="your-links pt-4">
-        <p className="your-links-header mb-5">Locations</p>
+        <p className="your-links-header mb-3 mb-m-5">Locations</p>
         <div className="single-link mb-3">
           <div className="single-link-info">
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
+            <Editicon />
+            <Deleteicon />
           </div>
         </div>
         <div className="single-link mb-3">
@@ -74,12 +72,8 @@ const Location = () => {
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
+            <Editicon />
+            <Deleteicon />
           </div>
         </div>
         <div className="single-link mb-3">
@@ -87,12 +81,8 @@ const Location = () => {
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">
-            <span className="edit-icon">
-              <EditIcon />
-            </span>
-            <span className="trash-icon">
-              <DeleteOutlineOutlinedIcon />
-            </span>
+            <Editicon />
+            <Deleteicon />
           </div>
         </div>
       </div>

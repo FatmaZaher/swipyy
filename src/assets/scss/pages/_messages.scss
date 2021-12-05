@@ -1,0 +1,32 @@
+.messages {
+  .messages-content {
+    padding: 30px;
+    border-radius: $btn-input-radius;
+    border: 1px solid $border-color;
+    .switch {
+      @include flex(center, start);
+      font-size: 13px;
+    }
+    .form-control .label {
+      color: $grad-color;
+    }
+    .with-border {
+      .form-control .link-input {
+        background-color: transparent;
+      }
+      @include flex(center, space-between);
+      border: 1px solid $border-color;
+      border-radius: 6px;
+    }
+  }
+}
+.index {
+  .index-header {
+    @include flex(center, space-between);
+    .link-button {
+      background-color: $text-color;
+      font-size: 13px;
+      width: 154px;
+    }
+  }
+}

@@ -10,6 +10,7 @@ import squer from "../assets/images/squer.png";
 import circel from "../assets/images/circel.png";
 import Polygon from "../assets/images/Polygon.png";
 import them1 from "../assets/images/them1.png";
+// import them2 from "../assets/images/them2.png";
 import FormikControl from "../component/form/FormikControl";
 import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
@@ -19,6 +20,9 @@ import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlin
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import Editicon from "../component/icons/Editicon";
+import Deleteicon from "../component/icons/Deleteicon";
+import Sharicon from "../component/icons/Sharicon";
 
 const initialValues = {
   description: "",
@@ -92,21 +96,21 @@ const themes = [
     img: them1,
     text: "Cerulean Blue",
   },
-  {
-    id: "2",
-    img: them1,
-    text: "Cerulean Blue",
-  },
-  {
-    id: "3",
-    img: them1,
-    text: "Cerulean Blue",
-  },
-  {
-    id: "4",
-    img: them1,
-    text: "Cerulean Blue",
-  },
+  // {
+  //   id: "2",
+  //   img: them2,
+  //   text: "Cerulean Blue",
+  // },
+  // {
+  //   id: "3",
+  //   img: them1,
+  //   text: "Cerulean Blue",
+  // },
+  // {
+  //   id: "4",
+  //   img: them2,
+  //   text: "Cerulean Blue",
+  // },
 ];
 
 const Appearance = () => {
@@ -127,12 +131,8 @@ const Appearance = () => {
                 </div>
               </div>
               <div className="link-action">
-                <span className="edit-icon">
-                  <EditIcon />
-                </span>
-                <span className="trash-icon">
-                  <ShareIcon />
-                </span>
+                <Editicon />
+                <Sharicon />
               </div>
             </div>
           </Accordion.Body>
@@ -151,12 +151,8 @@ const Appearance = () => {
                 </div>
               </div>
               <div className="link-action">
-                <span className="edit-icon">
-                  <EditIcon />
-                </span>
-                <span className="trash-icon">
-                  <ShareIcon />
-                </span>
+                <Editicon />
+                <Sharicon />
               </div>
             </div>
           </Accordion.Body>
@@ -181,12 +177,8 @@ const Appearance = () => {
                 <div className="link-and-icon">
                   <SwitchButton />
                   <div className="link-action">
-                    <span className="edit-icon">
-                      <EditIcon />
-                    </span>
-                    <span className="trash-icon">
-                      <ShareIcon />
-                    </span>
+                    <Editicon />
+                    <Sharicon />
                   </div>
                 </div>
               </div>
@@ -201,12 +193,8 @@ const Appearance = () => {
                 <div className="link-and-icon">
                   <SwitchButton />
                   <div className="link-action">
-                    <span className="edit-icon">
-                      <EditIcon />
-                    </span>
-                    <span className="trash-icon">
-                      <ShareIcon />
-                    </span>
+                    <Editicon />
+                    <Sharicon />
                   </div>
                 </div>
               </div>
@@ -216,7 +204,8 @@ const Appearance = () => {
         <Accordion.Item eventKey="4">
           <Accordion.Header>description</Accordion.Header>
           <Accordion.Body>
-            <Formik
+            <div className="description">
+              <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
             >
@@ -229,6 +218,8 @@ const Appearance = () => {
                 />
               </Form>
             </Formik>
+            </div>
+            
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="5">
@@ -275,7 +266,7 @@ const Appearance = () => {
                                   className="link-button"
                                   onClick={() => push("")}
                                 >
-                                  add
+                                  Add Another Detail
                                 </button>
                               </div>
                             ))}
@@ -350,7 +341,6 @@ const Appearance = () => {
                   <li key={id} index={index}>
                     <div className="avatar-theme-image">
                       <img src={img} alt="" />
-                      {/* {img} */}
                     </div>
                     <p className="">{text}</p>
                   </li>
@@ -362,8 +352,13 @@ const Appearance = () => {
         <Accordion.Item eventKey="9">
           <Accordion.Header>buttons</Accordion.Header>
           <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            <div className="buttons">
+              <div className="buttons-style">
+                <p>Buttons Style</p>
+                <div className="buttons-style-shap"></div>
+              </div>
+              <div className="buttons-icon-style"></div>
+            </div>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="10">

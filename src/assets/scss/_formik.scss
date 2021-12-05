@@ -24,6 +24,11 @@
     &::placeholder {
       color: $grad-color;
     }
+    @include mobile {
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+    }
   }
   .text-area {
     height: 110px;
@@ -32,6 +37,14 @@
     padding: $btn-input-padding;
     font-size: 13px;
     color: $blue-color;
+  }
+  @include mobile {
+    width: calc(100% - 110px);
+    font-size: 10px;
+    .error-mes {
+      font-size: 10px;
+      padding: $btn-input-padding-mobile;
+    }
   }
 }
 .link-button {
@@ -46,6 +59,11 @@
   transition: $transition;
   &:hover {
     background-color: #64c1c7;
+  }
+  @include mobile {
+    width: 97px;
+    height: 30px;
+    line-height: 30px;
   }
 }
 .social-page {

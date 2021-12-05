@@ -7,4 +7,9 @@
   top: 0;
   left: 255px;
   background-color: $back-color;
+  @include mobile {
+    width: 100%;
+    left: 0;
+    height: 100%;
+  }
 }

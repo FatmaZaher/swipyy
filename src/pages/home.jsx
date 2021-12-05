@@ -1,22 +1,27 @@
 import React from "react";
+import { Route } from "react-router-dom";
+import  Sidebar  from "../component/Sidebar";
 import HomeHeader from "../component/HomeHeader";
-// import RoutesApp from "../config/RoutesApp";
-import { Route, Switch } from "react-router-dom";
-import Links from "../pages/links";
-import Appearance from "../pages/appearance";
 import MobileSide from "../component/MobileSide";
 
-
-const home = () => {
+const Dashboardlayout = ({ children, ...rest }) => {
+  return <div>{children}</div>;
+};
+const Home = ({ component: Component, ...rest }) => {
   return (
-    <div className="home-page">
-      <HomeHeader />
-      <Switch>
-        <Route path="/" exact component={Links} />
-        <Route path="/appearance" component={Appearance} />
-      </Switch>
-      <MobileSide />
-    </div>
+    <Route
+      {...rest}
+      render={(props) => (
+        <Dashboardlayout>
+          <Sidebar />
+          <div className="home-page">
+            <HomeHeader />
+            <Component {...props} />
+          </div>
+          <MobileSide />
+        </Dashboardlayout>
+      )}
+    />
   );
 };
-export default home;
+export default Home;

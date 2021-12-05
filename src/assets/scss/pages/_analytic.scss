@@ -1,0 +1,60 @@
+.analytic {
+  .analytic-header {
+    @include flex(center, start);
+    margin-bottom: 15px;
+    .link-form {
+      margin-right: 15px;
+      .form-control {
+        width: 130px;
+        .link-input {
+          padding: 12px;
+          color: $text-color;
+          background-color: $white-color;
+        }
+      }
+    }
+    .link-button {
+      background-color: $text-color;
+      font-size: 13px;
+      width: 154px;
+    }
+  }
+  .analytic-info {
+    .analytic-info-list {
+      width: 100%;
+      @include flex(center, space-between);
+      .list-item {
+        height: 100px;
+        padding: 0 15px;
+        border-radius: $btn-input-radius;
+        color: $text-color;
+        background-color: $white-color;
+        @include flex(center, start);
+        cursor: pointer;
+        transition: $transition;
+        width: 180px;
+        .icon {
+          margin-right: 15px;
+          height: 50px;
+          width: 50px;
+          line-height: 50px;
+          background-color: $main-color;
+          text-align: center;
+          border-radius: $btn-input-radius;
+          color: $white-color;
+        }
+        .info {
+          font-size: 13px;
+          .title {
+            color: $pargh-color;
+          }
+          .number{
+              color: $main-color;
+              font-size: 15px;
+              font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
