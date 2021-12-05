@@ -5,6 +5,8 @@
   top: 0;
   right: 0;
   text-align: center;
+  transition: $transition;
+  z-index: 8;
   img {
     width: 100%;
   }
@@ -28,6 +30,9 @@
         width: 60px;
         border-radius: 50%;
       }
+    }
+    @include mobile{
+      top: 92px;
     }
   }
   .links {
@@ -86,5 +91,25 @@
   }
   @include mobile {
     right: -100%;
+  }
+}
+.icon-view {
+  display: none;
+  .link-button {
+    width: 35px;
+    border-radius: 15px 0 0 15px;
+    background-color: $main-color;
+  }
+  @include mobile {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 0;
+  }
+}
+.mobile-side.show {
+  @include mobile {
+    right: 0;
+    z-index: 9;
   }
 }
