@@ -21,6 +21,9 @@
       bottom: 0;
       left: 0;
     }
+    @include mobile {
+      display: none;
+    }
   }
   .right-login-side {
     padding: 50px 100px;
@@ -28,38 +31,71 @@
     margin-left: auto;
     min-height: 100vh;
     @include flex(center, center);
-   > div {
+    .logo-mobile {
+      display: none;
+    }
+    .login-section {
       width: 100%;
-    }
-    .login-head {
-      color: $text-color;
-      margin-bottom: 30px;
-      color: $text-color;
-      font-weight: 600;
-    }
-    
-    .other-login {
-      text-align: center;
-      .other-link {
-        @include flex(center, start);
-        padding: $btn-input-padding;
-        border-radius: $border-color;
-        border: 1px solid $border-color;
-        width: 100%;
+      .login-head {
         color: $text-color;
-        margin-bottom: 15px;
-        .img-link {
-          text-align: center;
-          width: 30%;
+        margin-bottom: 30px;
+        color: $text-color;
+        font-weight: 600;
+      }
+      .other-login {
+        text-align: center;
+        .other-link {
+          @include flex(center, start);
+          padding: $btn-input-padding;
+          border-radius: $border-color;
+          border: 1px solid $border-color;
+          width: 100%;
+          color: $text-color;
+          margin-bottom: 15px;
+          .img-link {
+            text-align: center;
+            width: 30%;
+            @include mobile{
+              img{
+                width: 15px;
+              }
+            }
+          }
+        }
+      }
+      .not-member {
+        text-align: center;
+        margin: 15px 0;
+        .sign-login {
+          color: $text-color;
+          font-weight: 600;
         }
       }
     }
-    .not-member{
-      text-align: center;
-      margin: 15px 0;
-      .sign-login{
-        color: $text-color;
-        font-weight: 600;
+
+    @include mobile {
+      width: 100%;
+      margin-left: 0;
+      padding: 50px 20px;
+      background-color: $main-color;
+      height: 100%;
+      // display: block;
+      > div{
+        width: 100%;
+      }
+      .logo-mobile{
+        margin-bottom: 20px;
+        display: block;
+        text-align: center;
+        img{
+          width: 100px;
+        }
+
+      }
+      .login-section {
+        padding: 20px;
+        border-radius: $btn-input-radius;
+        background-color: $white-color;
       }
     }
   }
@@ -84,6 +120,9 @@
     }
     .forget-password {
       color: $main-color;
+      @include mobile{
+        font-size: 60%;
+      }
     }
   }
   .login-btn {
@@ -91,6 +130,9 @@
       width: 100%;
       background-color: $main-color;
       margin: 15px 0;
+      @include mobile{
+        font-size: 60%;
+      }
     }
   }
 

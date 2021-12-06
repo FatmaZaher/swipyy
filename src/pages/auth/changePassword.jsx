@@ -40,42 +40,47 @@ const changePassword = () => {
       </div>
       <div className="right-login-side">
         <div>
-          <h2 className="login-head">Change Password</h2>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-          >
-            {(formik) => (
-              <Form className="login-form">
-                <FormikControl
-                  control="input"
-                  type="password"
-                  name="newPassword"
-                  label="New password*"
-                  placeholder="type the new password here.."
-                  error="true"
-                />
-                <FormikControl
-                  control="input"
-                  type="password"
-                  name="repaetPassword"
-                  label="Repaet password*"
-                  placeholder="type the new password here.."
-                  error="true"
-                />
-                <div className="login-btn">
-                  <Link to="/">
-                    <LinkButton
-                      type="submit"
-                      buttontext="Update Password"
-                      onClick={sucesesChange}
-                    />
-                  </Link>
-                </div>
-              </Form>
-            )}
-          </Formik>
+          <div className="logo-mobile">
+            <img src={logo} alt="" className="logo" />
+          </div>
+          <div className="login-section">
+            <h2 className="login-head">Change Password</h2>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {(formik) => (
+                <Form className="login-form">
+                  <FormikControl
+                    control="input"
+                    type="password"
+                    name="newPassword"
+                    label="New password*"
+                    placeholder="type the new password here.."
+                    error="true"
+                  />
+                  <FormikControl
+                    control="input"
+                    type="password"
+                    name="repaetPassword"
+                    label="Repaet password*"
+                    placeholder="type the new password here.."
+                    error="true"
+                  />
+                  <div className="login-btn">
+                    <Link to="/">
+                      <LinkButton
+                        type="submit"
+                        buttontext="Update Password"
+                        onClick={sucesesChange}
+                      />
+                    </Link>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
     </div>
