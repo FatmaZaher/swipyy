@@ -30,7 +30,6 @@
     width: 50%;
     margin-left: auto;
     min-height: 100vh;
-    @include flex(center, center);
     .logo-mobile {
       display: none;
     }
@@ -55,8 +54,8 @@
           .img-link {
             text-align: center;
             width: 30%;
-            @include mobile{
-              img{
+            @include mobile {
+              img {
                 width: 15px;
               }
             }
@@ -72,25 +71,24 @@
         }
       }
     }
-
     @include mobile {
       width: 100%;
+      @include flex(center, unset);
       margin-left: 0;
       padding: 50px 20px;
       background-color: $main-color;
       height: 100%;
       // display: block;
-      > div{
+      > div {
         width: 100%;
       }
-      .logo-mobile{
+      .logo-mobile {
         margin-bottom: 20px;
         display: block;
         text-align: center;
-        img{
+        img {
           width: 100px;
         }
-
       }
       .login-section {
         padding: 20px;
@@ -120,7 +118,7 @@
     }
     .forget-password {
       color: $main-color;
-      @include mobile{
+      @include mobile {
         font-size: 60%;
       }
     }
@@ -130,7 +128,7 @@
       width: 100%;
       background-color: $main-color;
       margin: 15px 0;
-      @include mobile{
+      @include mobile {
         font-size: 60%;
       }
     }
