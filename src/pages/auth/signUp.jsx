@@ -82,7 +82,6 @@ const signUp = () => {
                     <FormikControl
                       control="checkbox"
                       name="remember"
-                      label="Remember me"
                       options={remeberCheckbox}
                     />
                   </div>

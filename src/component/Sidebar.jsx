@@ -12,6 +12,7 @@ import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
 import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const Sidebar = () => {
   const SidebarData = [
@@ -38,8 +39,14 @@ const Sidebar = () => {
     {
       title: "Payments & Subscription",
       icon: <PaymentOutlinedIcon />,
-      link: "/",
+      link: "/payments",
     },
+    ,
+    {
+      title: "Settings",
+      icon: <SettingsIcon />,
+      link: "/settings",
+    }
   ];
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);

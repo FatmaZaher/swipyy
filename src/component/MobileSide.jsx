@@ -93,7 +93,7 @@ const MobileSide = () => {
             )}
           </Formik>
         </div>
-        <Link to="/" className="link upgrad-btn">
+        <Link to="/view" className="link upgrad-btn">
           <RemoveRedEyeIcon />
           View Live
         </Link>

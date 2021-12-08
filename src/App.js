@@ -4,12 +4,15 @@ import Home from './pages/Home';
 import signUp from './pages/auth/signUp';
 import changePassword from './pages/auth/changePassword';
 import Login from './pages/auth/login';
-import AppLayoutRoute from './layouts/AppLayoutRoute';
 import LoginLayoutRoute from './layouts/LoginLayoutRoute ';
 import Links from "./pages/Links";
 import Appearance from "./pages/appearance";
 import Messages from "./pages/Messages";
 import Analytic from "./pages/Analytic";
+import Payments from "./pages/Payments";
+import Settings from "./pages/Settings"
+import ViewLayout from './layouts/ViewLayout';
+import View from './pages/View';
 
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
         <Home path="/appearance" component={Appearance} />
         <Home path="/messages" component={Messages} />
         <Home path="/analytic" component={Analytic} />
+        <Home path="/payments" component={Payments} />
+        <Home path="/settings" component={Settings} />
+        <ViewLayout path="/view" component={View} />
       </Switch>
     </Router>
   );

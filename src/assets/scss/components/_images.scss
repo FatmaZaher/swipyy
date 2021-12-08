@@ -1,0 +1,21 @@
+.add-description {
+  .high-header {
+    font-weight: 600;
+    p {
+      font-size: 15px;
+    }
+  }
+  .form-control {
+    width: 100%;
+    margin: 30px 0;
+    font-size: 13px;
+  }
+}
+.color-div{
+  @include flex (center, space-between)
+}
+input[type="color"]{
+  width: 100px;
+  height: 20px;
+  border-color: $back-color;
+}

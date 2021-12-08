@@ -41,10 +41,7 @@
     cursor: pointer;
     transition: $transition;
     min-width: 140px;
-    &:hover {
-      background-color: $text-color;
-      color: $white-color;
-    }
+    border: none !important;
     &.active {
       background-color: $text-color;
       color: $white-color;

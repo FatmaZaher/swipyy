@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable } from "react-table";
-import { Table } from "react-bootstrap";
+// import { Table } from "react-bootstrap";
 import SwitchButton from "../component/SwitchButton";
 import FormikControl from "../component/form/FormikControl";
 import { Formik, Form } from "formik";
@@ -149,11 +149,14 @@ const Messages = () => {
           <LinkButton type="" buttontext="Export to CSV" exportIcon="true" />
         </div>
         <div className="index-content">
-          <table {...getTableProps()} style={{
-                        fontSize: "14px",
-                        margin: "30px 0 0 0",
-                        width: "100%"
-                      }}>
+          <table
+            {...getTableProps()}
+            style={{
+              fontSize: "14px",
+              margin: "30px 0 0 0",
+              width: "100%",
+            }}
+          >
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>

@@ -398,15 +398,15 @@ const Appearance = () => {
                                   className="link-input"
                                   placeholder="Type the detail here"
                                 />
-                                <button
+                                
+                              </div>
+                            ))}<button
                                   type="button"
                                   className="link-button"
                                   onClick={() => push("")}
                                 >
                                   Add Another Detail
                                 </button>
-                              </div>
-                            ))}
                           </div>
                         );
                       }}

@@ -68,7 +68,6 @@ const login = () => {
                     <FormikControl
                       control="checkbox"
                       name="remember"
-                      label="Remember me"
                       options={remeberCheckbox}
                     />
                     <Link to="/changePassword" className="forget-password">
