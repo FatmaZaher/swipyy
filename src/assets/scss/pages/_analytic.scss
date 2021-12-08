@@ -28,7 +28,7 @@
       @include flex(center, space-between);
       .list-item {
         height: 100px;
-        padding: 0 15px;
+        padding: 0 10px;
         border-radius: $btn-input-radius;
         color: $text-color;
         background-color: $white-color;
@@ -47,7 +47,7 @@
           color: $white-color;
         }
         .info {
-          font-size: 13px;
+          font-size: 11px;
           .title {
             color: $pargh-color;
           }

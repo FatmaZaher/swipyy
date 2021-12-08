@@ -79,52 +79,53 @@ const Settings = () => {
               contentLabel="Example Modal"
               ariaHideApp={false}
             >
-              <h4 ref={(_subtitle) => (subtitle = _subtitle)}>
-                Change Password
-              </h4>
-
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-                className="modal-form"
-              >
-                {(formik) => (
-                  <Form className="login-form">
-                    <FormikControl
-                      control="input"
-                      type="password"
-                      name="currentPassword"
-                      placeholder="type current password here.."
-                      error="true"
-                      label="Current Password*"
-                    />
-                    <FormikControl
-                      control="input"
-                      type="password"
-                      name="newPassword"
-                      placeholder="type the new password here.."
-                      error="true"
-                      label="New password*"
-                    />
-                    <FormikControl
-                      control="input"
-                      type="password"
-                      name="newPassword"
-                      placeholder="type the new password here.."
-                      error="true"
-                      label="Repeat New password*"
-                    />
-                    <div className="login-btn">
-                      <LinkButton
-                        type="submit"
-                        buttontext="Change password"
-                        onClick={sucesesEdit}
+              <div>
+                <h4 ref={(_subtitle) => (subtitle = _subtitle)}>
+                  Change Password
+                </h4>
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={onSubmit}
+                  className="modal-form"
+                >
+                  {(formik) => (
+                    <Form className="login-form">
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="currentPassword"
+                        placeholder="type current password here.."
+                        error="true"
+                        label="Current Password*"
                       />
-                    </div>
-                  </Form>
-                )}
-              </Formik>
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="newPassword"
+                        placeholder="type the new password here.."
+                        error="true"
+                        label="New password*"
+                      />
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="newPassword"
+                        placeholder="type the new password here.."
+                        error="true"
+                        label="Repeat New password*"
+                      />
+                      <div className="login-btn">
+                        <LinkButton
+                          type="submit"
+                          buttontext="Change password"
+                          onClick={sucesesEdit}
+                        />
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
             </Modal>
           </div>
         </div>

@@ -6,7 +6,11 @@
   box-shadow: $box-shadow;
   padding: 30px !important;
   margin: auto;
-  // max-height: 400px;
+  @include flex(center, center);
+  // min-height: 300px;
+  > div {
+    width: 100%;
+  }
   h4 {
     margin-bottom: 30px;
     color: $text-color;

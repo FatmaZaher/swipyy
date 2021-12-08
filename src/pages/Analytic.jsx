@@ -46,7 +46,6 @@ const Analytic = () => {
       number: "0.64%",
     },
   ];
-
   const viewsOption = {
     series: [
       {
@@ -299,7 +298,6 @@ const Analytic = () => {
     ],
     []
   );
-
   const columns = React.useMemo(
     () => [
       {
@@ -477,8 +475,10 @@ const Analytic = () => {
           />
         </div>
         <div className="mobile-device mb-3">
-          <p className="your-links-header mb-3 mb-m-5">Views by Country (map)</p>
-         <MapChart />
+          <p className="your-links-header mb-3 mb-m-5">
+            Views by Country (map)
+          </p>
+          <MapChart />
         </div>
       </div>
       <div className="row-2">
@@ -599,7 +599,6 @@ const Analytic = () => {
           </table>
         </div>
       </div>
-
       <div className="mobile-device final mb-3">
         <p className="your-links-header mb-3 mb-m-5">Views by Referrer</p>
         <table

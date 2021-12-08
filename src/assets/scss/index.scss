@@ -1,10 +1,10 @@
-.link{
+.link {
   text-decoration: none !important;
 }
-ul{
+ul {
   list-style: none;
   padding: 0;
-  margin: 0
+  margin: 0;
 }
 @import "./variables";
 @import "./mixin";
@@ -12,7 +12,6 @@ ul{
 @import "./upload-img";
 @import "./components/homeHeader";
 @import "./components/sidebar";
-@import "./components/images";
 @import "./components/mobileSide";
 @import "./components/linksHeader";
 @import "./pages/home";
@@ -24,7 +23,9 @@ ul{
 @import "./switchButton";
 @import "./pages/appearance";
 @import "./pages/payments";
+@import "./components/images";
 @import "./pages/view";
 @import "./components/linksPageHeader";
 @import "./components/singleLink";
+@import "./components/pdf";
 @import "./modal";

@@ -4,8 +4,15 @@
     text-align: center;
     height: 200px !important;
     padding: 30px !important;
-    border: dashed 3px $border-color !important;
+    border: dashed 2px $border-color !important;
     border-radius: $btn-input-radius;
+    svg{
+        height: 60px !important;
+        width: 60px !important;
+        path{
+            fill: $border-color !important
+        }
+    }
 }
 .ffYcuL{
     display: block !important;
@@ -19,4 +26,7 @@
         max-width: 100% !important;
         margin: 15px auto !important;
     }
+}
+.sc-jrQzAO ,.fodlAk{
+    display: none !important;
 }

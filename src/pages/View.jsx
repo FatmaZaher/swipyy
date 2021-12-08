@@ -23,12 +23,14 @@ const validationSchema = Yup.object({
 const View = () => {
   return (
     <div className="viewPage">
+      <div className="back-view">
+      </div>
       <div className="mobile-side-content">
-        <div className="personl-img mb-3">
+        <div className="personl-img mb-3 mb-md-4">
           <img src={personal} alt="" />
         </div>
-        <div className="username mb-3">FahadMuhayya</div>
-        <div className="description mb-3">
+        <div className="username mb-3 mb-md-4">FahadMuhayya</div>
+        <div className="description mb-3 mb-md-4">
           FahadMuhayya FahadMuhayya FahadMuhayya
         </div>
         <div className="links">

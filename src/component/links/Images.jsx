@@ -9,6 +9,7 @@ import { Accordion } from "react-bootstrap";
 import FormikControl from "../form/FormikControl";
 import { Formik, Form } from "formik";
 import SwitchButton from "../SwitchButton";
+import { Tabs, Tab } from "react-bootstrap";
 
 const initialValues = {
   highTitle: "",
@@ -25,6 +26,7 @@ const Images = () => {
   const [color1, setColor1] = useState("#8055f0");
   const [color2, setColor2] = useState("#163152");
   const [color3, setColor3] = useState("#8055f0");
+
   return (
     <div className="images">
       <p className="your-links-header mb-3 mb-m-5">PASSWORD & SECURITY</p>{" "}

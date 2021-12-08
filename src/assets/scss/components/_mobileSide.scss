@@ -9,9 +9,12 @@
   img {
     width: 100%;
   }
- 
+
   @include mobile {
     right: -100%;
+  }
+  @include desktop {
+    width: 415px;
   }
 }
 .mobile-side-content {
@@ -35,8 +38,13 @@
       border-radius: 50%;
     }
   }
-  @include mobile{
+  @include mobile {
     top: 92px;
+  }
+  @include desktop {
+    width: 308px;
+    right: 47px;
+    height: 616px;
   }
 }
 .links {
@@ -79,9 +87,9 @@
     width: 100%;
     .link-input {
       background-color: transparent;
-      border-bottom: 1px solid $grad-color;
+      border-bottom: 1px solid $border-color;
       padding: 10px 5px;
-      margin-bottom: 5px;
+      margin-bottom: 15px;
       border-radius: 0;
       font-size: 12px;
     }
@@ -91,6 +99,7 @@
     padding: 10px 5px;
     border: none;
     outline: none;
+    border-radius: $btn-input-radius;
   }
 }
 .icon-view {

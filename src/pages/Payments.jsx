@@ -7,6 +7,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import FormikControl from "../component/form/FormikControl";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import paypal from "../assets/images/paypal.png";
+import creditCard from "../assets/images/creditCard.png";
+import Datepicker from "../component/form/Datepicker";
 
 const MySwal = withReactContent(Swal);
 
@@ -23,7 +26,6 @@ const validationSchema = Yup.object({
   accountNumber: Yup.string().required("Select Your Bank*"),
   iban: Yup.string().required("Select Your Bank*"),
 });
-
 
 const Payments = () => {
   let subtitle;
@@ -175,7 +177,7 @@ const Payments = () => {
         <Tab eventKey="paymentMetod" title="Payment Method">
           <p className="your-links-header mb-3">Payment Method</p>
           <div className="pay-card paypal">
-            <div>
+            <div className="input-paypal">
               <input
                 type="radio"
                 id="PayPal"
@@ -190,14 +192,15 @@ const Payments = () => {
               You will be redirected to the PayPal website after submitting your
               order
             </p>
+            <img src={paypal} alt="" />
           </div>
 
-          <div className="pay-card">
+          <div className="pay-card credit">
             <div className="mb-4">
               <input type="radio" id="dewey" name="drone" value="dewey" />
               <label for="dewey">Pay with Credit Card</label>
             </div>
-
+            <img src={creditCard} alt="" />
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -208,12 +211,17 @@ const Payments = () => {
                 <Form className="login-form">
                   <FormikControl
                     control="input"
-                    type="number"
+                    type="text"
                     name="crdNumber"
                     placeholder="type the Card Number here.."
                     error="true"
                     label="Card Number*"
                   />
+                  <div className="form-control">
+                    <label className="label">Expire Date</label>
+                    <Datepicker />
+                  </div>
+
                   <FormikControl
                     control="input"
                     type="password"
@@ -223,7 +231,11 @@ const Payments = () => {
                     label="Card Security Code*"
                   />
                   <div className="login-btn">
-                    <LinkButton type="submit" buttontext="Pay" onClick={sucesesEdit} />
+                    <LinkButton
+                      type="submit"
+                      buttontext="Pay"
+                      onClick={sucesesEdit}
+                    />
                   </div>
                 </Form>
               )}

@@ -61,33 +61,34 @@ const Editicon = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
-
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-          className="modal-form"
-        >
-          {(formik) => (
-            <Form className="login-form">
-              <FormikControl
-                control="input"
-                type="text"
-                name="theLink"
-                placeholder=""
-                error="true"
-              />
-              <div className="login-btn">
-                <LinkButton
-                  type="submit"
-                  buttontext="Save Edit"
-                  onClick={sucesesEdit}
+        <div>
+          <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            className="modal-form"
+          >
+            {(formik) => (
+              <Form className="login-form">
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="theLink"
+                  placeholder=""
+                  error="true"
                 />
-              </div>
-            </Form>
-          )}
-        </Formik>
+                <div className="login-btn">
+                  <LinkButton
+                    type="submit"
+                    buttontext="Save Edit"
+                    onClick={sucesesEdit}
+                  />
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </Modal>
     </>
   );

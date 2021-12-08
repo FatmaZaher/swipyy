@@ -1,4 +1,5 @@
-.payments {
+.payments,
+.images {
   .p-payment {
     font-size: 13px;
     color: $pargh-color;
@@ -10,11 +11,13 @@
       font-size: 15px;
       background-color: $back-color;
       margin-right: 15px;
+      width: 200px;
       &.active {
         background-color: $text-color;
       }
       @include mobile {
         font-size: 11px;
+        width: 142px;
       }
     }
   }
@@ -22,19 +25,23 @@
     .nav {
       @include flex(center, center);
       background-color: $back-color;
-      width: 330px;
+      width: 196px;
       padding: 12px 0;
+      margin: 0;
       .nav-link {
         border-radius: $btn-input-radius;
         font-size: 13px;
         padding: 12px 0;
-        width: 50px;
+        width: 70px;
         margin-right: 10px;
         background-color: $back-color;
         &.active {
           background-color: $white-color;
           color: $text-color;
         }
+      }
+      @include mobile {
+        margin: 15px auto 0;
       }
     }
   }
@@ -82,6 +89,7 @@
         }
       }
     }
+
     .link-button {
       background-color: $main-color;
       font-size: 14px;
@@ -108,19 +116,15 @@
       margin: 0;
       margin-bottom: 10px;
     }
+    .link-button {
+      padding: $btn-input-padding-mobile;
+      width: auto;
+      height: auto;
+    }
   }
 }
-input[type="radio"]:checked ~ .check {
-  border: 5px solid $main-color;
-}
 
-input[type="radio"]:checked ~ .check::before {
-  background: $main-color;
-}
 
-input[type="radio"]:checked ~ label {
-  color: $main-color;
-}
 // .check::before {
 //   display: block;
 //   position: absolute;
@@ -133,20 +137,94 @@ input[type="radio"]:checked ~ label {
 //   margin: auto;
 // }
 .pay-card {
-  padding: $btn-input-padding;
+  padding: 30px;
   border: 1px solid $border-color;
   border-radius: $btn-input-radius;
   margin-bottom: 15px;
+  position: relative;
   input {
     margin-right: 15px;
   }
   label {
     font-weight: 600;
   }
+  img {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+  .login-form{
+    @include flex(center, space-between);
+    flex-wrap: wrap;
+    .form-control{
+      width: 49%;
+    }
+    .login-btn{
+      width: 100%;
+text-align: center;
+.link-button{
+  width: 30%;
+}
+    }
+  }
+  @include mobile {
+    padding: 15px;
+    img {
+      right: 15px;
+      top: 15px;
+    }
+  }
 }
 .paypal {
-  @include flex(center, space-between);
+  @include flex(center, start);
   p {
     margin: 0;
   }
+  .input-paypal {
+    margin-right: 15px;
+  }
+  @include mobile {
+    display: block;
+    p {
+      font-size: 9px;
+      margin-top: 10px;
+    }
+    img {
+      width: 30px;
+    }
+  }
+}
+.credit {
+  img {
+    @include mobile {
+      width: 100px;
+    }
+  }
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  margin-right: 7px;
+  background-clip: content-box;
+  border: 2px solid #bbb;
+  background-color: $back-color;
+  border-radius: 50%;
+}
+label {
+  display: flex;
+  align-items: center;
+}
+input[type="radio"]:checked + label {
+  color: $main-color;
+}
+input[type="radio"]:checked + label:before {
+  background-color: $main-color;
 }

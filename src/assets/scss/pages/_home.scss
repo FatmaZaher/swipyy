@@ -13,4 +13,7 @@
     height: 100%;
     margin-top: 50px;
   }
+  @include desktop{
+    width: calc(100% - 670px);
+  }
 }

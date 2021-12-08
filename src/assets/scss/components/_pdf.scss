@@ -1,0 +1,25 @@
+.drop-pdf {
+  min-height: 200px !important;
+  [type="file"] {
+    color: $white-color;
+  }
+  [type="file"]::-webkit-file-upload-button {
+    background: $main-color;
+    border: none;
+    border-radius: $btn-input-radius;
+    color: $white-color;
+    cursor: pointer;
+    // font-size: 14px;
+    outline: none;
+    padding: $btn-input-padding;
+    transition: $transition;
+  }
+
+  [type="file"]::-webkit-file-upload-button:hover {
+    box-shadow: $box-shadow;
+  }
+  p {
+    // font-size: 14px;
+    color: $pargh-color;
+  }
+}

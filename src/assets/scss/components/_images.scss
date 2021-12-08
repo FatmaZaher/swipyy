@@ -11,11 +11,12 @@
     font-size: 13px;
   }
 }
-.color-div{
-  @include flex (center, space-between)
+.color-div {
+  @include flex(center, space-between);
 }
-input[type="color"]{
+input[type="color"] {
   width: 100px;
   height: 20px;
   border-color: $back-color;
 }
+

@@ -88,7 +88,7 @@ const Sidebar = () => {
           <img src={vectary} alt="logo" />
           <div className="box">
             <p className="text">Updrade to pro for More features</p>
-            <Link to="/" className="link upgrad-btn">
+            <Link to="/payments" className="link upgrad-btn">
               Upgrade
             </Link>
           </div>

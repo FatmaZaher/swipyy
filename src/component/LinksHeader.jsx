@@ -37,6 +37,11 @@ const LinksHeader = () => {
       link: "/images",
     },
     {
+      title: "PDF",
+      icon: <ImageOutlinedIcon />,
+      link: "/pdf",
+    },
+    {
       title: "Banks",
       icon: <AccountBalanceIcon />,
       link: "/banks",

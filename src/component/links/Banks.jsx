@@ -20,7 +20,7 @@ const MySwal = withReactContent(Swal);
 
 const initialValues = {
   accountNumber: "",
-  iban: ""
+  iban: "",
 };
 
 const onSubmit = (values) => {
@@ -103,42 +103,43 @@ export default function Banks() {
                 contentLabel="Example Modal"
                 ariaHideApp={false}
               >
-                <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
-
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={validationSchema}
-                  onSubmit={onSubmit}
-                  className="modal-form"
-                >
-                  {(formik) => (
-                    <Form className="login-form">
-                      <FormikControl
-                        control="input"
-                        type="text"
-                        name="accountNumber"
-                        placeholder="type your bank account number here..."
-                        error="true"
-                        label="Account Bank Number"
-                      />
-                      <FormikControl
-                        control="input"
-                        type="text"
-                        name="iban"
-                        placeholder="type IBAN number here..."
-                        error="true"
-                        label="IBAN Number"
-                      />
-                      <div className="login-btn">
-                        <LinkButton
-                          type="submit"
-                          buttontext="Save"
-                          onClick={sucesesEdit}
+                <div>
+                  <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                    className="modal-form"
+                  >
+                    {(formik) => (
+                      <Form className="login-form">
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          name="accountNumber"
+                          placeholder="type your bank account number here..."
+                          error="true"
+                          label="Account Bank Number"
                         />
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          name="iban"
+                          placeholder="type IBAN number here..."
+                          error="true"
+                          label="IBAN Number"
+                        />
+                        <div className="login-btn">
+                          <LinkButton
+                            type="submit"
+                            buttontext="Save"
+                            onClick={sucesesEdit}
+                          />
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
               </Modal>
             </div>
             <Deleteicon />
