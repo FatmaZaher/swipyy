@@ -11,6 +11,8 @@ import paypal from "../assets/images/paypal.png";
 import creditCard from "../assets/images/creditCard.png";
 import Datepicker from "../component/form/Datepicker";
 
+import MaskedInput from "react-text-mask";
+
 const MySwal = withReactContent(Swal);
 
 const initialValues = {
@@ -43,7 +45,7 @@ const Payments = () => {
     setIsOpen(false);
   }
   function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire("Good job!", "The payment done successfully, enjoy your pro plan!", "success");
     setIsOpen(false);
   }
   return (
@@ -209,17 +211,38 @@ const Payments = () => {
             >
               {(formik) => (
                 <Form className="login-form">
-                  <FormikControl
+                  {/* <FormikControl
                     control="input"
                     type="text"
                     name="crdNumber"
                     placeholder="type the Card Number here.."
                     error="true"
                     label="Card Number*"
-                  />
+                  /> */}
+                  <div className="form-control">
+                    <label className="label">Card Number*</label>
+                    <MaskedInput
+                      mask={[/[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " ", /[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " ",/[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " "]}
+                      className="link-input mb-4"
+                      placeholder="type the Card Number here.."
+                      guide={false}
+                      id="my-input-id"
+                      onBlur={() => {}}
+                      onChange={() => {}}
+                    />
+                  </div>
+
                   <div className="form-control">
                     <label className="label">Expire Date</label>
-                    <Datepicker />
+                    <MaskedInput
+                      mask={[/[1-9]/, /[1-9]/, "/", /[1-9]/, /[1-9]/]}
+                      className="link-input mb-4"
+                      placeholder="mm / yy"
+                      guide={false}
+                      id="my-input-id"
+                      onBlur={() => {}}
+                      onChange={() => {}}
+                    />
                   </div>
 
                   <FormikControl

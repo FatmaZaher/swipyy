@@ -23,3 +23,16 @@
     color: $pargh-color;
   }
 }
+.more-size{
+  @include flex(center, start);
+  .link-button{
+    width: auto;
+    background-color: $main-color;
+    font-size: 12px;
+    padding:5px 10px;
+    display: inline-block;
+    height: auto;
+    line-height: unset;
+    margin-left: 15px;
+  }
+}

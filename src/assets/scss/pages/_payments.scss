@@ -3,6 +3,9 @@
   .p-payment {
     font-size: 13px;
     color: $pargh-color;
+    @include mobile{
+      font-size: 10px
+    }
   }
   .nav {
     @include flex(center, center);
