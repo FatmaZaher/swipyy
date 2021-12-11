@@ -198,6 +198,17 @@ text-align: center;
   }
 }
 .credit {
+ flex-wrap: wrap;
+ .login-form{
+   width: 100%;
+   margin-top: 30px;
+   .form-control{
+     background: transparent;
+     input:focus {
+      border-color: $main-color;
+    }
+   }
+ }
   img {
     @include mobile {
       width: 100px;
@@ -236,5 +247,18 @@ input[type="radio"]:checked + label:before {
   font-size: 10px;
   img{
     margin-right: 10px;
+  }
+}
+.input-payment-box{
+  > input {
+    &:checked{
+      & ~ label {
+        background: $back-color;
+        border-color: $main-color;
+        span{
+          font-weight: 600;
+        }
+      }
+    }
   }
 }

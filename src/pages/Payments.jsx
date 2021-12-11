@@ -46,7 +46,11 @@ const Payments = () => {
     setIsOpen(false);
   }
   function sucesesEdit() {
-    Swal.fire("Good job!", "The payment done successfully, enjoy your pro plan!", "success");
+    Swal.fire(
+      "Good job!",
+      "The payment done successfully, enjoy your pro plan!",
+      "success"
+    );
     setIsOpen(false);
   }
   return (
@@ -179,39 +183,45 @@ const Payments = () => {
         </Tab>
         <Tab eventKey="paymentMetod" title="Payment Method">
           <p className="your-links-header mb-3">Payment Method</p>
-          <div className="pay-card paypal">
-            <div className="input-paypal">
-              <input
-                type="radio"
-                id="PayPal"
-                name="drone"
-                value="PayPal"
-                checked
-              />
-              <label for="PayPal">PayPal</label>
-            </div>
 
-            <p className="p-payment">
-              You will be redirected to the PayPal website after submitting your
-              order
-            </p>
-            <img src={paypal} alt="" />
+          <div className="input-payment-box">
+          <input
+                  type="radio"
+                  id="PayPal"
+                  name="drone"
+                  value="PayPal"
+                  checked
+                />
+            <label for="PayPal" className="pay-card paypal">
+              <div className="input-paypal">
+              
+                <span>PayPal</span>
+              </div>
+
+              <p className="p-payment">
+                You will be redirected to the PayPal website after submitting
+                your order
+              </p>
+              <img src={paypal} alt="" />
+            </label>
           </div>
-          <div className="pay-card credit">
-            <div className="mb-4">
-              <input type="radio" id="dewey" name="drone" value="dewey" />
-              <label for="dewey">Pay with Credit Card</label>
-            </div>
-            <img src={creditCard} alt="" />
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-              className="modal-form"
-            >
-              {(formik) => (
-                <Form className="login-form">
-                  {/* <FormikControl
+          <div className="input-payment-box">
+          <input type="radio" id="dewey" name="drone" value="dewey" />
+
+            <label  for="dewey" className="pay-card credit">
+              <div>
+                <span>Pay with Credit Card</span>
+              </div>
+              <img src={creditCard} alt="" />
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+                className="modal-form mt-3"
+              >
+                {(formik) => (
+                  <Form className="login-form">
+                    {/* <FormikControl
                     control="input"
                     type="text"
                     name="crdNumber"
@@ -219,52 +229,74 @@ const Payments = () => {
                     error="true"
                     label="Card Number*"
                   /> */}
-                  <div className="form-control">
-                    <label className="label">Card Number*</label>
-                    <MaskedInput
-                      mask={[/[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " ", /[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " ",/[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/, " "]}
-                      className="link-input mb-4"
-                      placeholder="type the Card Number here.."
-                      guide={false}
-                      id="my-input-id"
-                      onBlur={() => {}}
-                      onChange={() => {}}
-                    />
-                  </div>
+                    <div className="form-control">
+                      <label className="label">Card Number*</label>
+                      <MaskedInput
+                        mask={[
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          " ",
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          " ",
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          /[1-9]/,
+                          " ",
+                        ]}
+                        className="link-input mb-4"
+                        placeholder="type the Card Number here.."
+                        guide={false}
+                        id="my-input-id"
+                        onBlur={() => {}}
+                        onChange={() => {}}
+                      />
+                    </div>
 
-                  <div className="form-control">
-                    <label className="label">Expire Date</label>
-                    <MaskedInput
-                      mask={[/[1-9]/, /[1-9]/, "/", /[1-9]/, /[1-9]/]}
-                      className="link-input mb-4"
-                      placeholder="mm / yy"
-                      guide={false}
-                      id="my-input-id"
-                      onBlur={() => {}}
-                      onChange={() => {}}
-                    />
-                  </div>
+                    <div className="form-control">
+                      <label className="label">Expire Date</label>
+                      <MaskedInput
+                        mask={[/[1-9]/, /[1-9]/, "/", /[1-9]/, /[1-9]/]}
+                        className="link-input mb-4"
+                        placeholder="mm / yy"
+                        guide={false}
+                        id="my-input-id"
+                        onBlur={() => {}}
+                        onChange={() => {}}
+                      />
+                    </div>
 
-                  <FormikControl
-                    control="input"
-                    type="password"
-                    name="securityCode"
-                    placeholder="type the Card Security Code here.."
-                    error="true"
-                    label="Card Security Code*"
-                  />
-                  <div className="login-btn">
-                    <LinkButton
-                      type="submit"
-                      buttontext="Pay"
-                      onClick={sucesesEdit}
+                    <FormikControl
+                      control="input"
+                      type="password"
+                      name="securityCode"
+                      placeholder="type the Card Security Code here.."
+                      error="true"
+                      label="Card Security Code*"
                     />
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                    <div className="login-btn">
+                      <LinkButton
+                        type="submit"
+                        buttontext="Pay"
+                        onClick={sucesesEdit}
+                      />
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </label>
           </div>
-          <p className="p-payment"><img src={clock} alt="" />We protect your payment information using encryption to provide bank-level security.</p>
+
+          <p className="p-payment">
+            <img src={clock} alt="" />
+            We protect your payment information using encryption to provide
+            bank-level security.
+          </p>
         </Tab>
       </Tabs>
     </div>
