@@ -29,7 +29,7 @@ const Images = () => {
 
   return (
     <div className="images">
-      <p className="your-links-header mb-3 mb-m-5">PASSWORD & SECURITY</p>{" "}
+      <p className="your-links-header mb-3 mb-m-5">Image Sliders</p>
       <div className="single-link mb-3">
         <div className="link-and-icon">
           <SwitchButton />
