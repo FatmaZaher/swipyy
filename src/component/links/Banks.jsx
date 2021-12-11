@@ -37,7 +37,17 @@ const banksList = [
   { key: "Bank1", value: "Bank1" },
   { key: "Bank2", value: "Bank2" },
 ];
-export default function Banks() {
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+ const Banks = () => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -56,6 +66,7 @@ export default function Banks() {
     Swal.fire("Good job!", "Edited successfully!", "success");
     setIsOpen(false);
   }
+ 
   return (
     <div className="banks-page">
       <Formik
@@ -102,9 +113,10 @@ export default function Banks() {
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
                 ariaHideApp={false}
+                style={customStyles}
               >
                 <div>
-                  <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
+                  <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Bank Information</h4>
                   <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -127,7 +139,7 @@ export default function Banks() {
                           name="iban"
                           placeholder="type IBAN number here..."
                           error="true"
-                          label="IBAN Number"
+                          label="IBAN"
                         />
                         <div className="login-btn">
                           <LinkButton
@@ -149,3 +161,4 @@ export default function Banks() {
     </div>
   );
 }
+export default Banks;

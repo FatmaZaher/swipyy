@@ -1,5 +1,8 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
+import ImageDrop from "../icons/ImageDrop";
+import LinkButton from "../../component/form/LinkButton";
+import { Link } from "react-router-dom";
 
 const DropImg = () => {
   const [images, setImages] = React.useState([]);
@@ -31,6 +34,10 @@ const DropImg = () => {
           // write your building UI
           <div className="upload__image-wrapper">
             <div>
+              <div className="img-upload mb-3">
+                <ImageDrop />
+              </div>
+              
               Drop your image here, or
               <button
                 style={isDragging ? { color: "red" } : null}
@@ -41,6 +48,14 @@ const DropImg = () => {
               </button>
               &nbsp; ,
               <button onClick={onImageRemoveAll}>remove all images</button>
+              <p>Supports: JPG,PNG, PDF <span className="pro-btn">
+                    <Link to="/payments">
+                      <LinkButton
+                        type=""
+                        buttontext="PRO"
+                      />
+                    </Link>
+                  </span></p>
             </div>
             {imageList.map((image, index) => (
               <div key={index} className="image-item">

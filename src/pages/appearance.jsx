@@ -6,6 +6,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Tabs, Tab } from "react-bootstrap";
 
 import LinkButton from "../component/form/LinkButton";
+import { Link } from "react-router-dom";
 
 import SwitchButton from "../component/SwitchButton";
 import personal from "../assets/images/personal.png";
@@ -58,13 +59,14 @@ import Sharicon from "../component/icons/Sharicon";
 // import ImagesIcon from "../component/icons/ImagesIcon";
 // import MeesaIcon from "../component/icons/MeesaIcon";
 
-
-
 import LinkBlue from "../component/icons/LinkBlue";
 import SocialBlue from "../component/icons/SocialBlue";
 import SliderBlue from "../component/icons/SliderBlue";
 import MeasssssBlue from "../component/icons/MeasssssBlue";
 import LocationBlue from "../component/icons/LocationBlue";
+import LeftAlign from "../component/icons/LeftAlign";
+import CenterAlign from "../component/icons/CenterAlign";
+import RightAlign from "../component/icons/RightAlign";
 
 const initialValues = {
   description: "",
@@ -83,27 +85,27 @@ const finalSpaceCharacters = [
   {
     id: "links",
     title: "Links",
-    icon: <LinkBlue/>,
+    icon: <LinkBlue />,
   },
   {
     id: "social",
     title: "Social",
-    icon: <SocialBlue/>,
+    icon: <SocialBlue />,
   },
   {
     id: "images",
     title: "Slider",
-    icon: <SliderBlue/>,
+    icon: <SliderBlue />,
   },
   {
     id: "messages",
     title: "Messages",
-    icon: <MeasssssBlue/>,
+    icon: <MeasssssBlue />,
   },
   {
     id: "location",
     title: "Location",
-    icon: <LocationBlue/>,
+    icon: <LocationBlue />,
   },
 ];
 const avatars = [
@@ -250,19 +252,21 @@ const fontEnglish = [
   {
     id: "2",
     img: fontE1,
+    pro: true,
   },
   {
     id: "3",
     img: fontE1,
+    pro: false,
   },
   {
     id: "4",
     img: fontE1,
+    pro: true,
   },
 ];
 
 const Appearance = () => {
-
   return (
     <div className="appearance-page">
       <Accordion>
@@ -450,9 +454,7 @@ const Appearance = () => {
                               {...provided.dragHandleProps}
                               className="link-dragg"
                             >
-                              <div className="icon">
-                              {icon}
-                              </div>
+                              <div className="icon">{icon}</div>
                               <div className="title">{title}</div>
                             </li>
                           )}
@@ -463,7 +465,6 @@ const Appearance = () => {
                 )}
               </Droppable>
             </DragDropContext>
-            
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">
@@ -537,6 +538,26 @@ const Appearance = () => {
                 </div>
               </div>
             </div>
+            <div className="button-color my-3">
+              <p>
+                Button Background Color{" "}
+                <div className="pro-btn back-pro">
+                  <LinkButton type="" buttontext="#8CC8CC" />
+                </div>
+              </p>
+              <p>
+                Button Font Color{" "}
+                <div className="pro-btn font-pro">
+                  <LinkButton type="" buttontext="#8CC8CC" />
+                </div>
+              </p>
+              <p>
+                Title & Description Font Color
+                <div className="pro-btn title-pro">
+                  <LinkButton type="" buttontext="#ffffff" />
+                </div>
+              </p>
+            </div>
             <div className="description">
               <p>Buttons Style</p>
               <Formik
@@ -601,40 +622,51 @@ const Appearance = () => {
         <Accordion.Item eventKey="11">
           <Accordion.Header>font style</Accordion.Header>
           <Accordion.Body>
-            <p>Background Style</p>
-            <div className="font-style-tabs">
-              <Tabs
-                defaultActiveKey="english"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-              >
-                <Tab eventKey="english" title="E">
-                  <ul className="avatar-theme-list">
-                    {fontEnglish.map(({ id, img }, index) => {
-                      return (
-                        <li key={id} index={index}>
-                          <div className="avatar-theme-image">
-                            <img src={img} alt="" />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Tab>
-                <Tab eventKey="arabic" title="ع">
-                  <ul className="avatar-theme-list">
-                    {fontEnglish.map(({ id, img }, index) => {
-                      return (
-                        <li key={id} index={index}>
-                          <div className="avatar-theme-image">
-                            <img src={img} alt="" />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Tab>
-              </Tabs>
+            <div className="font-style">
+              <p>Font Style</p>
+              <div className="font-style-tabs">
+                <Tabs
+                  defaultActiveKey="english"
+                  id="uncontrolled-tab-example"
+                  className="mb-3"
+                >
+                  <Tab eventKey="english" title="E">
+                    <ul className="avatar-theme-list">
+                      {fontEnglish.map(({ id, img, pro }, index) => {
+                        return (
+                          <li key={id} index={index}>
+                            <div className="avatar-theme-image">
+                              <span className="align-pro">
+                                {pro && (
+                                  <div className="pro-btn">
+                                    <Link to="/payments">
+                                      <LinkButton type="" buttontext="PRO" />
+                                    </Link>
+                                  </div>
+                                )}
+                                <img src={img} alt="" />
+                              </span>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </Tab>
+                  <Tab eventKey="arabic" title="ع">
+                    <ul className="avatar-theme-list">
+                      {fontEnglish.map(({ id, img }, index) => {
+                        return (
+                          <li key={id} index={index}>
+                            <div className="avatar-theme-image">
+                              <img src={img} alt="" />
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </Tab>
+                </Tabs>
+              </div>
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -642,9 +674,36 @@ const Appearance = () => {
           <Accordion.Header>links text alignment</Accordion.Header>
           <Accordion.Body>
             <div className="links-align">
-              <LinkButton type="" buttontext="Left" />
+              <button type="button" className="link-button">
+                <LeftAlign />
+                Left
+              </button>
+              <span className="align-pro">
+                <div className="pro-btn">
+                  <Link to="/payments">
+                    <LinkButton type="" buttontext="PRO" />
+                  </Link>
+                </div>
+                <button type="button" className="link-button" disabled>
+                  <CenterAlign />
+                  Center
+                </button>
+              </span>
+              <span className="align-pro">
+                <div className="pro-btn">
+                  <Link to="/payments">
+                    <LinkButton type="" buttontext="PRO" />
+                  </Link>
+                </div>
+                <button type="button" className="link-button" disabled>
+                  <RightAlign />
+                  Right
+                </button>
+              </span>
+
+              {/* <LinkButton type="" buttontext="Left" />
               <LinkButton type="" buttontext="Center" />
-              <LinkButton type="" buttontext="Right" />
+              <LinkButton type="" buttontext="Right" /> */}
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -652,14 +711,28 @@ const Appearance = () => {
           <Accordion.Header>social icon style</Accordion.Header>
           <Accordion.Body>
             <div className="social-icon">
-              <p>Background Color</p>
+              <p>SOCIAL ICONS STYLE</p>
               <LinkButton type="" buttontext="#8cc8cc" />
               <div className="high-title with-border">
-                <p>Hide HeyLink.me Logo</p>
+                <p>
+                  Hide HeyLink.me Logo{" "}
+                  <div className="pro-btn">
+                    <Link to="/payments">
+                      <LinkButton type="" buttontext="PRO" />
+                    </Link>
+                  </div>
+                </p>
                 <SwitchButton />
               </div>
               <div className="high-title with-border">
-                <p>Hide (i) icon</p>
+                <p>
+                  Hide (i) icon{" "}
+                  <div className="pro-btn">
+                    <Link to="/payments">
+                      <LinkButton type="" buttontext="PRO" />
+                    </Link>
+                  </div>
+                </p>
                 <SwitchButton />
               </div>
             </div>

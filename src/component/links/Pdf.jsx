@@ -40,7 +40,7 @@ const Pdf = () => {
                 <p className="more-size">
                   <sapn>a file is more than 150 go to </sapn>
                   
-                  <div className="login-btn">
+                  <div className="pro-btn">
                     <Link to="/payments">
                       <LinkButton
                         type=""

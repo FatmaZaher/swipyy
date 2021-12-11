@@ -1,24 +1,30 @@
-
-.drop-img{
-    min-width: 100%;
-    display: block ;
-    min-height: 200px ;
-    padding: 30px ;
-    border: dashed 2px $border-color !important;
-    border-radius: $btn-input-radius;
-    .upload__image-wrapper{
-        font-size: 13px;
-        color: $grad-color;
-        button{
-            border: none;
-            outline: none;
-            background-color: transparent;
-            color: $blue-color;
-            margin: 0 5px;
-        }
-        .image-item{
-            display: inline-block;
-            margin: 15px 10px;
-        }
+.drop-img {
+  min-width: 100%;
+  display: block;
+  min-height: 200px;
+  padding: 30px;
+  border: dashed 2px $border-color !important;
+  border-radius: $btn-input-radius;
+  .upload__image-wrapper {
+    font-size: 13px;
+    color: $grad-color;
+    text-align: center;
+    button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $blue-color;
+      margin: 0 5px;
     }
+    .image-item {
+      display: inline-block;
+      margin: 15px 10px;
+    }
+    p {
+      font-size: 10px;
+      .link-button{
+        background-color: $main-color;
+      }
+    }
+  }
 }

@@ -98,12 +98,48 @@
   .high-title,
   .high-details {
     margin: 15px 0;
-  }
-  @include mobile {
+    @include flex(center, start);
+    width: 100%;
+    .high-title-head,
+    .high-title-head {
+      width: 18%;
+      border-radius: 6px 0 0 6px;
+      background-color: #f3f3f39c;
+      color: #969ba3;
+      height: 48px;
+      line-height: 48px;
+      padding: 0 10px;
+      border-right: 1px solid $border-color;
+      @include mobile {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 8px;
+        margin-bottom: 5px;
+        width: 37%;
+      }
+    }
     .form-control {
+      width: 82%;
+    }
+    .link-input {
       width: 100%;
     }
   }
+  .high-details {
+    .link-input {
+      width: 82%;
+      margin-right: 0;
+      @include mobile {
+        width: 70%;
+      }
+    }
+  }
+  // @include mobile {
+  //   .form-control {
+  //     width: 100%;
+  //   }
+  // }
 }
 .field-array {
   .link-input {
@@ -119,6 +155,12 @@
     line-height: 48px;
     margin-right: 15px;
   }
+  .link-button {
+    width: 100%;
+    @include mobile {
+      font-size: 9px;
+    }
+  }
   @include mobile {
     .link-input {
       width: 100%;
@@ -127,9 +169,6 @@
       line-height: 30px;
       font-size: 10px;
       margin-bottom: 5px;
-    }
-    .link-button {
-      width: 100%;
     }
   }
 }
@@ -232,12 +271,14 @@
 .buttons {
   @include flex(start, space-between);
   box-sizing: border-box;
+  color: $grad-color;
   .buttons-style,
   .buttons-icon-style {
     width: 50%;
     min-height: 220px;
   }
-  @include mobile{
+
+  @include mobile {
     display: block;
     .buttons-style,
     .buttons-icon-style {
@@ -264,8 +305,8 @@
           width: 60px;
         }
       }
-      p{
-        font-size: 10px
+      p {
+        font-size: 10px;
       }
     }
   }
@@ -275,14 +316,33 @@
   > div {
     width: 40%;
   }
+  @include mobile{
+    display: block;
+    > div {
+      width:100%;
+    }
+  }
 }
 .font-style-tabs {
   .nav {
     @include flex(center, start);
+    background-color: #f3f3f39c;
+    width: 100px;
+    padding: 2px 5px;
+    margin: 0;
     .nav-link {
-      min-width: 50px;
-      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      padding: 5px;
+      width: 30px;
+      margin: 0 5px;
+      background-color: #f3f3f39c;
+      font-weight: 600;
     }
+   .nav-link.active {
+      background-color: #fff;
+      color: #163152;
+  }
   }
   li {
     background: none;
@@ -294,11 +354,44 @@
 }
 .links-align {
   .link-button {
-    width: 100px;
+    width: 130px;
     margin-right: 15px;
+    padding: 10px 0;
+    background-color: #f3f3f39c;
+    height: auto;
+    line-height: 0;
+    color: $text-color;
+    svg{
+      margin-right: 5px;
+    }
+    // &:hover{
+    //   background-color: $main-color;
+    //   color: $white-color;
+    //   svg{
+    //     path{
+    //       fill: $white-color;
+    //     }
+        
+    //   }
+    // }
+  }
+  
+}
+.links-align > button:hover{
+  background-color: $main-color;
+  color: $white-color;
+  svg{
+    path{
+      fill: $white-color;
+    }
+    
   }
 }
 .social-icon {
+  p{
+    color: $grad-color;
+    margin-bottom: 10px;
+  }
   .high-title,
   .high-details {
     margin: 15px 0;
@@ -311,6 +404,89 @@
     p {
       margin: 0;
       font-weight: 600;
+    }
+  }
+}
+.description {
+  p {
+    margin-bottom: 10px;
+    color: $grad-color;
+  }
+  .form-control {
+    width: 100%;
+  }
+}
+.button-color {
+  color: $grad-color;
+  @include flex(center, space-between);
+  @include mobile{
+    display: block;
+    p{
+      margin-bottom: 10px;
+    }
+  }
+}
+.appearance-page {
+  .pro-btn {
+    margin-left: 5px;
+    .link-button {
+      width: auto;
+      margin: 0;
+    }
+  }
+  
+}
+.font-pro {
+  .link-button {
+    background-color: $text-color !important;
+  }
+  
+}
+.title-pro {
+  .link-button {
+     background-color: $white-color !important;
+     color: $text-color !important;
+     border: 1px solid $border-color;
+  }
+ 
+}
+// .appearance-page{
+//   p{
+//     margin-bottom: 10px;
+//   }
+// }
+.font-style{
+  > p{
+    font-weight: 600;
+    color: $grad-color;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+}
+.font-style{
+  position: relative;
+  .nav-tabs{
+    position: absolute;
+    top: 0;
+    left: 100px;
+  }
+}
+.leftAligh{
+  .pro-btn{
+    position: absolute;
+    top: -2px;
+    left: 10px;
+  }
+}
+.align-pro{
+  position: relative;
+  .pro-btn{
+    display: inline;
+    position: absolute;
+    top: -15px;
+    left: 30%;
+    .link-button{
+      font-size: 6px;
     }
   }
 }

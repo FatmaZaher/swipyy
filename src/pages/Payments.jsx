@@ -10,6 +10,7 @@ import withReactContent from "sweetalert2-react-content";
 import paypal from "../assets/images/paypal.png";
 import creditCard from "../assets/images/creditCard.png";
 import Datepicker from "../component/form/Datepicker";
+import clock from "../assets/images/clock.png";
 
 import MaskedInput from "react-text-mask";
 
@@ -66,7 +67,7 @@ const Payments = () => {
             <Tabs
               defaultActiveKey="yearly"
               id="uncontrolled-tab-example"
-              className="mb-3"
+              className="my-3"
             >
               <Tab eventKey="yearly" title="Yearly">
                 <div className="payment-cards mt-5">
@@ -196,7 +197,6 @@ const Payments = () => {
             </p>
             <img src={paypal} alt="" />
           </div>
-
           <div className="pay-card credit">
             <div className="mb-4">
               <input type="radio" id="dewey" name="drone" value="dewey" />
@@ -264,6 +264,7 @@ const Payments = () => {
               )}
             </Formik>
           </div>
+          <p className="p-payment"><img src={clock} alt="" />We protect your payment information using encryption to provide bank-level security.</p>
         </Tab>
       </Tabs>
     </div>

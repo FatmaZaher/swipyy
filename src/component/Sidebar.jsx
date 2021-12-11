@@ -19,7 +19,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 const Sidebar = () => {
   const SidebarData = [
     {
-      title: "Links",
+      title: "Home",
       icon: <LinksIcon />,
       link: "/links",
     },

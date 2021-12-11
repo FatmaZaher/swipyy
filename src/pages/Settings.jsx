@@ -10,7 +10,9 @@ import LinkButton from "../component/form/LinkButton";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 
+
 import withReactContent from "sweetalert2-react-content";
+import Success from "../component/icons/Success";
 const MySwal = withReactContent(Swal);
 
 const initialValues = {
@@ -44,6 +46,13 @@ const Settings = () => {
   }
   function sucesesEdit() {
     Swal.fire("Good job!", "Edited successfully!", "success");
+    // Swal.fire({
+    //   title: 'Image icon',
+    //   iconHtml: '<img src="https://www.linkpicture.com/q/Icon-2_1.png">',
+    //   customClass: {
+    //     icon: 'no-border'
+    //   }
+    // })
     setIsOpen(false);
   }
   return (

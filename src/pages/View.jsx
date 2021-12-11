@@ -78,6 +78,16 @@ const View = () => {
             </Form>
           )}
         </Formik>
+        <div className="links">
+          <p className="mb-3">
+            <a href="#">Jeddah Saudi Arabia</a>
+            <ShareIcon />
+          </p>
+          <p className="mb-3">
+            <a href="#">Jeddah Saudi Arabia</a>
+            <ShareIcon />
+          </p>
+        </div>
       </div>
       <div className="logo-view">
         <img src={logo} alt="logo" />
