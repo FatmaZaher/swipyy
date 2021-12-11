@@ -28,4 +28,7 @@ body {
   @include mobile {
     margin-bottom: 50px;
   }
+  p{
+    margin: 0;
+  }
 }

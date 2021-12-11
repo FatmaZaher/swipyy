@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import FormikControl from "../component/form/FormikControl";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CancelIcon from "@mui/icons-material/Cancel";
+import logo from "../assets/images/logo.svg";
+import LinkButton from "../component/form/LinkButton";
+import Editticons from "../component/icons/Editticons";
 
 import * as Yup from "yup";
 
@@ -23,8 +26,7 @@ const validationSchema = Yup.object({
 const View = () => {
   return (
     <div className="viewPage">
-      <div className="back-view">
-      </div>
+      <div className="back-view"></div>
       <div className="mobile-side-content">
         <div className="personl-img mb-3 mb-md-4">
           <img src={personal} alt="" />
@@ -76,7 +78,10 @@ const View = () => {
             </Form>
           )}
         </Formik>
-        
+      </div>
+      <div className="logo-view">
+        <img src={logo} alt="logo" />
+        <Link to="/payments"><Editticons /></Link>
       </div>
     </div>
   );

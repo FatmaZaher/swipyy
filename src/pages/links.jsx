@@ -5,13 +5,19 @@ import Social from "../component/links/Social";
 import Location from "../component/links/Location";
 import Images from "../component/links/Images";
 import Banks from "../component/links/Banks";
-import LinkIcon from "@mui/icons-material/Link";
+// import LinkIcon from "@mui/cons-material/Link";
 import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import Pdf from "../component/links/Pdf";
+
+import LinkIcon from "../component/icons/LinkIcon";
+import SocialIcon from "../component/icons/SocialIcon";
+import LocationIcon from "../component/icons/LocationIcon";
+import ImagesIcon from "../component/icons/ImagesIcon";
+import BankIcon from "../component/icons/BankIcon";
 
 const Links = () => {
   const LinksHeaderData = [
@@ -47,19 +53,19 @@ const Links = () => {
         <Tab eventKey="link" title={<span><LinkIcon /> Links</span>}>
           <Link />
         </Tab>
-        <Tab eventKey="social" title={<span><SocialDistanceOutlinedIcon /> Social</span>}>
+        <Tab eventKey="social" title={<span><SocialIcon /> Social</span>}>
           <Social />
         </Tab>
-        <Tab eventKey="location" title={<span><LocationOnOutlinedIcon /> Location</span>}>
+        <Tab eventKey="location" title={<span><LocationIcon /> Location</span>}>
           <Location />
         </Tab>
-        <Tab eventKey="images" title={<span><ImageOutlinedIcon /> Images</span>}>
+        <Tab eventKey="images" title={<span><ImagesIcon /> Images</span>}>
           <Images />
         </Tab>
         <Tab eventKey="pdf" title={<span><AttachFileIcon /> PDF</span>}>
           <Pdf />
         </Tab>
-        <Tab eventKey="banks" title={<span><AccountBalanceIcon /> Banks</span>}>
+        <Tab eventKey="banks" title={<span><BankIcon /> Banks</span>}>
           <Banks />
         </Tab>
       </Tabs>

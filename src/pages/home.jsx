@@ -8,7 +8,7 @@ const Dashboardlayout = ({ children, ...rest }) => {
   return <div>{children}</div>;
 };
 const Home = ({ component: Component, ...rest }) => {
-  return (
+return (
     <Route
       {...rest}
       render={(props) => (

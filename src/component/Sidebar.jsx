@@ -5,40 +5,42 @@ import logo from "../assets/images/logo.svg";
 import vectary from "../assets/images/vectary.png";
 import shap1 from "../assets/images/shap1.png";
 import shap2 from "../assets/images/shap2.png";
-import LinkIcon from "@mui/icons-material/Link";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
-import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
+
+import SettingsIcon from '@mui/icons-material/Settings';
+import LinksIcon from "./icons/LinksIcon";
+import AppearanceIcon from "./icons/AppearanceIcon";
+import MessageIcon from "./icons/MessageIcon";
+import AnalyticIcon from "./icons/AnalyticIcon";
+import PaymentIcon from "./icons/PaymentIcon";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
-import SettingsIcon from '@mui/icons-material/Settings';
 
 const Sidebar = () => {
   const SidebarData = [
     {
       title: "Links",
-      icon: <LinkIcon />,
+      icon: <LinksIcon />,
       link: "/links",
     },
     {
       title: "Appearance",
-      icon: <VisibilityIcon />,
+      icon: <AppearanceIcon />,
       link: "/appearance",
     },
     {
       title: "Messages",
-      icon: <MailOutlineIcon />,
+      icon: <MessageIcon />,
       link: "/messages",
     },
     {
       title: "Analytic",
-      icon: <PollOutlinedIcon />,
+      icon: <AnalyticIcon />,
       link: "/analytic",
     },
     {
       title: "Payments & Subscription",
-      icon: <PaymentOutlinedIcon />,
+      icon: <PaymentIcon />,
       link: "/payments",
     },
     ,
@@ -46,7 +48,7 @@ const Sidebar = () => {
       title: "Settings",
       icon: <SettingsIcon />,
       link: "/settings",
-    }
+    },
   ];
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);

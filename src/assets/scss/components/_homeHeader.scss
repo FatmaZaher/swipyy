@@ -14,6 +14,11 @@
       width: 80%;
     }
   }
+  .personal-pho {
+    position: relative;
+    cursor: pointer;
+    font-size: 13px;
+  }
   @include mobile {
     .personal-pho {
       img {
@@ -28,6 +33,7 @@
   font-size: 14px;
   border-radius: $btn-input-radius;
   background-color: $white-color;
+  position: relative;
   .link-text {
     margin: 0;
     color: $grad-color;
@@ -37,12 +43,69 @@
         color: $black-color;
       }
     }
-    .person-photo {
-      width: 18px;
-      height: 18px;
+
+    .link-icon-to-list {
+      cursor: pointer;
+      position: relative;
     }
-    @include mobile{
+
+    @include mobile {
       font-size: 10px;
     }
   }
+}
+.link-icon-list {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: $white-color;
+  width: 180px;
+  padding: 0 15px;
+  border-radius: $btn-input-radius;
+  z-index: 222;
+  .link-icon {
+    background-color: transparent !important;
+    color: $grad-color;
+    text-align: start;
+    border-radius: 0;
+    width: 100%;
+    transition: $transition;
+    svg {
+      margin-right: 10px;
+      path {
+        fill: $grad-color;
+      }
+    }
+    span{
+      display: block;
+    }
+    &:hover {
+      color: $main-color;
+      svg {
+        path {
+          fill: $main-color;
+        }
+      }
+    }
+  }
+  .link-icon:first-of-type {
+    border-bottom: 1px solid $border-color;
+  }
+}
+.link-icon-list.show {
+  display: none;
+}
+.personal-info{
+  width: 197px;
+  height: 48px;
+  line-height: unset;
+  padding: 12px 0;
+  font-size: 11px;color: $text-color !important;
+
+    
+    span{
+      color: $grad-color !important;
+      font-size: 9px;
+    }
+
 }

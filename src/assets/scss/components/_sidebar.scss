@@ -36,6 +36,13 @@
         &:hover {
           background-color: $white-color;
           color: $main-color;
+          .icon {
+            svg {
+              path {
+                stroke: $main-color;
+              }
+            }
+          }
         }
         &.active {
           background-color: $white-color;
@@ -43,6 +50,34 @@
         }
         .icon {
           margin-right: 10px;
+          svg {
+            path {
+              stroke: $white-color;
+            }
+          }
+        }
+      }
+    }
+    li:first-of-type,
+    li:nth-child(5) {
+      a {
+        &:hover {
+          .icon {
+            svg {
+              path {
+                stroke: transparent;
+                fill: $main-color;
+              }
+            }
+          }
+        }
+      }
+      .icon {
+        svg {
+          path {
+            fill: $white-color;
+            stroke: transparent;
+          }
         }
       }
     }

@@ -1,32 +1,24 @@
-.hSLgqa{
-    min-width: 100% !important;
-    display: block !important;
-    text-align: center;
-    height: 200px !important;
-    padding: 30px !important;
+
+.drop-img{
+    min-width: 100%;
+    display: block ;
+    min-height: 200px ;
+    padding: 30px ;
     border: dashed 2px $border-color !important;
     border-radius: $btn-input-radius;
-    svg{
-        height: 60px !important;
-        width: 60px !important;
-        path{
-            fill: $border-color !important
+    .upload__image-wrapper{
+        font-size: 13px;
+        color: $grad-color;
+        button{
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: $blue-color;
+            margin: 0 5px;
+        }
+        .image-item{
+            display: inline-block;
+            margin: 15px 10px;
         }
     }
-}
-.ffYcuL{
-    display: block !important;
-   > span{
-        display: block !important;
-        width: 100% !important;
-        margin: 20px 0 !important;
-    }
-    .file-types{
-        display: block !important;
-        max-width: 100% !important;
-        margin: 15px auto !important;
-    }
-}
-.sc-jrQzAO ,.fodlAk{
-    display: none !important;
 }

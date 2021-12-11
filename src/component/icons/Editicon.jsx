@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
-import EditIcon from "@mui/icons-material/Edit";
+import Editticons from "./Editticons";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import FormikControl from "../form/FormikControl";
@@ -51,7 +51,7 @@ const Editicon = () => {
   return (
     <>
       <div className="edit-icon" onClick={openModal}>
-        <EditIcon />
+        <Editticons />
       </div>
       <Modal
         isOpen={modalIsOpen}

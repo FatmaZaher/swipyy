@@ -10,6 +10,8 @@ import FormikControl from "../component/form/FormikControl";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CancelIcon from "@mui/icons-material/Cancel";
 
+import logo from "../assets/images/logo.svg";
+import Editticons from "../component/icons/Editticons";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -36,7 +38,11 @@ const MobileSide = () => {
       ></div>
       <div className={mobileSide ? "mobile-side show" : "mobile-side"}>
         <div className="close-icon">
-          <button type="button" className="link-button" onClick={showMobileSide}>
+          <button
+            type="button"
+            className="link-button"
+            onClick={showMobileSide}
+          >
             <CancelIcon />
           </button>
         </div>
@@ -92,6 +98,13 @@ const MobileSide = () => {
               </Form>
             )}
           </Formik>
+
+          {/* <div className="logo-view">
+            <img src={logo} alt="logo" />
+            <Link to="/payments">
+              <Editticons />
+            </Link>
+          </div> */}
         </div>
         <Link to="/view" className="link upgrad-btn">
           <RemoveRedEyeIcon />

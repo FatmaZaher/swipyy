@@ -47,14 +47,24 @@ import FormikControl from "../component/form/FormikControl";
 import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import LinkIcon from "@mui/icons-material/Link";
-import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlined";
-import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+
 import Editicon from "../component/icons/Editicon";
 import Deleteicon from "../component/icons/Deleteicon";
 import Sharicon from "../component/icons/Sharicon";
+
+// import LinkIcon from "../component/icons/LinkIcon";
+// import SocialIcon from "../component/icons/SocialIcon";
+// import LocationIcon from "../component/icons/LocationIcon";
+// import ImagesIcon from "../component/icons/ImagesIcon";
+// import MeesaIcon from "../component/icons/MeesaIcon";
+
+
+
+import LinkBlue from "../component/icons/LinkBlue";
+import SocialBlue from "../component/icons/SocialBlue";
+import SliderBlue from "../component/icons/SliderBlue";
+import MeasssssBlue from "../component/icons/MeasssssBlue";
+import LocationBlue from "../component/icons/LocationBlue";
 
 const initialValues = {
   description: "",
@@ -73,27 +83,27 @@ const finalSpaceCharacters = [
   {
     id: "links",
     title: "Links",
-    icon: <LinkIcon />,
+    icon: <LinkBlue/>,
   },
   {
     id: "social",
     title: "Social",
-    icon: <SocialDistanceOutlinedIcon />,
+    icon: <SocialBlue/>,
   },
   {
     id: "images",
-    title: "Images",
-    icon: <ImageOutlinedIcon />,
+    title: "Slider",
+    icon: <SliderBlue/>,
   },
   {
     id: "messages",
     title: "Messages",
-    icon: <MailOutlineIcon />,
+    icon: <MeasssssBlue/>,
   },
   {
     id: "location",
     title: "Location",
-    icon: <LocationOnOutlinedIcon />,
+    icon: <LocationBlue/>,
   },
 ];
 const avatars = [
@@ -252,6 +262,7 @@ const fontEnglish = [
 ];
 
 const Appearance = () => {
+
   return (
     <div className="appearance-page">
       <Accordion>
@@ -398,15 +409,15 @@ const Appearance = () => {
                                   className="link-input"
                                   placeholder="Type the detail here"
                                 />
-                                
                               </div>
-                            ))}<button
-                                  type="button"
-                                  className="link-button"
-                                  onClick={() => push("")}
-                                >
-                                  Add Another Detail
-                                </button>
+                            ))}
+                            <button
+                              type="button"
+                              className="link-button"
+                              onClick={() => push("")}
+                            >
+                              Add Another Detail
+                            </button>
                           </div>
                         );
                       }}
@@ -439,7 +450,9 @@ const Appearance = () => {
                               {...provided.dragHandleProps}
                               className="link-dragg"
                             >
-                              <div className="icon">{icon}</div>
+                              <div className="icon">
+                              {icon}
+                              </div>
                               <div className="title">{title}</div>
                             </li>
                           )}
@@ -450,6 +463,7 @@ const Appearance = () => {
                 )}
               </Droppable>
             </DragDropContext>
+            
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">

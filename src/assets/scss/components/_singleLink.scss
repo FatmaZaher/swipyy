@@ -3,9 +3,14 @@
   border: 1px solid $border-color;
   border-radius: $btn-input-radius;
   @include flex(center, space-between);
+  
   .link-and-icon {
     @include flex(center, start);
     width: 50%;
+    img{
+      width: 10px;
+      margin-right: 10px;
+    }
     @include mobile {
       width: 60%;
     }
