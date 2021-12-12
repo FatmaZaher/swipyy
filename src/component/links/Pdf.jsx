@@ -29,7 +29,7 @@ const Pdf = () => {
             accept="application/pdf"
           />
           <p className="more-size">
-            <sapn>a file is bigger than 150M go to </sapn>
+            <sapn>bigger than 150M go to </sapn>
 
             <div className="pro-btn">
               <Link to="/payments">
