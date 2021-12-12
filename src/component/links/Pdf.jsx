@@ -28,7 +28,16 @@ const Pdf = () => {
             onChange={changeHandler}
             accept="application/pdf"
           />
-          {isFilePicked ? (
+          <p className="more-size">
+            <sapn>a file is bigger than 150M go to </sapn>
+
+            <div className="pro-btn">
+              <Link to="/payments">
+                <LinkButton type="" buttontext="PRO" />
+              </Link>
+            </div>
+          </p>
+          {/* {isFilePicked ? (
             <div>
               {selectedFile.size < 52428800 ? (
                 <p className="more-size">
@@ -54,7 +63,7 @@ const Pdf = () => {
             </div>
           ) : (
             <p>Select a file to show details</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>
