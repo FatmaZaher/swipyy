@@ -35,18 +35,13 @@ const DropImg = () => {
           <div className="upload__image-wrapper">
             <div>
               <button onClick={onImageUpload} {...dragProps}>
-                {isDragging ? (
-                  <div>
-                    <div className="img-upload mb-3">
+              <div className="img-upload mb-3">
                       <ImageDrop />
                     </div>
-                    leave here
-                  </div>
+                {isDragging ? (
+                  <div>leave here</div>
                 ) : (
                   <div>
-                    <div className="img-upload mb-3">
-                      <ImageDrop />
-                    </div>
                     Drop your image here, or browse &nbsp; ,
                     <button onClick={onImageRemoveAll} className="remove-img">
                       remove all images
@@ -63,7 +58,7 @@ const DropImg = () => {
                 )}
               </button>
             </div>
-            <div className="images-uploads mt-3 mt-3">
+            <div className="images-uploads mt-3">
               {imageList.map((image, index) => (
                 <div key={index} className="image-item">
                   <img src={image.data_url} alt="" width="100" />

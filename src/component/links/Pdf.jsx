@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
 import ImageDrop from "../icons/ImageDrop";
+import UploadFileIcon from "../icons/UploadFileIcon";
 
 const Pdf = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -17,9 +18,9 @@ const Pdf = () => {
     <div className="pdf">
       <div className="drop-pdf">
         <div>
-          {" "}
           <div className="img-upload mb-3">
-            <ImageDrop />
+            {/* <ImageDrop /> */}
+            <UploadFileIcon />
           </div>
           <input
             type="file"
@@ -29,7 +30,17 @@ const Pdf = () => {
           />
           {isFilePicked ? (
             <div>
-              {selectedFile.size < 157286400 ? (
+              {selectedFile.size < 52428800 ? (
+                <p className="more-size">
+                  <sapn>a file is bigger than 150M go to </sapn>
+
+                  <div className="pro-btn">
+                    <Link to="/payments">
+                      <LinkButton type="" buttontext="PRO" />
+                    </Link>
+                  </div>
+                </p>
+              ) : (
                 <div className="file-info mt-3 pt-3">
                   <p>Filename: {selectedFile.name}</p>
                   <p>Filetype: {selectedFile.type}</p>
@@ -39,16 +50,6 @@ const Pdf = () => {
                     {selectedFile.lastModifiedDate.toLocaleDateString()}
                   </p>
                 </div>
-              ) : (
-                <p className="more-size">
-                  <sapn>a file is more than 150 go to </sapn>
-
-                  <div className="pro-btn">
-                    <Link to="/payments">
-                      <LinkButton type="" buttontext="PRO" />
-                    </Link>
-                  </div>
-                </p>
               )}
             </div>
           ) : (

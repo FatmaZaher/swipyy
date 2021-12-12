@@ -3,6 +3,7 @@
   font-size: 13px;
   input[type="file"] {
     color: $white-color;
+    width: 100px;
   }
   input[type="file"]::-webkit-file-upload-button {
     border: none;
@@ -18,7 +19,7 @@
   }
 }
 .more-size {
-  @include flex(center, start);
+  @include flex(center, center);
 }
 .pro-btn {
   display: inline-block;
@@ -37,6 +38,6 @@
 }
 .file-info,
 .images-uploads{
-  border-top: 1px solid $border-color;
+  // border-top: 1px solid $border-color;
   text-align: left;
 }

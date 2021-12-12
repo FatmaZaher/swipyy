@@ -68,7 +68,7 @@ const Social = () => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="link-form">
+          <Form className="link-form form-head">
             {/* <Select
               name="yourLinkType"
               options={dropdwonoptions}

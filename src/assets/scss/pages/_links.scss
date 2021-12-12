@@ -164,7 +164,17 @@
   }
 }
 .soical-drag {
-  .single-link{
+  .single-link {
     background-color: $white-color;
+  }
+}
+.social-page {
+  .form-head {
+    .form-control {
+      width: calc(100% - 445px) !important;
+      @include mobile {
+        width: 100px !important;
+      }
+    }
   }
 }
