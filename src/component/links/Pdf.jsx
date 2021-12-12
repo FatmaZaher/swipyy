@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
+import ImageDrop from "../icons/ImageDrop";
 
 const Pdf = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -16,18 +17,20 @@ const Pdf = () => {
     <div className="pdf">
       <div className="drop-pdf">
         <div>
+          {" "}
+          <div className="img-upload mb-3">
+            <ImageDrop />
+          </div>
           <input
             type="file"
             name="file"
             onChange={changeHandler}
             accept="application/pdf"
-            className="mb-3"
           />
-
           {isFilePicked ? (
             <div>
               {selectedFile.size < 157286400 ? (
-                <div>
+                <div className="file-info mt-3 pt-3">
                   <p>Filename: {selectedFile.name}</p>
                   <p>Filetype: {selectedFile.type}</p>
                   <p>Size in bytes: {selectedFile.size}</p>
@@ -39,15 +42,11 @@ const Pdf = () => {
               ) : (
                 <p className="more-size">
                   <sapn>a file is more than 150 go to </sapn>
-                  
+
                   <div className="pro-btn">
                     <Link to="/payments">
-                      <LinkButton
-                        type=""
-                        buttontext="PRO"
-                      />
+                      <LinkButton type="" buttontext="PRO" />
                     </Link>
-                  
                   </div>
                 </p>
               )}

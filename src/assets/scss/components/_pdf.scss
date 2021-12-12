@@ -1,25 +1,19 @@
 .drop-pdf {
-  min-height: 200px !important;
-  [type="file"] {
+  text-align: center;
+  font-size: 13px;
+  input[type="file"] {
     color: $white-color;
   }
-  [type="file"]::-webkit-file-upload-button {
-    background: $main-color;
+  input[type="file"]::-webkit-file-upload-button {
     border: none;
-    border-radius: $btn-input-radius;
-    color: $white-color;
+    color: $pargh-color;
     cursor: pointer;
-    // font-size: 14px;
     outline: none;
-    padding: $btn-input-padding;
-    transition: $transition;
-  }
-
-  [type="file"]::-webkit-file-upload-button:hover {
-    box-shadow: $box-shadow;
+    background-color: transparent;
+    font-weight: 600;
+    width: 100% !important;
   }
   p {
-    // font-size: 14px;
     color: $pargh-color;
   }
 }
@@ -40,4 +34,9 @@
     border-radius: 3px;
     color: $white-color;
   }
+}
+.file-info,
+.images-uploads{
+  border-top: 1px solid $border-color;
+  text-align: left;
 }

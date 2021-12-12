@@ -34,38 +34,46 @@ const DropImg = () => {
           // write your building UI
           <div className="upload__image-wrapper">
             <div>
-              <div className="img-upload mb-3">
-                <ImageDrop />
-              </div>
-              
-              Drop your image here, or
-              <button
-                style={isDragging ? { color: "red" } : null}
-                onClick={onImageUpload}
-                {...dragProps}
-              >
-                browse
+              <button onClick={onImageUpload} {...dragProps}>
+                {isDragging ? (
+                  <div>
+                    <div className="img-upload mb-3">
+                      <ImageDrop />
+                    </div>
+                    leave here
+                  </div>
+                ) : (
+                  <div>
+                    <div className="img-upload mb-3">
+                      <ImageDrop />
+                    </div>
+                    Drop your image here, or browse &nbsp; ,
+                    <button onClick={onImageRemoveAll} className="remove-img">
+                      remove all images
+                    </button>
+                    <p>
+                      Supports: JPG,PNG, PDF{" "}
+                      <span className="pro-btn">
+                        <Link to="/payments">
+                          <LinkButton type="" buttontext="PRO" />
+                        </Link>
+                      </span>
+                    </p>
+                  </div>
+                )}
               </button>
-              &nbsp; ,
-              <button onClick={onImageRemoveAll}>remove all images</button>
-              <p>Supports: JPG,PNG, PDF <span className="pro-btn">
-                    <Link to="/payments">
-                      <LinkButton
-                        type=""
-                        buttontext="PRO"
-                      />
-                    </Link>
-                  </span></p>
             </div>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image.data_url} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
+            <div className="images-uploads mt-3 mt-3">
+              {imageList.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img src={image.data_url} alt="" width="100" />
+                  <div className="image-item__btn-wrapper">
+                    <button onClick={() => onImageUpdate(index)}>Update</button>
+                    <button onClick={() => onImageRemove(index)}>Remove</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </ImageUploading>

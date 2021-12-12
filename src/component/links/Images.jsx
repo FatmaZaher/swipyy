@@ -47,7 +47,7 @@ const Images = () => {
       </div>
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Description & linlk</Accordion.Header>
+          <Accordion.Header>Description & link</Accordion.Header>
           <Accordion.Body>
             <div className="add-description">
               <div className="high-header">

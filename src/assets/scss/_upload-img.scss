@@ -1,4 +1,5 @@
-.drop-img {
+.drop-img,
+.drop-pdf {
   min-width: 100%;
   display: block;
   min-height: 200px;
@@ -7,14 +8,13 @@
   border-radius: $btn-input-radius;
   .upload__image-wrapper {
     font-size: 13px;
-    color: $grad-color;
     text-align: center;
     button {
       border: none;
       outline: none;
       background-color: transparent;
-      color: $blue-color;
       margin: 0 5px;
+      color: $grad-color;
     }
     .image-item {
       display: inline-block;
@@ -22,9 +22,13 @@
     }
     p {
       font-size: 10px;
-      .link-button{
+      .link-button {
         background-color: $main-color;
+        color: $white-color;
       }
+    }
+    .remove-img {
+      color: $blue-color;
     }
   }
 }

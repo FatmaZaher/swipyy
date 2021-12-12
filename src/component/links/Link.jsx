@@ -3,6 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import ImageUpload from "image-upload-react";
 import "image-upload-react/dist/index.css";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 // import EditIcon from "@mui/icons-material/Edit";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -43,6 +46,23 @@ const Link = () => {
   //   console.log(imageList, addUpdateIndex);
   //   setImages(imageList);
   // };
+  const linksList = [
+    {
+      id: "0",
+      title: "sewarsa.com",
+      link: "https://sewarsa.com/",
+    },
+    {
+      id: "1",
+      title: "fdfdfd.com",
+      link: "https://dddddddd.com/",
+    },
+    {
+      id: "2",
+      title: "dfrerere.com",
+      link: "https://6y666.com/",
+    },
+  ];
   return (
     <div className="link-page">
       <Formik
@@ -71,533 +91,63 @@ const Link = () => {
             <HelpOutlineOutlinedIcon />
           </span>
         </p>
-
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              className="immmg"
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0, 
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-link mb-3">
-          <div className="link-and-icon">
-            <SwitchButton />
-            {/* <ImgUpload /> */}
-            {/* <div className="image-upload">
-               <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  <button
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    <AddPhotoAlternateIcon />
-                  </button>
-                  &nbsp;
-                  <button onClick={onImageRemoveAll}>
-                    <HideImageIcon />
-                  </button>
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          <UpdateIcon />
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          <DeleteOutlineIcon />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ImageUploading>
-            </div> */}
-
-            <ImageUpload
-              handleImageSelect={handleImageSelect}
-              imageSrc={imageSrc}
-              setImageSrc={setImageSrc}
-              style={{
-                width: 65,
-                height: 65,
-                margin: 0,
-              }}
-            />
-            <div className="single-link-info">
-              <p className="name-from-link">sewarsa.com</p>
-              <span className="the-link">
-                <img src={tele} alt="" />
-                https://sewarsa.com/
-              </span>
-            </div>
-          </div>
-          <div className="link-action">
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
+        <DragDropContext>
+          <Droppable droppableId="characters" className="soical-drag">
+            {(provided) => (
+              <ul
+                className="characters"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {linksList.map(({ id, title, link }, index) => {
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <div className="single-link mb-3">
+                            <div className="link-and-icon">
+                              <img
+                                src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                                alt=""
+                              />
+                              <SwitchButton />
+                              <ImageUpload
+                                handleImageSelect={handleImageSelect}
+                                imageSrc={imageSrc}
+                                setImageSrc={setImageSrc}
+                                className="immmg"
+                                style={{
+                                  width: 65,
+                                  height: 65,
+                                  margin: 0,
+                                }}
+                              />
+                              <div className="single-link-info">
+                                <p className="name-from-link">{title}</p>
+                                <span className="the-link">
+                                  <img src={tele} alt="" />
+                                  {link}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="link-action">
+                              <Editicon />
+                              <Deleteicon />
+                            </div>
+                          </div>
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );
