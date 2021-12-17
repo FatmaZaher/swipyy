@@ -35,9 +35,9 @@ const DropImg = () => {
           <div className="upload__image-wrapper">
             <div>
               <button onClick={onImageUpload} {...dragProps}>
-              <div className="img-upload mb-3">
-                      <ImageDrop />
-                    </div>
+                <div className="img-upload mb-3">
+                  <ImageDrop />
+                </div>
                 {isDragging ? (
                   <div>leave here</div>
                 ) : (

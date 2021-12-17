@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -8,26 +8,41 @@ import facebook from "../../assets/images/facebook.png";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
-import LinkButton from "../../component/form/LinkButton";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "../../redux/actions/userActions";
 
-const initialValues = {
-  email: "",
-  password: "",
-  remeberCheckbox: "",
-};
-const onSubmit = (values) => {
-  console.log("values", values);
-};
-const validationSchema = Yup.object({
-  email: Yup.string().required("Enter Your Email*"),
-  password: Yup.string().required("Enter Your Password*"),
-});
-const remeberCheckbox = [{ key: "check1", value: "Remember me" }];
+const Login = (props) => {
+  const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { loading, userInfo, error } = userSignin;
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push("/");
+    }
+    return () => {};
+  }, [userInfo]);
 
-const login = () => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("invalid email format*")
+      .required("Enter Your Email*"),
+    password: Yup.string().required("Enter Your Password*"),
+  });
+  const onSubmit = (values) => {
+    dispatch(signin(values.email, values.password));
+  };
+
+  if (userSignin.userInfo) return <Redirect to="/" />;
+  
+  const checkboxOptions = [{ key: "check1", value: "remmberMe" }];
+
   return (
-    <div className="login-content">
+    <div className="login-page">
       <div className="left-login-side">
         <img src={logo} alt="" className="logo" />
         <img src={shap1} alt="" className="shap1" />
@@ -38,7 +53,6 @@ const login = () => {
           <div className="logo-mobile">
             <img src={logo} alt="" className="logo" />
           </div>
-
           <div className="login-section">
             <h2 className="login-head">Sign in</h2>
             <Formik
@@ -67,37 +81,40 @@ const login = () => {
                   <div className="remmeber-forget">
                     <FormikControl
                       control="checkbox"
-                      name="remember"
-                      options={remeberCheckbox}
+                      label="Remember Me"
+                      name="checkboxOption"
+                      options={checkboxOptions}
                     />
                     <Link to="/changePassword" className="forget-password">
                       Forget Password?
                     </Link>
                   </div>
-                  <div className="login-btn">
-                    <Link to="/">
-                      <LinkButton type="submit" buttontext="Sign in" />
-                    </Link>
+                  <div className="login-btn my-3">
+                    {/* <Link to="/">
+                    </Link> */}
+                    <button type="submit" disabled={!formik.isValid}>
+                      Sign in
+                    </button>
                   </div>
                 </Form>
               )}
             </Formik>
-            <div className="other-login">
+            <div className="other-login text-center">
               <p>or</p>
-              <Link to="/" className="link other-link">
-                <div className="img-link">
+              <Link to="/" className="link other-link mb-3">
+                <div className="img-link mx-3">
                   <img src={google} alt="" />
                 </div>
                 <span> Sign in with Google</span>
               </Link>
-              <Link to="/" className="link other-link">
-                <div className="img-link">
+              <Link to="/" className="link other-link mb-3">
+                <div className="img-link mx-3">
                   <img src={facebook} alt="" />
                 </div>
                 <span>Sign in with Facebook</span>
               </Link>
             </div>
-            <div className="not-member">
+            <div className="not-member text-center my-3">
               <p>
                 Not a member?{" "}
                 <Link to="/signUp" className="link sign-login">
@@ -111,4 +128,4 @@ const login = () => {
     </div>
   );
 };
-export default login;
+export default Login;

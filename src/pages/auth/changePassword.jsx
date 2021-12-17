@@ -32,7 +32,7 @@ const changePassword = () => {
     Swal.fire("Good job!", "Edited successfully!", "success");
   }
   return (
-    <div className="login-content">
+    <div className="login-page">
       <div className="left-login-side">
         <img src={logo} alt="" className="logo" />
         <img src={shap1} alt="" className="shap1" />

@@ -47,6 +47,13 @@
         &.active {
           background-color: $white-color;
           color: $main-color;
+          .icon {
+            svg {
+              path {
+                stroke: $main-color;
+              }
+            }
+          }
         }
         .icon {
           margin-right: 10px;
@@ -62,6 +69,16 @@
     li:nth-child(5) {
       a {
         &:hover {
+          .icon {
+            svg {
+              path {
+                stroke: transparent;
+                fill: $main-color;
+              }
+            }
+          }
+        }
+        &.active{
           .icon {
             svg {
               path {

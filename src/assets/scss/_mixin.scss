@@ -1,13 +1,46 @@
 @mixin flex($aligin-item, $justify-content) {
-    display: flex;
-    align-items: $aligin-item;
-    justify-content: $justify-content;
+  display: flex;
+  align-items: $aligin-item;
+  justify-content: $justify-content;
 }
 
 @mixin overlay {
-    background-color: rgba($color: #000000, $alpha: 0.6);
+  background-color: rgba($color: #000000, $alpha: 0.6);
 }
 
 @mixin weight($weight) {
-    font-weight: $weight;
+  font-weight: $weight;
+}
+@mixin button($width, $background, $color, $border, $padding) {
+  width: $width;
+  background-color: $background;
+  color: $color;
+  border: $border;
+  outline: none;
+  padding: $padding;
+}
+@mixin linkInput(
+  $width,
+  $background,
+  $color,
+  $border,
+  $height,
+  $lineHeight
+) {
+  width: $width;
+  background-color: $background;
+  color: $color;
+  border: $border;
+  outline: none;
+  height: $height;
+  line-height: $lineHeight;
+  border-radius: $btn-input-radius;
+  &::placeholder {
+    color: $grad-color;
+  }
+}
+@mixin form-control($width, $color, $background) {
+  width: $width;
+  color: $color;
+  background-color: $background;
 }

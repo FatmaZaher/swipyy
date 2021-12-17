@@ -185,16 +185,15 @@ const Payments = () => {
           <p className="your-links-header mb-3">Payment Method</p>
 
           <div className="input-payment-box">
-          <input
-                  type="radio"
-                  id="PayPal"
-                  name="drone"
-                  value="PayPal"
-                  checked
-                />
-            <label for="PayPal" className="pay-card paypal">
+            <input
+              type="radio"
+              id="PayPal"
+              name="drone"
+              value="PayPal"
+              checked
+            />
+            <label htmlFor="PayPal" className="pay-card paypal">
               <div className="input-paypal">
-              
                 <span>PayPal</span>
               </div>
 
@@ -206,9 +205,9 @@ const Payments = () => {
             </label>
           </div>
           <div className="input-payment-box">
-          <input type="radio" id="dewey" name="drone" value="dewey" />
+            <input type="radio" id="dewey" name="drone" value="dewey" />
 
-            <label  for="dewey" className="pay-card credit">
+            <label htmlFor="dewey" className="pay-card credit">
               <div>
                 <span>Pay with Credit Card</span>
               </div>

@@ -59,18 +59,17 @@ const HomeHeader = () => {
           </div>
         </div>
         <div className="lang-switch">
-        <div>
-<dropdown>
-  <input id="toggle2" type="checkbox"/>
-  <label for="toggle2" class="animate">E</label>
-  <ul class="animate">
-    <li class="animate">ع</li>
-
-
-
-  </ul>
-</dropdown>
-</div>
+          <div>
+            <dropdown>
+              <input id="toggle2" type="checkbox" />
+              <label htmlFor="toggle2" class="animate">
+                E
+              </label>
+              <ul class="animate">
+                <li class="animate">ع</li>
+              </ul>
+            </dropdown>
+          </div>
         </div>
       </div>
     </>

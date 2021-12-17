@@ -1,4 +1,4 @@
-import React from "react";
+import Reac, { useEffect } from "react";
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -8,33 +8,49 @@ import facebook from "../../assets/images/facebook.png";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
-import LinkButton from "../../component/form/LinkButton";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../redux/actions/userActions";
 
-const initialValues = {
-  email: "",
-  password: "",
-  repatePassword: "",
-  remeberCheckbox: "",
-};
-const onSubmit = (values) => {
-  console.log("values", values);
-};
-const validationSchema = Yup.object({
-  email: Yup.string().required("Enter Your Email*"),
-  password: Yup.string().required("Enter Your Email*"),
-  repeatPassword: Yup.string().required("Repeat Your Password*"),
-});
-const remeberCheckbox = [
-  {
-    key: "check1",
-    value: "I agree to the Terms of Service and Privacy Policy",
-  },
-];
+const SignUp = (props) => {
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, userInfo, error } = userRegister;
+  const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin); //get user info from store
 
-const signUp = () => {
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push("/");
+    }
+    return () => {};
+  }, [userInfo]);
+
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().required("Enter Your Email*"),
+    password: Yup.string().required("Enter Your password*"),
+    name: Yup.string().required("Enter Your Name*"),
+  });
+  const onSubmit = (values) => {
+    console.log(values);
+    dispatch(register(values.name, values.email, values.password));
+  };
+
+  if (userSignin.userInfo) return <Redirect to="/" />;
+
+  const checkboxOptions = [
+    {
+      key: "check1",
+      value: "agreePolicy",
+    },
+  ];
   return (
-    <div className="login-content">
+    <div className="login-page">
       <div className="left-login-side">
         <img src={logo} alt="" className="logo" />
         <img src={shap1} alt="" className="shap1" />
@@ -47,6 +63,7 @@ const signUp = () => {
           </div>
           <div className="login-section">
             <h2 className="login-head">Sign up</h2>
+            { error && <span>{error}</span>}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -54,6 +71,14 @@ const signUp = () => {
             >
               {(formik) => (
                 <Form className="login-form">
+                  <FormikControl
+                    control="input"
+                    type="text"
+                    name="name"
+                    label="User Name*"
+                    placeholder="user name"
+                    error="true"
+                  />
                   <FormikControl
                     control="input"
                     type="email"
@@ -70,43 +95,39 @@ const signUp = () => {
                     placeholder="Password"
                     error="true"
                   />
-                  <FormikControl
-                    control="input"
-                    type="password"
-                    name="repeatPassword"
-                    label="Repeat password*"
-                    placeholder="Repeat password"
-                    error="true"
-                  />
+
                   <div className="remmeber-forget">
                     <FormikControl
                       control="checkbox"
-                      name="remember"
-                      options={remeberCheckbox}
+                      label="I agree to the Terms of Service and Privacy Policy"
+                      name="checkboxOption"
+                      options={checkboxOptions}
                     />
                   </div>
-                  <div className="login-btn">
-                    <LinkButton type="submit" buttontext="Sign up" />
+                  <div className="login-btn my-3">
+                    <button type="submit" disabled={!formik.isValid}>
+                      Sign up
+                    </button>
                   </div>
                 </Form>
               )}
             </Formik>
-            <div className="other-login">
+            <div className="other-login text-center">
               <p>or</p>
-              <Link to="/" className="link other-link">
+              <Link to="/" className="link other-link mb-3">
                 <div className="img-link">
                   <img src={google} alt="" />
                 </div>
                 <span> Sign in with Google</span>
               </Link>
-              <Link to="/" className="link other-link">
+              <Link to="/" className="link other-link mb-3">
                 <div className="img-link">
                   <img src={facebook} alt="" />
                 </div>
                 <span>Sign in with Facebook</span>
               </Link>
             </div>
-            <div className="not-member">
+            <div className="not-member text-center my-3">
               <p>
                 Not a member?{" "}
                 <Link to="/login" className="link sign-login">
@@ -120,4 +141,4 @@ const signUp = () => {
     </div>
   );
 };
-export default signUp;
+export default SignUp;

@@ -19,7 +19,7 @@ const Checkbox = (props) => {
                 />
 
                 <label htmlFor={option.value}>
-                  {option.value}
+                  {label}
                 </label>
               </React.Fragment>
             );

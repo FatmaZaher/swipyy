@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import SidebarData from "./SidebarData";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
 import vectary from "../assets/images/vectary.png";
 import shap1 from "../assets/images/shap1.png";
@@ -78,10 +78,10 @@ const Sidebar = () => {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="list-item">
-                <Link to={val.link}>
+                <NavLink to={val.link}>
                   <div className="icon">{val.icon}</div>
                   <div className="title">{val.title}</div>
-                </Link>
+                </NavLink>
               </li>
             );
           })}
