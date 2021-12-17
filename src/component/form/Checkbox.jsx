@@ -5,7 +5,7 @@ const Checkbox = (props) => {
   const { label, name, error, options, ...rest } = props;
   return (
     <div className="form-control">
-      <Field id={name} name={name} {...rest} className="link-input">
+      <Field id={name} name={name} {...rest} className="form-input">
         {({ field }) => {
           return options.map((option) => {
             return (

@@ -325,7 +325,7 @@ const Analytic = () => {
           validationSchema={validationSchema}
         >
           {(formik) => (
-            <Form className="link-form">
+            <Form className="form-page">
               <FormikControl
                 control="select"
                 name="theDate"

@@ -28,20 +28,20 @@ const Location = () => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="link-form">
+          <Form className="form-page">
             {/* <div className="form-control">
               <Field
                 type="text"
                 id="yourLink"
                 name="yourLink"
                 placeholder="Type or paste location address"
-                className="link-input"
+                className="form-input"
               />
               <div className="error-mes">
                 <ErrorMessage name="yourLink" />
               </div>
             </div>
-            <button type="submit" className="link-button">
+            <button type="submit" className="form-button">
               <AddOutlinedIcon />
               Add Location
             </button> */}
@@ -58,8 +58,8 @@ const Location = () => {
       </Formik>
       <div className="your-links pt-4">
         <p className="your-links-header mb-3 mb-m-5">Locations</p>
-        <div className="single-link mb-3">
-          <div className="single-link-info">
+        <div className="single-item mb-3">
+          <div className="single-item-info">
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">
@@ -67,8 +67,8 @@ const Location = () => {
             <Deleteicon />
           </div>
         </div>
-        <div className="single-link mb-3">
-          <div className="single-link-info">
+        <div className="single-item mb-3">
+          <div className="single-item-info">
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">
@@ -76,8 +76,8 @@ const Location = () => {
             <Deleteicon />
           </div>
         </div>
-        <div className="single-link mb-3">
-          <div className="single-link-info">
+        <div className="single-item mb-3">
+          <div className="single-item-info">
             <p className="name-from-link">Jeddah Saudi Arabia</p>
           </div>
           <div className="link-action">

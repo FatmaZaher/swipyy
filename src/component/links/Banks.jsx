@@ -75,7 +75,7 @@ const customStyles = {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="link-form">
+          <Form className="form-page">
             <FormikControl
               control="select"
               name="yourBanks"
@@ -92,12 +92,12 @@ const customStyles = {
       </Formik>
       <div className="your-links pt-4">
         <p className="your-links-header mb-3 mb-m-5">Bank Account</p>
-        <div className="single-link mb-3">
+        <div className="single-item mb-3">
           <div className="link-and-icon">
-            <div className="single-link-img">
+            <div className="single-item-img">
               <img src={bank} alt="" />
             </div>
-            <div className="single-link-info">
+            <div className="single-item-info">
               <p className="name-from-link">NCB Bank</p>
               <span className="the-link">https://sewarsa.com/</span>
             </div>

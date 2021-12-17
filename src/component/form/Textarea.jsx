@@ -6,7 +6,7 @@ const Textarea = (props) => {
   return (
     <div className="form-control">
       {label && <label htmlFor={name}>{label}</label>}
-      <Field as="textarea" id={name} name={name} {...rest} className="link-input text-area"/>
+      <Field as="textarea" id={name} name={name} {...rest} className="form-input text-area"/>
       {error ? (
         <div className="error-mes">
           <ErrorMessage name={name} />

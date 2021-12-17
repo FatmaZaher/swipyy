@@ -58,9 +58,9 @@ const Settings = () => {
   return (
     <div className="settings">
       <p className="your-links-header mb-3 mb-m-5">PASSWORD & SECURITY</p>{" "}
-      <div className="single-link mb-3">
+      <div className="single-item mb-3">
         <div className="link-and-icon">
-          <div className="single-link-info">
+          <div className="single-item-info">
             <p className="name-from-link">Current Email</p>
             <span className="the-link">FahadMuhayya_99@gmail.com</span>
           </div>
@@ -69,9 +69,9 @@ const Settings = () => {
           <Editicon />
         </div>
       </div>
-      <div className="single-link mb-3 mb-md-5">
+      <div className="single-item mb-3 mb-md-5">
         <div className="link-and-icon">
-          <div className="single-link-info">
+          <div className="single-item-info">
             <p className="name-from-link">Paswword</p>
             <span className="the-link">Fahad************</span>
           </div>

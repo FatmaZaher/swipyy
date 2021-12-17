@@ -11,7 +11,7 @@
       color: $grad-color;
     }
     .with-border {
-      .form-control .link-input {
+      .form-control .form-input {
         background-color: transparent;
       }
       @include flex(center, space-between);
@@ -26,7 +26,7 @@
 .index {
   .index-header {
     @include flex(center, space-between);
-    .link-button {
+    .form-button {
       background-color: $text-color;
       font-size: 13px;
       width: 154px;

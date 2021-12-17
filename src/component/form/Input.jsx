@@ -6,7 +6,7 @@ const Input = (props) => {
   return (
     <div className="form-control">
       {label && <label htmlFor={name} className="label mb-3">{label}</label>}
-      <Field id={name} name={name} {...rest} className="link-input" />
+      <Field id={name} name={name} {...rest} className="form-input" />
       {error && (
         <div className="error-mes">
           <ErrorMessage name={name} />

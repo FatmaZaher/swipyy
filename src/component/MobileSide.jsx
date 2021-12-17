@@ -28,7 +28,7 @@ const MobileSide = () => {
   return (
     <>
       <div className="icon-view">
-        <button type="button" className="link-button" onClick={showMobileSide}>
+        <button type="button" className="form-button" onClick={showMobileSide}>
           <RemoveRedEyeIcon />
         </button>
       </div>
@@ -40,7 +40,7 @@ const MobileSide = () => {
         <div className="close-icon">
           <button
             type="button"
-            className="link-button"
+            className="form-button"
             onClick={showMobileSide}
           >
             <CancelIcon />

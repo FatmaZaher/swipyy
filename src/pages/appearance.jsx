@@ -273,8 +273,8 @@ const Appearance = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>username</Accordion.Header>
           <Accordion.Body>
-            <div className="single-link mb-3">
-              <div className="single-link-info">
+            <div className="single-item mb-3">
+              <div className="single-item-info">
                 <div className="my-link">
                   <p className="link-text">
                     <span>
@@ -293,8 +293,8 @@ const Appearance = () => {
         <Accordion.Item eventKey="1">
           <Accordion.Header>short username</Accordion.Header>
           <Accordion.Body>
-            <div className="single-link mb-3">
-              <div className="single-link-info">
+            <div className="single-item mb-3">
+              <div className="single-item-info">
                 <div className="my-link">
                   <p className="link-text">
                     <span>
@@ -323,8 +323,8 @@ const Appearance = () => {
           <Accordion.Header>avatar & title</Accordion.Header>
           <Accordion.Body>
             <div className="avatar-title">
-              <div className="single-link mb-3">
-                <div className="single-link-img">
+              <div className="single-item mb-3">
+                <div className="single-item-img">
                   <img src={personal} alt="" />
                 </div>
                 <div className="link-and-icon">
@@ -335,8 +335,8 @@ const Appearance = () => {
                   </div>
                 </div>
               </div>
-              <div className="single-link mb-3">
-                <div className="single-link-info">
+              <div className="single-item mb-3">
+                <div className="single-item-info">
                   <div className="my-link">
                     <div className="link-text">
                       <p className="profile-title m-0">FahadMuhayya</p>
@@ -362,7 +362,7 @@ const Appearance = () => {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
               >
-                <Form className="link-form">
+                <Form className="form-page">
                   <FormikControl
                     control="textarea"
                     name="description"
@@ -410,14 +410,14 @@ const Appearance = () => {
                                 <p className="high-title-head">Detail</p>
                                 <Field
                                   name={`details[${index}]`}
-                                  className="link-input"
+                                  className="form-input"
                                   placeholder="Type the detail here"
                                 />
                               </div>
                             ))}
                             <button
                               type="button"
-                              className="link-button"
+                              className="form-button"
                               onClick={() => push("")}
                             >
                               Add Another Detail
@@ -564,7 +564,7 @@ const Appearance = () => {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
               >
-                <Form className="link-form">
+                <Form className="form-page">
                   <FormikControl
                     control="textarea"
                     name="description"
@@ -674,7 +674,7 @@ const Appearance = () => {
           <Accordion.Header>links text alignment</Accordion.Header>
           <Accordion.Body>
             <div className="links-align">
-              <button type="button" className="link-button">
+              <button type="button" className="form-button">
                 <LeftAlign />
                 Left
               </button>
@@ -684,7 +684,7 @@ const Appearance = () => {
                     <LinkButton type="" buttontext="PRO" />
                   </Link>
                 </div>
-                <button type="button" className="link-button" disabled>
+                <button type="button" className="form-button" disabled>
                   <CenterAlign />
                   Center
                 </button>
@@ -695,7 +695,7 @@ const Appearance = () => {
                     <LinkButton type="" buttontext="PRO" />
                   </Link>
                 </div>
-                <button type="button" className="link-button" disabled>
+                <button type="button" className="form-button" disabled>
                   <RightAlign />
                   Right
                 </button>

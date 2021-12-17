@@ -3,12 +3,9 @@
 }
 .form-control {
   padding: 0;
-  width: calc(100% - 207px);
+  // width: calc(100% - 207px);
   border: none;
   font-size: 14px;
-  // .label {
-  //   margin-bottom: 15px;
-  // }
   .form-input {
     padding: $btn-input-padding;
     border-radius: $btn-input-radius;
@@ -20,14 +17,8 @@
     height: 48px;
     line-height: 48px;
     display: block;
-    // margin-bottom: 15px;
     &::placeholder {
       color: $grad-color;
-    }
-    @include mobile {
-      padding: 0 10px;
-      height: 30px;
-      line-height: 30px;
     }
   }
   .text-area {
@@ -41,36 +32,27 @@
   @include mobile {
     width: calc(100% - 110px);
     font-size: 10px;
+    .form-input {
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+    }
     .error-mes {
       font-size: 10px;
       padding: $btn-input-padding-mobile;
     }
   }
 }
-.form-button {
-  width: 197px;
-  height: 48px;
-  line-height: 48px;
-  border-radius: $btn-input-radius;
-  background-color: $blue-color;
-  color: $white-color;
-  border: none;
-  outline: none;
-  transition: $transition;
-  &:hover {
-    background-color: #64c1c7;
-  }
-  @include mobile {
-    width: 97px;
-    height: 30px;
-    line-height: 30px;
+.link-page,
+.location-page,
+.bank-page {
+  .form-control {
+    width: calc(100% - 207px);
   }
 }
 .social-page {
-  .form-page {
-    .form-control {
-      width: calc(100% - 480px);
-    }
+  .form-control {
+    width: calc(100% - 480px);
   }
   .link-action {
     .form-page {
@@ -87,7 +69,3 @@
     }
   }
 }
-.datepicker{
-  margin-bottom: 26px;
-}
-

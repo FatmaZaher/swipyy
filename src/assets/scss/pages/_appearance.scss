@@ -43,20 +43,20 @@
     width: 49%;
     height: 95px;
   }
-  .single-link-img {
+  .single-item-img {
     margin-right: 120px;
     @include mobile {
       width: 50%;
     }
   }
-  .single-link-switch {
+  .single-item-switch {
     margin-right: 10px;
   }
 
   .profile-title {
     color: $text-color;
   }
-  .single-link .single-link-info {
+  .single-item .single-item-info {
     width: 55%;
   }
   @include mobile {
@@ -122,12 +122,12 @@
     .form-control {
       width: 82%;
     }
-    .link-input {
+    .form-input {
       width: 100%;
     }
   }
   .high-details {
-    .link-input {
+    .form-input {
       width: 82%;
       margin-right: 0;
       @include mobile {
@@ -142,7 +142,7 @@
   // }
 }
 .field-array {
-  .link-input {
+  .form-input {
     padding: $btn-input-padding;
     border-radius: $btn-input-radius;
     background-color: $back-color;
@@ -155,14 +155,14 @@
     line-height: 48px;
     margin-right: 15px;
   }
-  .link-button {
+  .form-button {
     width: 100%;
     @include mobile {
       font-size: 9px;
     }
   }
   @include mobile {
-    .link-input {
+    .form-input {
       width: 100%;
       padding: 0 10px;
       height: 30px;
@@ -174,10 +174,10 @@
 }
 // .high-title {
 //   margin-top: 20px;
-//   .link-form{
+//   .form-page{
 //     display: block
 //   }
-//   .link-form > div {
+//   .form-page > div {
 //     @include flex(center, start);
 //     width: 100%;
 //     margin-bottom: 15px;
@@ -194,7 +194,7 @@
 //     margin: 0;
 //   }
 // }
-// .link-input{
+// .form-input{
 //   padding: 12px 30px;
 //   border-radius: 6px;
 //   background-color: #f3f3f39c;
@@ -353,7 +353,7 @@
   }
 }
 .links-align {
-  .link-button {
+  .form-button {
     width: 130px;
     margin-right: 15px;
     padding: 10px 0;
@@ -429,7 +429,7 @@
 .appearance-page {
   .pro-btn {
     margin-left: 5px;
-    .link-button {
+    .form-button {
       width: auto;
       margin: 0;
     }
@@ -437,13 +437,13 @@
   
 }
 .font-pro {
-  .link-button {
+  .form-button {
     background-color: $text-color !important;
   }
   
 }
 .title-pro {
-  .link-button {
+  .form-button {
      background-color: $white-color !important;
      color: $text-color !important;
      border: 1px solid $border-color;
@@ -485,7 +485,7 @@
     position: absolute;
     top: -15px;
     left: 30%;
-    .link-button{
+    .form-button{
       font-size: 6px;
     }
   }

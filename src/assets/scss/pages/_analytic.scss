@@ -2,11 +2,11 @@
   .analytic-header {
     @include flex(center, start);
     margin-bottom: 15px;
-    .link-form {
+    .form-page {
       margin-right: 15px;
       .form-control {
         width: 130px;
-        .link-input {
+        .form-input {
           padding: 12px;
           color: $text-color;
           background-color: $white-color;
@@ -16,7 +16,7 @@
         }
       }
     }
-    .link-button {
+    .form-button {
       background-color: $text-color;
       font-size: 13px;
       width: 154px;

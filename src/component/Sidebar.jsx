@@ -55,7 +55,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="icon-mobile">
-        <button type="button" className="link-button" onClick={showSidebar}>
+        <button type="button" className="form-button" onClick={showSidebar}>
           <MenuIcon />
         </button>
       </div>
@@ -69,7 +69,7 @@ const Sidebar = () => {
             <img src={logo} alt="logo" />
           </Link>
           <div className="close-icon">
-            <button type="button" className="link-button" onClick={showSidebar}>
+            <button type="button" className="form-button" onClick={showSidebar}>
               <CancelIcon />
             </button>
           </div>

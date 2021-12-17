@@ -68,7 +68,7 @@ const Social = () => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="link-form form-head">
+          <Form className="form-page form-head">
             {/* <Select
               name="yourLinkType"
               options={dropdwonoptions}
@@ -80,13 +80,13 @@ const Social = () => {
                 id="yourLink"
                 name="yourLink"
                 placeholder="Paste your social link here"
-                className="link-input"
+                className="form-input"
               />
               <div className="error-mes">
                 <ErrorMessage name="yourLink" />
               </div>
             </div>
-            <button type="submit" className="link-button">
+            <button type="submit" className="form-button">
               <AddOutlinedIcon />
               Add Social Link
             </button> */}
@@ -109,12 +109,12 @@ const Social = () => {
       </Formik>
       {/* <div className="your-links pt-4">
         <p className="your-links-header mb-3 mb-m-5">Social Links</p>
-        <div className="single-link mb-3">
+        <div className="single-item mb-3">
           <div className="link-and-icon">
-            <div className="single-link-icon">
+            <div className="single-item-icon">
               <WhatsAppIcon />
             </div>
-            <div className="single-link-info">
+            <div className="single-item-info">
               <p className="name-from-link">My Whatsapp</p>
               <span className="the-link">+9705667897</span>
             </div>
@@ -122,7 +122,7 @@ const Social = () => {
 
           <div className="link-action">
             <Formik initialValues={initialValues}>
-              <Form className="link-form">
+              <Form className="form-page">
                  <Select
                   name="socialLinkIsButton"
                   options={socialLinkIsButton}
@@ -138,12 +138,12 @@ const Social = () => {
             <Deleteicon />
           </div>
         </div>
-        <div className="single-link mb-3">
+        <div className="single-item mb-3">
           <div className="link-and-icon">
-            <div className="single-link-icon">
+            <div className="single-item-icon">
               <FacebookIcon />
             </div>
-            <div className="single-link-info">
+            <div className="single-item-info">
               <p className="name-from-link">My Facebook</p>
               <span className="the-link">FahadMuhayya</span>
             </div>
@@ -151,7 +151,7 @@ const Social = () => {
 
           <div className="link-action">
             <Formik initialValues={initialValues}>
-              <Form className="link-form">
+              <Form className="form-page">
                  <Select
                   name="socialLinkIsButton"
                   options={socialLinkIsButton}
@@ -167,12 +167,12 @@ const Social = () => {
             <Deleteicon />
           </div>
         </div>
-        <div className="single-link mb-3">
+        <div className="single-item mb-3">
           <div className="link-and-icon">
-            <div className="single-link-icon">
+            <div className="single-item-icon">
               <TwitterIcon />
             </div>
-            <div className="single-link-info">
+            <div className="single-item-info">
               <p className="name-from-link">My Twitter</p>
               <span className="the-link">FahadMuhayya</span>
             </div>
@@ -180,7 +180,7 @@ const Social = () => {
 
           <div className="link-action">
             <Formik initialValues={initialValues}>
-              <Form className="link-form">
+              <Form className="form-page">
                  <Select
                   name="socialLinkIsButton"
                   options={socialLinkIsButton}
@@ -215,11 +215,11 @@ const Social = () => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <div className="single-link mb-3">
+                          <div className="single-item mb-3">
                             <div className="link-and-icon">
                               <img src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg" alt="" />
-                              <div className="single-link-icon">{icon}</div>
-                              <div className="single-link-info">
+                              <div className="single-item-icon">{icon}</div>
+                              <div className="single-item-info">
                               
                                 <p className="name-from-link">{title}</p>
                                 <span className="the-link">{subTitle}</span>
@@ -228,7 +228,7 @@ const Social = () => {
 
                             <div className="link-action">
                               <Formik initialValues={initialValues}>
-                                <Form className="link-form">
+                                <Form className="form-page">
                                   {/* <Select
                   name="socialLinkIsButton"
                   options={socialLinkIsButton}

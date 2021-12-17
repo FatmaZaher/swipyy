@@ -11,7 +11,7 @@ const Datepicker = () => {
       onChange={(date) => setStartDate(date)}
       disabledKeyboardNavigation
       placeholderText="mm/yy"
-      className="link-input datepicker"
+      className="form-input datepicker"
     />
   );
 };

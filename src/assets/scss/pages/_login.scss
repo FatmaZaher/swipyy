@@ -102,7 +102,7 @@
   // font-size: 15px;
   .form-control {
     @include form-control(100%, $black-color, transparent);
-    .link-input {
+    .form-input {
       @include linkInput(
         100%,
         transparent,

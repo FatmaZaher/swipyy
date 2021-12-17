@@ -30,10 +30,10 @@ const Images = () => {
   return (
     <div className="images">
       <p className="your-links-header mb-3 mb-m-5">Image Sliders</p>
-      <div className="single-link mb-3">
+      <div className="single-item mb-3">
         <div className="link-and-icon">
           <SwitchButton />
-          <div className="single-link-info">
+          <div className="single-item-info">
             <p className="name-from-link">New Image Slider</p>
           </div>
         </div>

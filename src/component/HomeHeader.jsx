@@ -28,12 +28,12 @@ const HomeHeader = () => {
               // className="link-icon-list"
               className={linkList ? "link-icon-list" : "link-icon-list show"}
             >
-              <button type="button" className="link-icon link-button">
+              <button type="button" className="link-icon form-button">
                 <LinksIcon />
                 Copy Full Link
               </button>
 
-              <button type="button" className="link-icon link-button">
+              <button type="button" className="link-icon form-button">
                 <LinksIcon />
                 Copy Short Link
               </button>
@@ -52,7 +52,7 @@ const HomeHeader = () => {
               <span>fahadmuhayya@gmail.com</span>
             </p>
 
-            <button type="button" className="link-icon link-button">
+            <button type="button" className="link-icon form-button">
               <LogoutIcon />
               Log Out
             </button>

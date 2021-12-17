@@ -6,7 +6,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 const LinkButton = (props) => {
   const { type, buttontext, icon, exportIcon, ...rest } = props;
   return (
-    <button type={type} className="link-button" {...rest}>
+    <button type={type} className="form-button" {...rest}>
       {icon && <AddOutlinedIcon />}
       {exportIcon && <DownloadIcon/>}
       {buttontext}

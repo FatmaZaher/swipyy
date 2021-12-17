@@ -71,7 +71,7 @@ const Link = () => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="link-form">
+          <Form className="form-page">
             <FormikControl
               control="input"
               type="text"
@@ -108,7 +108,7 @@ const Link = () => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <div className="single-link mb-3">
+                          <div className="single-item mb-3">
                             <div className="link-and-icon">
                               <img
                                 src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
@@ -126,7 +126,7 @@ const Link = () => {
                                   margin: 0,
                                 }}
                               />
-                              <div className="single-link-info">
+                              <div className="single-item-info">
                                 <p className="name-from-link">{title}</p>
                                 <span className="the-link">
                                   <img src={tele} alt="" />

@@ -248,7 +248,7 @@ const Payments = () => {
                           /[1-9]/,
                           " ",
                         ]}
-                        className="link-input mb-4"
+                        className="form-input mb-4"
                         placeholder="type the Card Number here.."
                         guide={false}
                         id="my-input-id"
@@ -261,7 +261,7 @@ const Payments = () => {
                       <label className="label">Expire Date</label>
                       <MaskedInput
                         mask={[/[1-9]/, /[1-9]/, "/", /[1-9]/, /[1-9]/]}
-                        className="link-input mb-4"
+                        className="form-input mb-4"
                         placeholder="mm / yy"
                         guide={false}
                         id="my-input-id"
