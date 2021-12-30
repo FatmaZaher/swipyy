@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Accordion } from "react-bootstrap";
 import EditIcon from "@mui/icons-material/Edit";
 import ShareIcon from "@mui/icons-material/Share";
-
 import { Tabs, Tab } from "react-bootstrap";
-
 import LinkButton from "../component/form/LinkButton";
 import { Link } from "react-router-dom";
-
 import SwitchButton from "../component/SwitchButton";
 import personal from "../assets/images/personal.png";
 import avatar from "../assets/images/avatar.svg";
@@ -31,34 +28,21 @@ import buttonIcon3 from "../assets/images/buttonIcon3.png";
 import buttonIcon4 from "../assets/images/buttonIcon4.png";
 import buttonIcon5 from "../assets/images/buttonIcon5.png";
 import buttonIcon6 from "../assets/images/buttonIcon6.png";
-
 import background1 from "../assets/images/background1.png";
 import background2 from "../assets/images/background2.png";
 import background3 from "../assets/images/background3.png";
-
 import animatedBack1 from "../assets/images/animatedBack1.png";
 import animatedBack2 from "../assets/images/animatedBack3.png";
 import animatedBack3 from "../assets/images/animatedBack1.png";
-
 import fontE1 from "../assets/images/fontE1.png";
-
 import upload from "../assets/images/upload.png";
-// import them2 from "../assets/images/them2.png";
 import FormikControl from "../component/form/FormikControl";
 import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 import Editicon from "../component/icons/Editicon";
 import Deleteicon from "../component/icons/Deleteicon";
 import Sharicon from "../component/icons/Sharicon";
-
-// import LinkIcon from "../component/icons/LinkIcon";
-// import SocialIcon from "../component/icons/SocialIcon";
-// import LocationIcon from "../component/icons/LocationIcon";
-// import ImagesIcon from "../component/icons/ImagesIcon";
-// import MeesaIcon from "../component/icons/MeesaIcon";
-
 import LinkBlue from "../component/icons/LinkBlue";
 import SocialBlue from "../component/icons/SocialBlue";
 import SliderBlue from "../component/icons/SliderBlue";
@@ -67,6 +51,19 @@ import LocationBlue from "../component/icons/LocationBlue";
 import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
+
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
+};
+const grid = 8;
+const getItemStyle = (isDragging, draggableStyle) => ({
+  userSelect: "none",
+  ...draggableStyle,
+});
+const queryAttr = "data-rbd-drag-handle-draggable-id";
 
 const initialValues = {
   description: "",
@@ -81,33 +78,33 @@ const dropdwonoptions = [
   { key: "Facebook", value: "facebook" },
   { key: "Telegram", value: "telegram" },
 ];
-const finalSpaceCharacters = [
-  {
-    id: "links",
-    title: "Links",
-    icon: <LinkBlue />,
-  },
-  {
-    id: "social",
-    title: "Social",
-    icon: <SocialBlue />,
-  },
-  {
-    id: "images",
-    title: "Slider",
-    icon: <SliderBlue />,
-  },
-  {
-    id: "messages",
-    title: "Messages",
-    icon: <MeasssssBlue />,
-  },
-  {
-    id: "location",
-    title: "Location",
-    icon: <LocationBlue />,
-  },
-];
+// const finalSpaceCharacters = [
+//   {
+//     id: "links",
+//     title: "Links",
+//     icon: <LinkBlue />,
+//   },
+//   {
+//     id: "social",
+//     title: "Social",
+//     icon: <SocialBlue />,
+//   },
+//   {
+//     id: "images",
+//     title: "Slider",
+//     icon: <SliderBlue />,
+//   },
+//   {
+//     id: "messages",
+//     title: "Messages",
+//     icon: <MeasssssBlue />,
+//   },
+//   {
+//     id: "location",
+//     title: "Location",
+//     icon: <LocationBlue />,
+//   },
+// ];
 const avatars = [
   {
     id: "1",
@@ -267,6 +264,76 @@ const fontEnglish = [
 ];
 
 const Appearance = () => {
+  const [placeholderProps, setPlaceholderProps] = useState({});
+  const [items, setItems] = useState([
+    {
+      id: "links",
+      title: "Links",
+      icon: <LinkBlue />,
+    },
+    {
+      id: "social",
+      title: "Social",
+      icon: <SocialBlue />,
+    },
+    {
+      id: "images",
+      title: "Slider",
+      icon: <SliderBlue />,
+    },
+    {
+      id: "messages",
+      title: "Messages",
+      icon: <MeasssssBlue />,
+    },
+    {
+      id: "location",
+      title: "Location",
+      icon: <LocationBlue />,
+    },
+  ]);
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    setPlaceholderProps({});
+    setItems((items) =>
+      reorder(items, result.source.index, result.destination.index)
+    );
+  };
+
+  const onDragUpdate = (update) => {
+    if (!update.destination) {
+      return;
+    }
+    const draggableId = update.draggableId;
+    const destinationIndex = update.destination.index;
+    const domQuery = `[${queryAttr}='${draggableId}']`;
+    const draggedDOM = document.querySelector(domQuery);
+    if (!draggedDOM) {
+      return;
+    }
+    const { clientHeight, clientWidth } = draggedDOM;
+    const clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      [...draggedDOM.parentNode.children]
+        .slice(0, destinationIndex)
+        .reduce((total, curr) => {
+          const style = curr.currentStyle || window.getComputedStyle(curr);
+          const marginBottom = parseFloat(style.marginBottom);
+          return total + curr.clientHeight + marginBottom;
+        }, 0);
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      ),
+    });
+  };
+
   return (
     <div className="appearance-page">
       <Accordion>
@@ -436,32 +503,41 @@ const Appearance = () => {
         <Accordion.Item eventKey="6">
           <Accordion.Header>placement manager</Accordion.Header>
           <Accordion.Body>
-            <DragDropContext>
-              <Droppable droppableId="characters">
-                {(provided) => (
-                  <ul
-                    className="characters"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {finalSpaceCharacters.map(({ id, title, icon }, index) => {
-                      return (
-                        <Draggable key={id} draggableId={id} index={index}>
-                          {(provided) => (
-                            <li
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              className="link-dragg"
-                            >
-                              <div className="icon">{icon}</div>
+            <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {items.map(({ id, title, icon }, index) => (
+                      <Draggable key={id} draggableId={id} index={index}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                            className="link-dragg"
+                          >
+                           <div className="icon">{icon}</div>
                               <div className="title">{title}</div>
-                            </li>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                  </ul>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+
+                    {provided.placeholder}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: placeholderProps.clientY,
+                        left: placeholderProps.clientX,
+                        height: placeholderProps.clientHeight,
+                        width: placeholderProps.clientWidth,
+                      }}
+                    />
+                  </div>
                 )}
               </Droppable>
             </DragDropContext>

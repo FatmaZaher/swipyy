@@ -46,7 +46,7 @@
       }
       .other-login {
         .other-link {
-          @include flex(center, center);
+          @include flex(center, start);
           @include linkInput(
             100%,
             transparent,
@@ -56,6 +56,7 @@
             48px
           );
           .img-link {
+            width: 30px;
             @include mobile {
               img {
                 width: 15px;

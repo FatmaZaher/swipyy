@@ -1,4 +1,4 @@
-import Reac, { useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -10,39 +10,48 @@ import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/actions/userActions";
+import { register } from "../../actions/auth";
+import { useHistory } from "react-router-dom";
 
-const SignUp = (props) => {
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, userInfo, error } = userRegister;
+const SignUp = () => {
+  const history = useHistory();
+  const [successful, setSuccessful] = useState(false);
+  const { message } = useSelector((state) => state.message);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const userSignin = useSelector((state) => state.userSignin); //get user info from store
-
-  useEffect(() => {
-    if (userInfo) {
-      props.history.push("/");
-    }
-    return () => {};
-  }, [userInfo]);
 
   const initialValues = {
-    name: "",
+    // name: "",
     email: "",
     password: "",
+    password_confirmation: ""
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().required("Enter Your Email*"),
+    email: Yup.string()
+    .email("invalid email format*")
+    .required("Enter Your Email*"),
     password: Yup.string().required("Enter Your password*"),
-    name: Yup.string().required("Enter Your Name*"),
+    password_confirmation: Yup.string().required("Enter Your password*"),
+    // name: Yup.string().required("Enter Your Name*"),
   });
   const onSubmit = (values) => {
     console.log(values);
-    dispatch(register(values.name, values.email, values.password));
+    setSuccessful(false);
+
+    dispatch(register( values.email, values.password, values.password_confirmation))
+      .then(() => {
+        setSuccessful(true);
+        console.log('register done');
+        history.push("/verify");
+      })
+      .catch(() => {
+        setSuccessful(false);
+      });
   };
-
-  if (userSignin.userInfo) return <Redirect to="/" />;
-
+  if (isLoggedIn) {
+    return history.push("/links");
+  }
   const checkboxOptions = [
     {
       key: "check1",
@@ -63,7 +72,6 @@ const SignUp = (props) => {
           </div>
           <div className="login-section">
             <h2 className="login-head">Sign up</h2>
-            { error && <span>{error}</span>}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -71,20 +79,20 @@ const SignUp = (props) => {
             >
               {(formik) => (
                 <Form className="login-form">
-                  <FormikControl
+                  {/* <FormikControl
                     control="input"
                     type="text"
                     name="name"
                     label="User Name*"
                     placeholder="user name"
                     error="true"
-                  />
+                  /> */}
                   <FormikControl
                     control="input"
                     type="email"
                     name="email"
-                    label="Email address or user name**"
-                    placeholder="Enter email address or user name"
+                    label="Email address**"
+                    placeholder="Enter email address"
                     error="true"
                   />
                   <FormikControl
@@ -93,6 +101,14 @@ const SignUp = (props) => {
                     name="password"
                     label="Create password*"
                     placeholder="Password"
+                    error="true"
+                  />
+                  <FormikControl
+                    control="input"
+                    type="password"
+                    name="password_confirmation"
+                    label="Confirm Password*"
+                    placeholder="Confirm Password"
                     error="true"
                   />
 
@@ -109,6 +125,20 @@ const SignUp = (props) => {
                       Sign up
                     </button>
                   </div>
+                  {message && (
+                    <div className="form-group">
+                      <div
+                        className={
+                          successful
+                            ? "alert alert-success"
+                            : "alert alert-danger"
+                        }
+                        role="alert"
+                      >
+                        {message}
+                      </div>
+                    </div>
+                  )}
                 </Form>
               )}
             </Formik>

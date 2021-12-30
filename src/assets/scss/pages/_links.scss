@@ -8,7 +8,10 @@
 .payments,
 .settings,
 .images,
-.pdf {
+.pdf,
+.appearance-page,
+.messages,
+.index {
   background-color: $white-color;
   padding: 30px;
   border-radius: $btn-input-radius;
@@ -87,11 +90,6 @@
   border-radius: $btn-input-radius !important;
 }
 @include mobile {
-  // .eQWBcd {
-  //   svg {
-  //     width: 10px !important;
-  //   }
-  // }
   .hQZhQk {
     svg {
       width: 15px !important;
@@ -102,14 +100,7 @@
     height: 35px !important;
   }
 }
-// .links-page{
-//   .nav-item{
-//     width: 14%;
-//     .nav-link{
-//       width: 100%;
-//     }
-//   }
-// }
+
 .links-page {
   .nav-item {
     .nav-link {
@@ -166,15 +157,5 @@
 .soical-drag {
   .single-item {
     background-color: $white-color;
-  }
-}
-.social-page {
-  .form-head {
-    .form-control {
-      width: calc(100% - 445px) !important;
-      @include mobile {
-        width: 100px !important;
-      }
-    }
   }
 }

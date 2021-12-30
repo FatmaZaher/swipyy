@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -8,20 +8,37 @@ import facebook from "../../assets/images/facebook.png";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../../component/form/FormikControl";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../../redux/actions/userActions";
-
+import { login } from "../../actions/auth";
+// import { GoogleLogin, GoogleLogout } from "react-google-login";
+// const clientId =
+//   "658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com";
 const Login = (props) => {
+  // const [showloginButton, setShowloginButton] = useState(true);
+  // const [showlogoutButton, setShowlogoutButton] = useState(false);
+  // const onLoginSuccess = (res) => {
+  //   console.log("Login Success:", res.profileObj);
+  //   setShowloginButton(false);
+  //   setShowlogoutButton(true);
+  // };
+
+  // const onLoginFailure = (res) => {
+  //   console.log("Login Failed:", res);
+  // };
+
+  // const onSignoutSuccess = () => {
+  //   alert("You have been logged out successfully");
+  //   console.clear();
+  //   setShowloginButton(true);
+  //   setShowlogoutButton(false);
+  // };
+
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  const userSignin = useSelector((state) => state.userSignin);
-  const { loading, userInfo, error } = userSignin;
-  useEffect(() => {
-    if (userInfo) {
-      props.history.push("/");
-    }
-    return () => {};
-  }, [userInfo]);
 
   const initialValues = {
     email: "",
@@ -34,11 +51,21 @@ const Login = (props) => {
     password: Yup.string().required("Enter Your Password*"),
   });
   const onSubmit = (values) => {
-    dispatch(signin(values.email, values.password));
+    console.log(values);
+    setLoading(true);
+    dispatch(login(values.email, values.password))
+      .then((res) => {
+        history.push("/links");
+        // window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
+  if (isLoggedIn) {
+    return history.push("/links");
+  }
 
-  if (userSignin.userInfo) return <Redirect to="/" />;
-  
   const checkboxOptions = [{ key: "check1", value: "remmberMe" }];
 
   return (
@@ -93,22 +120,32 @@ const Login = (props) => {
                     {/* <Link to="/">
                     </Link> */}
                     <button type="submit" disabled={!formik.isValid}>
+                      {loading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                      )}
                       Sign in
                     </button>
                   </div>
+                  {message && (
+                    <div className="form-group">
+                      <div className="alert alert-danger" role="alert">
+                        {message}
+                      </div>
+                    </div>
+                  )}
                 </Form>
               )}
             </Formik>
             <div className="other-login text-center">
               <p>or</p>
               <Link to="/" className="link other-link mb-3">
-                <div className="img-link mx-3">
+                <div className="img-link">
                   <img src={google} alt="" />
                 </div>
                 <span> Sign in with Google</span>
               </Link>
               <Link to="/" className="link other-link mb-3">
-                <div className="img-link mx-3">
+                <div className="img-link">
                   <img src={facebook} alt="" />
                 </div>
                 <span>Sign in with Facebook</span>
@@ -122,6 +159,26 @@ const Login = (props) => {
                 </Link>
               </p>
             </div>
+            <div>
+              {/* {showloginButton ? (
+                <GoogleLogin
+                  clientId={clientId}
+                  buttonText="Sign In"
+                  onSuccess={onLoginSuccess}
+                  onFailure={onLoginFailure}
+                  cookiePolicy={"single_host_origin"}
+                  isSignedIn={true}
+                />
+              ) : null}
+
+              {showlogoutButton ? (
+                <GoogleLogout
+                  clientId={clientId}
+                  buttonText="Sign Out"
+                  onLogoutSuccess={onSignoutSuccess}
+                ></GoogleLogout>
+              ) : null} */}
+            </div>
           </div>
         </div>
       </div>
@@ -129,3 +186,4 @@ const Login = (props) => {
   );
 };
 export default Login;
+ 

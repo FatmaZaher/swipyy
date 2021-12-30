@@ -3,8 +3,8 @@
   .p-payment {
     font-size: 13px;
     color: $pargh-color;
-    @include mobile{
-      font-size: 10px
+    @include mobile {
+      font-size: 10px;
     }
   }
   .nav {
@@ -127,7 +127,6 @@
   }
 }
 
-
 // .check::before {
 //   display: block;
 //   position: absolute;
@@ -156,18 +155,18 @@
     right: 30px;
     top: 30px;
   }
-  .login-form{
+  .login-form {
     @include flex(center, space-between);
     flex-wrap: wrap;
-    .form-control{
+    .form-control {
       width: 49%;
     }
-    .login-btn{
+    .login-btn {
       width: 100%;
-text-align: center;
-.form-button{
-  width: 30%;
-}
+      text-align: center;
+      .form-button {
+        width: 30%;
+      }
     }
   }
   @include mobile {
@@ -198,17 +197,17 @@ text-align: center;
   }
 }
 .credit {
- flex-wrap: wrap;
- .login-form{
-   width: 100%;
-   margin-top: 30px;
-   .form-control{
-     background: transparent;
-     input:focus {
-      border-color: $main-color;
+  flex-wrap: wrap;
+  .login-form {
+    width: 100%;
+    margin-top: 30px;
+    .form-control {
+      background: transparent;
+      input:focus {
+        border-color: $main-color;
+      }
     }
-   }
- }
+  }
   img {
     @include mobile {
       width: 100px;
@@ -242,20 +241,20 @@ input[type="radio"]:checked + label {
 input[type="radio"]:checked + label:before {
   background-color: $main-color;
 }
-.p-payment{
+.p-payment {
   color: $pargh-color;
   font-size: 10px;
-  img{
+  img {
     margin-right: 10px;
   }
 }
-.input-payment-box{
+.input-payment-box {
   > input {
-    &:checked{
+    &:checked {
       & ~ label {
         background: $back-color;
         border-color: $main-color;
-        span{
+        span {
           font-weight: 600;
         }
       }

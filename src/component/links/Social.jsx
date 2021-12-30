@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -8,58 +8,131 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
-import tele from "../../assets/images/tele.png";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
 import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
 
-const initialValues = {
-  yourLink: "",
-  yourLinkType: "",
-  socialLinkIsButton: "button",
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
 };
-const onSubmit = (values) => {
-  console.log("values", values);
-};
-const validationSchema = Yup.object({
-  yourLink: Yup.string().required("Add You Link*"),
-  yourLinkType: Yup.string().required("Add You Link*"),
+const grid = 8;
+const getItemStyle = (isDragging, draggableStyle) => ({
+  userSelect: "none",
+  ...draggableStyle,
 });
-const dropdwonoptions = [
-  { key: "Select Popular Social Link", value: "" },
-  { key: "Whatsapp", value: "whatsapp" },
-  { key: "Facebook", value: "facebook" },
-  { key: "Telegram", value: "telegram" },
-];
-const socialLinkIsButton = [
-  { key: "Show as", value: "" },
-  { key: "Button", value: "button" },
-  { key: "Icon", value: "icon" },
-];
-
-const finalSpaceCharacters = [
-  {
-    id: "whatsapp",
-    title: "My Whatsapp",
-    subTitle: "+9705667897",
-    icon: <WhatsAppIcon />,
-  },
-  {
-    id: "facebook",
-    title: "My Facebook",
-    subTitle: "FahadMuhayya",
-    icon: <FacebookIcon />,
-  },
-  {
-    id: "twitter",
-    title: "My Twitter",
-    subTitle: "FahadMuhayya",
-    icon: <WhatsAppIcon />,
-  },
-];
+const queryAttr = "data-rbd-drag-handle-draggable-id";
 const Social = () => {
+  const [placeholderProps, setPlaceholderProps] = useState({});
+  const [items, setItems] = useState([
+    {
+      id: "whatsapp",
+      title: "My Whatsapp",
+      subTitle: "+9705667897",
+      icon: <WhatsAppIcon />,
+    },
+    {
+      id: "facebook",
+      title: "My Facebook",
+      subTitle: "FahadMuhayya",
+      icon: <FacebookIcon />,
+    },
+    {
+      id: "twitter",
+      title: "My Twitter",
+      subTitle: "FahadMuhayya",
+      icon: <WhatsAppIcon />,
+    },
+  ]);
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    setPlaceholderProps({});
+    setItems((items) =>
+      reorder(items, result.source.index, result.destination.index)
+    );
+  };
+
+  const onDragUpdate = (update) => {
+    if (!update.destination) {
+      return;
+    }
+    const draggableId = update.draggableId;
+    const destinationIndex = update.destination.index;
+    const domQuery = `[${queryAttr}='${draggableId}']`;
+    const draggedDOM = document.querySelector(domQuery);
+    if (!draggedDOM) {
+      return;
+    }
+    const { clientHeight, clientWidth } = draggedDOM;
+    const clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      [...draggedDOM.parentNode.children]
+        .slice(0, destinationIndex)
+        .reduce((total, curr) => {
+          const style = curr.currentStyle || window.getComputedStyle(curr);
+          const marginBottom = parseFloat(style.marginBottom);
+          return total + curr.clientHeight + marginBottom;
+        }, 0);
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      ),
+    });
+  };
+  const initialValues = {
+    yourLink: "",
+    yourLinkType: "",
+    socialLinkIsButton: "button",
+  };
+  const onSubmit = (values) => {
+    console.log("values", values);
+  };
+  const validationSchema = Yup.object({
+    yourLink: Yup.string().required("Add You Link*"),
+    yourLinkType: Yup.string().required("Add You Link*"),
+  });
+  const dropdwonoptions = [
+    { key: "Select Popular Social Link", value: "" },
+    { key: "Whatsapp", value: "whatsapp" },
+    { key: "Facebook", value: "facebook" },
+    { key: "Telegram", value: "telegram" },
+  ];
+  const socialLinkIsButton = [
+    { key: "Show as", value: "" },
+    { key: "Button", value: "button" },
+    { key: "Icon", value: "icon" },
+  ];
+
+  // const finalSpaceCharacters = [
+  //   {
+  //     id: "whatsapp",
+  //     title: "My Whatsapp",
+  //     subTitle: "+9705667897",
+  //     icon: <WhatsAppIcon />,
+  //   },
+  //   {
+  //     id: "facebook",
+  //     title: "My Facebook",
+  //     subTitle: "FahadMuhayya",
+  //     icon: <FacebookIcon />,
+  //   },
+  //   {
+  //     id: "twitter",
+  //     title: "My Twitter",
+  //     subTitle: "FahadMuhayya",
+  //     icon: <WhatsAppIcon />,
+  //   },
+  // ];
+
   return (
     <div className="social-page">
       <Formik
@@ -69,27 +142,6 @@ const Social = () => {
       >
         {(formik) => (
           <Form className="form-page form-head">
-            {/* <Select
-              name="yourLinkType"
-              options={dropdwonoptions}
-              error="true"
-            />
-            <div className="form-control">
-              <Field
-                type="text"
-                id="yourLink"
-                name="yourLink"
-                placeholder="Paste your social link here"
-                className="form-input"
-              />
-              <div className="error-mes">
-                <ErrorMessage name="yourLink" />
-              </div>
-            </div>
-            <button type="submit" className="form-button">
-              <AddOutlinedIcon />
-              Add Social Link
-            </button> */}
             <FormikControl
               control="select"
               name="yourLinkType"
@@ -107,150 +159,65 @@ const Social = () => {
           </Form>
         )}
       </Formik>
-      {/* <div className="your-links pt-4">
-        <p className="your-links-header mb-3 mb-m-5">Social Links</p>
-        <div className="single-item mb-3">
-          <div className="link-and-icon">
-            <div className="single-item-icon">
-              <WhatsAppIcon />
-            </div>
-            <div className="single-item-info">
-              <p className="name-from-link">My Whatsapp</p>
-              <span className="the-link">+9705667897</span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <Formik initialValues={initialValues}>
-              <Form className="form-page">
-                 <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> 
-                <FormikControl
-                  control="select"
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                />
-              </Form>
-            </Formik>
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-item mb-3">
-          <div className="link-and-icon">
-            <div className="single-item-icon">
-              <FacebookIcon />
-            </div>
-            <div className="single-item-info">
-              <p className="name-from-link">My Facebook</p>
-              <span className="the-link">FahadMuhayya</span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <Formik initialValues={initialValues}>
-              <Form className="form-page">
-                 <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> 
-                <FormikControl
-                  control="select"
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                />
-              </Form>
-            </Formik>
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-        <div className="single-item mb-3">
-          <div className="link-and-icon">
-            <div className="single-item-icon">
-              <TwitterIcon />
-            </div>
-            <div className="single-item-info">
-              <p className="name-from-link">My Twitter</p>
-              <span className="the-link">FahadMuhayya</span>
-            </div>
-          </div>
-
-          <div className="link-action">
-            <Formik initialValues={initialValues}>
-              <Form className="form-page">
-                 <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> 
-                <FormikControl
-                  control="select"
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                />
-              </Form>
-            </Formik>
-            <Editicon />
-            <Deleteicon />
-          </div>
-        </div>
-      </div> */}
-      <DragDropContext>
-        <Droppable droppableId="characters" className="soical-drag">
-          {(provided) => (
-            <ul
-              className="characters"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {finalSpaceCharacters.map(
-                ({ id, title, subTitle, icon }, index) => {
-                  return (
-                    <Draggable key={id} draggableId={id} index={index}>
-                      {(provided) => (
-                        <li
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <div className="single-item mb-3">
-                            <div className="link-and-icon">
-                              <img src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg" alt="" />
-                              <div className="single-item-icon">{icon}</div>
-                              <div className="single-item-info">
-                              
-                                <p className="name-from-link">{title}</p>
-                                <span className="the-link">{subTitle}</span>
-                              </div>
-                            </div>
-
-                            <div className="link-action">
-                              <Formik initialValues={initialValues}>
-                                <Form className="form-page">
-                                  {/* <Select
-                  name="socialLinkIsButton"
-                  options={socialLinkIsButton}
-                /> */}
-                                  <FormikControl
-                                    control="select"
-                                    name="socialLinkIsButton"
-                                    options={socialLinkIsButton}
-                                  />
-                                </Form>
-                              </Formik>
-                              <Editicon />
-                              <Deleteicon />
-                            </div>
-                          </div>
-                        </li>
+      <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {items.map(({ id, title, subTitle, icon }, index) => (
+                <Draggable key={id} draggableId={id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
                       )}
-                    </Draggable>
-                  );
-                }
-              )}
-            </ul>
+                    >
+                      <div className="single-item mb-3">
+                        <div className="link-and-icon">
+                          <img
+                            src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                            alt=""
+                          />
+                          <div className="single-item-icon">{icon}</div>
+                          <div className="single-item-info">
+                            <p className="name-from-link">{title}</p>
+                            <span className="the-link">{subTitle}</span>
+                          </div>
+                        </div>
+
+                        <div className="link-action">
+                          <Formik initialValues={initialValues}>
+                            <Form className="form-page">
+                              <FormikControl
+                                control="select"
+                                name="socialLinkIsButton"
+                                options={socialLinkIsButton}
+                              />
+                            </Form>
+                          </Formik>
+                          <Editicon />
+                          <Deleteicon />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+
+              {provided.placeholder}
+              <div
+                style={{
+                  position: "absolute",
+                  top: placeholderProps.clientY,
+                  left: placeholderProps.clientX,
+                  height: placeholderProps.clientHeight,
+                  width: placeholderProps.clientWidth,
+                }}
+              />
+            </div>
           )}
         </Droppable>
       </DragDropContext>

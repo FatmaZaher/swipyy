@@ -25,7 +25,6 @@ const HomeHeader = () => {
               onClick={showLinkList}
             />
             <div
-              // className="link-icon-list"
               className={linkList ? "link-icon-list" : "link-icon-list show"}
             >
               <button type="button" className="link-icon form-button">
@@ -43,7 +42,6 @@ const HomeHeader = () => {
         <div className="personal-pho" onClick={showPersonalList}>
           <img src={personal} alt="" />
           <div
-            // className="link-icon-list"
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >
             <p className="link-icon personal-info">
@@ -62,11 +60,11 @@ const HomeHeader = () => {
           <div>
             <dropdown>
               <input id="toggle2" type="checkbox" />
-              <label htmlFor="toggle2" class="animate">
+              <label htmlFor="toggle2" className="animate">
                 E
               </label>
-              <ul class="animate">
-                <li class="animate">ع</li>
+              <ul className="animate">
+                <li className="animate">ع</li>
               </ul>
             </dropdown>
           </div>

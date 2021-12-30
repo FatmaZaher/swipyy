@@ -1,0 +1,14 @@
+.code-inputs {
+  @include flex(center, center);
+  border: 1px solid $border-color;
+  padding: $btn-input-padding;
+  border-radius: $btn-input-radius;
+  margin: 15px 0;
+  input {
+    width: 40px !important;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid $border-color;
+    margin: 0 5px;
+  }
+}

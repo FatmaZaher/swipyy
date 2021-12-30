@@ -9,7 +9,6 @@ import { Accordion } from "react-bootstrap";
 import FormikControl from "../form/FormikControl";
 import { Formik, Form } from "formik";
 import SwitchButton from "../SwitchButton";
-import { Tabs, Tab } from "react-bootstrap";
 
 const initialValues = {
   highTitle: "",

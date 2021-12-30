@@ -1,9 +1,11 @@
 .form-page {
   @include flex(start, space-between);
+  width: 100%;
 }
 .form-control {
   padding: 0;
   // width: calc(100% - 207px);
+  width: 100%;
   border: none;
   font-size: 14px;
   .form-input {
@@ -30,7 +32,7 @@
     color: $blue-color;
   }
   @include mobile {
-    width: calc(100% - 110px);
+    // width: calc(100% - 110px);
     font-size: 10px;
     .form-input {
       padding: 0 10px;
@@ -43,16 +45,43 @@
     }
   }
 }
+.form-button {
+  width: 197px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: $btn-input-radius;
+  background-color: $blue-color;
+  color: $white-color;
+  border: none;
+  outline: none;
+  transition: $transition;
+  &:hover {
+    background-color: #64c1c7;
+  }
+  @include mobile {
+    width: 97px;
+    height: 30px;
+    line-height: 30px;
+  }
+}
 .link-page,
 .location-page,
-.bank-page {
+.banks-page {
   .form-control {
     width: calc(100% - 207px);
+    @include mobile {
+      width: calc(100% - 110px);
+    }
   }
 }
 .social-page {
-  .form-control {
-    width: calc(100% - 480px);
+  .form-head {
+    .form-control {
+      width: calc(100% - 445px) !important;
+      @include mobile {
+        width: 100px !important;
+      }
+    }
   }
   .link-action {
     .form-page {
@@ -68,4 +97,7 @@
       }
     }
   }
+}
+.datepicker {
+  margin-bottom: 26px;
 }

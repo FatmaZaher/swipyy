@@ -1,4 +1,7 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 import { Tabs, Tab } from "react-bootstrap";
 import Link from "../component/links/Link";
 import Social from "../component/links/Social";
@@ -12,7 +15,6 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import Pdf from "../component/links/Pdf";
-
 import LinkIcon from "../component/icons/LinkIcon";
 import SocialIcon from "../component/icons/SocialIcon";
 import LocationIcon from "../component/icons/LocationIcon";
@@ -20,6 +22,11 @@ import ImagesIcon from "../component/icons/ImagesIcon";
 import BankIcon from "../component/icons/BankIcon";
 
 const Links = () => {
+  const { user: currentUser } = useSelector((state) => state.auth);
+
+  if (!currentUser) {
+    return <Redirect to="/login" />;
+  }
   const LinksHeaderData = [
     {
       title: "Links",
@@ -44,6 +51,26 @@ const Links = () => {
   ];
   return (
     <div className="links-page">
+      {/* <header className="jumbotron">
+        <h3>
+          <strong>{currentUser.name}</strong> Profile
+        </h3>
+      </header>
+      <p>
+        <strong>Token:</strong> {currentUser.token} ...{" "}
+        {currentUser.token}
+      </p>
+      <p>
+        <strong>Id:</strong> {currentUser.id}
+      </p>
+      <p>
+        <strong>Email:</strong> {currentUser.email}
+      </p>
+      <strong>Authorities:</strong>
+      <ul>
+        {currentUser.roles &&
+          currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+      </ul> */}
       {/* <LinksHeader /> */}
       <Tabs
         defaultActiveKey="link"
