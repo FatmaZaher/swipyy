@@ -37,6 +37,19 @@ const Pdf = () => {
               </Link>
             </div>
           </p>
+          {/* <div className="file-info mt-3 pt-3">
+            <p>Filename: {selectedFile.name}</p>
+            <p>Filetype: {selectedFile.type}</p>
+            <p>Size in bytes: {selectedFile.size}</p>
+            <p>
+              lastModifiedDate:{" "}
+              {selectedFile.lastModifiedDate.toLocaleDateString()}
+            </p>
+          </div> */}
+
+
+
+
           {/* {isFilePicked ? (
             <div>
               {selectedFile.size < 52428800 ? (
