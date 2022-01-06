@@ -6,7 +6,7 @@ import {
   LOGOUT,
   SET_MESSAGE,
   VERIFY_SUCCESS,
-  VERIFY_FAIL
+  VERIFY_FAIL,
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -51,10 +51,7 @@ export const verify = (code) => (dispatch) => {
   return AuthService.verify(code).then(
     (data) => {
       console.log(data);
-      dispatch({
-        type: VERIFY_SUCCESS,
-        payload: { user: data.data.user },
-      });
+
       return dispatch(user());
     },
     (error) => {
@@ -81,10 +78,19 @@ export const verify = (code) => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
   return AuthService.login(email, password).then(
     (data) => {
-      console.log(data.data.user);
+      console.log(data);
+
+      localStorage.setItem("user_token", data.data.access_token);
+      const headers = JSON.stringify({
+        headers: {
+          Authorization: "Bearer " + data.data.access_token,
+        },
+      });
+      localStorage.setItem("headers", headers);
+
       dispatch({
-        type: LOGIN_SUCCESS,
-        payload: { user: data.data.user },
+        type: "SET_USER",
+        payload: data.data.user,
       });
     },
     (error) => {
@@ -108,13 +114,14 @@ export const login = (email, password) => (dispatch) => {
   );
 };
 export const user = () => (dispatch) => {
-  return AuthService.user().then(res => {
+  return AuthService.user().then((res) => {
     dispatch({
-      type: 'SET_USER',
+      type: "SET_USER",
       payload: res,
     });
-  })
-}
+    return res;
+  });
+};
 export const logout = () => (dispatch) => {
   AuthService.logout();
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "image-upload-react/dist/index.css";
@@ -8,11 +8,12 @@ import tele from "../../assets/images/tele.png";
 // import SwitchButton from "../../component/SwitchButton";
 import Editicon from "../../component/icons/Editicon";
 import LinkButton from "../../component/form/LinkButton";
-import ImageDrop from "../../component/icons/ImageDrop";
 import FormikControl from "../../component/form/FormikControl";
 import Deleteicon from "../../component/icons/Deleteicon";
 import TrashIcon from "../icons/TrashIcon";
 import ImageUploading from "react-images-uploading";
+import axios from "axios";
+import LinkUploadImg from "../LinkUploadImg";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -25,26 +26,11 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
   ...draggableStyle,
 });
+const config = JSON.parse(localStorage.getItem("headers"));
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 const Link = () => {
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [items, setItems] = useState([
-    {
-      id: "0",
-      title: "sewarsa.com",
-      link: "https://sewarsa.com/",
-    },
-    {
-      id: "1",
-      title: "fdfdfd.com",
-      link: "https://dddddddd.com/",
-    },
-    {
-      id: "2",
-      title: "dfrerere.com",
-      link: "https://6y666.com/",
-    },
-  ]);
+  const [items, setItems] = useState([]);
 
   const onDragEnd = (result) => {
     if (!result.destination) {
@@ -87,27 +73,50 @@ const Link = () => {
     });
   };
 
-  const [image, setImage] = useState("");
-  const maxNumber = 1;
-  const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
-    setImage(imageList);
-  };
   const [checked, setChecked] = useState(false);
   const handleChange = () => {
     setChecked(!checked);
     console.log(checked);
   };
   const initialValues = {
-    yourLink: "",
+    url: "",
   };
   const onSubmit = (values) => {
-    console.log("values", values);
+    axios
+      .post("https://test-place.site/api/user/link", values, config)
+      .then((res) => {
+        getLinks();
+      });
+  };
+  const onImageUpload = (e) => {
+    console.log(e);
   };
   const validationSchema = Yup.object({
-    yourLink: Yup.string().required("Add You Link*"),
+    url: Yup.string().required("Add You Link*"),
   });
-
+  const getLinks = () => {
+    axios.get("https://test-place.site/api/user/link", config).then((res) => {
+      setItems(res.data.data);
+    });
+  };
+  useEffect(() => {
+    getLinks();
+  }, []);
+  const handleEditData = (key, e) => {
+    getLinks();
+  };
+  const handleChangeSwitch = (id, value) => {
+    const newValue = value === true ? "active" : "inactive";
+    axios
+      .patch(
+        "https://test-place.site/api/user/link/" + id,
+        { status: newValue },
+        config
+      )
+      .then((res) => {
+        getLinks();
+      });
+  };
   return (
     <div className="link-page">
       <Formik
@@ -120,7 +129,7 @@ const Link = () => {
             <FormikControl
               control="input"
               type="text"
-              name="yourLink"
+              name="url"
               placeholder="Paste your link here"
               error="true"
             />
@@ -140,8 +149,8 @@ const Link = () => {
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {items.map(({ id, title, link }, index) => (
-                  <Draggable key={id} draggableId={id} index={index}>
+                {items.map((link, index) => (
+                  <Draggable key={link.id} draggableId={link.id} index={index}>
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
@@ -163,81 +172,46 @@ const Link = () => {
                                 <input
                                   type="checkbox"
                                   name="show"
-                                  onChange={handleChange}
+                                  checked={
+                                    link.status === "active" ? true : false
+                                  }
+                                  onChange={(e) =>
+                                    handleChangeSwitch(
+                                      link.id,
+                                      e.target.checked
+                                    )
+                                  }
                                 />
                               </div>
                             </div>
                             <div className="drop-img">
-                              <ImageUploading
-                                multiple
-                                value={image}
-                                onChange={onChange}
-                                maxNumber={maxNumber}
-                                dataURLKey="data_url"
-                              >
-                                {({
-                                  imageList,
-                                  onImageUpload,
-                                  onImageRemoveAll,
-                                  onImageUpdate,
-                                  onImageRemove,
-                                  isDragging,
-                                  dragProps,
-                                }) => (
-                                  // write your building UI
-                                  <div className="upload__image-wrapper">
-                                    <div>
-                                      <button
-                                        onClick={onImageUpload}
-                                        {...dragProps}
-                                      >
-                                        <div className="img-upload">
-                                          <ImageDrop />
-                                        </div>
-                                      </button>
-                                    </div>
-                                    <div
-                                      className="images-uploads"
-                                      style={
-                                        imageList.length > 0
-                                          ? { top: "0" }
-                                          : { top: "50px" }
-                                      }
-                                    >
-                                      {imageList.map((image, index) => (
-                                        <div key={index} className="image-item">
-                                          <img
-                                            src={image.data_url}
-                                            alt=""
-                                            width="100"
-                                          />
-                                          <div className="image-item__btn-wrapper">
-                                            <button
-                                              onClick={() =>
-                                                onImageRemove(index)
-                                              }
-                                            >
-                                              <TrashIcon />
-                                            </button>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </ImageUploading>
+                              <LinkUploadImg
+                                link={link}
+                                config={config}
+                                onSaveData={() => handleEditData()}
+                              />
                             </div>
                             <div className="single-item-info">
-                              <p className="name-from-link">{title}</p>
+                              <p className="name-from-link">{link.url}</p>
                               <span className="the-link">
                                 <img src={tele} alt="" />
-                                {link}
+                                {link.url}
                               </span>
                             </div>
                           </div>
                           <div className="link-action">
-                            <Editicon />
-                            <Deleteicon />
+                            <Editicon
+                              link={link}
+                              config={config}
+                              onSaveData={() => handleEditData()}
+                              api="user/link"
+                            />
+                            <Deleteicon
+                              link={link}
+                              config={config}
+                              onSaveData={() => handleEditData()}
+                              api="user/link"
+                            />
                           </div>
                         </div>
                       </div>

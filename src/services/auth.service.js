@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://test-place.site/api/";
+const API_URL = "https://test-place.site/api/";
 // const headers = {
 //   'Content-Type': 'application/json',
 //   'Authorization': 'JWT fefege...'
@@ -40,10 +40,10 @@ const login = (email, password) => {
       password,
     }, { headers: authHeader() })
     .then((response) => {
-      const token = response.data.data.access_token
-      if (token) {
-        localStorage.setItem("user_token", token);
-      }
+      // const token = response.data.data.access_token
+      // if (token) {
+      //   localStorage.setItem("user_token", token);
+      // }
 
       return response.data;
     });

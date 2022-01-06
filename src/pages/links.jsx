@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 import { Tabs, Tab } from "react-bootstrap";
@@ -13,7 +12,7 @@ import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlin
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import AttachFileIcon from '@mui/icons-material/AttachFile';
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 import Pdf from "../component/links/Pdf";
 import LinkIcon from "../component/icons/LinkIcon";
 import SocialIcon from "../component/icons/SocialIcon";
@@ -22,11 +21,11 @@ import ImagesIcon from "../component/icons/ImagesIcon";
 import BankIcon from "../component/icons/BankIcon";
 
 const Links = () => {
-  const { user: currentUser } = useSelector((state) => state.auth);
+  // const { user: currentUser } = useSelector((state) => state.auth);
 
-  if (!currentUser) {
-    return <Redirect to="/login" />;
-  }
+  // if (!currentUser) {
+  //   return <Redirect to="/login" />;
+  // }
   const LinksHeaderData = [
     {
       title: "Links",
@@ -57,8 +56,7 @@ const Links = () => {
         </h3>
       </header>
       <p>
-        <strong>Token:</strong> {currentUser.token} ...{" "}
-        {currentUser.token}
+        <strong>Token:</strong> {currentUser.token} ... {currentUser.token}
       </p>
       <p>
         <strong>Id:</strong> {currentUser.id}
@@ -77,22 +75,64 @@ const Links = () => {
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-        <Tab eventKey="link" title={<span><LinkIcon /> Links</span>}>
+        <Tab
+          eventKey="link"
+          title={
+            <span>
+              <LinkIcon /> Links
+            </span>
+          }
+        >
           <Link />
         </Tab>
-        <Tab eventKey="social" title={<span><SocialIcon /> Social</span>}>
+        <Tab
+          eventKey="social"
+          title={
+            <span>
+              <SocialIcon /> Social
+            </span>
+          }
+        >
           <Social />
         </Tab>
-        <Tab eventKey="location" title={<span><LocationIcon /> Location</span>}>
+        <Tab
+          eventKey="location"
+          title={
+            <span>
+              <LocationIcon /> Location
+            </span>
+          }
+        >
           <Location />
         </Tab>
-        <Tab eventKey="images" title={<span><ImagesIcon /> Images</span>}>
+        <Tab
+          eventKey="images"
+          title={
+            <span>
+              <ImagesIcon /> Images
+            </span>
+          }
+        >
           <Images />
         </Tab>
-        <Tab eventKey="pdf" title={<span><AttachFileIcon /> PDF</span>}>
+        <Tab
+          eventKey="pdf"
+          title={
+            <span>
+              <AttachFileIcon /> PDF
+            </span>
+          }
+        >
           <Pdf />
         </Tab>
-        <Tab eventKey="banks" title={<span><BankIcon /> Banks</span>}>
+        <Tab
+          eventKey="banks"
+          title={
+            <span>
+              <BankIcon /> Banks
+            </span>
+          }
+        >
           <Banks />
         </Tab>
       </Tabs>

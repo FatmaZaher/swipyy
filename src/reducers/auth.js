@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case 'SET_USER':
+    case "SET_USER":
       return {
         ...state,
         user: payload,
@@ -45,18 +45,18 @@ export default function (state = initialState, action) {
         isLoggedIn: false,
         user: null,
       };
-      case VERIFY_SUCCESS:
-        return {
-          ...state,
-          isLoggedIn: true,
-          user: payload.user,
-        };
-      case VERIFY_FAIL:
-        return {
-          ...state,
-          isLoggedIn: false,
-          user: null,
-        };
+    case VERIFY_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: payload.user,
+      };
+    case VERIFY_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+      };
     case LOGOUT:
       return {
         ...state,

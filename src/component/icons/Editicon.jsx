@@ -8,7 +8,7 @@ import FormikControl from "../form/FormikControl";
 import LinkButton from "../form/LinkButton";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import axios from "axios";
 const MySwal = withReactContent(Swal);
 
 const customStyles = {
@@ -21,22 +21,42 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-const initialValues = {
-  theLink: "",
-};
-const onSubmit = (values) => {};
-const validationSchema = Yup.object({
-  theLink: Yup.string().required("Add You Edit*"),
-});
 
-const Editicon = () => {
+const Editicon = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
+  const { item, config, api } = props;
   function openModal() {
     setIsOpen(true);
   }
+  let initialValues;
+  let inputName;
+  if (api === "user/link") {
+    initialValues = {
+      url: item ? item.url : null,
+    };
+    inputName = "url";
+  } else if (api === "user/location") {
+    initialValues = {
+      name: item ? item.name : null,
+    };
+    inputName = "name";
+  }
 
+  const validationSchema = Yup.object({
+    url: Yup.string().required("Add You Edit*"),
+  });
+  const onSubmit = async (values) => {
+    try {
+      await axios
+        .patch(`https://test-place.site/api/${api}/${item.id}`, values, config)
+        .then((res) => {
+          props.onSaveData();
+
+          sucesesEdit();
+        });
+    } catch (error) {}
+  };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
@@ -74,7 +94,7 @@ const Editicon = () => {
                 <FormikControl
                   control="input"
                   type="text"
-                  name="theLink"
+                  name={inputName}
                   placeholder=""
                   error="true"
                 />
@@ -82,7 +102,7 @@ const Editicon = () => {
                   <LinkButton
                     type="submit"
                     buttontext="Save Edit"
-                    onClick={sucesesEdit}
+                    onClick={onSubmit}
                   />
                 </div>
               </Form>
