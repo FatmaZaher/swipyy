@@ -7,10 +7,12 @@ import LinkButton from "../component/form/LinkButton";
 import { Link } from "react-router-dom";
 import SwitchButton from "../component/SwitchButton";
 import personal from "../assets/images/personal.png";
-import avatar from "../assets/images/avatar.svg";
+import layout1 from "../assets/images/layout1.svg";
+import layout2 from "../assets/images/layout2.svg";
+import checkIcon from "../assets/images/checkIcon.svg";
 import cover from "../assets/images/cover-img.svg";
 import squer from "../assets/images/squer.png";
-import circel from "../assets/images/circel.png";
+import circell from "../assets/images/circell.svg";
 import Polygon from "../assets/images/Polygon.svg";
 import them1 from "../assets/images/them1.png";
 import button1 from "../assets/images/button1.png";
@@ -52,6 +54,7 @@ import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
 import axios from "axios";
+import LinkUploadImg from "../component/LinkUploadImg";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -107,55 +110,55 @@ const dropdwonoptions = [
 // ];
 const avatars = [
   {
-    id: "1",
+    id: "0",
     img: squer,
+  },
+  {
+    id: "1",
+    img: circell,
   },
   {
     id: "2",
-    img: circel,
-  },
-  {
-    id: "3",
     img: Polygon,
   },
   {
-    id: "4",
+    id: "3",
     img: squer,
   },
   {
-    id: "5",
-    img: circel,
+    id: "4",
+    img: circell,
   },
   {
-    id: "6",
+    id: "5",
     img: Polygon,
   },
 ];
 const themes = [
   {
-    id: "1",
+    id: "0",
     img: them1,
     text: "Cerulean Blue",
   },
   {
-    id: "2",
+    id: "1",
     img: them1,
     text: "Cerulean Blue",
   },
 ];
 const backgroundStyles = [
   {
-    id: "1",
+    id: "0",
     img: background1,
     text: "Falt",
   },
   {
-    id: "2",
+    id: "1",
     img: background2,
     text: "Up",
   },
   {
-    id: "3",
+    id: "2",
     img: background3,
     text: "Down",
   },
@@ -266,6 +269,12 @@ const config = JSON.parse(localStorage.getItem("headers"));
 
 const Appearance = () => {
   const [settings, setSettings] = useState({});
+  const [color1, setColor1] = useState("#8cc8cc");
+  const [color2, setColor2] = useState("#163152");
+  const [color3, setColor3] = useState("#fff");
+  const [color4, setColor4] = useState("#8cc8cc");
+  const [color5, setColor5] = useState("#8cc8cc");
+
   const getAllSettings = async () => {
     try {
       axios
@@ -409,8 +418,33 @@ const Appearance = () => {
           <Accordion.Header>layout</Accordion.Header>
           <Accordion.Body>
             <div className="layout">
-              <img src={avatar} alt="" />
-              <img src={cover} alt="" />
+              <div className="avatar">
+                <input
+                  type="radio"
+                  id="layout1"
+                  name="drone"
+                  value="layout1"
+                  checked
+                />
+                <label htmlFor="layout1" className="">
+                  <img src={checkIcon} alt="" className="check-icon" />
+                  <img src={layout1} alt="" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio"
+                  id="layout2"
+                  name="drone"
+                  value="layout2"
+                  checked
+                  disabled
+                />
+                <label htmlFor="layout2" className="">
+                  <img src={checkIcon} alt="" className="check-icon" />
+                  <img src={layout2} alt="" />
+                </label>
+              </div>
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -548,6 +582,11 @@ const Appearance = () => {
                             )}
                             className="link-dragg"
                           >
+                            <img
+                              src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                              alt=""
+                              className="drag-img"
+                            />
                             <div className="icon">{icon}</div>
                             <div className="title">{title}</div>
                           </div>
@@ -574,24 +613,33 @@ const Appearance = () => {
         <Accordion.Item eventKey="7">
           <Accordion.Header>custom avatars</Accordion.Header>
           <Accordion.Body>
-            <ul className="avatar-theme-list">
+            <div className="custom-avatars">
               {avatars.map(({ id, img }, index) => {
                 return (
-                  <li key={id} index={index}>
-                    <div className="avatar-theme-image">
-                      <img src={img} alt="" />
-                      {/* {img} */}
+                  <div className="avatar-back">
+                    <div className="avatar" key={id} index={index}>
+                      <input
+                        type="radio"
+                        id={id}
+                        name="drone"
+                        value={id}
+                        checked
+                      />
+                      <label htmlFor={id} className="">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <img src={img} alt="" />
+                      </label>
                     </div>
-                  </li>
+                  </div>
                 );
               })}
-            </ul>
+            </div>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="8">
           <Accordion.Header>theme</Accordion.Header>
           <Accordion.Body>
-            <ul className="avatar-theme-list">
+            {/* <ul className="avatar-theme-list">
               {themes.map(({ id, img, text }, index) => {
                 return (
                   <li key={id} index={index}>
@@ -602,7 +650,29 @@ const Appearance = () => {
                   </li>
                 );
               })}
-            </ul>
+            </ul> */}
+            <div className="custom-avatars">
+              {themes.map(({ id, img, text }, index) => {
+                return (
+                  <div className="avatar-back">
+                    <div className="avatar" key={id} index={index}>
+                      <input
+                        type="radio"
+                        id={id}
+                        name="themes"
+                        value={id}
+                        checked
+                      />
+                      <label htmlFor={id} className="d-block">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <img src={img} alt="" />
+                        <p className="mt-2">{text}</p>
+                      </label>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="9">
@@ -612,7 +682,36 @@ const Appearance = () => {
               <div className="buttons-style">
                 <p>Buttons Style</p>
                 <div className="buttons-style-shap">
-                  <ul className="buttons-style-shap-list">
+                  <div className="custom-avatars">
+                    {buttonStyles.map(({ id, img }, index) => {
+                      return (
+                        <div className="avatar-back">
+                          <div
+                            className="avatar buttons-style-shap-list"
+                            key={id}
+                            index={index}
+                          >
+                            <input
+                              type="radio"
+                              id={id}
+                              name="buttonStyle"
+                              value={id}
+                              checked
+                            />
+                            <label htmlFor={id} className="d-block">
+                              <img
+                                src={checkIcon}
+                                alt=""
+                                className="check-icon"
+                              />
+                              <img src={img} alt="" />
+                            </label>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* <ul className="buttons-style-shap-list">
                     {buttonStyles.map(({ id, img }, index) => {
                       return (
                         <li key={id} index={index}>
@@ -622,13 +721,43 @@ const Appearance = () => {
                         </li>
                       );
                     })}
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
               <div className="buttons-icon-style">
                 <p>Buttons Icon Style</p>
                 <div className="buttons-style-shap">
-                  <ul className="buttons-style-shap-list">
+                  <div className="custom-avatars">
+                    {buttonIconStyles.map(({ id, img }, index) => {
+                      return (
+                        <div className="avatar-back">
+                          <div
+                            className="avatar buttons-style-shap-list"
+                            key={id}
+                            index={index}
+                          >
+                            <input
+                              type="radio"
+                              id={id}
+                              name="buttonIcon"
+                              value={id}
+                              checked
+                            />
+                            <label htmlFor={id} className="d-block">
+                              <img
+                                src={checkIcon}
+                                alt=""
+                                className="check-icon"
+                              />
+                              <img src={img} alt="" />
+                            </label>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* <ul className="buttons-style-shap-list">
+                    
                     {buttonIconStyles.map(({ id, img }, index) => {
                       return (
                         <li key={id} index={index}>
@@ -638,7 +767,7 @@ const Appearance = () => {
                         </li>
                       );
                     })}
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
@@ -646,19 +775,31 @@ const Appearance = () => {
               <p>
                 Button Background Color{" "}
                 <div className="pro-btn back-pro">
-                  <LinkButton type="" buttontext="#8CC8CC" />
+                  <input
+                    type="color"
+                    value={color1}
+                    onChange={(e) => setColor1(e.target.value)}
+                  />
                 </div>
               </p>
               <p>
                 Button Font Color{" "}
                 <div className="pro-btn font-pro">
-                  <LinkButton type="" buttontext="#8CC8CC" />
+                  <input
+                    type="color"
+                    value={color2}
+                    onChange={(e) => setColor2(e.target.value)}
+                  />
                 </div>
               </p>
               <p>
                 Title & Description Font Color
                 <div className="pro-btn title-pro">
-                  <LinkButton type="" buttontext="#ffffff" />
+                  <input
+                    type="color"
+                    value={color3}
+                    onChange={(e) => setColor3(e.target.value)}
+                  />
                 </div>
               </p>
             </div>
@@ -684,41 +825,76 @@ const Appearance = () => {
           <Accordion.Header>background</Accordion.Header>
           <Accordion.Body>
             <p>Background Style</p>
-
-            <ul className="avatar-theme-list">
+            <div className="custom-avatars">
               {backgroundStyles.map(({ id, img, text }, index) => {
                 return (
-                  <li key={id} index={index}>
-                    <div className="avatar-theme-image">
-                      <img src={img} alt="" />
+                  <div className="avatar-back">
+                    <div
+                      className="avatar buttons-style-shap-list"
+                      key={id}
+                      index={index}
+                    >
+                      <input
+                        type="radio"
+                        id={id}
+                        name="background"
+                        value={id}
+                        checked
+                      />
+                      <label htmlFor={id} className="d-block">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <img src={img} alt="" />
+                        <p className="mt-2">{text}</p>
+                      </label>
                     </div>
-                    <p className="">{text}</p>
-                  </li>
+                  </div>
                 );
               })}
-            </ul>
+            </div>
             <p className="mt-4">Animated Background</p>
-
-            <ul className="avatar-theme-list">
+            <div className="custom-avatars">
               {animatedBack.map(({ id, img, text }, index) => {
                 return (
-                  <li key={id} index={index}>
-                    <div className="avatar-theme-image">
-                      <img src={img} alt="" />
+                  <div className="avatar-back">
+                    <div
+                      className="avatar buttons-style-shap-list"
+                      key={id}
+                      index={index}
+                    >
+                      <input
+                        type="radio"
+                        id={id}
+                        name="animat"
+                        value={id}
+                        checked
+                      />
+                      <label htmlFor={id} className="d-block">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <img src={img} alt="" />
+                        <p className="mt-2">{text}</p>
+                      </label>
                     </div>
-                    <p className="">{text}</p>
-                  </li>
+                  </div>
                 );
               })}
-            </ul>
+            </div>
             <div className="upload-button">
               <div>
                 <p className="mt-4">Background Color</p>
-                <LinkButton type="" buttontext="#8cc8cc" />
+                <input
+                  type="color"
+                  value={color4}
+                  onChange={(e) => setColor4(e.target.value)}
+                />
               </div>
               <div>
-                <p className="mt-4">Upload Image</p>
-                <img src={upload} alt="" />
+                {/* <p className="mt-4">Upload Image</p> */}
+                {/* <LinkUploadImg
+                  // link={link}
+                  // config={config}
+                  // onSaveData={() => handleEditData()}
+                /> */}
+                {/* <img src={upload} alt="" /> */}
               </div>
             </div>
           </Accordion.Body>
@@ -735,7 +911,45 @@ const Appearance = () => {
                   className="mb-3"
                 >
                   <Tab eventKey="english" title="E">
-                    <ul className="avatar-theme-list">
+                    <div className="custom-avatars">
+                      {fontEnglish.map(({ id, img, pro }, index) => {
+                        return (
+                          <div className="avatar-back">
+                            <div
+                              className="avatar buttons-style-shap-list"
+                              key={id}
+                              index={index}
+                            >
+                              <input
+                                type="radio"
+                                id={id}
+                                name="fontEnglish"
+                                value={id}
+                                checked
+                              />
+                              <label htmlFor={id} className="d-block">
+                                <img
+                                  src={checkIcon}
+                                  alt=""
+                                  className="check-icon"
+                                />
+                                <span className="align-pro">
+                                  {pro && (
+                                    <div className="pro-btn">
+                                      <Link to="/payments">
+                                        <LinkButton type="" buttontext="PRO" />
+                                      </Link>
+                                    </div>
+                                  )}
+                                  <img src={img} alt="" />
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {/* <ul className="avatar-theme-list">
                       {fontEnglish.map(({ id, img, pro }, index) => {
                         return (
                           <li key={id} index={index}>
@@ -754,20 +968,47 @@ const Appearance = () => {
                           </li>
                         );
                       })}
-                    </ul>
+                    </ul> */}
                   </Tab>
                   <Tab eventKey="arabic" title="ع">
-                    <ul className="avatar-theme-list">
-                      {fontEnglish.map(({ id, img }, index) => {
+                    <div className="custom-avatars">
+                      {fontEnglish.map(({ id, img, pro }, index) => {
                         return (
-                          <li key={id} index={index}>
-                            <div className="avatar-theme-image">
-                              <img src={img} alt="" />
+                          <div className="avatar-back">
+                            <div
+                              className="avatar buttons-style-shap-list"
+                              key={id}
+                              index={index}
+                            >
+                              <input
+                                type="radio"
+                                id={id}
+                                name="fontArabic"
+                                value={id}
+                                checked
+                              />
+                              <label htmlFor={id} className="d-block">
+                                <img
+                                  src={checkIcon}
+                                  alt=""
+                                  className="check-icon"
+                                />
+                                <span className="align-pro">
+                                  {pro && (
+                                    <div className="pro-btn">
+                                      <Link to="/payments">
+                                        <LinkButton type="" buttontext="PRO" />
+                                      </Link>
+                                    </div>
+                                  )}
+                                  <img src={img} alt="" />
+                                </span>
+                              </label>
                             </div>
-                          </li>
+                          </div>
                         );
                       })}
-                    </ul>
+                    </div>
                   </Tab>
                 </Tabs>
               </div>
@@ -778,7 +1019,75 @@ const Appearance = () => {
           <Accordion.Header>links text alignment</Accordion.Header>
           <Accordion.Body>
             <div className="links-align">
-              <button type="button" className="form-button">
+              <div className="avatar-back">
+                <div className="avatar buttons-style-shap-list">
+                  <input
+                    type="radio"
+                    id="left"
+                    name="textalign"
+                    value="left"
+                    checked
+                    className=""
+                  />
+                  <label htmlFor="left" className="d-block form-button">
+                    <img src={checkIcon} alt="" className="check-icon" />
+                    <LeftAlign />
+                    Left
+                  </label>
+                </div>
+              </div>
+              <div className="avatar-back">
+                <div className="avatar buttons-style-shap-list">
+                  <input
+                    type="radio"
+                    id="center"
+                    name="textalign"
+                    value="center"
+                    checked
+                    disabled
+                    className=""
+                  />
+
+                  <label htmlFor="center" className="d-block form-button">
+                    <img src={checkIcon} alt="" className="check-icon" />
+                    <span className="align-pro">
+                      <div className="pro-btn">
+                        <Link to="/payments">
+                          <LinkButton type="" buttontext="PRO" />
+                        </Link>
+                      </div>
+                    </span>
+                    <CenterAlign />
+                    Center
+                  </label>
+                </div>
+              </div>
+              <div className="avatar-back">
+                <div className="avatar buttons-style-shap-list">
+                  <input
+                    type="radio"
+                    id="right"
+                    name="textalign"
+                    value="right"
+                    checked
+                    disabled
+                    className=""
+                  />
+                  <label htmlFor="right" className="d-block form-button">
+                    <span className="align-pro">
+                      <div className="pro-btn">
+                        <Link to="/payments">
+                          <LinkButton type="" buttontext="PRO" />
+                        </Link>
+                      </div>
+                    </span>
+                    <img src={checkIcon} alt="" className="check-icon" />
+                    <RightAlign />
+                    Right
+                  </label>
+                </div>
+              </div>
+              {/* <button type="button" className="form-button">
                 <LeftAlign />
                 Left
               </button>
@@ -803,7 +1112,7 @@ const Appearance = () => {
                   <RightAlign />
                   Right
                 </button>
-              </span>
+              </span> */}
 
               {/* <LinkButton type="" buttontext="Left" />
               <LinkButton type="" buttontext="Center" />
@@ -816,7 +1125,12 @@ const Appearance = () => {
           <Accordion.Body>
             <div className="social-icon">
               <p>SOCIAL ICONS STYLE</p>
-              <LinkButton type="" buttontext="#8cc8cc" />
+              <input
+                type="color"
+                value={color5}
+                onChange={(e) => setColor5(e.target.value)}
+              />
+              {/* <LinkButton type="" buttontext="#8cc8cc" /> */}
               <div className="high-title with-border">
                 <p>
                   Hide HeyLink.me Logo{" "}
