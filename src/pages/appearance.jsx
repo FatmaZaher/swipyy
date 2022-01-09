@@ -438,7 +438,6 @@ const Appearance = () => {
                   name="drone"
                   value="layout2"
                   checked
-                  disabled
                 />
                 <label htmlFor="layout2" className="">
                   <img src={checkIcon} alt="" className="check-icon" />
