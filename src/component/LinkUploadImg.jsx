@@ -34,9 +34,7 @@ const LinkUploadImg = (props) => {
   };
   const maxNumber = 1;
   const onChange = async (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
     setImage(imageList);
-    console.log(imageList);
     const img = toFormData({
       img: imageList[0].file,
       url: link.url,

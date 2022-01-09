@@ -4,19 +4,25 @@ import group from "../assets/images/Group.png";
 import langSwitch from "../assets/images/lang-switch.png";
 import LinksIcon from "./icons/LinkIcon";
 import LogoutIcon from "./icons/LogoutIcon";
+import { useSelector } from "react-redux";
 
 const HomeHeader = () => {
   const [linkList, setLinkList] = useState(false);
   const showLinkList = () => setLinkList(!linkList);
   const [personalList, setPersonalList] = useState(false);
   const showPersonalList = () => setPersonalList(!personalList);
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   return (
     <>
       <div className="home-header">
         <div className="my-link">
           <p className="link-text">
             <span>
-              heylink.me/<a href="#">FahadMuhayya</a>
+              heylink.me/<a href="#">{currentUser.username}</a>
             </span>
             <img
               src={group}

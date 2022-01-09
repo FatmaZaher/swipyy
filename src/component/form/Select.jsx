@@ -2,15 +2,15 @@ import { ErrorMessage, Field } from "formik";
 import React from "react";
 
 const Select = (props) => {
-  const { label, name, options, error, ...rest } = props;
+  const { label, name, value, options, error, ...rest } = props;
   return (
     <div className="form-control">
       {label && <label htmlFor={name}>{label}</label>} 
-      <Field as="select" id={name} name={name} {...rest} className="form-input">
+      <Field as="select" id={name} value={value} name={name} {...rest} className="form-input">
         {options.map((option) => {
           return (
-            <option key={option.value} value={option.value}>
-              {option.key}
+            <option key={option.id} value={option.id}>
+              {option.name}
             </option>
           );
         })}

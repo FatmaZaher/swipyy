@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 // import Select from "../../component/form/Select";
 // import EditIcon from "@mui/icons-material/Edit";
@@ -8,65 +8,70 @@ import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
 
 import Modal from "react-modal";
-import EditIcon from "@mui/icons-material/Edit";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import FormikControl from "../form/FormikControl";
 import LinkButton from "../form/LinkButton";
-import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import BankModal from "../BankModal";
+import axios from "axios";
+const config = JSON.parse(localStorage.getItem("headers"));
 
-const MySwal = withReactContent(Swal);
+const Banks = () => {
+  const [banksList, setBanksList] = useState([]);
+  const [items, setItems] = useState([]);
 
-const initialValues = {
-  accountNumber: "",
-  iban: "",
-};
+  const initialValues = {
+    bank_id: "",
+    account_number: "545456454",
+  };
+  const getBankList = async () => {
+    try {
+      await axios
+        .get("https://test-place.site/api/user/bank/get", config)
+        .then((res) => {
+          setBanksList(res.data.data);
+        });
+    } catch (error) {}
+  };
+  const onSubmit = (values) => {
+    axios
+      .post("https://test-place.site/api/user/bankUser", values, config)
+      .then((res) => {
+        getBanks();
+      });
+  };
 
-const onSubmit = (values) => {
-  console.log("values", values);
-};
+  const validationSchema = Yup.object({
+    bank_id: Yup.string().required("Add You Link*"),
+  });
+  const getBanks = () => {
+    axios
+      .get("https://test-place.site/api/user/bankUser", config)
+      .then((res) => {
+        setItems(res.data.data);
+      });
+  };
+  useEffect(() => {
+    getBanks();
+    getBankList();
+  }, []);
+  const handleEditData = (key, e) => {
+    getBanks();
+  };
+  const handleChangeSwitch = (id, value) => {
+    const newValue = value === true ? "active" : "inactive";
+    axios
+      .patch(
+        "https://test-place.site/api/user/bankUser/" + id,
+        { status: newValue },
+        config
+      )
+      .then((res) => {
+        getBanks();
+      });
+  };
 
-const validationSchema = Yup.object({
-  accountNumber: Yup.string().required("Select Your Bank*"),
-  iban: Yup.string().required("Select Your Bank*"),
-});
-
-const banksList = [
-  { key: "Select your Banks", value: "" },
-  { key: "Bank1", value: "Bank1" },
-  { key: "Bank2", value: "Bank2" },
-];
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
- const Banks = () => {
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-  function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
-    setIsOpen(false);
-  }
- 
   return (
     <div className="banks-page">
       <Formik
@@ -78,7 +83,7 @@ const customStyles = {
           <Form className="form-page">
             <FormikControl
               control="select"
-              name="yourBanks"
+              name="bank_id"
               options={banksList}
               error="true"
             />
@@ -92,73 +97,30 @@ const customStyles = {
       </Formik>
       <div className="your-links pt-4">
         <p className="your-links-header mb-3 mb-m-5">Bank Account</p>
-        <div className="single-item mb-3">
-          <div className="link-and-icon">
-            <div className="single-item-img">
-              <img src={bank} alt="" />
-            </div>
-            <div className="single-item-info">
-              <p className="name-from-link">NCB Bank</p>
-              <span className="the-link">https://sewarsa.com/</span>
-            </div>
-          </div>
-          <div className="link-action">
-            <div>
-              <div className="edit-icon" onClick={openModal}>
-                <EditIcon />
+        {items.map((bank, index) => (
+          <div className="single-item mb-3">
+            <div className="link-and-icon">
+              <div className="single-item-img">
+                <img src={bank} alt="" />
               </div>
-              <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                contentLabel="Example Modal"
-                ariaHideApp={false}
-                style={customStyles}
-              >
-                <div>
-                  <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Bank Information</h4>
-                  <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                    className="modal-form"
-                  >
-                    {(formik) => (
-                      <Form className="login-form">
-                        <FormikControl
-                          control="input"
-                          type="text"
-                          name="accountNumber"
-                          placeholder="type your bank account number here..."
-                          error="true"
-                          label="Account Bank Number"
-                        />
-                        <FormikControl
-                          control="input"
-                          type="text"
-                          name="iban"
-                          placeholder="type IBAN number here..."
-                          error="true"
-                          label="IBAN"
-                        />
-                        <div className="login-btn">
-                          <LinkButton
-                            type="submit"
-                            buttontext="Save"
-                            onClick={sucesesEdit}
-                          />
-                        </div>
-                      </Form>
-                    )}
-                  </Formik>
-                </div>
-              </Modal>
+              <div className="single-item-info">
+                <p className="name-from-link">{bank.bank}</p>
+                <span className="the-link">{bank.account_number}</span>
+              </div>
             </div>
-            <Deleteicon />
+            <div className="link-action">
+              <BankModal
+                bank={bank}
+                banksList={banksList}
+                config={config}
+                onSaveData={() => handleEditData()}
+              />
+              <Deleteicon onSaveData={() => handleEditData()} />
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 export default Banks;

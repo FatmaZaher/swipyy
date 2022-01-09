@@ -73,11 +73,7 @@ const Link = () => {
     });
   };
 
-  const [checked, setChecked] = useState(false);
-  const handleChange = () => {
-    setChecked(!checked);
-    console.log(checked);
-  };
+
   const initialValues = {
     url: "",
   };
@@ -88,9 +84,7 @@ const Link = () => {
         getLinks();
       });
   };
-  const onImageUpload = (e) => {
-    console.log(e);
-  };
+
   const validationSchema = Yup.object({
     url: Yup.string().required("Add You Link*"),
   });
@@ -201,13 +195,13 @@ const Link = () => {
                           </div>
                           <div className="link-action">
                             <Editicon
-                              link={link}
+                              item={link}
                               config={config}
                               onSaveData={() => handleEditData()}
                               api="user/link"
                             />
                             <Deleteicon
-                              link={link}
+                              item={link}
                               config={config}
                               onSaveData={() => handleEditData()}
                               api="user/link"

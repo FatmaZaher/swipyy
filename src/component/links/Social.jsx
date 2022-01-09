@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -12,6 +12,8 @@ import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
 import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
+import axios from "axios";
+const config = JSON.parse(localStorage.getItem("headers"));
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -27,26 +29,8 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 const Social = () => {
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [items, setItems] = useState([
-    {
-      id: "whatsapp",
-      title: "My Whatsapp",
-      subTitle: "+9705667897",
-      icon: <WhatsAppIcon />,
-    },
-    {
-      id: "facebook",
-      title: "My Facebook",
-      subTitle: "FahadMuhayya",
-      icon: <FacebookIcon />,
-    },
-    {
-      id: "twitter",
-      title: "My Twitter",
-      subTitle: "FahadMuhayya",
-      icon: <WhatsAppIcon />,
-    },
-  ]);
+  const [items, setItems] = useState([]);
+  const [socialPlatforms, setSocialPlatforms] = useState([]);
 
   const onDragEnd = (result) => {
     if (!result.destination) {
@@ -89,27 +73,60 @@ const Social = () => {
     });
   };
   const initialValues = {
-    yourLink: "",
-    yourLinkType: "",
+    url: "",
+    social_id: "",
     socialLinkIsButton: "button",
   };
+  const getAllSocialPlatforms = async () => {
+    try {
+      await axios
+        .get("https://test-place.site/api/user/social/get", config)
+        .then((res) => {
+          setSocialPlatforms(res.data.data);
+        });
+    } catch (error) {}
+  };
   const onSubmit = (values) => {
-    console.log("values", values);
+    axios
+      .post("https://test-place.site/api/user/socialUser", values, config)
+      .then((res) => {
+        getSocials();
+      });
   };
   const validationSchema = Yup.object({
-    yourLink: Yup.string().required("Add You Link*"),
-    yourLinkType: Yup.string().required("Add You Link*"),
+    url: Yup.string().required("Add You Link*"),
+    social_id: Yup.string().required("Add You Link*"),
   });
-  const dropdwonoptions = [
-    { key: "Select Popular Social Link", value: "" },
-    { key: "Whatsapp", value: "whatsapp" },
-    { key: "Facebook", value: "facebook" },
-    { key: "Telegram", value: "telegram" },
-  ];
+  const getSocials = () => {
+    axios
+      .get("https://test-place.site/api/user/socialUser", config)
+      .then((res) => {
+        setItems(res.data.data);
+      });
+  };
+  useEffect(() => {
+    getSocials();
+    getAllSocialPlatforms();
+  }, []);
+  const handleEditData = (key, e) => {
+    getSocials();
+  };
+  const handleChangeSelect = (id, value, url) => {
+    console.log(id);
+    axios
+      .patch(
+        "https://test-place.site/api/user/socialUser/" + id,
+        { type: value, url },
+        config
+      )
+      .then((res) => {
+        getSocials();
+      });
+  };
   const socialLinkIsButton = [
-    { key: "Show as", value: "" },
-    { key: "Button", value: "button" },
-    { key: "Icon", value: "icon" },
+    { id: "Show as", name: "Show as" },
+    { id: "button", name: "button" },
+    { id: "icon", name: "icon" },
   ];
 
   // const finalSpaceCharacters = [
@@ -144,14 +161,14 @@ const Social = () => {
           <Form className="form-page form-head">
             <FormikControl
               control="select"
-              name="yourLinkType"
-              options={dropdwonoptions}
+              name="social_id"
+              options={socialPlatforms}
               error="true"
             />
             <FormikControl
               control="input"
               type="text"
-              name="yourLink"
+              name="url"
               placeholder="Paste your social link here"
               error="true"
             />
@@ -163,8 +180,12 @@ const Social = () => {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {items.map(({ id, title, subTitle, icon }, index) => (
-                <Draggable key={id} draggableId={id} index={index}>
+              {items.map((social, index) => (
+                <Draggable
+                  key={index}
+                  draggableId={String(social.id)}
+                  index={index}
+                >
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -181,10 +202,10 @@ const Social = () => {
                             src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
                             alt=""
                           />
-                          <div className="single-item-icon">{icon}</div>
+                          <div className="single-item-icon">{social.type}</div>
                           <div className="single-item-info">
-                            <p className="name-from-link">{title}</p>
-                            <span className="the-link">{subTitle}</span>
+                            <p className="name-from-link">{social.social}</p>
+                            <span className="the-link">{social.url}</span>
                           </div>
                         </div>
 
@@ -195,11 +216,28 @@ const Social = () => {
                                 control="select"
                                 name="socialLinkIsButton"
                                 options={socialLinkIsButton}
+                                onChange={(e) =>
+                                  handleChangeSelect(
+                                    social.id,
+                                    e.target.value,
+                                    social.url
+                                  )
+                                }
                               />
                             </Form>
                           </Formik>
-                          <Editicon />
-                          <Deleteicon />
+                          <Editicon
+                            item={social}
+                            config={config}
+                            onSaveData={() => handleEditData()}
+                            api="user/socialUser"
+                          />
+                          <Deleteicon
+                            item={social}
+                            config={config}
+                            onSaveData={() => handleEditData()}
+                            api="user/socialUser"
+                          />
                         </div>
                       </div>
                     </div>

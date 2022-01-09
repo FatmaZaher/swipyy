@@ -24,7 +24,7 @@ const SocialBlue = () => {
         height="6.79994"
         rx="1.65"
         stroke="white"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="7.85006"
@@ -33,7 +33,7 @@ const SocialBlue = () => {
         height="6.79994"
         rx="1.65"
         stroke="white"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="8.92147"
@@ -42,7 +42,7 @@ const SocialBlue = () => {
         height="4.6571"
         rx="0.65"
         stroke="white"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="1.42141"
@@ -51,7 +51,7 @@ const SocialBlue = () => {
         height="4.6571"
         rx="0.65"
         stroke="white"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
     </svg>
   );

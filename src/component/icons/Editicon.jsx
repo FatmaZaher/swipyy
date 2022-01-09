@@ -25,36 +25,46 @@ const customStyles = {
 const Editicon = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const { item, config, api } = props;
+  const { item, config, api, settingName } = props;
   function openModal() {
     setIsOpen(true);
   }
-  let initialValues;
+  const initialValues = {};
   let inputName;
-  if (api === "user/link") {
-    initialValues = {
-      url: item ? item.url : null,
-    };
+  let newItemId = item ? `/${item.id}` : "";
+  let method = axios.patch;
+  if (api === "user/link" || api === "user/socialUser") {
+    initialValues.url = item ? item.url : null;
     inputName = "url";
   } else if (api === "user/location") {
-    initialValues = {
-      name: item ? item.name : null,
-    };
+    initialValues.name = item ? item.location : null;
     inputName = "name";
+  } else if (api === "user/appearance/update") {
+    newItemId = "";
+    method = axios.post;
+    if (settingName === "username") {
+      initialValues.username = item ? item.username : null;
+      inputName = "username";
+    }
+    if (settingName === "short_name") {
+      initialValues.short_name = item ? item.short_name : null;
+      inputName = "short_name";
+    }
   }
 
-  const validationSchema = Yup.object({
-    url: Yup.string().required("Add You Edit*"),
-  });
+  const validationSchema = Yup.object({});
   const onSubmit = async (values) => {
+    console.log(values);
     try {
-      await axios
-        .patch(`https://test-place.site/api/${api}/${item.id}`, values, config)
-        .then((res) => {
-          props.onSaveData();
+      await method(
+        `https://test-place.site/api/${api}${newItemId}`,
+        values,
+        config
+      ).then((res) => {
+        props.onSaveData();
 
-          sucesesEdit();
-        });
+        sucesesEdit();
+      });
     } catch (error) {}
   };
   function afterOpenModal() {
@@ -99,11 +109,7 @@ const Editicon = (props) => {
                   error="true"
                 />
                 <div className="login-btn">
-                  <LinkButton
-                    type="submit"
-                    buttontext="Save Edit"
-                    onClick={onSubmit}
-                  />
+                  <LinkButton type="submit" buttontext="Save Edit" />
                 </div>
               </Form>
             )}

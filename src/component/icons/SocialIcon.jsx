@@ -24,7 +24,7 @@ const SocialIcon = () => {
         height="7.91539"
         rx="1.65"
         stroke="#163152"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="8.96554"
@@ -33,7 +33,7 @@ const SocialIcon = () => {
         height="7.91539"
         rx="1.65"
         stroke="#163152"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="10.1963"
@@ -42,7 +42,7 @@ const SocialIcon = () => {
         height="5.45385"
         rx="0.65"
         stroke="#163152"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
       <rect
         x="1.58077"
@@ -51,7 +51,7 @@ const SocialIcon = () => {
         height="5.45385"
         rx="0.65"
         stroke="#163152"
-        stroke-width="0.7"
+        strokeWidth="0.7"
       />
     </svg>
   );

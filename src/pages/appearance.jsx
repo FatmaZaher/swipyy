@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import EditIcon from "@mui/icons-material/Edit";
 import ShareIcon from "@mui/icons-material/Share";
@@ -51,7 +51,7 @@ import LocationBlue from "../component/icons/LocationBlue";
 import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
-
+import axios from "axios";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -262,8 +262,22 @@ const fontEnglish = [
     pro: true,
   },
 ];
+const config = JSON.parse(localStorage.getItem("headers"));
 
 const Appearance = () => {
+  const [settings, setSettings] = useState({});
+  const getAllSettings = async () => {
+    try {
+      axios
+        .get("https://test-place.site/api/user/appearance", config)
+        .then((res) => {
+          setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getAllSettings();
+  }, []);
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([
     {
@@ -292,7 +306,9 @@ const Appearance = () => {
       icon: <LocationBlue />,
     },
   ]);
-
+  const handleEditData = (key, e) => {
+    getAllSettings();
+  };
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -345,13 +361,19 @@ const Appearance = () => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      heylink.me/<a href="#">FahadMuhayya</a>
+                      heylink.me/<a href="#">{settings.username}</a>
                     </span>
                   </p>
                 </div>
               </div>
               <div className="link-action">
-                <Editicon />
+                <Editicon
+                  settingName="username"
+                  item={settings}
+                  config={config}
+                  onSaveData={() => handleEditData()}
+                  api="user/appearance/update"
+                />
                 <Sharicon />
               </div>
             </div>
@@ -365,13 +387,19 @@ const Appearance = () => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      heylink.me/<a href="#">fffff</a>
+                      heylink.me/<a href="#">{settings.short_name}</a>
                     </span>
                   </p>
                 </div>
               </div>
               <div className="link-action">
-                <Editicon />
+                <Editicon
+                  settingName="short_name"
+                  item={settings}
+                  config={config}
+                  onSaveData={() => handleEditData()}
+                  api="user/appearance/update"
+                />
                 <Sharicon />
               </div>
             </div>
@@ -520,8 +548,8 @@ const Appearance = () => {
                             )}
                             className="link-dragg"
                           >
-                           <div className="icon">{icon}</div>
-                              <div className="title">{title}</div>
+                            <div className="icon">{icon}</div>
+                            <div className="title">{title}</div>
                           </div>
                         )}
                       </Draggable>
