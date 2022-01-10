@@ -20,7 +20,7 @@ import LocationIcon from "../component/icons/LocationIcon";
 import ImagesIcon from "../component/icons/ImagesIcon";
 import BankIcon from "../component/icons/BankIcon";
 
-const Links = () => {
+const Links = (props) => {
   // const { user: currentUser } = useSelector((state) => state.auth);
 
   // if (!currentUser) {
@@ -48,6 +48,10 @@ const Links = () => {
       icon: <AccountBalanceIcon />,
     },
   ];
+  const handleEditData = (key, e) => {
+    console.log("log from linkss");
+    props.onSaveData();
+  };
   return (
     <div className="links-page">
       {/* <header className="jumbotron">
@@ -83,7 +87,7 @@ const Links = () => {
             </span>
           }
         >
-          <Link />
+          <Link onSaveData={() => handleEditData()} />
         </Tab>
         <Tab
           eventKey="social"

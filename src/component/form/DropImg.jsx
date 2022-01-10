@@ -3,16 +3,56 @@ import ImageUploading from "react-images-uploading";
 import ImageDrop from "../icons/ImageDrop";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const DropImg = () => {
+const DropImg = (props) => {
+  const { config } = props;
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
+
+  const toFormData = (fromdata) => {
+    const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
+      (f) => (fd) => (pk) => (d) => {
+        if (d instanceof Object) {
+          Object.keys(d).forEach((k) => {
+            const v = d[k];
+            if (pk) k = `${pk}[${k}]`;
+            if (
+              v instanceof Object &&
+              !(v instanceof Date) &&
+              !(v instanceof File)
+            ) {
+              return f(fd)(k)(v);
+            } else {
+              fd.append(k, v);
+            }
+          });
+        }
+        return fd;
+      }
+    )(new FormData())();
+    return toFormDataInner(fromdata);
+  };
+  const submitImages = async (values) => {
+    const newValues = toFormData(values);
+    try {
+      await axios
+        .post(
+          "https://test-place.site/api/user/slider/update",
+          newValues,
+          config
+        )
+        .then((res) => {
+          props.onSaveData("ee");
+        });
+    } catch (error) {}
+  };
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    const newImage = imageList.map((item) => item.file);
+    submitImages({ imgs: newImage });
     setImages(imageList);
   };
-
   return (
     <>
       <ImageUploading

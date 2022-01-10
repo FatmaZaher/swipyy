@@ -63,6 +63,23 @@ const Payments = () => {
         });
     } catch (error) {}
   };
+  const submitPay = async (packageId) => {
+    try {
+      axios
+        .post(
+          "https://test-place.site/api/user/payment/" + packageId,
+          {},
+          config
+        )
+        .then((res) => {
+          window.location.replace(res.data.data.url);
+
+
+          // setPackageMonthly(res.data.data.data[0]);
+          // setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
@@ -152,7 +169,10 @@ const Payments = () => {
                           ))
                         : null}
                     </ul>
-                    <LinkButton type="" buttontext="Update" />
+                    <LinkButton
+                      buttontext="Update"
+                      onClick={() => submitPay(packageYearly.id)}
+                    />
                     <span className="the-best">Best Sell</span>
                   </div>
                 </div>
@@ -174,7 +194,10 @@ const Payments = () => {
                           ))
                         : null}
                     </ul>
-                    <LinkButton type="" buttontext="Update" />
+                    <LinkButton
+                      buttontext="Update"
+                      onClick={() => submitPay(packageMonthly.id)}
+                    />
                     <span className="the-best">Best Sell</span>
                   </div>
                 </div>

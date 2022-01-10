@@ -135,21 +135,17 @@
       top: 0;
     }
     .animate {
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-      -ms-transition: all 0.3s;
-      -ms-transition: all 0.3s;
+      
       transition: all 0.3s;
       backface-visibility: hidden;
-      -webkit-backface-visibility: hidden; /* Chrome and Safari */
-      -moz-backface-visibility: hidden; /* Firefox */
-      -ms-backface-visibility: hidden; /* Internet Explorer */
+      
       padding: 0;
       position: absolute;
       top: 44px;
       width: 37px;
       height: 37px;
       line-height: 37px;
+      z-index: 5545454;
     }
     @include mobile {
       dropdown,

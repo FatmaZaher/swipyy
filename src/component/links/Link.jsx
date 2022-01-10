@@ -14,6 +14,7 @@ import TrashIcon from "../icons/TrashIcon";
 import ImageUploading from "react-images-uploading";
 import axios from "axios";
 import UploadImg from "../UploadImg";
+import { useTranslation } from "react-i18next";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -28,7 +29,9 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 const config = JSON.parse(localStorage.getItem("headers"));
 const queryAttr = "data-rbd-drag-handle-draggable-id";
-const Link = () => {
+const Link = (props) => {
+  const { t } = useTranslation();
+
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
 
@@ -73,7 +76,6 @@ const Link = () => {
     });
   };
 
-
   const initialValues = {
     url: "",
   };
@@ -81,6 +83,8 @@ const Link = () => {
     axios
       .post("https://test-place.site/api/user/link", values, config)
       .then((res) => {
+        props.onSaveData();
+
         getLinks();
       });
   };

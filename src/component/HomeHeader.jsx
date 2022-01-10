@@ -5,6 +5,7 @@ import langSwitch from "../assets/images/lang-switch.png";
 import LinksIcon from "./icons/LinkIcon";
 import LogoutIcon from "./icons/LogoutIcon";
 import { useSelector } from "react-redux";
+import LanguageSelector from "./LanguageSelector ";
 
 const HomeHeader = () => {
   const [linkList, setLinkList] = useState(false);
@@ -64,15 +65,8 @@ const HomeHeader = () => {
         </div>
         <div className="lang-switch">
           <div>
-            <dropdown>
-              <input id="toggle2" type="checkbox" />
-              <label htmlFor="toggle2" className="animate">
-                E
-              </label>
-              <ul className="animate">
-                <li className="animate">ع</li>
-              </ul>
-            </dropdown>
+            <LanguageSelector />
+          
           </div>
         </div>
       </div>
