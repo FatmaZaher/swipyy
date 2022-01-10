@@ -13,7 +13,7 @@ import Deleteicon from "../../component/icons/Deleteicon";
 import TrashIcon from "../icons/TrashIcon";
 import ImageUploading from "react-images-uploading";
 import axios from "axios";
-import LinkUploadImg from "../LinkUploadImg";
+import UploadImg from "../UploadImg";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -179,9 +179,10 @@ const Link = () => {
                               </div>
                             </div>
                             <div className="drop-img">
-                              <LinkUploadImg
-                                link={link}
+                              <UploadImg
+                                item={link}
                                 config={config}
+                                uploadType="link"
                                 onSaveData={() => handleEditData()}
                               />
                             </div>

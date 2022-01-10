@@ -5,8 +5,8 @@ import ImageDrop from "./icons/ImageDrop";
 import ImageUploading from "react-images-uploading";
 import TrashIcon from "./icons/TrashIcon";
 import axios from "axios";
-const LinkUploadImg = (props) => {
-  const { link, config } = props;
+const UploadImg = (props) => {
+  const { item, config, uploadType } = props;
 
   const [image, setImage] = useState("");
   const toFormData = (fromdata) => {
@@ -34,18 +34,26 @@ const LinkUploadImg = (props) => {
   };
   const maxNumber = 1;
   const onChange = async (imageList, addUpdateIndex) => {
-    setImage(imageList);
-    const img = toFormData({
-      img: imageList[0].file,
-      url: link.url,
-      _method: "patch",
-    });
+    let data = {};
+    let api = {};
+    if (uploadType === "link") {
+      data = {
+        img: imageList[0].file,
+        url: item.url,
+        _method: "patch",
+      };
+      api = "https://test-place.site/api/user/link/" + item.id;
+    } else if (uploadType === "avatar") {
+      data = {
+        avatar: imageList[0].file,
+      };
+      api = "https://test-place.site/api/user/appearance/update";
+    }
+    const img = toFormData(data);
     try {
-      await axios
-        .post("https://test-place.site/api/user/link/" + link.id, img, config)
-        .then((res) => {
-          props.onSaveData("ee");
-        });
+      await axios.post(api, img, config).then((res) => {
+        props.onSaveData("ee");
+      });
     } catch (error) {
       console.log(error);
     }
@@ -97,4 +105,4 @@ const LinkUploadImg = (props) => {
     </>
   );
 };
-export default LinkUploadImg;
+export default UploadImg;

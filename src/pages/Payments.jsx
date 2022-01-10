@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import LinkButton from "../component/form/LinkButton";
@@ -11,8 +11,10 @@ import paypal from "../assets/images/paypal.png";
 import creditCard from "../assets/images/creditCard.png";
 import Datepicker from "../component/form/Datepicker";
 import clock from "../assets/images/clock.png";
+import axios from "axios";
 
 import MaskedInput from "react-text-mask";
+const config = JSON.parse(localStorage.getItem("headers"));
 
 const MySwal = withReactContent(Swal);
 
@@ -33,11 +35,34 @@ const validationSchema = Yup.object({
 const Payments = () => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [packageMonthly, setPackageMonthly] = useState({});
+  const [packageYearly, setPackageYearly] = useState({});
 
   function openModal() {
     setIsOpen(true);
   }
 
+  const getAllPackageMonthly = async () => {
+    try {
+      axios
+        .get("https://test-place.site/api/user/package/monthly", config)
+        .then((res) => {
+          setPackageMonthly(res.data.data.data[0]);
+          // setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
+  const getAllPackageYearly = async () => {
+    try {
+      axios
+        .get("https://test-place.site/api/user/package/yearly", config)
+        .then((res) => {
+          setPackageYearly(res.data.data.data[0]);
+
+          // setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
@@ -53,6 +78,10 @@ const Payments = () => {
     );
     setIsOpen(false);
   }
+  useEffect(() => {
+    getAllPackageMonthly();
+    getAllPackageYearly();
+  }, []);
   return (
     <div className="payments">
       <Tabs
@@ -110,32 +139,18 @@ const Payments = () => {
                   </div>
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
-                    <p className="price-card">$25.00</p>
+                    <p className="price-card">${packageYearly.amount}</p>
                     <ul className="list-card">
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
+                      {packageYearly.dtails
+                        ? packageYearly.dtails.map((item, index) => (
+                            <li className="list-card-item">
+                              <span>
+                                <CheckCircleOutlineIcon />
+                              </span>
+                              {item.text}
+                            </li>
+                          ))
+                        : null}
                     </ul>
                     <LinkButton type="" buttontext="Update" />
                     <span className="the-best">Best Sell</span>
@@ -146,32 +161,18 @@ const Payments = () => {
                 <div className="payment-cards mt-5">
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
-                    <p className="price-card">$25.00</p>
+                    <p className="price-card">${packageMonthly.amount}</p>
                     <ul className="list-card">
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
-                      <li className="list-card-item">
-                        <span>
-                          <CheckCircleOutlineIcon />
-                        </span>
-                        Lorem ipsum dolor{" "}
-                      </li>
+                      {packageMonthly.dtails
+                        ? packageMonthly.dtails.map((item, index) => (
+                            <li className="list-card-item">
+                              <span>
+                                <CheckCircleOutlineIcon />
+                              </span>
+                              {item.text}
+                            </li>
+                          ))
+                        : null}
                     </ul>
                     <LinkButton type="" buttontext="Update" />
                     <span className="the-best">Best Sell</span>

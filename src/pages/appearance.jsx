@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import EditIcon from "@mui/icons-material/Edit";
 import ShareIcon from "@mui/icons-material/Share";
+import { useSelector } from "react-redux";
+
 import { Tabs, Tab } from "react-bootstrap";
 import LinkButton from "../component/form/LinkButton";
 import { Link } from "react-router-dom";
@@ -54,7 +56,8 @@ import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
 import axios from "axios";
-import LinkUploadImg from "../component/LinkUploadImg";
+import UploadImg from "../component/UploadImg";
+
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -108,32 +111,7 @@ const dropdwonoptions = [
 //     icon: <LocationBlue />,
 //   },
 // ];
-const avatars = [
-  {
-    id: "0",
-    img: squer,
-  },
-  {
-    id: "1",
-    img: circell,
-  },
-  {
-    id: "2",
-    img: Polygon,
-  },
-  {
-    id: "3",
-    img: squer,
-  },
-  {
-    id: "4",
-    img: circell,
-  },
-  {
-    id: "5",
-    img: Polygon,
-  },
-];
+
 const themes = [
   {
     id: "0",
@@ -268,7 +246,13 @@ const fontEnglish = [
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Appearance = () => {
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const [settings, setSettings] = useState({});
+
   const [color1, setColor1] = useState("#8cc8cc");
   const [color2, setColor2] = useState("#163152");
   const [color3, setColor3] = useState("#fff");
@@ -284,6 +268,50 @@ const Appearance = () => {
         });
     } catch (error) {}
   };
+  const apiChange = async (values) => {
+    try {
+      axios
+        .post(
+          "https://test-place.site/api/user/appearance/update",
+          values,
+          config
+        )
+        .then((res) => {
+          getAllSettings();
+        });
+    } catch (error) {}
+  };
+  const changeLayout = (layout) => {
+    console.log(layout);
+    apiChange({ layout });
+  };
+
+  const changeAvatarStatus = (value) => {
+    const avtar_status = value === true ? 1 : 0;
+    apiChange({ avtar_status });
+  };
+  const changeTitleStatus = (value) => {
+    const title_status = value === true ? 1 : 0;
+    apiChange({ title_status });
+  };
+  const changeDescription = (description) => {
+    apiChange({ description });
+  };
+
+  const changeHighlightsStatus = (value) => {
+    const highlights_status = value === true ? 1 : 0;
+    apiChange({ highlights_status });
+  };
+  const changePlacement = () => {
+    apiChange({ placement: items });
+  };
+  const changeAvatarType = (avatar_type_id) => {
+    apiChange({ avatar_type_id });
+  };
+  const changeTheme = (theme_id) => {
+    apiChange({ theme_id });
+  };
+
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -292,29 +320,42 @@ const Appearance = () => {
     {
       id: "links",
       title: "Links",
-      icon: <LinkBlue />,
+      icon: "LinkBlue",
     },
     {
       id: "social",
       title: "Social",
-      icon: <SocialBlue />,
+      icon: "SocialBlue",
     },
     {
       id: "images",
       title: "Slider",
-      icon: <SliderBlue />,
+      icon: "SliderBlue",
     },
     {
       id: "messages",
       title: "Messages",
-      icon: <MeasssssBlue />,
+      icon: "MeasssssBlue",
     },
     {
       id: "location",
       title: "Location",
-      icon: <LocationBlue />,
+      icon: "LocationBlue",
     },
   ]);
+  const renderIcon = (icon) => {
+    if (icon === "LinkBlue") {
+      return <LinkBlue />;
+    } else if (icon === "SocialBlue") {
+      return <SocialBlue />;
+    } else if (icon === "SliderBlue") {
+      return <SliderBlue />;
+    } else if (icon === "MeasssssBlue") {
+      return <MeasssssBlue />;
+    } else if (icon === "LocationBlue") {
+      return <LocationBlue />;
+    }
+  };
   const handleEditData = (key, e) => {
     getAllSettings();
   };
@@ -332,6 +373,7 @@ const Appearance = () => {
     if (!update.destination) {
       return;
     }
+
     const draggableId = update.draggableId;
     const destinationIndex = update.destination.index;
     const domQuery = `[${queryAttr}='${draggableId}']`;
@@ -363,7 +405,7 @@ const Appearance = () => {
     <div className="appearance-page">
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>username</Accordion.Header>
+          <Accordion.Header>username {currentUser.username}</Accordion.Header>
           <Accordion.Body>
             <div className="single-item mb-3">
               <div className="single-item-info">
@@ -424,7 +466,7 @@ const Appearance = () => {
                   id="layout1"
                   name="drone"
                   value="layout1"
-                  checked
+                  onChange={() => changeLayout("avatar")}
                 />
                 <label htmlFor="layout1" className="">
                   <img src={checkIcon} alt="" className="check-icon" />
@@ -437,7 +479,7 @@ const Appearance = () => {
                   id="layout2"
                   name="drone"
                   value="layout2"
-                  checked
+                  onChange={() => changeLayout("cover")}
                 />
                 <label htmlFor="layout2" className="">
                   <img src={checkIcon} alt="" className="check-icon" />
@@ -453,12 +495,25 @@ const Appearance = () => {
             <div className="avatar-title">
               <div className="single-item mb-3">
                 <div className="single-item-img">
-                  <img src={personal} alt="" />
+                  <UploadImg
+                    config={config}
+                    uploadType="avatar"
+                    onSaveData={() => handleEditData()}
+                  />
                 </div>
                 <div className="link-and-icon">
-                  <SwitchButton />
+                  <div className="single-item-switch">
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        name="show"
+                        checked={settings.avtar_status === 1 ? true : false}
+                        onChange={(e) => changeAvatarStatus(e.target.checked)}
+                      />
+                    </div>
+                  </div>
                   <div className="link-action">
-                    <Editicon />
+                    {/* <Editicon /> */}
                     <Sharicon />
                   </div>
                 </div>
@@ -467,14 +522,29 @@ const Appearance = () => {
                 <div className="single-item-info">
                   <div className="my-link">
                     <div className="link-text">
-                      <p className="profile-title m-0">FahadMuhayya</p>
+                      <p className="profile-title m-0">{settings.title}</p>
                     </div>
                   </div>
                 </div>
                 <div className="link-and-icon">
-                  <SwitchButton />
+                  <div className="single-item-switch">
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        name="show"
+                        checked={settings.title_status === 1 ? true : false}
+                        onChange={(e) => changeTitleStatus(e.target.checked)}
+                      />
+                    </div>
+                  </div>
                   <div className="link-action">
-                    <Editicon />
+                    <Editicon
+                      settingName="title"
+                      item={settings}
+                      config={config}
+                      onSaveData={() => handleEditData()}
+                      api="user/appearance/update"
+                    />
                     <Sharicon />
                   </div>
                 </div>
@@ -496,6 +566,7 @@ const Appearance = () => {
                     name="description"
                     placeholder="Type the description here.."
                     note="500 characters left"
+                    onBlur={(e) => changeDescription(e.target.value)}
                   />
                 </Form>
               </Formik>
@@ -507,58 +578,71 @@ const Appearance = () => {
           <Accordion.Body>
             <div className="high-header">
               <p>Add the main highlights on your HeyLink.me page</p>
-              <SwitchButton />
+              <div className="single-item-switch">
+                <div className="checkbox">
+                  <input
+                    type="checkbox"
+                    name="show"
+                    checked={settings.highlights_status === 1 ? true : false}
+                    onChange={(e) => changeHighlightsStatus(e.target.checked)}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="highlights">
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-              >
-                <Form className="">
-                  <div className="high-title">
-                    <p className="high-title-head">Highlights Title</p>
-                    <FormikControl
-                      control="input"
-                      name="highTitle"
-                      placeholder="Type the tilte here"
-                    />
-                  </div>
-                  <div className="field-array">
-                    <FieldArray name="details">
-                      {(fieldArrayProps) => {
-                        console.log("fieldArrayProps", fieldArrayProps);
-                        const { push, form } = fieldArrayProps;
-                        const { values } = form;
-                        const { details } = values;
-                        console.log("details", details);
-                        return (
-                          <div>
-                            {details.map((detail, index) => (
-                              <div key={index} className="high-details">
-                                <p className="high-title-head">Detail</p>
-                                <Field
-                                  name={`details[${index}]`}
-                                  className="form-input"
-                                  placeholder="Type the detail here"
-                                />
+            {settings.highlights_status === 1 ? (
+              <>
+                <div className="highlights">
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                  >
+                    <Form className="">
+                      <div className="high-title">
+                        <p className="high-title-head">Highlights Title</p>
+                        <FormikControl
+                          control="input"
+                          name="highTitle"
+                          placeholder="Type the tilte here"
+                        />
+                      </div>
+                      <div className="field-array">
+                        <FieldArray name="details">
+                          {(fieldArrayProps) => {
+                            console.log("fieldArrayProps", fieldArrayProps);
+                            const { push, form } = fieldArrayProps;
+                            const { values } = form;
+                            const { details } = values;
+                            console.log("details", details);
+                            return (
+                              <div>
+                                {details.map((detail, index) => (
+                                  <div key={index} className="high-details">
+                                    <p className="high-title-head">Detail</p>
+                                    <Field
+                                      name={`details[${index}]`}
+                                      className="form-input"
+                                      placeholder="Type the detail here"
+                                    />
+                                  </div>
+                                ))}
+                                <button
+                                  type="button"
+                                  className="form-button"
+                                  onClick={() => push("")}
+                                >
+                                  Add Another Detail
+                                </button>
                               </div>
-                            ))}
-                            <button
-                              type="button"
-                              className="form-button"
-                              onClick={() => push("")}
-                            >
-                              Add Another Detail
-                            </button>
-                          </div>
-                        );
-                      }}
-                    </FieldArray>
-                  </div>
-                </Form>
-              </Formik>
-            </div>
-            <div className="high-detail"></div>
+                            );
+                          }}
+                        </FieldArray>
+                      </div>
+                    </Form>
+                  </Formik>
+                </div>
+                <div className="high-detail"></div>
+              </>
+            ) : null}
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="6">
@@ -568,8 +652,12 @@ const Appearance = () => {
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {items.map(({ id, title, icon }, index) => (
-                      <Draggable key={id} draggableId={id} index={index}>
+                    {items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
@@ -586,8 +674,8 @@ const Appearance = () => {
                               alt=""
                               className="drag-img"
                             />
-                            <div className="icon">{icon}</div>
-                            <div className="title">{title}</div>
+                            <div className="icon">{renderIcon(item.icon)}</div>
+                            <div className="title">{item.title}</div>
                           </div>
                         )}
                       </Draggable>
@@ -607,31 +695,57 @@ const Appearance = () => {
                 )}
               </Droppable>
             </DragDropContext>
+            <button
+              type="button"
+              className="form-button"
+              onClick={() => changePlacement()}
+            >
+              Save placement
+            </button>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">
           <Accordion.Header>custom avatars</Accordion.Header>
           <Accordion.Body>
             <div className="custom-avatars">
-              {avatars.map(({ id, img }, index) => {
-                return (
-                  <div className="avatar-back">
-                    <div className="avatar" key={id} index={index}>
-                      <input
-                        type="radio"
-                        id={id}
-                        name="drone"
-                        value={id}
-                        checked
-                      />
-                      <label htmlFor={id} className="">
-                        <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={img} alt="" />
-                      </label>
-                    </div>
-                  </div>
-                );
-              })}
+              {settings.avatars_type
+                ? settings.avatars_type.map((avatar_type, avatar_typeIndex) => {
+                    return (
+                      <div className="avatar-back">
+                        <div
+                          className="avatar"
+                          key={avatar_type.id}
+                          index={avatar_typeIndex}
+                        >
+                          <input
+                            type="radio"
+                            id={"avatar_type-" + avatar_type.id}
+                            name="avatar_type"
+                            value={avatar_type.id}
+                            onChange={() => changeAvatarType(avatar_type.id)}
+                            checked={
+                              avatar_type.id === settings.avtar_type_id
+                                ? true
+                                : null
+                            }
+                          />
+                          <label
+                            htmlFor={"avatar_type-" + avatar_type.id}
+                            className="d-block"
+                          >
+                            <img
+                              src={checkIcon}
+                              alt=""
+                              className="check-icon"
+                            />
+                            <img src={avatar_type.img} alt="" />
+                            <p class="mt-2">{avatar_type.name}</p>
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -651,26 +765,43 @@ const Appearance = () => {
               })}
             </ul> */}
             <div className="custom-avatars">
-              {themes.map(({ id, img, text }, index) => {
-                return (
-                  <div className="avatar-back">
-                    <div className="avatar" key={id} index={index}>
-                      <input
-                        type="radio"
-                        id={id}
-                        name="themes"
-                        value={id}
-                        checked
-                      />
-                      <label htmlFor={id} className="d-block">
-                        <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={img} alt="" />
-                        <p className="mt-2">{text}</p>
-                      </label>
-                    </div>
-                  </div>
-                );
-              })}
+              {settings.themes
+                ? settings.themes.map((theme, themeIndex) => {
+                    return (
+                      <div className="avatar-back">
+                        <div
+                          className="avatar"
+                          key={theme.id}
+                          index={themeIndex}
+                        >
+                          <input
+                            type="radio"
+                            id={"theme-" + theme.id}
+                            name="theme"
+                            value={theme.id}
+                            onChange={() => changeTheme(theme.id)}
+                            checked={
+                              theme.id === settings.theme_id ? true : null
+                            }
+                          />
+                          <label
+                            htmlFor={"theme-" + theme.id}
+                            className="d-block"
+                          >
+                            {" "}
+                            <img
+                              src={checkIcon}
+                              alt=""
+                              className="check-icon"
+                            />
+                            <img src={theme.img} alt="" />
+                            <p className="mt-2">{theme.name}</p>
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -888,7 +1019,7 @@ const Appearance = () => {
               </div>
               <div>
                 {/* <p className="mt-4">Upload Image</p> */}
-                {/* <LinkUploadImg
+                {/* <UploadImg
                   // link={link}
                   // config={config}
                   // onSaveData={() => handleEditData()}

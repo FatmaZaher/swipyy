@@ -50,6 +50,13 @@ const Editicon = (props) => {
       initialValues.short_name = item ? item.short_name : null;
       inputName = "short_name";
     }
+    if (settingName === "title") {
+      initialValues.title = item ? item.title : null;
+      inputName = "title";
+    }
+  }else if (api === "user/settings/update") {
+    initialValues.email = item ? item.email : null;
+    inputName = "email";
   }
 
   const validationSchema = Yup.object({});
