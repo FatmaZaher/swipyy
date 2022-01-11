@@ -1,14 +1,14 @@
 import "./App.scss";
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
+  withRouter,
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 
 import Home from "./pages/home";
 import { user } from "./actions/auth";
@@ -28,25 +28,32 @@ import ViewLayout from "./layouts/ViewLayout";
 import View from "./pages/View";
 const token = localStorage.getItem("user_token");
 
-
 function App() {
-  
+  const location = Router;
+
   const dispatch = useDispatch();
-  
-  if (token) {
-    dispatch(user(token)).then((res) => {
-      if (res.status.code == 200) {
-        <Redirect to="/links" />;
+
+  useEffect(() => {
+    if (token) {
+      dispatch(user(token)).then((res) => {
+        if (res.status.code == 200) {
+          <Redirect to="/links" />;
+        } else {
+          localStorage.removeItem("user_token");
+          window.location.replace("/login");
+        }
+      });
+    } else {
+      const url = window.location.pathname;
+      if (url === "/login" || url === "signUp" || url === "/changePassword") {
       } else {
-        <Redirect to="/login" />;
+        window.location.replace("/login");
       }
-    });
-  } else {
-    <Redirect to="/login" />;
-  }
+    }
+  }, []);
+
   return (
     <>
-    
       <Router>
         <Switch>
           <Route exact path="/">
