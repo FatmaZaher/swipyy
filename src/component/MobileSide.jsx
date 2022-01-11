@@ -14,6 +14,7 @@ import logo from "../assets/images/logo.svg";
 import Editticons from "../component/icons/Editticons";
 import * as Yup from "yup";
 import MobileViewContent from "./MobileViewContent";
+import { useSelector } from "react-redux";
 
 const initialValues = {
   email: "",
@@ -24,6 +25,11 @@ const validationSchema = Yup.object({
 });
 
 const MobileSide = () => {
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const [mobileSide, setMobileSide] = useState(false);
   const showMobileSide = () => setMobileSide(!mobileSide);
   return (
@@ -48,7 +54,11 @@ const MobileSide = () => {
           </button>
         </div>
         <img src={mobileCover} alt="" />
-        <MobileViewContent />
+        {/* <MobileViewContent /> */}
+        <iframe
+          src={`https://test-place.site/${currentUser.username}`}
+          title="description"
+        />
         <Link to="/view" className="link upgrad-btn">
           <RemoveRedEyeIcon />
           View Live

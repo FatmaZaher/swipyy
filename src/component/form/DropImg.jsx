@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const DropImg = (props) => {
-  const { config } = props;
+  const { config , item } = props;
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
 
