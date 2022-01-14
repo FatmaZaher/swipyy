@@ -60,7 +60,6 @@ const Pdf = (props) => {
     axios.get("https://test-place.site/api/user/files", config).then((res) => {
       setItems(res.data.data);
       props.onSaveData();
-
     });
   };
   useEffect(() => {
@@ -140,6 +139,12 @@ const Pdf = (props) => {
             </p>
           </div>
           <div className="link-action">
+            <Editicon
+              item={file}
+              config={config}
+              onSaveData={() => handleEditData()}
+              api="user/files"
+            />
             <Deleteicon
               item={file}
               config={config}

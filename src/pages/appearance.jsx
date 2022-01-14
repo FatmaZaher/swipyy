@@ -317,7 +317,7 @@ const Appearance = (props) => {
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
                 />
-                <Sharicon />
+                {/* <Sharicon /> */}
               </div>
             </div>
           </Accordion.Body>
@@ -343,7 +343,7 @@ const Appearance = (props) => {
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
                 />
-                <Sharicon />
+                {/* <Sharicon /> */}
               </div>
             </div>
           </Accordion.Body>
@@ -407,7 +407,7 @@ const Appearance = (props) => {
                   </div>
                   <div className="link-action">
                     {/* <Editicon /> */}
-                    <Sharicon />
+                    {/* <Sharicon /> */}
                   </div>
                 </div>
               </div>
@@ -438,7 +438,7 @@ const Appearance = (props) => {
                       onSaveData={() => handleEditData()}
                       api="user/appearance/update"
                     />
-                    <Sharicon />
+                    {/* <Sharicon /> */}
                   </div>
                 </div>
               </div>
@@ -462,6 +462,9 @@ const Appearance = (props) => {
                     note="500 characters left"
                     value={settings.description}
                     onBlur={(e) => changeDescription(e.target.value)}
+                    onChange={(e) =>
+                      settingsChange("description", e.target.value)
+                    }
                   />
                 </Form>
               </Formik>

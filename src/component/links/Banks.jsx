@@ -102,7 +102,7 @@ const Banks = (props) => {
           <div className="single-item mb-3">
             <div className="link-and-icon">
               <div className="single-item-img">
-                <img src={bank} alt="" />
+                <img src={bank.img} alt="" />
               </div>
               <div className="single-item-info">
                 <p className="name-from-link">{bank.bank}</p>
@@ -116,7 +116,12 @@ const Banks = (props) => {
                 config={config}
                 onSaveData={() => handleEditData()}
               />
-              <Deleteicon onSaveData={() => handleEditData()} />
+              <Deleteicon
+                item={bank}
+                onSaveData={() => handleEditData()}
+                config={config}
+                api="user/bankUser"
+              />
             </div>
           </div>
         ))}

@@ -17,35 +17,6 @@ const Messages = () => {
   const [settings, setSettings] = useState({});
   const [messages, setMessages] = useState([]);
 
-  const data = React.useMemo(
-    () => [
-      {
-        id: "1",
-        text: "Thanks",
-        name: "fahad",
-        email: "fahhalatrips@gmail.comad",
-        date: "8 days ago",
-        icon: "",
-      },
-      {
-        id: "2",
-        text: "Thanks",
-        name: "fahad",
-        email: "fahhalatrips@gmail.comad",
-        date: "8 days ago",
-        icon: "",
-      },
-      {
-        id: "3",
-        text: "Thanks",
-        name: "fahad",
-        email: "fahhalatrips@gmail.comad",
-        date: "8 days ago",
-        icon: "",
-      },
-    ],
-    []
-  );
   const config = JSON.parse(localStorage.getItem("headers"));
 
   const getAllSettings = async () => {
@@ -57,6 +28,13 @@ const Messages = () => {
           setMessages(res.data.data.table);
         });
     } catch (error) {}
+  };
+  const settingsChange = (property, value) => {
+    console.log({ property, value });
+    let oldSettings = { ...settings };
+    oldSettings[property] = value;
+    let newSettings = oldSettings;
+    setSettings(newSettings);
   };
   const apiChange = async (values) => {
     try {
@@ -142,6 +120,10 @@ const Messages = () => {
                         name="messageText"
                         placeholder="Message Text"
                         label="Message Text"
+                        value={settings.message_text}
+                        onChange={(e) =>
+                          settingsChange("message_text", e.target.value)
+                        }
                         onBlur={(e) => changMessage_text(e.target.value)}
                       />
                     </div>
@@ -152,6 +134,11 @@ const Messages = () => {
                         name="succesMessageText"
                         placeholder="Succes Message Text"
                         label="Succes Message Text"
+                        value={settings.message_success}
+
+                        onChange={(e) =>
+                          settingsChange("message_success", e.target.value)
+                        }
                         onBlur={(e) => changeMessage_success(e.target.value)}
                       />
                     </div>

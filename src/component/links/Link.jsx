@@ -191,7 +191,7 @@ const Link = (props) => {
                               />
                             </div>
                             <div className="single-item-info">
-                              <p className="name-from-link">{link.url}</p>
+                              <p className="name-from-link">{link.name}</p>
                               <span className="the-link">
                                 <img src={tele} alt="" />
                                 {link.url}

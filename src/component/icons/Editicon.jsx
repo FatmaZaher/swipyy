@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import Editticons from "./Editticons";
@@ -25,17 +25,27 @@ const customStyles = {
 const Editicon = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [isName, setIsName] = React.useState(false);
   const { item, config, api, settingName } = props;
   function openModal() {
     setIsOpen(true);
   }
   const initialValues = {};
   let inputName;
+  let labelName = "";
   let newItemId = item ? `/${item.id}` : "";
   let method = axios.patch;
-  if (api === "user/link" || api === "user/socialUser") {
+  if (api === "user/link") {
+    initialValues.url = item ? item.url : null;
+    initialValues.name = item ? item.name : null;
+    inputName = "url";
+    labelName = "url";
+  } else if (api === "user/socialUser") {
     initialValues.url = item ? item.url : null;
     inputName = "url";
+  } else if (api === "user/files") {
+    initialValues.name = item ? item.name : null;
+    inputName = "Name";
   } else if (api === "user/location") {
     initialValues.name = item ? item.location : null;
     inputName = "name";
@@ -54,7 +64,7 @@ const Editicon = (props) => {
       initialValues.title = item ? item.title : null;
       inputName = "title";
     }
-  }else if (api === "user/settings/update") {
+  } else if (api === "user/settings/update") {
     initialValues.email = item ? item.email : null;
     inputName = "email";
   }
@@ -85,6 +95,12 @@ const Editicon = (props) => {
     Swal.fire("Good job!", "Edited successfully!", "success");
     setIsOpen(false);
   }
+
+  useEffect(() => {
+    if (api === "user/link") {
+      setIsName(true);
+    }
+  }, []);
   return (
     <>
       <div className="edit-icon" onClick={openModal}>
@@ -108,12 +124,23 @@ const Editicon = (props) => {
           >
             {(formik) => (
               <Form className="login-form">
+                {isName ? (
+                  <FormikControl
+                    control="input"
+                    type="text"
+                    name="name"
+                    placeholder=""
+                    error="true"
+                    label="name"
+                  />
+                ) : null}
                 <FormikControl
                   control="input"
                   type="text"
                   name={inputName}
                   placeholder=""
                   error="true"
+                  label={labelName}
                 />
                 <div className="login-btn">
                   <LinkButton type="submit" buttontext="Save Edit" />

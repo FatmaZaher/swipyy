@@ -38,7 +38,7 @@ const BankModal = (props) => {
     console.log(values);
     try {
       await axios
-        .patch(
+        .put(
           `https://test-place.site/api/user/bankUser/${bank.id}`,
           values,
           config
