@@ -39,8 +39,17 @@ const Images = (props) => {
         });
     } catch (error) {}
   };
+  const settingsChange = (property, value) => {
+    let oldSettings = { ...settings };
+    oldSettings[property] = value;
+    let newSettings = oldSettings;
+    setSettings(newSettings);
+  };
   const changeSliderStatus = (value) => {
+    settingsChange("slider_status", value);
+
     const slider_status = value === true ? 1 : 0;
+
     apiChange({ slider_status });
   };
   const changeDescriptionStatus = (value) => {
