@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import Editticons from "./Editticons";
+
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import FormikControl from "../form/FormikControl";
@@ -43,9 +44,10 @@ const Editicon = (props) => {
   } else if (api === "user/socialUser") {
     initialValues.url = item ? item.url : null;
     inputName = "url";
-  } else if (api === "user/files") {
+  } else if (api === "user/files/update") {
     initialValues.name = item ? item.name : null;
-    inputName = "Name";
+    inputName = "name";
+    method = axios.post;
   } else if (api === "user/location") {
     initialValues.name = item ? item.location : null;
     inputName = "name";
@@ -71,7 +73,6 @@ const Editicon = (props) => {
 
   const validationSchema = Yup.object({});
   const onSubmit = async (values) => {
-    console.log(values);
     try {
       await method(
         `https://test-place.site/api/${api}${newItemId}`,
@@ -81,6 +82,9 @@ const Editicon = (props) => {
         props.onSaveData();
 
         sucesesEdit();
+        if (settingName === "username") {
+          window.location.reload();
+        }
       });
     } catch (error) {}
   };

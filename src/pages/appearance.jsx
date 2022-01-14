@@ -202,7 +202,7 @@ const Appearance = (props) => {
     apiChange({ social_icons_color: color5 });
   };
   const saveDetails = (details) => {
-    apiChange(details )
+    apiChange(details);
   };
   useEffect(() => {
     getAllSettings();
@@ -555,34 +555,38 @@ const Appearance = (props) => {
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {items.map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                              snapshot.isDragging,
-                              provided.draggableProps.style
-                            )}
-                            className="link-dragg"
+                    {settings.placement
+                      ? settings.placement.map((item, index) => (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
                           >
-                            <img
-                              src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
-                              alt=""
-                              className="drag-img"
-                            />
-                            <div className="icon">{renderIcon(item.icon)}</div>
-                            <div className="title">{item.title}</div>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                                className="link-dragg"
+                              >
+                                <img
+                                  src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                                  alt=""
+                                  className="drag-img"
+                                />
+                                <div className="icon">
+                                  {renderIcon(item.icon)}
+                                </div>
+                                <div className="title">{item.title}</div>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))
+                      : null}
 
                     {provided.placeholder}
                     <div
@@ -914,7 +918,7 @@ const Appearance = (props) => {
                             }
                             checked={
                               background.id ===
-                              parseInt(settings.button_icon_style_id)
+                              parseInt(settings.background_animated_id)
                                 ? true
                                 : null
                             }

@@ -13,7 +13,7 @@ const Home = ({ component: Component, ...rest }) => {
     setIframe(false);
     setTimeout(() => {
       setIframe(true);
-    }, 500);
+    }, 100);
   };
   const showMobile = () => {
     console.log("iframe");

@@ -5,6 +5,9 @@ import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
 import ImageDrop from "../icons/ImageDrop";
 import UploadFileIcon from "../icons/UploadFileIcon";
+import UploadLoading from "../../assets/images/UploadLoading.svg";
+import { useSelector } from "react-redux";
+
 import axios from "axios";
 const toFormData = (fromdata) => {
   const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
@@ -29,13 +32,29 @@ const toFormData = (fromdata) => {
   )(new FormData())();
   return toFormDataInner(fromdata);
 };
+
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Pdf = (props) => {
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [items, setItems] = useState([]);
-
+  const checkSize = (size) => {
+    if (currentUser.is_pro === true) {
+      return true;
+    } else {
+      if (size > 52428800) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
   const changeHandler = async (event) => {
     setSelectedFile(event.target.files[0]);
     const file = event.target.files[0];
@@ -49,6 +68,7 @@ const Pdf = (props) => {
           .post("https://test-place.site/api/user/files", img, config)
           .then((res) => {
             getFiles();
+            setIsFilePicked(false);
           })
           .then((res) => {});
       } catch (error) {
@@ -86,9 +106,20 @@ const Pdf = (props) => {
 
           {isFilePicked ? (
             <div>
-              {selectedFile.size < 52428800 ? (
+              {checkSize() ? (
+                <div className="file-info mt-3 pt-3 text-center">
+                  <img src={UploadLoading} alt="" />
+                  {/* <p>Filename: {selectedFile.name}</p>
+                 <p>Filetype: {selectedFile.type}</p>
+                 <p>Size in bytes: {selectedFile.size}</p>
+                 <p>
+                   lastModifiedDate:{" "}
+                   {selectedFile.lastModifiedDate.toLocaleDateString()}
+                 </p> */}
+                </div>
+              ) : (
                 <p className="more-size">
-                  <sapn>a file is bigger than 150M go to </sapn>
+                  <sapn>a file is bigger than 150kb go to </sapn>
 
                   <div className="pro-btn">
                     <Link to="/payments">
@@ -96,22 +127,12 @@ const Pdf = (props) => {
                     </Link>
                   </div>
                 </p>
-              ) : (
-                <div className="file-info mt-3 pt-3">
-                  {/* <p>Filename: {selectedFile.name}</p>
-                  <p>Filetype: {selectedFile.type}</p>
-                  <p>Size in bytes: {selectedFile.size}</p>
-                  <p>
-                    lastModifiedDate:{" "}
-                    {selectedFile.lastModifiedDate.toLocaleDateString()}
-                  </p> */}
-                </div>
               )}
             </div>
           ) : (
             <>
               <p className="more-size">
-                <span>bigger than 150M go to </span>
+                <span>bigger than 150kb go to </span>
 
                 <div className="pro-btn">
                   <Link to="/payments">
@@ -135,7 +156,7 @@ const Pdf = (props) => {
                 overflow: "hidden",
               }}
             >
-              <a href={file.src}>{file.src}</a>
+              <a href={file.src}>{file.name || 'No name and add name'}</a>
             </p>
           </div>
           <div className="link-action">
@@ -143,7 +164,7 @@ const Pdf = (props) => {
               item={file}
               config={config}
               onSaveData={() => handleEditData()}
-              api="user/files"
+              api="user/files/update"
             />
             <Deleteicon
               item={file}

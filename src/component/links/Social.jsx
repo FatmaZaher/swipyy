@@ -216,6 +216,7 @@ const Social = (props) => {
                               <FormikControl
                                 control="select"
                                 name="socialLinkIsButton"
+                                value={social.type}
                                 options={socialLinkIsButton}
                                 onChange={(e) =>
                                   handleChangeSelect(
