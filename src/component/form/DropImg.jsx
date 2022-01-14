@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImageUploading from "react-images-uploading";
 import ImageDrop from "../icons/ImageDrop";
 import LinkButton from "../../component/form/LinkButton";
@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const DropImg = (props) => {
-  const { config , item } = props;
+  const { config, item } = props;
   const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
+  const [oldImages, setoldImages] = React.useState([]);
 
+  const maxNumber = 69;
   const toFormData = (fromdata) => {
     const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
       (f) => (fd) => (pk) => (d) => {
@@ -51,8 +52,11 @@ const DropImg = (props) => {
     // data for submit
     const newImage = imageList.map((item) => item.file);
     submitImages({ imgs: newImage });
-    setImages(imageList);
+    // setImages(imageList);
   };
+  useEffect(() => {
+    setoldImages(item.images);
+  });
   return (
     <>
       <ImageUploading
@@ -99,11 +103,11 @@ const DropImg = (props) => {
               </button>
             </div>
             <div className="images-uploads mt-3">
-              {imageList.map((image, index) => (
+              {oldImages.map((image, index) => (
                 <div key={index} className="image-item">
-                  <img src={image.data_url} alt="" width="100" />
+                  <img src={image.src} alt="" width="100" />
                   <div className="image-item__btn-wrapper">
-                    <button onClick={() => onImageUpdate(index)}>Update</button>
+                    {/* <button onClick={() => onImageUpdate(index)}>Update</button> */}
                     <button onClick={() => onImageRemove(index)}>Remove</button>
                   </div>
                 </div>

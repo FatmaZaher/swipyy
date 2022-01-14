@@ -11,7 +11,7 @@ import Editicon from "../../component/icons/Editicon";
 import axios from "axios";
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const Location = () => {
+const Location = (props) => {
   const [items, setItems] = useState([]);
 
   const initialValues = {
@@ -32,6 +32,8 @@ const Location = () => {
       .get("https://test-place.site/api/user/location", config)
       .then((res) => {
         setItems(res.data.data);
+        props.onSaveData();
+
       });
   };
   useEffect(() => {

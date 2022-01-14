@@ -83,8 +83,6 @@ const Link = (props) => {
     axios
       .post("https://test-place.site/api/user/link", values, config)
       .then((res) => {
-        props.onSaveData();
-
         getLinks();
       });
   };
@@ -94,6 +92,8 @@ const Link = (props) => {
   });
   const getLinks = () => {
     axios.get("https://test-place.site/api/user/link", config).then((res) => {
+      props.onSaveData();
+
       setItems(res.data.data);
     });
   };

@@ -27,7 +27,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 const queryAttr = "data-rbd-drag-handle-draggable-id";
-const Social = () => {
+const Social = (props) => {
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
   const [socialPlatforms, setSocialPlatforms] = useState([]);
@@ -102,6 +102,7 @@ const Social = () => {
       .get("https://test-place.site/api/user/socialUser", config)
       .then((res) => {
         setItems(res.data.data);
+        props.onSaveData();
       });
   };
   useEffect(() => {

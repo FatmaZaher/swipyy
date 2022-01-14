@@ -97,7 +97,7 @@ const Links = (props) => {
             </span>
           }
         >
-          <Social />
+          <Social onSaveData={() => handleEditData()} />
         </Tab>
         <Tab
           eventKey="location"
@@ -107,7 +107,7 @@ const Links = (props) => {
             </span>
           }
         >
-          <Location />
+          <Location onSaveData={() => handleEditData()} />
         </Tab>
         <Tab
           eventKey="images"
@@ -117,7 +117,7 @@ const Links = (props) => {
             </span>
           }
         >
-          <Images />
+          <Images onSaveData={() => handleEditData()} />
         </Tab>
         <Tab
           eventKey="pdf"
@@ -127,7 +127,7 @@ const Links = (props) => {
             </span>
           }
         >
-          <Pdf />
+          <Pdf onSaveData={() => handleEditData()} />
         </Tab>
         <Tab
           eventKey="banks"
@@ -137,7 +137,7 @@ const Links = (props) => {
             </span>
           }
         >
-          <Banks />
+          <Banks onSaveData={() => handleEditData()} />
         </Tab>
       </Tabs>
     </div>

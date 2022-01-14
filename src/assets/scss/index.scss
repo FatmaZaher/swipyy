@@ -31,4 +31,10 @@ ul {
 @import "./components/pdf";
 @import "./modal";
 
+.img-upload .img-uploadded{
+  width: 40px !important;
+  height: 40px;
+  object-fit: contain;
+}
+
 

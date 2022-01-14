@@ -31,7 +31,7 @@ const toFormData = (fromdata) => {
 };
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const Pdf = () => {
+const Pdf = (props) => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [items, setItems] = useState([]);
@@ -59,6 +59,8 @@ const Pdf = () => {
   const getFiles = () => {
     axios.get("https://test-place.site/api/user/files", config).then((res) => {
       setItems(res.data.data);
+      props.onSaveData();
+
     });
   };
   useEffect(() => {

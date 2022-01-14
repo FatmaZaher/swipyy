@@ -24,7 +24,7 @@ const imagesSizeList = [
   { key: "Square 1:1 (width:Height)", value: "4" },
 ];
 
-const Images = () => {
+const Images = (props) => {
   const [color1, setColor1] = useState("#8055f0");
   const [color2, setColor2] = useState("#163152");
   const [color3, setColor3] = useState("#8055f0");
@@ -70,6 +70,7 @@ const Images = () => {
         .get("https://test-place.site/api/user/slider", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
+          props.onSaveData();
         });
     } catch (error) {}
   };
@@ -100,8 +101,8 @@ const Images = () => {
           </div>
         </div>
         <div className="link-action">
-          <Editicon />
-          <Deleteicon />
+          {/* <Editicon />
+          <Deleteicon /> */}
         </div>
       </div>
       {settings.slider_status ? (

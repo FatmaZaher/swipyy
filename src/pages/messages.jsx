@@ -15,6 +15,7 @@ const initialValues = {
 const validationSchema = Yup.object({});
 const Messages = () => {
   const [settings, setSettings] = useState({});
+  const [messages, setMessages] = useState([]);
 
   const data = React.useMemo(
     () => [
@@ -47,41 +48,13 @@ const Messages = () => {
   );
   const config = JSON.parse(localStorage.getItem("headers"));
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "",
-        accessor: "id", // accessor is the "key" in the data
-      },
-      {
-        Header: "Text",
-        accessor: "text",
-      },
-      {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Date Received	",
-        accessor: "date",
-      },
-      {
-        Header: "",
-        accessor: "icon",
-      },
-    ],
-    []
-  );
   const getAllSettings = async () => {
     try {
       axios
         .get("https://test-place.site/api/user/message", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
+          setMessages(res.data.data.table);
         });
     } catch (error) {}
   };
@@ -119,8 +92,24 @@ const Messages = () => {
   useEffect(() => {
     getAllSettings();
   }, []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const exportCSV = async () => {
+    try {
+      axios
+        .get("https://test-place.site/api/user/message/export", {
+          ...config,
+          responseType: "blob",
+        })
+
+        .then((blob) => {
+          const href = window.URL.createObjectURL(blob.data);
+          const a = document.createElement("a");
+          a.download = "messages.csv";
+          a.href = href;
+          a.click();
+          a.href = "";
+        });
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -242,61 +231,32 @@ const Messages = () => {
       <div className="index">
         <div className="index-header">
           <p className="your-links-header mb-3">Index</p>
-          <LinkButton type="" buttontext="Export to CSV" exportIcon="true" />
+          <LinkButton
+            type=""
+            buttontext="Export to CSV"
+            exportIcon="true"
+            onClick={() => exportCSV()}
+          />
         </div>
         <div className="index-content">
-          <table
-            {...getTableProps()}
-            style={{
-              fontSize: "14px",
-              margin: "30px 0 0 0",
-              width: "100%",
-            }}
-          >
+          <table className="table">
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      style={{
-                        borderBottom: "solid 1px #dee3ed8a",
-                        padding: "15px 0",
-                        color: "#bfbfbf",
-                        fontWeight: "400",
-                        minWidth: "90px",
-                      }}
-                    >
-                      {column.render("Header")}
-                    </th>
-                  ))}
+              <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Text</th>
+              </tr>
+            </thead>
+            <tbody>
+              {messages.map((message) => (
+                <tr>
+                  <td>{message.enail}</td>
+                  <td>{message.name}</td>
+                  <td>{message.phone}</td>
+                  <td>{message.text}</td>
                 </tr>
               ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            borderBottom: "solid 1px #dee3ed8a",
-                            padding: "15px 0",
-                            color: "#163152",
-                            fontWeight: "400",
-                            minWidth: "90px",
-                          }}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
             </tbody>
           </table>
           {/* <Table responsive className="index-table mt-5">

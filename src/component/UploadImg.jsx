@@ -80,7 +80,25 @@ const UploadImg = (props) => {
             <div>
               <button onClick={onImageUpload} {...dragProps}>
                 <div className="img-upload">
-                  <ImageDrop />
+                  {uploadType === "link" ? (
+                    item.img ? (
+                      <img
+                        src={item.img}
+                        className="img-uploadded"
+                        alt={item.id}
+                      />
+                    ) : (
+                      <ImageDrop />
+                    )
+                  ) : item.avatar ? (
+                    <img
+                      src={item.avatar}
+                      className="img-uploadded"
+                      alt={item.username}
+                    />
+                  ) : (
+                    <ImageDrop />
+                  )}
                 </div>
               </button>
             </div>

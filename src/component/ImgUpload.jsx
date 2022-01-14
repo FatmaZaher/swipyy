@@ -5,13 +5,13 @@ import UpdateIcon from "@mui/icons-material/Update";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ImageUploading from "react-images-uploading";
 
-const ImgUpload = () => {
+const ImgUpload = (props) => {
+  const { item } = props;
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   return (
@@ -39,27 +39,19 @@ const ImgUpload = () => {
                 style={isDragging ? { color: "red" } : undefined}
                 onClick={onImageUpload}
                 {...dragProps}
-            
               >
+                         
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quas, maiores culpa sequi deleniti voluptates. Error exercitationem et doloremque, dolorem perferendis repudiandae explicabo? Quod non inventore facere. Ipsam, consequuntur officia.</span>
                 <AddPhotoAlternateIcon />
               </button>
               &nbsp;
               <button onClick={onImageRemoveAll}>
-                <HideImageIcon />
+                {item.img !== null ? (
+                  <img src={item.img} alt="" width="100" />
+                ) : (
+                  <HideImageIcon />
+                )}
               </button>
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  <img src={image["data_url"]} alt="" width="100" />
-                  <div className="image-item__btn-wrapper">
-                    <button onClick={() => onImageUpdate(index)} className="button-img">
-                      <UpdateIcon />
-                    </button>
-                    <button onClick={() => onImageRemove(index)}>
-                      <DeleteOutlineIcon />
-                    </button>
-                  </div>
-                </div>
-              ))}
             </div>
           )}
         </ImageUploading>

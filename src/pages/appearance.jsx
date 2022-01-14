@@ -12,34 +12,11 @@ import personal from "../assets/images/personal.png";
 import layout1 from "../assets/images/layout1.svg";
 import layout2 from "../assets/images/layout2.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
-import cover from "../assets/images/cover-img.svg";
-import squer from "../assets/images/squer.png";
-import circell from "../assets/images/circell.svg";
-import Polygon from "../assets/images/Polygon.svg";
-import them1 from "../assets/images/them1.png";
-import button1 from "../assets/images/button1.png";
-import button2 from "../assets/images/button2.png";
-import button3 from "../assets/images/button3.png";
-import button4 from "../assets/images/button4.png";
-import button5 from "../assets/images/button5.png";
-import button6 from "../assets/images/button6.png";
-import button7 from "../assets/images/button7.png";
-import button8 from "../assets/images/button8.png";
-import button9 from "../assets/images/button9.png";
-import buttonIcon1 from "../assets/images/buttonIcon1.png";
-import buttonIcon2 from "../assets/images/buttonIcon2.png";
-import buttonIcon3 from "../assets/images/buttonIcon3.png";
-import buttonIcon4 from "../assets/images/buttonIcon4.png";
-import buttonIcon5 from "../assets/images/buttonIcon5.png";
-import buttonIcon6 from "../assets/images/buttonIcon6.png";
+
 import background1 from "../assets/images/background1.png";
 import background2 from "../assets/images/background2.png";
 import background3 from "../assets/images/background3.png";
-import animatedBack1 from "../assets/images/animatedBack1.png";
-import animatedBack2 from "../assets/images/animatedBack3.png";
-import animatedBack3 from "../assets/images/animatedBack1.png";
-import fontE1 from "../assets/images/fontE1.png";
-import upload from "../assets/images/upload.png";
+
 import FormikControl from "../component/form/FormikControl";
 import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
@@ -75,55 +52,18 @@ const initialValues = {
   description: "",
   details: [""],
 };
+const onSubmit = (values) => {
+  console.log(values);
+  // axios
+  //   .post("https://test-place.site/api/user/link", values, config)
+  //   .then((res) => {
+  //     getLinks();
+  //   });
+};
 const validationSchema = Yup.object({
   description: Yup.string().required("You must lower than 500 characters*"),
 });
-const dropdwonoptions = [
-  { key: "Select Popular Social Link", value: "" },
-  { key: "Whatsapp", value: "whatsapp" },
-  { key: "Facebook", value: "facebook" },
-  { key: "Telegram", value: "telegram" },
-];
-// const finalSpaceCharacters = [
-//   {
-//     id: "links",
-//     title: "Links",
-//     icon: <LinkBlue />,
-//   },
-//   {
-//     id: "social",
-//     title: "Social",
-//     icon: <SocialBlue />,
-//   },
-//   {
-//     id: "images",
-//     title: "Slider",
-//     icon: <SliderBlue />,
-//   },
-//   {
-//     id: "messages",
-//     title: "Messages",
-//     icon: <MeasssssBlue />,
-//   },
-//   {
-//     id: "location",
-//     title: "Location",
-//     icon: <LocationBlue />,
-//   },
-// ];
 
-const themes = [
-  {
-    id: "0",
-    img: them1,
-    text: "Cerulean Blue",
-  },
-  {
-    id: "1",
-    img: them1,
-    text: "Cerulean Blue",
-  },
-];
 const backgroundStyles = [
   {
     id: "0",
@@ -141,111 +81,10 @@ const backgroundStyles = [
     text: "Down",
   },
 ];
-const animatedBack = [
-  {
-    id: "1",
-    img: animatedBack1,
-    text: "Snow",
-  },
-  {
-    id: "2",
-    img: animatedBack2,
-    text: "Waves",
-  },
-  {
-    id: "3",
-    img: animatedBack3,
-    text: "Blur",
-  },
-];
-const buttonStyles = [
-  {
-    id: "1",
-    img: button1,
-  },
-  {
-    id: "2",
-    img: button2,
-  },
-  {
-    id: "3",
-    img: button3,
-  },
-  {
-    id: "4",
-    img: button4,
-  },
-  {
-    id: "5",
-    img: button5,
-  },
-  {
-    id: "6",
-    img: button6,
-  },
-  {
-    id: "7",
-    img: button7,
-  },
-  {
-    id: "8",
-    img: button8,
-  },
-  {
-    id: "9",
-    img: button9,
-  },
-];
-const buttonIconStyles = [
-  {
-    id: "1",
-    img: buttonIcon1,
-  },
-  {
-    id: "2",
-    img: buttonIcon2,
-  },
-  {
-    id: "3",
-    img: buttonIcon3,
-  },
-  {
-    id: "4",
-    img: buttonIcon4,
-  },
-  {
-    id: "5",
-    img: buttonIcon5,
-  },
-  {
-    id: "6",
-    img: buttonIcon6,
-  },
-];
-const fontEnglish = [
-  {
-    id: "1",
-    img: fontE1,
-  },
-  {
-    id: "2",
-    img: fontE1,
-    pro: true,
-  },
-  {
-    id: "3",
-    img: fontE1,
-    pro: false,
-  },
-  {
-    id: "4",
-    img: fontE1,
-    pro: true,
-  },
-];
+
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const Appearance = () => {
+const Appearance = (props) => {
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
@@ -253,9 +92,9 @@ const Appearance = () => {
   }
   const [settings, setSettings] = useState({});
 
-  const [color1, setColor1] = useState("#8cc8cc");
-  const [color2, setColor2] = useState("#163152");
-  const [color3, setColor3] = useState("#fff");
+  const [color1, setColor1] = useState("");
+  const [color2, setColor2] = useState("");
+  const [color3, setColor3] = useState("");
   const [color4, setColor4] = useState("#8cc8cc");
   const [color5, setColor5] = useState("#8cc8cc");
 
@@ -265,8 +104,22 @@ const Appearance = () => {
         .get("https://test-place.site/api/user/appearance", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
+          setColor1(res.data.data.Settings.btn_background_color);
+          setColor2(res.data.data.Settings.btn_font_color);
+          setColor3(res.data.data.Settings.titile_descreption_color);
+          setColor4(res.data.data.Settings.background_color);
+          setColor5(res.data.data.Settings.social_icons_color);
+
+          props.onSaveData();
         });
     } catch (error) {}
+  };
+  const settingsChange = (property, value) => {
+    console.log({ property, value });
+    let oldSettings = { ...settings };
+    oldSettings[property] = value;
+    let newSettings = oldSettings;
+    setSettings(newSettings);
   };
   const apiChange = async (values) => {
     try {
@@ -302,6 +155,10 @@ const Appearance = () => {
     const highlights_status = value === true ? 1 : 0;
     apiChange({ highlights_status });
   };
+  const changeHighlightTitle = (highlights) => {
+    apiChange({ highlights });
+  };
+
   const changePlacement = () => {
     apiChange({ placement: items });
   };
@@ -311,7 +168,42 @@ const Appearance = () => {
   const changeTheme = (theme_id) => {
     apiChange({ theme_id });
   };
+  const changeButton = (button_type_id) => {
+    apiChange({ button_type_id });
+  };
+  const changeButtonIcon = (button_icon_style_id) => {
+    apiChange({ button_icon_style_id });
+  };
+  const changebtn_background_color = () => {
+    apiChange({ btn_background_color: color1 });
+  };
+  const changebtn_font_color = () => {
+    apiChange({ btn_font_color: color2 });
+  };
+  const changetitile_descreption_color = () => {
+    apiChange({ titile_descreption_color: color3 });
+  };
 
+  const changeBackgroundColor = () => {
+    apiChange({ background_color: color4 });
+  };
+
+  const changeBackground = (background_id) => {
+    apiChange({ background_id });
+  };
+  const changeBackgroundAnimate = (background_animated_id) => {
+    apiChange({ background_animated_id });
+  };
+  const changeTextAlign = (text_alignment) => {
+    apiChange({ text_alignment });
+  };
+
+  const changeSocialColor = () => {
+    apiChange({ social_icons_color: color5 });
+  };
+  const saveDetails = (details) => {
+    apiChange(details )
+  };
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -498,6 +390,7 @@ const Appearance = () => {
                   <UploadImg
                     config={config}
                     uploadType="avatar"
+                    item={settings}
                     onSaveData={() => handleEditData()}
                   />
                 </div>
@@ -559,6 +452,7 @@ const Appearance = () => {
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
+                onSubmit={onSubmit}
               >
                 <Form className="form-page">
                   <FormikControl
@@ -566,6 +460,7 @@ const Appearance = () => {
                     name="description"
                     placeholder="Type the description here.."
                     note="500 characters left"
+                    value={settings.description}
                     onBlur={(e) => changeDescription(e.target.value)}
                   />
                 </Form>
@@ -595,6 +490,7 @@ const Appearance = () => {
                   <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
+                    onSubmit={onSubmit}
                   >
                     <Form className="">
                       <div className="high-title">
@@ -603,16 +499,19 @@ const Appearance = () => {
                           control="input"
                           name="highTitle"
                           placeholder="Type the tilte here"
+                          value={settings.highlights}
+                          onChange={(e) =>
+                            settingsChange("highlights", e.target.value)
+                          }
+                          onBlur={(e) => changeHighlightTitle(e.target.value)}
                         />
                       </div>
                       <div className="field-array">
                         <FieldArray name="details">
                           {(fieldArrayProps) => {
-                            console.log("fieldArrayProps", fieldArrayProps);
                             const { push, form } = fieldArrayProps;
                             const { values } = form;
                             const { details } = values;
-                            console.log("details", details);
                             return (
                               <div>
                                 {details.map((detail, index) => (
@@ -622,6 +521,7 @@ const Appearance = () => {
                                       name={`details[${index}]`}
                                       className="form-input"
                                       placeholder="Type the detail here"
+                                      onBlur={(e) => saveDetails(details)}
                                     />
                                   </div>
                                 ))}
@@ -788,7 +688,6 @@ const Appearance = () => {
                             htmlFor={"theme-" + theme.id}
                             className="d-block"
                           >
-                            {" "}
                             <img
                               src={checkIcon}
                               alt=""
@@ -813,112 +712,116 @@ const Appearance = () => {
                 <p>Buttons Style</p>
                 <div className="buttons-style-shap">
                   <div className="custom-avatars">
-                    {buttonStyles.map(({ id, img }, index) => {
-                      return (
-                        <div className="avatar-back">
-                          <div
-                            className="avatar buttons-style-shap-list"
-                            key={id}
-                            index={index}
-                          >
-                            <input
-                              type="radio"
-                              id={id}
-                              name="buttonStyle"
-                              value={id}
-                              checked
-                            />
-                            <label htmlFor={id} className="d-block">
-                              <img
-                                src={checkIcon}
-                                alt=""
-                                className="check-icon"
-                              />
-                              <img src={img} alt="" />
-                            </label>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {settings.buttons
+                      ? settings.buttons.map((button, index) => {
+                          return (
+                            <div className="avatar-back">
+                              <div
+                                className="avatar buttons-style-shap-list"
+                                key={button.id}
+                                index={index}
+                              >
+                                <input
+                                  type="radio"
+                                  id={"button-" + button.id}
+                                  name="buttonStyle"
+                                  value={button.id}
+                                  onChange={() => changeButton(button.id)}
+                                  checked={
+                                    button.id ===
+                                    parseInt(settings.button_type_id)
+                                      ? true
+                                      : null
+                                  }
+                                />
+                                <label
+                                  htmlFor={"button-" + button.id}
+                                  className="d-block"
+                                >
+                                  <img
+                                    src={checkIcon}
+                                    alt=""
+                                    className="check-icon"
+                                  />
+                                  <img src={button.img} alt="" />
+                                </label>
+                              </div>
+                            </div>
+                          );
+                        })
+                      : null}
                   </div>
-                  {/* <ul className="buttons-style-shap-list">
-                    {buttonStyles.map(({ id, img }, index) => {
-                      return (
-                        <li key={id} index={index}>
-                          <div className="avatar-theme-image">
-                            <img src={img} alt="" />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul> */}
                 </div>
               </div>
+
               <div className="buttons-icon-style">
                 <p>Buttons Icon Style</p>
                 <div className="buttons-style-shap">
                   <div className="custom-avatars">
-                    {buttonIconStyles.map(({ id, img }, index) => {
-                      return (
-                        <div className="avatar-back">
-                          <div
-                            className="avatar buttons-style-shap-list"
-                            key={id}
-                            index={index}
-                          >
-                            <input
-                              type="radio"
-                              id={id}
-                              name="buttonIcon"
-                              value={id}
-                              checked
-                            />
-                            <label htmlFor={id} className="d-block">
-                              <img
-                                src={checkIcon}
-                                alt=""
-                                className="check-icon"
-                              />
-                              <img src={img} alt="" />
-                            </label>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {settings.button_icon_style
+                      ? settings.button_icon_style.map((buttonIcon, index) => {
+                          return (
+                            <div className="avatar-back">
+                              <div
+                                className="avatar buttons-style-shap-list"
+                                key={buttonIcon.id}
+                                index={index}
+                              >
+                                <input
+                                  type="radio"
+                                  id={"button_style" + buttonIcon.id}
+                                  name="button_style"
+                                  value={buttonIcon.id}
+                                  onChange={() =>
+                                    changeButtonIcon(buttonIcon.id)
+                                  }
+                                  checked={
+                                    buttonIcon.id ===
+                                    parseInt(settings.button_icon_style_id)
+                                      ? true
+                                      : null
+                                  }
+                                />
+                                <label
+                                  htmlFor={"button_style" + buttonIcon.id}
+                                  className="d-block"
+                                >
+                                  <img
+                                    src={checkIcon}
+                                    alt=""
+                                    className="check-icon"
+                                  />
+                                  <img src={buttonIcon.img} alt="" />
+                                </label>
+                              </div>
+                            </div>
+                          );
+                        })
+                      : null}
                   </div>
-                  {/* <ul className="buttons-style-shap-list">
-                    
-                    {buttonIconStyles.map(({ id, img }, index) => {
-                      return (
-                        <li key={id} index={index}>
-                          <div className="avatar-theme-image">
-                            <img src={img} alt="" />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul> */}
                 </div>
               </div>
             </div>
             <div className="button-color my-3">
               <p>
-                Button Background Color{" "}
+                Button Background Color
                 <div className="pro-btn back-pro">
                   <input
                     type="color"
                     value={color1}
                     onChange={(e) => setColor1(e.target.value)}
+                    onBlur={(e) => changebtn_background_color()}
                   />
                 </div>
               </p>
               <p>
-                Button Font Color{" "}
+                Button Font Color
                 <div className="pro-btn font-pro">
                   <input
                     type="color"
                     value={color2}
                     onChange={(e) => setColor2(e.target.value)}
+                    onBlur={(e) => changebtn_font_color()}
                   />
                 </div>
               </p>
@@ -929,11 +832,12 @@ const Appearance = () => {
                     type="color"
                     value={color3}
                     onChange={(e) => setColor3(e.target.value)}
+                    onBlur={(e) => changetitile_descreption_color()}
                   />
                 </div>
               </p>
             </div>
-            <div className="description">
+            {/* <div className="description">
               <p>Buttons Style</p>
               <Formik
                 initialValues={initialValues}
@@ -948,7 +852,7 @@ const Appearance = () => {
                   />
                 </Form>
               </Formik>
-            </div>
+            </div> */}
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="10">
@@ -956,25 +860,30 @@ const Appearance = () => {
           <Accordion.Body>
             <p>Background Style</p>
             <div className="custom-avatars">
-              {backgroundStyles.map(({ id, img, text }, index) => {
+              {backgroundStyles.map((background, index) => {
                 return (
                   <div className="avatar-back">
                     <div
                       className="avatar buttons-style-shap-list"
-                      key={id}
+                      key={background.id}
                       index={index}
                     >
                       <input
                         type="radio"
-                        id={id}
+                        id={background.id}
                         name="background"
-                        value={id}
-                        checked
+                        value={background.id}
+                        onChange={() => changeBackground(background.id)}
+                        checked={
+                          background.id === parseInt(settings.background_type)
+                            ? true
+                            : null
+                        }
                       />
-                      <label htmlFor={id} className="d-block">
+                      <label htmlFor={background.id} className="d-block">
                         <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={img} alt="" />
-                        <p className="mt-2">{text}</p>
+                        <img src={background.img} alt="" />
+                        <p className="mt-2">{background.text}</p>
                       </label>
                     </div>
                   </div>
@@ -983,30 +892,44 @@ const Appearance = () => {
             </div>
             <p className="mt-4">Animated Background</p>
             <div className="custom-avatars">
-              {animatedBack.map(({ id, img, text }, index) => {
-                return (
-                  <div className="avatar-back">
-                    <div
-                      className="avatar buttons-style-shap-list"
-                      key={id}
-                      index={index}
-                    >
-                      <input
-                        type="radio"
-                        id={id}
-                        name="animat"
-                        value={id}
-                        checked
-                      />
-                      <label htmlFor={id} className="d-block">
-                        <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={img} alt="" />
-                        <p className="mt-2">{text}</p>
-                      </label>
-                    </div>
-                  </div>
-                );
-              })}
+              {settings.background_animated
+                ? settings.background_animated.map((background, index) => {
+                    return (
+                      <div className="avatar-back">
+                        <div
+                          className="avatar buttons-style-shap-list"
+                          key={background.id}
+                          index={index}
+                        >
+                          <input
+                            type="radio"
+                            id={background.id}
+                            name="animat"
+                            value={background.id}
+                            onChange={() =>
+                              changeBackgroundAnimate(background.id)
+                            }
+                            checked={
+                              background.id ===
+                              parseInt(settings.button_icon_style_id)
+                                ? true
+                                : null
+                            }
+                          />
+                          <label htmlFor={background.id} className="d-block">
+                            <img
+                              src={checkIcon}
+                              alt=""
+                              className="check-icon"
+                            />
+                            <img src={background.img} alt="" />
+                            <p className="mt-2">{background.name}</p>
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
             <div className="upload-button">
               <div>
@@ -1015,6 +938,7 @@ const Appearance = () => {
                   type="color"
                   value={color4}
                   onChange={(e) => setColor4(e.target.value)}
+                  onBlur={(e) => changeBackgroundColor()}
                 />
               </div>
               <div>
@@ -1029,122 +953,7 @@ const Appearance = () => {
             </div>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="11">
-          <Accordion.Header>font style</Accordion.Header>
-          <Accordion.Body>
-            <div className="font-style">
-              <p>Font Style</p>
-              <div className="font-style-tabs">
-                <Tabs
-                  defaultActiveKey="english"
-                  id="uncontrolled-tab-example"
-                  className="mb-3"
-                >
-                  <Tab eventKey="english" title="E">
-                    <div className="custom-avatars">
-                      {fontEnglish.map(({ id, img, pro }, index) => {
-                        return (
-                          <div className="avatar-back">
-                            <div
-                              className="avatar buttons-style-shap-list"
-                              key={id}
-                              index={index}
-                            >
-                              <input
-                                type="radio"
-                                id={id}
-                                name="fontEnglish"
-                                value={id}
-                                checked
-                              />
-                              <label htmlFor={id} className="d-block">
-                                <img
-                                  src={checkIcon}
-                                  alt=""
-                                  className="check-icon"
-                                />
-                                <span className="align-pro">
-                                  {pro && (
-                                    <div className="pro-btn">
-                                      <Link to="/payments">
-                                        <LinkButton type="" buttontext="PRO" />
-                                      </Link>
-                                    </div>
-                                  )}
-                                  <img src={img} alt="" />
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    {/* <ul className="avatar-theme-list">
-                      {fontEnglish.map(({ id, img, pro }, index) => {
-                        return (
-                          <li key={id} index={index}>
-                            <div className="avatar-theme-image">
-                              <span className="align-pro">
-                                {pro && (
-                                  <div className="pro-btn">
-                                    <Link to="/payments">
-                                      <LinkButton type="" buttontext="PRO" />
-                                    </Link>
-                                  </div>
-                                )}
-                                <img src={img} alt="" />
-                              </span>
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul> */}
-                  </Tab>
-                  <Tab eventKey="arabic" title="ع">
-                    <div className="custom-avatars">
-                      {fontEnglish.map(({ id, img, pro }, index) => {
-                        return (
-                          <div className="avatar-back">
-                            <div
-                              className="avatar buttons-style-shap-list"
-                              key={id}
-                              index={index}
-                            >
-                              <input
-                                type="radio"
-                                id={id}
-                                name="fontArabic"
-                                value={id}
-                                checked
-                              />
-                              <label htmlFor={id} className="d-block">
-                                <img
-                                  src={checkIcon}
-                                  alt=""
-                                  className="check-icon"
-                                />
-                                <span className="align-pro">
-                                  {pro && (
-                                    <div className="pro-btn">
-                                      <Link to="/payments">
-                                        <LinkButton type="" buttontext="PRO" />
-                                      </Link>
-                                    </div>
-                                  )}
-                                  <img src={img} alt="" />
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </Tab>
-                </Tabs>
-              </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
+
         <Accordion.Item eventKey="12">
           <Accordion.Header>links text alignment</Accordion.Header>
           <Accordion.Body>
@@ -1156,8 +965,8 @@ const Appearance = () => {
                     id="left"
                     name="textalign"
                     value="left"
-                    checked
-                    className=""
+                    checked={settings.text_alignment === "left" ? true : null}
+                    onChange={(e) => changeTextAlign(e.target.value)}
                   />
                   <label htmlFor="left" className="d-block form-button">
                     <img src={checkIcon} alt="" className="check-icon" />
@@ -1173,9 +982,8 @@ const Appearance = () => {
                     id="center"
                     name="textalign"
                     value="center"
-                    checked
-                    disabled
-                    className=""
+                    checked={settings.text_alignment === "center" ? true : null}
+                    onChange={(e) => changeTextAlign(e.target.value)}
                   />
 
                   <label htmlFor="center" className="d-block form-button">
@@ -1199,9 +1007,8 @@ const Appearance = () => {
                     id="right"
                     name="textalign"
                     value="right"
-                    checked
-                    disabled
-                    className=""
+                    checked={settings.text_alignment === "right" ? true : null}
+                    onChange={(e) => changeTextAlign(e.target.value)}
                   />
                   <label htmlFor="right" className="d-block form-button">
                     <span className="align-pro">
@@ -1259,11 +1066,12 @@ const Appearance = () => {
                 type="color"
                 value={color5}
                 onChange={(e) => setColor5(e.target.value)}
+                onBlur={(e) => changeSocialColor()}
               />
               {/* <LinkButton type="" buttontext="#8cc8cc" /> */}
               <div className="high-title with-border">
                 <p>
-                  Hide HeyLink.me Logo{" "}
+                  Hide HeyLink.me Logo
                   <div className="pro-btn">
                     <Link to="/payments">
                       <LinkButton type="" buttontext="PRO" />
@@ -1274,7 +1082,7 @@ const Appearance = () => {
               </div>
               <div className="high-title with-border">
                 <p>
-                  Hide (i) icon{" "}
+                  Hide (i) icon
                   <div className="pro-btn">
                     <Link to="/payments">
                       <LinkButton type="" buttontext="PRO" />

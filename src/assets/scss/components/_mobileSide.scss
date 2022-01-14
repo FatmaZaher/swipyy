@@ -1,5 +1,5 @@
 .mobile-side {
-  width: 330px;
+  width: 450px;
   position: fixed;
   top: 0;
   right: 0;
@@ -8,45 +8,53 @@
   z-index: 8;
   img {
     width: 100%;
+    height: 650px;
   }
 
   @include mobile {
     right: -100%;
+    width: 320px;
+
   }
   @include desktop {
     width: 415px;
   }
-}
-.mobile-side-content {
-  width: 247px;
-  height: 477px;
-  background-color: $main-color;
-  position: absolute;
-  top: 62px;
-  right: 32px;
-  border-radius: 5px;
-  z-index: 1;
-  text-align: center;
-  color: $white-color;
-  font-size: 12px;
-  padding: 20px 0;
-  box-sizing: border-box;
-  overflow-y: scroll;
-  .personl-img {
-    img {
-      width: 60px;
-      border-radius: 50%;
+  .mobile-side-content,
+  iframe {
+    width: 330px;
+    height: 477px;
+    background-color: $main-color;
+    position: absolute;
+    top: 62px;
+    left: 53%;
+    border-radius: 5px;
+    z-index: 1;
+    text-align: center;
+    color: $white-color;
+    font-size: 12px;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    transform: translateX(-50%);
+    .personl-img {
+      img {
+        width: 60px;
+        border-radius: 50%;
+      }
+    }
+    @include mobile {
+      top: 92px;
+      width: 250px;
+      left: 50%;
+    }
+    @include desktop {
+      width: 308px;
+      right: 47px;
+      height: 616px;
     }
   }
-  @include mobile {
-    top: 92px;
-  }
-  @include desktop {
-    width: 308px;
-    right: 47px;
-    height: 616px;
-  }
 }
+
 .links {
   margin-top: 15px;
   p {

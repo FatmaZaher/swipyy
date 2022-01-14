@@ -17,7 +17,7 @@ import BankModal from "../BankModal";
 import axios from "axios";
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const Banks = () => {
+const Banks = (props) => {
   const [banksList, setBanksList] = useState([]);
   const [items, setItems] = useState([]);
 
@@ -50,6 +50,7 @@ const Banks = () => {
       .get("https://test-place.site/api/user/bankUser", config)
       .then((res) => {
         setItems(res.data.data);
+        props.onSaveData();
       });
   };
   useEffect(() => {

@@ -59,10 +59,15 @@ const MobileSide = () => {
           src={`https://test-place.site/${currentUser.username}`}
           title="description"
         />
-        <Link to="/view" className="link upgrad-btn">
+        <a
+          href={`https://test-place.site/${currentUser.username}`}
+          rel="noreferrer"
+          className="link upgrad-btn"
+          target="_blank"
+        >
           <RemoveRedEyeIcon />
           View Live
-        </Link>
+        </a>
       </div>
     </>
   );
