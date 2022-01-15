@@ -11,7 +11,10 @@ import SwitchButton from "../component/SwitchButton";
 import personal from "../assets/images/personal.png";
 import layout1 from "../assets/images/layout1.svg";
 import layout2 from "../assets/images/layout2.svg";
+import layout1Active from "../assets/images/layout1-active.svg";
+import layout2Active from "../assets/images/layout2-active.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
+import customTheme from "../assets/images/custom-theme.png";
 
 import background1 from "../assets/images/background1.png";
 import background2 from "../assets/images/background2.png";
@@ -97,6 +100,14 @@ const Appearance = (props) => {
   const [color3, setColor3] = useState("");
   const [color4, setColor4] = useState("#8cc8cc");
   const [color5, setColor5] = useState("#8cc8cc");
+  const [placements, setPlacements] = useState([
+    { id: "links", name: "links" },
+    { id: "social", name: "social" },
+    { id: "slider", name: "slider" },
+    { id: "messages", name: "messages" },
+    { id: "location", name: "location" },
+  ]);
+  const [themes, setThemes] = useState([]);
 
   const getAllSettings = async () => {
     try {
@@ -109,7 +120,16 @@ const Appearance = (props) => {
           setColor3(res.data.data.Settings.titile_descreption_color);
           setColor4(res.data.data.Settings.background_color);
           setColor5(res.data.data.Settings.social_icons_color);
+          let themes = res.data.data.Settings.themes;
 
+          themes.splice(0, 0, {
+            class: "theme-class-01",
+            id: 0,
+            img: customTheme,
+            name: "Custom theme",
+          });
+
+          setThemes(themes);
           props.onSaveData();
         });
     } catch (error) {}
@@ -304,7 +324,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      heylink.me/<a href="#">{settings.username}</a>
+                      swippy.me/<a href="#">{settings.username}</a>
                     </span>
                   </p>
                 </div>
@@ -330,7 +350,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      heylink.me/<a href="#">{settings.short_name}</a>
+                      swippy.me/<a href="#">{settings.short_name}</a>
                     </span>
                   </p>
                 </div>
@@ -358,11 +378,17 @@ const Appearance = (props) => {
                   id="layout1"
                   name="drone"
                   value="layout1"
+                  checked={settings.layout === "avatar" ? true : null}
                   onChange={() => changeLayout("avatar")}
                 />
                 <label htmlFor="layout1" className="">
                   <img src={checkIcon} alt="" className="check-icon" />
-                  <img src={layout1} alt="" />
+                  {settings.layout === "avatar" ? (
+                    <img src={layout1Active} alt="" />
+                  ) : (
+                    <img src={layout1} alt="" />
+                  )}
+                  <p className="mt-2"></p>
                 </label>
               </div>
               <div className="avatar">
@@ -372,10 +398,15 @@ const Appearance = (props) => {
                   name="drone"
                   value="layout2"
                   onChange={() => changeLayout("cover")}
+                  checked={settings.layout === "cover" ? true : null}
                 />
                 <label htmlFor="layout2" className="">
                   <img src={checkIcon} alt="" className="check-icon" />
-                  <img src={layout2} alt="" />
+                  {settings.layout === "cover" ? (
+                    <img src={layout2Active} alt="" />
+                  ) : (
+                    <img src={layout2} alt="" />
+                  )}
                 </label>
               </div>
             </div>
@@ -475,7 +506,7 @@ const Appearance = (props) => {
           <Accordion.Header>highlights</Accordion.Header>
           <Accordion.Body>
             <div className="high-header">
-              <p>Add the main highlights on your HeyLink.me page</p>
+              <p>Add the main highlights on your swippy.me page</p>
               <div className="single-item-switch">
                 <div className="checkbox">
                   <input
@@ -555,38 +586,34 @@ const Appearance = (props) => {
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {settings.placement
-                      ? settings.placement.map((item, index) => (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={getItemStyle(
-                                  snapshot.isDragging,
-                                  provided.draggableProps.style
-                                )}
-                                className="link-dragg"
-                              >
-                                <img
-                                  src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
-                                  alt=""
-                                  className="drag-img"
-                                />
-                                <div className="icon">
-                                  {renderIcon(item.icon)}
-                                </div>
-                                <div className="title">{item.title}</div>
-                              </div>
+                    {placements.map((item, index) => (
+                      <Draggable
+                        key={item.name}
+                        draggableId={item.name}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
                             )}
-                          </Draggable>
-                        ))
-                      : null}
+                            className="link-dragg"
+                          >
+                            <img
+                              src="https://cdn-f.swippy.me/static/media/ic_swap_icon.60319cd6.svg"
+                              alt=""
+                              className="drag-img"
+                            />
+                            <div className="icon">{renderIcon(item.name)}</div>
+                            <div className="title">{item.name}</div>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
 
                     {provided.placeholder}
                     <div
@@ -659,192 +686,191 @@ const Appearance = (props) => {
         <Accordion.Item eventKey="8">
           <Accordion.Header>theme</Accordion.Header>
           <Accordion.Body>
-            {/* <ul className="avatar-theme-list">
-              {themes.map(({ id, img, text }, index) => {
+            <div className="custom-avatars">
+              {themes.map((theme, themeIndex) => {
                 return (
-                  <li key={id} index={index}>
-                    <div className="avatar-theme-image">
-                      <img src={img} alt="" />
+                  <div
+                    className={`avatar-back ${
+                      theme.is_pro ? "align-pro" : null
+                    }`}
+                  >
+                    <div className="avatar" key={theme.id} index={themeIndex}>
+                      <input
+                        type="radio"
+                        id={"theme-" + theme.id}
+                        name="theme"
+                        value={theme.id}
+                        onChange={() => changeTheme(theme.id)}
+                        checked={theme.id === settings.theme_id ? true : null}
+                      />
+                      <label htmlFor={"theme-" + theme.id} className="d-block">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <img width="100px" src={theme.img} alt="" />
+                        <p className="mt-2">{theme.name}</p>
+                        {theme.is_pro ? (
+                          <div className="pro-btn">
+                            <Link to="/payments">
+                              <LinkButton type="" buttontext="PRO" />
+                            </Link>
+                          </div>
+                        ) : null}
+                      </label>
                     </div>
-                    <p className="">{text}</p>
-                  </li>
+                  </div>
                 );
               })}
-            </ul> */}
-            <div className="custom-avatars">
-              {settings.themes
-                ? settings.themes.map((theme, themeIndex) => {
-                    return (
-                      <div className="avatar-back">
-                        <div
-                          className="avatar"
-                          key={theme.id}
-                          index={themeIndex}
-                        >
-                          <input
-                            type="radio"
-                            id={"theme-" + theme.id}
-                            name="theme"
-                            value={theme.id}
-                            onChange={() => changeTheme(theme.id)}
-                            checked={
-                              theme.id === settings.theme_id ? true : null
-                            }
-                          />
-                          <label
-                            htmlFor={"theme-" + theme.id}
-                            className="d-block"
-                          >
-                            <img
-                              src={checkIcon}
-                              alt=""
-                              className="check-icon"
-                            />
-                            <img src={theme.img} alt="" />
-                            <p className="mt-2">{theme.name}</p>
-                          </label>
-                        </div>
-                      </div>
-                    );
-                  })
-                : null}
             </div>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="9">
-          <Accordion.Header>buttons</Accordion.Header>
-          <Accordion.Body>
-            <div className="buttons">
-              <div className="buttons-style">
-                <p>Buttons Style</p>
-                <div className="buttons-style-shap">
-                  <div className="custom-avatars">
-                    {settings.buttons
-                      ? settings.buttons.map((button, index) => {
-                          return (
-                            <div className="avatar-back">
-                              <div
-                                className="avatar buttons-style-shap-list"
-                                key={button.id}
-                                index={index}
-                              >
-                                <input
-                                  type="radio"
-                                  id={"button-" + button.id}
-                                  name="buttonStyle"
-                                  value={button.id}
-                                  onChange={() => changeButton(button.id)}
-                                  checked={
-                                    button.id ===
-                                    parseInt(settings.button_type_id)
-                                      ? true
-                                      : null
-                                  }
-                                />
-                                <label
-                                  htmlFor={"button-" + button.id}
-                                  className="d-block"
-                                >
-                                  <img
-                                    src={checkIcon}
-                                    alt=""
-                                    className="check-icon"
-                                  />
-                                  <img src={button.img} alt="" />
-                                </label>
-                              </div>
-                            </div>
-                          );
-                        })
-                      : null}
-                  </div>
-                </div>
-              </div>
 
-              <div className="buttons-icon-style">
-                <p>Buttons Icon Style</p>
-                <div className="buttons-style-shap">
-                  <div className="custom-avatars">
-                    {settings.button_icon_style
-                      ? settings.button_icon_style.map((buttonIcon, index) => {
-                          return (
-                            <div className="avatar-back">
-                              <div
-                                className="avatar buttons-style-shap-list"
-                                key={buttonIcon.id}
-                                index={index}
-                              >
-                                <input
-                                  type="radio"
-                                  id={"button_style" + buttonIcon.id}
-                                  name="button_style"
-                                  value={buttonIcon.id}
-                                  onChange={() =>
-                                    changeButtonIcon(buttonIcon.id)
-                                  }
-                                  checked={
-                                    buttonIcon.id ===
-                                    parseInt(settings.button_icon_style_id)
-                                      ? true
-                                      : null
-                                  }
-                                />
-                                <label
-                                  htmlFor={"button_style" + buttonIcon.id}
-                                  className="d-block"
-                                >
-                                  <img
-                                    src={checkIcon}
-                                    alt=""
-                                    className="check-icon"
-                                  />
-                                  <img src={buttonIcon.img} alt="" />
-                                </label>
-                              </div>
-                            </div>
-                          );
-                        })
-                      : null}
+        {settings.theme_id === 0 ? (
+          <>
+            <Accordion.Item eventKey="9">
+              <Accordion.Header>buttons</Accordion.Header>
+              <Accordion.Body>
+                <div className="buttons">
+                  <div className="buttons-style">
+                    <p>Buttons Style</p>
+                    <div className="buttons-style-shap">
+                      <div className="custom-avatars">
+                        {settings.buttons
+                          ? settings.buttons.map((button, index) => {
+                              return (
+                                <div className="avatar-back">
+                                  <div
+                                    className="avatar buttons-style-shap-list"
+                                    key={button.id}
+                                    index={index}
+                                  >
+                                    <input
+                                      type="radio"
+                                      id={"button-" + button.id}
+                                      name="buttonStyle"
+                                      value={button.id}
+                                      onChange={() => changeButton(button.id)}
+                                      checked={
+                                        button.id ===
+                                        parseInt(settings.button_type_id)
+                                          ? true
+                                          : null
+                                      }
+                                    />
+                                    <label
+                                      htmlFor={"button-" + button.id}
+                                      className="d-block"
+                                    >
+                                      <img
+                                        src={checkIcon}
+                                        alt=""
+                                        className="check-icon"
+                                      />
+                                      <img
+                                        src={button.img}
+                                        height="40px"
+                                        alt=""
+                                      />
+                                    </label>
+                                  </div>
+                                </div>
+                              );
+                            })
+                          : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="buttons-icon-style">
+                    <p>Buttons Icon Style</p>
+                    <div className="buttons-style-shap">
+                      <div className="custom-avatars">
+                        {settings.button_icon_style
+                          ? settings.button_icon_style.map(
+                              (buttonIcon, index) => {
+                                return (
+                                  <div className="avatar-back">
+                                    <div
+                                      className="avatar buttons-style-shap-list"
+                                      key={buttonIcon.id}
+                                      index={index}
+                                    >
+                                      <input
+                                        type="radio"
+                                        id={"button_style" + buttonIcon.id}
+                                        name="button_style"
+                                        value={buttonIcon.id}
+                                        onChange={() =>
+                                          changeButtonIcon(buttonIcon.id)
+                                        }
+                                        checked={
+                                          buttonIcon.id ===
+                                          parseInt(
+                                            settings.button_icon_style_id
+                                          )
+                                            ? true
+                                            : null
+                                        }
+                                      />
+                                      <label
+                                        htmlFor={"button_style" + buttonIcon.id}
+                                        className="d-block"
+                                      >
+                                        <img
+                                          src={checkIcon}
+                                          alt=""
+                                          className="check-icon"
+                                        />
+                                        <img
+                                          height="40px"
+                                          src={buttonIcon.img}
+                                          alt=""
+                                        />
+                                      </label>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )
+                          : null}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="button-color my-3">
-              <p>
-                Button Background Color
-                <div className="pro-btn back-pro">
-                  <input
-                    type="color"
-                    value={color1}
-                    onChange={(e) => setColor1(e.target.value)}
-                    onBlur={(e) => changebtn_background_color()}
-                  />
+                <div className="button-color my-3">
+                  <p>
+                    Button Background Color
+                    <div className="pro-btn back-pro">
+                      <input
+                        type="color"
+                        value={color1}
+                        onChange={(e) => setColor1(e.target.value)}
+                        onBlur={(e) => changebtn_background_color()}
+                      />
+                    </div>
+                  </p>
+                  <p>
+                    Button Font Color
+                    <div className="pro-btn font-pro">
+                      <input
+                        type="color"
+                        value={color2}
+                        onChange={(e) => setColor2(e.target.value)}
+                        onBlur={(e) => changebtn_font_color()}
+                      />
+                    </div>
+                  </p>
+                  <p>
+                    Title & Description Font Color
+                    <div className="pro-btn title-pro">
+                      <input
+                        type="color"
+                        value={color3}
+                        onChange={(e) => setColor3(e.target.value)}
+                        onBlur={(e) => changetitile_descreption_color()}
+                      />
+                    </div>
+                  </p>
                 </div>
-              </p>
-              <p>
-                Button Font Color
-                <div className="pro-btn font-pro">
-                  <input
-                    type="color"
-                    value={color2}
-                    onChange={(e) => setColor2(e.target.value)}
-                    onBlur={(e) => changebtn_font_color()}
-                  />
-                </div>
-              </p>
-              <p>
-                Title & Description Font Color
-                <div className="pro-btn title-pro">
-                  <input
-                    type="color"
-                    value={color3}
-                    onChange={(e) => setColor3(e.target.value)}
-                    onBlur={(e) => changetitile_descreption_color()}
-                  />
-                </div>
-              </p>
-            </div>
-            {/* <div className="description">
+                {/* <div className="description">
               <p>Buttons Style</p>
               <Formik
                 initialValues={initialValues}
@@ -860,47 +886,14 @@ const Appearance = (props) => {
                 </Form>
               </Formik>
             </div> */}
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="10">
-          <Accordion.Header>background</Accordion.Header>
-          <Accordion.Body>
-            <p>Background Style</p>
-            <div className="custom-avatars">
-              {backgroundStyles.map((background, index) => {
-                return (
-                  <div className="avatar-back">
-                    <div
-                      className="avatar buttons-style-shap-list"
-                      key={background.id}
-                      index={index}
-                    >
-                      <input
-                        type="radio"
-                        id={background.id}
-                        name="background"
-                        value={background.id}
-                        onChange={() => changeBackground(background.id)}
-                        checked={
-                          background.id === parseInt(settings.background_type)
-                            ? true
-                            : null
-                        }
-                      />
-                      <label htmlFor={background.id} className="d-block">
-                        <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={background.img} alt="" />
-                        <p className="mt-2">{background.text}</p>
-                      </label>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <p className="mt-4">Animated Background</p>
-            <div className="custom-avatars">
-              {settings.background_animated
-                ? settings.background_animated.map((background, index) => {
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="10">
+              <Accordion.Header>background</Accordion.Header>
+              <Accordion.Body>
+                <p>Background Style</p>
+                <div className="custom-avatars">
+                  {backgroundStyles.map((background, index) => {
                     return (
                       <div className="avatar-back">
                         <div
@@ -911,14 +904,12 @@ const Appearance = (props) => {
                           <input
                             type="radio"
                             id={background.id}
-                            name="animat"
+                            name="background"
                             value={background.id}
-                            onChange={() =>
-                              changeBackgroundAnimate(background.id)
-                            }
+                            onChange={() => changeBackground(background.id)}
                             checked={
                               background.id ===
-                              parseInt(settings.background_animated_id)
+                              parseInt(settings.background_type)
                                 ? true
                                 : null
                             }
@@ -930,108 +921,156 @@ const Appearance = (props) => {
                               className="check-icon"
                             />
                             <img src={background.img} alt="" />
-                            <p className="mt-2">{background.name}</p>
+                            <p className="mt-2">{background.text}</p>
                           </label>
                         </div>
                       </div>
                     );
-                  })
-                : null}
-            </div>
-            <div className="upload-button">
-              <div>
-                <p className="mt-4">Background Color</p>
-                <input
-                  type="color"
-                  value={color4}
-                  onChange={(e) => setColor4(e.target.value)}
-                  onBlur={(e) => changeBackgroundColor()}
-                />
-              </div>
-              <div>
-                {/* <p className="mt-4">Upload Image</p> */}
-                {/* <UploadImg
+                  })}
+                </div>
+                <p className="mt-4">Animated Background</p>
+                <div className="custom-avatars">
+                  {settings.background_animated
+                    ? settings.background_animated.map((background, index) => {
+                        return (
+                          <div className="avatar-back">
+                            <div
+                              className="avatar buttons-style-shap-list"
+                              key={background.id}
+                              index={index}
+                            >
+                              <input
+                                type="radio"
+                                id={background.id}
+                                name="animat"
+                                value={background.id}
+                                onChange={() =>
+                                  changeBackgroundAnimate(background.id)
+                                }
+                                checked={
+                                  background.id ===
+                                  parseInt(settings.background_animated_id)
+                                    ? true
+                                    : null
+                                }
+                              />
+                              <label
+                                htmlFor={background.id}
+                                className="d-block"
+                              >
+                                <img
+                                  src={checkIcon}
+                                  alt=""
+                                  className="check-icon"
+                                />
+                                <img src={background.img} alt="" />
+                                <p className="mt-2">{background.name}</p>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : null}
+                </div>
+                <div className="upload-button">
+                  <div>
+                    <p className="mt-4">Background Color</p>
+                    <input
+                      type="color"
+                      value={color4}
+                      onChange={(e) => setColor4(e.target.value)}
+                      onBlur={(e) => changeBackgroundColor()}
+                    />
+                  </div>
+                  <div>
+                    {/* <p className="mt-4">Upload Image</p> */}
+                    {/* <UploadImg
                   // link={link}
                   // config={config}
                   // onSaveData={() => handleEditData()}
                 /> */}
-                {/* <img src={upload} alt="" /> */}
-              </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
+                    {/* <img src={upload} alt="" /> */}
+                  </div>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="12">
+              <Accordion.Header>links text alignment</Accordion.Header>
+              <Accordion.Body>
+                <div className="links-align">
+                  <div className="avatar-back">
+                    <div className="avatar buttons-style-shap-list">
+                      <input
+                        type="radio"
+                        id="left"
+                        name="textalign"
+                        value="left"
+                        checked={
+                          settings.text_alignment === "left" ? true : null
+                        }
+                        onChange={(e) => changeTextAlign(e.target.value)}
+                      />
+                      <label htmlFor="left" className="d-block form-button">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <LeftAlign />
+                        Left
+                      </label>
+                    </div>
+                  </div>
+                  <div className="avatar-back">
+                    <div className="avatar buttons-style-shap-list">
+                      <input
+                        type="radio"
+                        id="center"
+                        name="textalign"
+                        value="center"
+                        checked={
+                          settings.text_alignment === "center" ? true : null
+                        }
+                        onChange={(e) => changeTextAlign(e.target.value)}
+                      />
 
-        <Accordion.Item eventKey="12">
-          <Accordion.Header>links text alignment</Accordion.Header>
-          <Accordion.Body>
-            <div className="links-align">
-              <div className="avatar-back">
-                <div className="avatar buttons-style-shap-list">
-                  <input
-                    type="radio"
-                    id="left"
-                    name="textalign"
-                    value="left"
-                    checked={settings.text_alignment === "left" ? true : null}
-                    onChange={(e) => changeTextAlign(e.target.value)}
-                  />
-                  <label htmlFor="left" className="d-block form-button">
-                    <img src={checkIcon} alt="" className="check-icon" />
-                    <LeftAlign />
-                    Left
-                  </label>
-                </div>
-              </div>
-              <div className="avatar-back">
-                <div className="avatar buttons-style-shap-list">
-                  <input
-                    type="radio"
-                    id="center"
-                    name="textalign"
-                    value="center"
-                    checked={settings.text_alignment === "center" ? true : null}
-                    onChange={(e) => changeTextAlign(e.target.value)}
-                  />
-
-                  <label htmlFor="center" className="d-block form-button">
-                    <img src={checkIcon} alt="" className="check-icon" />
-                    <span className="align-pro">
-                      <div className="pro-btn">
-                        <Link to="/payments">
-                          <LinkButton type="" buttontext="PRO" />
-                        </Link>
-                      </div>
-                    </span>
-                    <CenterAlign />
-                    Center
-                  </label>
-                </div>
-              </div>
-              <div className="avatar-back">
-                <div className="avatar buttons-style-shap-list">
-                  <input
-                    type="radio"
-                    id="right"
-                    name="textalign"
-                    value="right"
-                    checked={settings.text_alignment === "right" ? true : null}
-                    onChange={(e) => changeTextAlign(e.target.value)}
-                  />
-                  <label htmlFor="right" className="d-block form-button">
-                    <span className="align-pro">
-                      <div className="pro-btn">
-                        <Link to="/payments">
-                          <LinkButton type="" buttontext="PRO" />
-                        </Link>
-                      </div>
-                    </span>
-                    <img src={checkIcon} alt="" className="check-icon" />
-                    <RightAlign />
-                    Right
-                  </label>
-                </div>
-              </div>
-              {/* <button type="button" className="form-button">
+                      <label htmlFor="center" className="d-block form-button">
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <span className="align-pro">
+                          <div className="pro-btn">
+                            <Link to="/payments">
+                              <LinkButton type="" buttontext="PRO" />
+                            </Link>
+                          </div>
+                        </span>
+                        <CenterAlign />
+                        Center
+                      </label>
+                    </div>
+                  </div>
+                  <div className="avatar-back">
+                    <div className="avatar buttons-style-shap-list">
+                      <input
+                        type="radio"
+                        id="right"
+                        name="textalign"
+                        value="right"
+                        checked={
+                          settings.text_alignment === "right" ? true : null
+                        }
+                        onChange={(e) => changeTextAlign(e.target.value)}
+                      />
+                      <label htmlFor="right" className="d-block form-button">
+                        <span className="align-pro">
+                          <div className="pro-btn">
+                            <Link to="/payments">
+                              <LinkButton type="" buttontext="PRO" />
+                            </Link>
+                          </div>
+                        </span>
+                        <img src={checkIcon} alt="" className="check-icon" />
+                        <RightAlign />
+                        Right
+                      </label>
+                    </div>
+                  </div>
+                  {/* <button type="button" className="form-button">
                 <LeftAlign />
                 Left
               </button>
@@ -1058,49 +1097,53 @@ const Appearance = (props) => {
                 </button>
               </span> */}
 
-              {/* <LinkButton type="" buttontext="Left" />
+                  {/* <LinkButton type="" buttontext="Left" />
               <LinkButton type="" buttontext="Center" />
               <LinkButton type="" buttontext="Right" /> */}
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="13">
-          <Accordion.Header>social icon style</Accordion.Header>
-          <Accordion.Body>
-            <div className="social-icon">
-              <p>SOCIAL ICONS STYLE</p>
-              <input
-                type="color"
-                value={color5}
-                onChange={(e) => setColor5(e.target.value)}
-                onBlur={(e) => changeSocialColor()}
-              />
-              {/* <LinkButton type="" buttontext="#8cc8cc" /> */}
-              <div className="high-title with-border">
-                <p>
-                  Hide HeyLink.me Logo
-                  <div className="pro-btn">
-                    <Link to="/payments">
-                      <LinkButton type="" buttontext="PRO" />
-                    </Link>
-                  </div>
-                </p>
-                <SwitchButton />
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="13">
+              <Accordion.Header>social icon style</Accordion.Header>
+              <Accordion.Body>
+                <div className="social-icon">
+                  <p>SOCIAL ICONS STYLE</p>
+                  <input
+                    type="color"
+                    value={color5}
+                    onChange={(e) => setColor5(e.target.value)}
+                    onBlur={(e) => changeSocialColor()}
+                  />
+                  {/* <LinkButton type="" buttontext="#8cc8cc" /> */}
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          </>
+        ) : null}
+        <div className="social-icon">
+          <div className="high-title with-border">
+            <p>
+              Hide swippy.me Logo
+              <div className="pro-btn">
+                <Link to="/payments">
+                  <LinkButton type="" buttontext="PRO" />
+                </Link>
               </div>
-              <div className="high-title with-border">
-                <p>
-                  Hide (i) icon
-                  <div className="pro-btn">
-                    <Link to="/payments">
-                      <LinkButton type="" buttontext="PRO" />
-                    </Link>
-                  </div>
-                </p>
-                <SwitchButton />
+            </p>
+            <SwitchButton />
+          </div>
+          <div className="high-title with-border">
+            <p>
+              Hide (i) icon
+              <div className="pro-btn">
+                <Link to="/payments">
+                  <LinkButton type="" buttontext="PRO" />
+                </Link>
               </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
+            </p>
+            <SwitchButton />
+          </div>
+        </div>
       </Accordion>
     </div>
   );

@@ -203,7 +203,9 @@ const Social = (props) => {
                             src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
                             alt=""
                           />
-                          <div className="single-item-icon">{social.type}</div>
+                          <div className="single-item-icon">
+                            <img src={social.icon} alt="" />
+                          </div>
                           <div className="single-item-info">
                             <p className="name-from-link">{social.social}</p>
                             <span className="the-link">{social.url}</span>

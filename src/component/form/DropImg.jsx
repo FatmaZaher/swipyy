@@ -4,6 +4,7 @@ import ImageDrop from "../icons/ImageDrop";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UploadLoading from "../../assets/images/UploadLoading.svg";
 
 const DropImg = (props) => {
   const { config, item } = props;
@@ -101,6 +102,9 @@ const DropImg = (props) => {
                   </div>
                 )}
               </button>
+              <div className="text-center">
+                <img src={UploadLoading} alt="" />
+              </div>
             </div>
             <div className="images-uploads mt-3">
               {oldImages.map((image, index) => (

@@ -10,6 +10,7 @@ import FormikControl from "../form/FormikControl";
 import { Formik, Form } from "formik";
 import SwitchButton from "../SwitchButton";
 import axios from "axios";
+import UploadLoading from "../../assets/images/UploadLoading.svg";
 
 const initialValues = {
   highTitle: "",
@@ -50,7 +51,7 @@ const Images = (props) => {
 
     const slider_status = value === true ? 1 : 0;
 
-    apiChange({ slider_status });
+    // apiChange({ slider_status });
   };
   const changeDescriptionStatus = (value) => {
     const description_status = value === true ? 1 : 0;

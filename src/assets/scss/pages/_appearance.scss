@@ -40,7 +40,7 @@
     flex-wrap: wrap;
     .avatar {
       margin: 10px;
-      input{
+      input {
         position: absolute;
         top: 0;
         left: 0;
@@ -325,7 +325,7 @@
 
   .pro-btn {
     margin-left: 5px;
-
+    position: absolute;
     .form-button {
       width: auto;
       margin: 0;
@@ -396,10 +396,10 @@
   .pro-btn {
     display: inline;
     position: absolute;
-    top: -33px;
+    top: 0;
     left: 30%;
     .form-button {
-      font-size: 6px;
+      font-size: 10px;
     }
   }
 }
