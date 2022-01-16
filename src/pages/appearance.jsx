@@ -37,7 +37,7 @@ import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
 import axios from "axios";
 import UploadImg from "../component/UploadImg";
-
+import LockModal from "../component/LockModal";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -100,6 +100,8 @@ const Appearance = (props) => {
   const [color3, setColor3] = useState("");
   const [color4, setColor4] = useState("#8cc8cc");
   const [color5, setColor5] = useState("#8cc8cc");
+  const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+
   const [placements, setPlacements] = useState([
     { id: "links", name: "links" },
     { id: "social", name: "social" },
@@ -110,10 +112,14 @@ const Appearance = (props) => {
   const [themes, setThemes] = useState([]);
 
   const getAllSettings = async () => {
+    props.onStartRequest(true);
+
     try {
       axios
         .get("https://test-place.site/api/user/appearance", config)
         .then((res) => {
+          props.onFinishRequest(true);
+
           setSettings(res.data.data.Settings);
           setColor1(res.data.data.Settings.btn_background_color);
           setColor2(res.data.data.Settings.btn_font_color);
@@ -130,7 +136,6 @@ const Appearance = (props) => {
           });
 
           setThemes(themes);
-          props.onSaveData();
         });
     } catch (error) {}
   };
@@ -142,6 +147,8 @@ const Appearance = (props) => {
     setSettings(newSettings);
   };
   const apiChange = async (values) => {
+    props.onStartRequest(true);
+
     try {
       axios
         .post(
@@ -154,11 +161,22 @@ const Appearance = (props) => {
         });
     } catch (error) {}
   };
-  const changeLayout = (layout) => {
-    console.log(layout);
+  const checkIsPro = (value) => {
+    if (value === 1) {
+      if (currentUser.is_pro === false) {
+        setIsLockModalOpen(true);
+        return false;
+      }
+    }
+  };
+  const changeLayout = (layout, isPro) => {
+    if (checkIsPro(isPro) === false) return;
     apiChange({ layout });
   };
 
+  const handleCloseLockModal = () => {
+    setIsLockModalOpen(false);
+  };
   const changeAvatarStatus = (value) => {
     const avtar_status = value === true ? 1 : 0;
     apiChange({ avtar_status });
@@ -182,10 +200,14 @@ const Appearance = (props) => {
   const changePlacement = () => {
     apiChange({ placement: items });
   };
-  const changeAvatarType = (avatar_type_id) => {
+  const changeAvatarType = (avatar_type_id, isPro) => {
+    if (checkIsPro(isPro) === false) return;
+
     apiChange({ avatar_type_id });
   };
-  const changeTheme = (theme_id) => {
+  const changeTheme = (theme_id, isPro) => {
+    if (checkIsPro(isPro) === false) return;
+
     apiChange({ theme_id });
   };
   const changeButton = (button_type_id) => {
@@ -211,10 +233,14 @@ const Appearance = (props) => {
   const changeBackground = (background_id) => {
     apiChange({ background_id });
   };
-  const changeBackgroundAnimate = (background_animated_id) => {
+  const changeBackgroundAnimate = (background_animated_id, isPro) => {
+    if (checkIsPro(isPro) === false) return;
+
     apiChange({ background_animated_id });
   };
-  const changeTextAlign = (text_alignment) => {
+  const changeTextAlign = (text_alignment, isPro) => {
+    if (checkIsPro(isPro) === false) return;
+
     apiChange({ text_alignment });
   };
 
@@ -224,6 +250,15 @@ const Appearance = (props) => {
   const saveDetails = (details) => {
     apiChange(details);
   };
+  const changeSwipyInformationStatuss = (value) => {
+    const swipy_information_status = value === true ? 1 : 0;
+    apiChange({ swipy_information_status });
+  };
+  const changeSwipyLogoStatus = (value) => {
+    const swipy_logo_status = value === true ? 1 : 0;
+    apiChange({ swipy_logo_status });
+  };
+
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -379,16 +414,16 @@ const Appearance = (props) => {
                   name="drone"
                   value="layout1"
                   checked={settings.layout === "avatar" ? true : null}
-                  onChange={() => changeLayout("avatar")}
+                  onChange={() => changeLayout("avatar", 0)}
                 />
-                <label htmlFor="layout1" className="">
+                <label htmlFor="layout1" className="d-block">
                   <img src={checkIcon} alt="" className="check-icon" />
                   {settings.layout === "avatar" ? (
                     <img src={layout1Active} alt="" />
                   ) : (
                     <img src={layout1} alt="" />
                   )}
-                  <p className="mt-2"></p>
+                  <p className="mt-2">Avatar</p>
                 </label>
               </div>
               <div className="avatar">
@@ -397,16 +432,22 @@ const Appearance = (props) => {
                   id="layout2"
                   name="drone"
                   value="layout2"
-                  onChange={() => changeLayout("cover")}
+                  onChange={() => changeLayout("cover", 1)}
                   checked={settings.layout === "cover" ? true : null}
                 />
-                <label htmlFor="layout2" className="">
+                <label htmlFor="layout2" className="d-block align-pro">
                   <img src={checkIcon} alt="" className="check-icon" />
                   {settings.layout === "cover" ? (
                     <img src={layout2Active} alt="" />
                   ) : (
                     <img src={layout2} alt="" />
                   )}
+                  <div className="pro-btn">
+                    <Link to="/payments">
+                      <LinkButton type="" buttontext="PRO" />
+                    </Link>
+                  </div>
+                  <p className="mt-2">Cover Image</p>
                 </label>
               </div>
             </div>
@@ -638,51 +679,7 @@ const Appearance = (props) => {
             </button>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="7">
-          <Accordion.Header>custom avatars</Accordion.Header>
-          <Accordion.Body>
-            <div className="custom-avatars">
-              {settings.avatars_type
-                ? settings.avatars_type.map((avatar_type, avatar_typeIndex) => {
-                    return (
-                      <div className="avatar-back">
-                        <div
-                          className="avatar"
-                          key={avatar_type.id}
-                          index={avatar_typeIndex}
-                        >
-                          <input
-                            type="radio"
-                            id={"avatar_type-" + avatar_type.id}
-                            name="avatar_type"
-                            value={avatar_type.id}
-                            onChange={() => changeAvatarType(avatar_type.id)}
-                            checked={
-                              avatar_type.id === settings.avtar_type_id
-                                ? true
-                                : null
-                            }
-                          />
-                          <label
-                            htmlFor={"avatar_type-" + avatar_type.id}
-                            className="d-block"
-                          >
-                            <img
-                              src={checkIcon}
-                              alt=""
-                              className="check-icon"
-                            />
-                            <img src={avatar_type.img} alt="" />
-                            <p class="mt-2">{avatar_type.name}</p>
-                          </label>
-                        </div>
-                      </div>
-                    );
-                  })
-                : null}
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
+
         <Accordion.Item eventKey="8">
           <Accordion.Header>theme</Accordion.Header>
           <Accordion.Body>
@@ -700,7 +697,7 @@ const Appearance = (props) => {
                         id={"theme-" + theme.id}
                         name="theme"
                         value={theme.id}
-                        onChange={() => changeTheme(theme.id)}
+                        onChange={() => changeTheme(theme.id, theme.is_pro)}
                         checked={theme.id === settings.theme_id ? true : null}
                       />
                       <label htmlFor={"theme-" + theme.id} className="d-block">
@@ -725,6 +722,68 @@ const Appearance = (props) => {
 
         {settings.theme_id === 0 ? (
           <>
+            <Accordion.Item eventKey="7">
+              <Accordion.Header>custom avatars</Accordion.Header>
+              <Accordion.Body>
+                <div className="custom-avatars">
+                  {settings.avatars_type
+                    ? settings.avatars_type.map(
+                        (avatar_type, avatar_typeIndex) => {
+                          return (
+                            <div
+                              className={`avatar-back ${
+                                avatar_type.is_pro ? "align-pro" : null
+                              }`}
+                            >
+                              <div
+                                className="avatar"
+                                key={avatar_type.id}
+                                index={avatar_typeIndex}
+                              >
+                                <input
+                                  type="radio"
+                                  id={"avatar_type-" + avatar_type.id}
+                                  name="avatar_type"
+                                  value={avatar_type.id}
+                                  onChange={() =>
+                                    changeAvatarType(
+                                      avatar_type.id,
+                                      avatar_type.is_pro
+                                    )
+                                  }
+                                  checked={
+                                    avatar_type.id === settings.avtar_type_id
+                                      ? true
+                                      : null
+                                  }
+                                />
+                                <label
+                                  htmlFor={"avatar_type-" + avatar_type.id}
+                                  className="d-block"
+                                >
+                                  <img
+                                    src={checkIcon}
+                                    alt=""
+                                    className="check-icon"
+                                  />
+                                  <img src={avatar_type.img} alt="" />
+                                  {avatar_type.is_pro ? (
+                                    <div className="pro-btn">
+                                      <Link to="/payments">
+                                        <LinkButton type="" buttontext="PRO" />
+                                      </Link>
+                                    </div>
+                                  ) : null}
+                                </label>
+                              </div>
+                            </div>
+                          );
+                        }
+                      )
+                    : null}
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
             <Accordion.Item eventKey="9">
               <Accordion.Header>buttons</Accordion.Header>
               <Accordion.Body>
@@ -736,7 +795,11 @@ const Appearance = (props) => {
                         {settings.buttons
                           ? settings.buttons.map((button, index) => {
                               return (
-                                <div className="avatar-back">
+                                <div
+                                  className={`avatar-back ${
+                                    button.is_pro ? "align-pro" : null
+                                  }`}
+                                >
                                   <div
                                     className="avatar buttons-style-shap-list"
                                     key={button.id}
@@ -787,7 +850,12 @@ const Appearance = (props) => {
                           ? settings.button_icon_style.map(
                               (buttonIcon, index) => {
                                 return (
-                                  <div className="avatar-back">
+                                  <div
+                                    className="avatar-back"
+                                    className={`avatar-back ${
+                                      buttonIcon.is_pro ? "align-pro" : null
+                                    }`}
+                                  >
                                     <div
                                       className="avatar buttons-style-shap-list"
                                       key={buttonIcon.id}
@@ -824,6 +892,16 @@ const Appearance = (props) => {
                                           src={buttonIcon.img}
                                           alt=""
                                         />
+                                        {buttonIcon.is_pro ? (
+                                          <div className="pro-btn">
+                                            <Link to="/payments">
+                                              <LinkButton
+                                                type=""
+                                                buttontext="PRO"
+                                              />
+                                            </Link>
+                                          </div>
+                                        ) : null}
                                       </label>
                                     </div>
                                   </div>
@@ -933,7 +1011,11 @@ const Appearance = (props) => {
                   {settings.background_animated
                     ? settings.background_animated.map((background, index) => {
                         return (
-                          <div className="avatar-back">
+                          <div
+                            className={`avatar-back ${
+                              background.is_pro ? "align-pro" : null
+                            }`}
+                          >
                             <div
                               className="avatar buttons-style-shap-list"
                               key={background.id}
@@ -945,7 +1027,10 @@ const Appearance = (props) => {
                                 name="animat"
                                 value={background.id}
                                 onChange={() =>
-                                  changeBackgroundAnimate(background.id)
+                                  changeBackgroundAnimate(
+                                    background.id,
+                                    background.is_pro
+                                  )
                                 }
                                 checked={
                                   background.id ===
@@ -965,6 +1050,13 @@ const Appearance = (props) => {
                                 />
                                 <img src={background.img} alt="" />
                                 <p className="mt-2">{background.name}</p>
+                                {background.is_pro ? (
+                                  <div className="pro-btn">
+                                    <Link to="/payments">
+                                      <LinkButton type="" buttontext="PRO" />
+                                    </Link>
+                                  </div>
+                                ) : null}
                               </label>
                             </div>
                           </div>
@@ -1008,7 +1100,7 @@ const Appearance = (props) => {
                         checked={
                           settings.text_alignment === "left" ? true : null
                         }
-                        onChange={(e) => changeTextAlign(e.target.value)}
+                        onChange={(e) => changeTextAlign(e.target.value, 0)}
                       />
                       <label htmlFor="left" className="d-block form-button">
                         <img src={checkIcon} alt="" className="check-icon" />
@@ -1027,7 +1119,7 @@ const Appearance = (props) => {
                         checked={
                           settings.text_alignment === "center" ? true : null
                         }
-                        onChange={(e) => changeTextAlign(e.target.value)}
+                        onChange={(e) => changeTextAlign(e.target.value, 1)}
                       />
 
                       <label htmlFor="center" className="d-block form-button">
@@ -1054,7 +1146,7 @@ const Appearance = (props) => {
                         checked={
                           settings.text_alignment === "right" ? true : null
                         }
-                        onChange={(e) => changeTextAlign(e.target.value)}
+                        onChange={(e) => changeTextAlign(e.target.value, 1)}
                       />
                       <label htmlFor="right" className="d-block form-button">
                         <span className="align-pro">
@@ -1130,21 +1222,24 @@ const Appearance = (props) => {
                 </Link>
               </div>
             </p>
-            <SwitchButton />
-          </div>
-          <div className="high-title with-border">
-            <p>
-              Hide (i) icon
-              <div className="pro-btn">
-                <Link to="/payments">
-                  <LinkButton type="" buttontext="PRO" />
-                </Link>
+
+            <div className="single-item-switch">
+              <div className="checkbox">
+                <input
+                  type="checkbox"
+                  name="show"
+                  checked={settings.swipy_logo_status === 1 ? true : false}
+                  onChange={(e) => changeSwipyLogoStatus(e.target.checked)}
+                />
               </div>
-            </p>
-            <SwitchButton />
+            </div>
           </div>
         </div>
       </Accordion>
+      <LockModal
+        modalIsOpen={isLockModalOpen}
+        onCloseLockModal={() => handleCloseLockModal()}
+      />
     </div>
   );
 };

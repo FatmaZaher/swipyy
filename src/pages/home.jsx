@@ -8,24 +8,28 @@ const Dashboardlayout = ({ children, ...rest }) => {
   return <div>{children}</div>;
 };
 const Home = ({ component: Component, ...rest }) => {
-  const [iframe, setIframe] = useState(true);
-  const handleEditData = (key, e) => {
-    setIframe(false);
-    setTimeout(() => {
-      setIframe(true);
-    }, 100);
+  const [isRender, setIsRender] = useState(false);
+  const startRequest = (key, e) => {
+    setIsRender(true);
   };
-  const showMobile = () => {
-    console.log("iframe");
+  const finishRequest = (key, e) => {
+    setIsRender(false);
+  };
+  setTimeout(() => {
+    setIsRender(false);
 
-    console.log(iframe);
-    console.log("iframe");
-    if (iframe === true) {
-      return <MobileSide />;
-    } else {
-      return null;
-    }
-  };
+  }, 3000);
+  // const showMobile = () => {
+  //   console.log("iframe");
+
+  //   console.log(iframe);
+  //   console.log("iframe");
+  //   if (iframe === true) {
+  //     return <MobileSide />;
+  //   } else {
+  //     return null;
+  //   }
+  // };
   return (
     <Route
       {...rest}
@@ -34,9 +38,13 @@ const Home = ({ component: Component, ...rest }) => {
           <Sidebar />
           <div className="home-page">
             <HomeHeader />
-            <Component onSaveData={() => handleEditData()} {...props} />
+            <Component
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              {...props}
+            />
           </div>
-          {showMobile()}
+          <MobileSide isRender={isRender} />
         </Dashboardlayout>
       )}
     />

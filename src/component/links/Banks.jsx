@@ -35,6 +35,8 @@ const Banks = (props) => {
     } catch (error) {}
   };
   const onSubmit = (values) => {
+    props.onStartRequest(false);
+
     axios
       .post("https://test-place.site/api/user/bankUser", values, config)
       .then((res) => {
@@ -50,7 +52,7 @@ const Banks = (props) => {
       .get("https://test-place.site/api/user/bankUser", config)
       .then((res) => {
         setItems(res.data.data);
-        props.onSaveData();
+        props.onFinishRequest(false);
       });
   };
   useEffect(() => {

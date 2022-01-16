@@ -52,6 +52,13 @@ const Links = (props) => {
     console.log("log from linkss");
     props.onSaveData();
   };
+
+  const startRequest = (key, e) => {
+    props.onStartRequest(true);
+  };
+  const finishRequest = (key, e) => {
+    props.onFinishRequest(false);
+  };
   return (
     <div className="links-page">
       {/* <header className="jumbotron">
@@ -87,7 +94,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Link onSaveData={() => handleEditData()} />
+          <Link
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
         <Tab
           eventKey="social"
@@ -97,7 +107,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Social onSaveData={() => handleEditData()} />
+          <Social
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
         <Tab
           eventKey="location"
@@ -107,7 +120,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Location onSaveData={() => handleEditData()} />
+          <Location
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
         <Tab
           eventKey="images"
@@ -117,7 +133,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Images onSaveData={() => handleEditData()} />
+          <Images
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
         <Tab
           eventKey="pdf"
@@ -127,7 +146,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Pdf onSaveData={() => handleEditData()} />
+          <Pdf
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
         <Tab
           eventKey="banks"
@@ -137,7 +159,10 @@ const Links = (props) => {
             </span>
           }
         >
-          <Banks onSaveData={() => handleEditData()} />
+          <Banks
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+          />
         </Tab>
       </Tabs>
     </div>

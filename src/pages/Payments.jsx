@@ -32,7 +32,7 @@ const validationSchema = Yup.object({
   iban: Yup.string().required("Select Your Bank*"),
 });
 
-const Payments = () => {
+const Payments = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [packageMonthly, setPackageMonthly] = useState({});
@@ -43,6 +43,7 @@ const Payments = () => {
   }
 
   const getAllPackageMonthly = async () => {
+
     try {
       axios
         .get("https://test-place.site/api/user/package/monthly", config)
@@ -96,6 +97,8 @@ const Payments = () => {
     setIsOpen(false);
   }
   useEffect(() => {
+    props.onFinishRequest(true);
+
     getAllPackageMonthly();
     getAllPackageYearly();
   }, []);

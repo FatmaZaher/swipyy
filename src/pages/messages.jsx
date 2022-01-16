@@ -13,19 +13,22 @@ const initialValues = {
   succesMessageText: "",
 };
 const validationSchema = Yup.object({});
-const Messages = () => {
+const Messages = (props) => {
   const [settings, setSettings] = useState({});
   const [messages, setMessages] = useState([]);
 
   const config = JSON.parse(localStorage.getItem("headers"));
 
   const getAllSettings = async () => {
+    props.onStartRequest(true);
+
     try {
       axios
         .get("https://test-place.site/api/user/message", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
           setMessages(res.data.data.table);
+          props.onFinishRequest(true);
         });
     } catch (error) {}
   };
@@ -37,6 +40,8 @@ const Messages = () => {
     setSettings(newSettings);
   };
   const apiChange = async (values) => {
+    props.onStartRequest(true);
+
     try {
       axios
         .post("https://test-place.site/api/user/message/update", values, config)
@@ -135,7 +140,6 @@ const Messages = () => {
                         placeholder="Succes Message Text"
                         label="Succes Message Text"
                         value={settings.message_success}
-
                         onChange={(e) =>
                           settingsChange("message_success", e.target.value)
                         }
@@ -149,6 +153,7 @@ const Messages = () => {
                         type="text"
                         name="yourName"
                         placeholder="Your name"
+                        disabled
                       />
                       <div className="single-item-switch">
                         <div className="checkbox">
@@ -192,6 +197,7 @@ const Messages = () => {
                         type="nubmer"
                         name="yourPhone"
                         placeholder="Your phone number"
+                        disabled
                       />
                       <div className="single-item-switch">
                         <div className="checkbox">

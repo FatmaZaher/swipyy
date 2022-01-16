@@ -18,6 +18,8 @@ const Location = (props) => {
     name: "",
   };
   const onSubmit = (values) => {
+    props.onStartRequest(true);
+
     axios
       .post("https://test-place.site/api/user/location", values, config)
       .then((res) => {
@@ -32,7 +34,7 @@ const Location = (props) => {
       .get("https://test-place.site/api/user/location", config)
       .then((res) => {
         setItems(res.data.data);
-        props.onSaveData();
+        props.onFinishRequest(false);
 
       });
   };

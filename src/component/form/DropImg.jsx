@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ImageUploading from "react-images-uploading";
 import ImageDrop from "../icons/ImageDrop";
 import LinkButton from "../../component/form/LinkButton";
@@ -8,8 +8,9 @@ import UploadLoading from "../../assets/images/UploadLoading.svg";
 
 const DropImg = (props) => {
   const { config, item } = props;
-  const [images, setImages] = React.useState([]);
-  const [oldImages, setoldImages] = React.useState([]);
+  const [images, setImages] = useState([]);
+  const [oldImages, setoldImages] = useState([]);
+  const [isUpoad, setIsUpload] = useState(false);
 
   const maxNumber = 69;
   const toFormData = (fromdata) => {
@@ -37,6 +38,7 @@ const DropImg = (props) => {
   };
   const submitImages = async (values) => {
     const newValues = toFormData(values);
+    setIsUpload(true);
     try {
       await axios
         .post(
@@ -45,6 +47,7 @@ const DropImg = (props) => {
           config
         )
         .then((res) => {
+          setIsUpload(false);
           props.onSaveData("ee");
         });
     } catch (error) {}
@@ -102,9 +105,11 @@ const DropImg = (props) => {
                   </div>
                 )}
               </button>
-              <div className="text-center">
-                <img src={UploadLoading} alt="" />
-              </div>
+              {isUpoad ? (
+                <div className="text-center">
+                  <img src={UploadLoading} alt="" />
+                </div>
+              ) : null}
             </div>
             <div className="images-uploads mt-3">
               {oldImages.map((image, index) => (

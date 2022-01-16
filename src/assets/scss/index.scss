@@ -38,3 +38,20 @@ ul {
 }
 
 
+.mobile-loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  z-index: 100;
+  width: 247px;
+  height: 477px;
+  background-color: #163152;
+  position: absolute;
+  top: 62px;
+  right: 32px;
+}
+
+.mobile-loading-box img {
+  width: 100px;
+}

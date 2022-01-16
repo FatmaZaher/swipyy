@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import mobileCover from "../assets/images/mobile-cover.png";
 import personal from "../assets/images/personal.png";
 import ShareIcon from "@mui/icons-material/Share";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import FormikControl from "../component/form/FormikControl";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CancelIcon from "@mui/icons-material/Cancel";
+import mobileLoader from "../assets/images/mobile-loader.svg";
 
 import logo from "../assets/images/logo.svg";
 import Editticons from "../component/icons/Editticons";
@@ -24,14 +25,23 @@ const validationSchema = Yup.object({
   email: Yup.string().required("Add You Link*"),
 });
 
-const MobileSide = () => {
+const MobileSide = (props) => {
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
     currentUser = user.data;
   }
   const [mobileSide, setMobileSide] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
+
+  const { isRender } = props;
   const showMobileSide = () => setMobileSide(!mobileSide);
+  const renderIframe = () => {
+    setTimeout(() => {
+      console.log("ameer");
+    }, 2000);
+  };
+  useEffect(() => {});
   return (
     <>
       <div className="icon-view">
@@ -55,10 +65,18 @@ const MobileSide = () => {
         </div>
         <img src={mobileCover} alt="" />
         {/* <MobileViewContent /> */}
-        <iframe
-          src={`https://test-place.site/${currentUser.username}`}
-          title="description"
-        />
+
+        {isRender === true ? (
+          <div className="mobile-loading-box">
+            <img src={mobileLoader} alt="" />
+          </div>
+        ) : null}
+        {isRender === false ? (
+          <iframe
+            src={`https://test-place.site/${currentUser.username}`}
+            title="description"
+          />
+        ) : null}
         <a
           href={`https://test-place.site/${currentUser.username}`}
           rel="noreferrer"

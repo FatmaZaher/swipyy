@@ -51,7 +51,7 @@ const Images = (props) => {
 
     const slider_status = value === true ? 1 : 0;
 
-    // apiChange({ slider_status });
+    apiChange({ slider_status });
   };
   const changeDescriptionStatus = (value) => {
     const description_status = value === true ? 1 : 0;
@@ -80,7 +80,7 @@ const Images = (props) => {
         .get("https://test-place.site/api/user/slider", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
-          props.onSaveData();
+          props.onFinishRequest(false);
         });
     } catch (error) {}
   };
@@ -214,7 +214,7 @@ const Images = (props) => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
+            {/* <Accordion.Item eventKey="1">
               <Accordion.Header>Shape & size</Accordion.Header>
               <Accordion.Body>
                 <div className="add-description">
@@ -261,7 +261,7 @@ const Images = (props) => {
                   />
                 </div>
               </Accordion.Body>
-            </Accordion.Item>
+            </Accordion.Item> */}
           </Accordion>
         </>
       ) : null}

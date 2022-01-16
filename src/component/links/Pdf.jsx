@@ -56,6 +56,7 @@ const Pdf = (props) => {
     }
   };
   const changeHandler = async (event) => {
+
     setSelectedFile(event.target.files[0]);
     const file = event.target.files[0];
     setIsFilePicked(true);
@@ -63,6 +64,8 @@ const Pdf = (props) => {
       src: event.target.files[0],
     });
     if (file.size < 52428800) {
+      props.onStartRequest(false);
+
       try {
         await axios
           .post("https://test-place.site/api/user/files", img, config)
@@ -79,7 +82,8 @@ const Pdf = (props) => {
   const getFiles = () => {
     axios.get("https://test-place.site/api/user/files", config).then((res) => {
       setItems(res.data.data);
-      props.onSaveData();
+      props.onFinishRequest(false);
+
     });
   };
   useEffect(() => {

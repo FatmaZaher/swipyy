@@ -79,7 +79,9 @@ const Link = (props) => {
   const initialValues = {
     url: "",
   };
+
   const onSubmit = (values) => {
+    props.onStartRequest(true);
     axios
       .post("https://test-place.site/api/user/link", values, config)
       .then((res) => {
@@ -92,7 +94,7 @@ const Link = (props) => {
   });
   const getLinks = () => {
     axios.get("https://test-place.site/api/user/link", config).then((res) => {
-      props.onSaveData();
+      props.onFinishRequest(false);
 
       setItems(res.data.data);
     });

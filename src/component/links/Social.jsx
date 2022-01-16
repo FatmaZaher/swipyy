@@ -78,6 +78,8 @@ const Social = (props) => {
     socialLinkIsButton: "button",
   };
   const getAllSocialPlatforms = async () => {
+    props.onStartRequest(false);
+
     try {
       await axios
         .get("https://test-place.site/api/user/social/get", config)
@@ -102,7 +104,8 @@ const Social = (props) => {
       .get("https://test-place.site/api/user/socialUser", config)
       .then((res) => {
         setItems(res.data.data);
-        props.onSaveData();
+        props.onFinishRequest(false);
+
       });
   };
   useEffect(() => {

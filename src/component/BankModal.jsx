@@ -22,7 +22,7 @@ const BankModal = (props) => {
   const initialValues = {
     account_number: bank.account_number,
     iban: bank.iban,
-    bank_id: bank.id,
+    bank_id: bank.bank_id,
   };
   const customStyles = {
     content: {
@@ -59,6 +59,8 @@ const BankModal = (props) => {
   }
 
   function closeModal() {
+    console.log('closeModal closeModal');
+
     setIsOpen(false);
   }
   function sucesesEdit() {
@@ -104,7 +106,7 @@ const BankModal = (props) => {
                   label="Account Bank Number"
                 />
                 <FormikControl
-                  control="input"
+                  control="input"  
                   type="text"
                   name="iban"
                   placeholder="type IBAN number here..."

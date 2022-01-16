@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.10dee91e.chunk.css",
-    "main.js": "/static/js/main.3f33fbba.chunk.js",
-    "main.js.map": "/static/js/main.3f33fbba.chunk.js.map",
+    "main.css": "/static/css/main.292370ac.chunk.css",
+    "main.js": "/static/js/main.995a7a45.chunk.js",
+    "main.js.map": "/static/js/main.995a7a45.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0c963b2c.js",
     "runtime-main.js.map": "/static/js/runtime-main.0c963b2c.js.map",
     "static/css/2.201c2357.chunk.css": "/static/css/2.201c2357.chunk.css",
-    "static/js/2.d67358b7.chunk.js": "/static/js/2.d67358b7.chunk.js",
-    "static/js/2.d67358b7.chunk.js.map": "/static/js/2.d67358b7.chunk.js.map",
+    "static/js/2.a89ed0b4.chunk.js": "/static/js/2.a89ed0b4.chunk.js",
+    "static/js/2.a89ed0b4.chunk.js.map": "/static/js/2.a89ed0b4.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.201c2357.chunk.css.map": "/static/css/2.201c2357.chunk.css.map",
-    "static/css/main.10dee91e.chunk.css.map": "/static/css/main.10dee91e.chunk.css.map",
-    "static/js/2.d67358b7.chunk.js.LICENSE.txt": "/static/js/2.d67358b7.chunk.js.LICENSE.txt",
+    "static/css/main.292370ac.chunk.css.map": "/static/css/main.292370ac.chunk.css.map",
+    "static/js/2.a89ed0b4.chunk.js.LICENSE.txt": "/static/js/2.a89ed0b4.chunk.js.LICENSE.txt",
     "static/media/UploadLoading.f857b88a.svg": "/static/media/UploadLoading.f857b88a.svg",
     "static/media/checkIcon.4c6f13e5.svg": "/static/media/checkIcon.4c6f13e5.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.582d29c4.cjs",
@@ -21,6 +21,7 @@
     "static/media/layout2.8e8fb8f6.svg": "/static/media/layout2.8e8fb8f6.svg",
     "static/media/logo.59b51ab1.svg": "/static/media/logo.59b51ab1.svg",
     "static/media/mobile-cover.a471f2b6.png": "/static/media/mobile-cover.a471f2b6.png",
+    "static/media/mobile-loader.ba2d82ac.svg": "/static/media/mobile-loader.ba2d82ac.svg",
     "static/media/shap1.6b4c87b3.svg": "/static/media/shap1.6b4c87b3.svg",
     "static/media/shap2.13c423ec.svg": "/static/media/shap2.13c423ec.svg",
     "static/media/vectary.a0f55fe3.png": "/static/media/vectary.a0f55fe3.png"
@@ -28,8 +29,8 @@
   "entrypoints": [
     "static/js/runtime-main.0c963b2c.js",
     "static/css/2.201c2357.chunk.css",
-    "static/js/2.d67358b7.chunk.js",
-    "static/css/main.10dee91e.chunk.css",
-    "static/js/main.3f33fbba.chunk.js"
+    "static/js/2.a89ed0b4.chunk.js",
+    "static/css/main.292370ac.chunk.css",
+    "static/js/main.995a7a45.chunk.js"
   ]
 }
