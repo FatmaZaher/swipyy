@@ -48,7 +48,7 @@ const HomeHeader = () => {
         </div>
         <div className="personal-pho" onClick={showPersonalList}>
           <img src={personal} alt="" />
-          <div
+          {/* <div
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >
             <p className="link-icon personal-info">
@@ -61,12 +61,11 @@ const HomeHeader = () => {
               <LogoutIcon />
               Log Out
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="lang-switch">
           <div>
             <LanguageSelector />
-          
           </div>
         </div>
       </div>

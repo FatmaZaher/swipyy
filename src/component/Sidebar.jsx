@@ -16,7 +16,7 @@ import PaymentIcon from "./icons/PaymentIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useSelector } from "react-redux";
-
+import axios from "axios";
 const Sidebar = () => {
   const SidebarData = [
     {
@@ -52,12 +52,28 @@ const Sidebar = () => {
     },
   ];
   const { user } = useSelector((state) => state.auth);
-let currentUser = {};
-if (user) {
-  currentUser = user.data;
-}
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const config = JSON.parse(localStorage.getItem("headers"));
+
+  const Logout = () => {
+    try {
+      axios
+        .post("https://test-place.site/api/logout", {}, config)
+        .then((res) => {
+
+          localStorage.removeItem('headers')
+          localStorage.removeItem('user_token')
+          window.location.replace("/login");
+
+
+        });
+    } catch (error) {}
+  };
   return (
     <>
       <div className="icon-mobile">
@@ -91,6 +107,14 @@ if (user) {
               </li>
             );
           })}
+          <li className="list-item">
+            <a onClick={() => Logout()}>
+              <div className="icon">
+                <PaymentIcon />
+              </div>
+              <div className="title">Logout</div>
+            </a>
+          </li>
         </ul>
         {currentUser.is_pro === false ? (
           <div className="upgrad">

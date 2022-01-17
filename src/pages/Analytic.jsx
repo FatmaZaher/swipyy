@@ -12,6 +12,7 @@ import { useTable } from "react-table";
 
 import Chart from "react-apexcharts";
 import MapChart from "../component/MapChart";
+import axios from "axios";
 
 const initialValues = {
   theDate: "",
@@ -24,6 +25,8 @@ const allDate = [
 ];
 
 const Analytic = () => {
+  const [settings, setSettings] = useState({});
+
   const analyticInfoData = [
     {
       title: "Views",
@@ -46,6 +49,7 @@ const Analytic = () => {
       number: "0.64%",
     },
   ];
+
   const viewsOption = {
     series: [
       {
@@ -92,6 +96,7 @@ const Analytic = () => {
       },
     },
   };
+
   const uniqueOption = {
     series: [
       {
@@ -138,6 +143,7 @@ const Analytic = () => {
       },
     },
   };
+
   const clicksOption = {
     series: [
       {
@@ -184,6 +190,7 @@ const Analytic = () => {
       },
     },
   };
+
   const ctrOption = {
     series: [
       {
@@ -230,6 +237,7 @@ const Analytic = () => {
       },
     },
   };
+
   const deviceCatOption = {
     series: [100, 1000],
     options: {
@@ -251,6 +259,7 @@ const Analytic = () => {
       ],
     },
   };
+
   const globalMarket = {
     series: [
       {
@@ -283,6 +292,7 @@ const Analytic = () => {
       },
     },
   };
+
   const data = React.useMemo(
     () => [
       {
@@ -298,6 +308,7 @@ const Analytic = () => {
     ],
     []
   );
+
   const columns = React.useMemo(
     () => [
       {
@@ -315,6 +326,20 @@ const Analytic = () => {
     ],
     []
   );
+  const config = JSON.parse(localStorage.getItem("headers"));
+
+  const getAllSettings = async () => {
+    try {
+      axios
+        .get("https://test-place.site/api/user/analytics", config)
+        .then((res) => {
+          setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getAllSettings();
+  }, []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
   return (

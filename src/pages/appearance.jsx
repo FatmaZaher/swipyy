@@ -679,7 +679,66 @@ const Appearance = (props) => {
             </button>
           </Accordion.Body>
         </Accordion.Item>
-
+        <Accordion.Item eventKey="7">
+          <Accordion.Header>custom avatars</Accordion.Header>
+          <Accordion.Body>
+            <div className="custom-avatars">
+              {settings.avatars_type
+                ? settings.avatars_type.map((avatar_type, avatar_typeIndex) => {
+                    return (
+                      <div
+                        className={`avatar-back ${
+                          avatar_type.is_pro ? "align-pro" : null
+                        }`}
+                      >
+                        <div
+                          className="avatar"
+                          key={avatar_type.id}
+                          index={avatar_typeIndex}
+                        >
+                          <input
+                            type="radio"
+                            id={"avatar_type-" + avatar_type.id}
+                            name="avatar_type"
+                            value={avatar_type.id}
+                            onChange={() =>
+                              changeAvatarType(
+                                avatar_type.id,
+                                avatar_type.is_pro
+                              )
+                            }
+                            checked={
+                              avatar_type.id === settings.avtar_type_id
+                                ? true
+                                : null
+                            }
+                          />
+                          <label
+                            htmlFor={"avatar_type-" + avatar_type.id}
+                            className="d-block"
+                          >
+                            <img
+                              src={checkIcon}
+                              alt=""
+                              className="check-icon"
+                            />
+                            <img src={avatar_type.img} alt="" />
+                            {avatar_type.is_pro ? (
+                              <div className="pro-btn">
+                                <Link to="/payments">
+                                  <LinkButton type="" buttontext="PRO" />
+                                </Link>
+                              </div>
+                            ) : null}
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null}
+            </div>
+          </Accordion.Body>
+        </Accordion.Item>
         <Accordion.Item eventKey="8">
           <Accordion.Header>theme</Accordion.Header>
           <Accordion.Body>
@@ -720,70 +779,8 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
 
-        {settings.theme_id === 0 ? (
+        {settings.is_theme_pro === 0 ? (
           <>
-            <Accordion.Item eventKey="7">
-              <Accordion.Header>custom avatars</Accordion.Header>
-              <Accordion.Body>
-                <div className="custom-avatars">
-                  {settings.avatars_type
-                    ? settings.avatars_type.map(
-                        (avatar_type, avatar_typeIndex) => {
-                          return (
-                            <div
-                              className={`avatar-back ${
-                                avatar_type.is_pro ? "align-pro" : null
-                              }`}
-                            >
-                              <div
-                                className="avatar"
-                                key={avatar_type.id}
-                                index={avatar_typeIndex}
-                              >
-                                <input
-                                  type="radio"
-                                  id={"avatar_type-" + avatar_type.id}
-                                  name="avatar_type"
-                                  value={avatar_type.id}
-                                  onChange={() =>
-                                    changeAvatarType(
-                                      avatar_type.id,
-                                      avatar_type.is_pro
-                                    )
-                                  }
-                                  checked={
-                                    avatar_type.id === settings.avtar_type_id
-                                      ? true
-                                      : null
-                                  }
-                                />
-                                <label
-                                  htmlFor={"avatar_type-" + avatar_type.id}
-                                  className="d-block"
-                                >
-                                  <img
-                                    src={checkIcon}
-                                    alt=""
-                                    className="check-icon"
-                                  />
-                                  <img src={avatar_type.img} alt="" />
-                                  {avatar_type.is_pro ? (
-                                    <div className="pro-btn">
-                                      <Link to="/payments">
-                                        <LinkButton type="" buttontext="PRO" />
-                                      </Link>
-                                    </div>
-                                  ) : null}
-                                </label>
-                              </div>
-                            </div>
-                          );
-                        }
-                      )
-                    : null}
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
             <Accordion.Item eventKey="9">
               <Accordion.Header>buttons</Accordion.Header>
               <Accordion.Body>

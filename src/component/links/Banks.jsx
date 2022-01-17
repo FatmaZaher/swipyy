@@ -22,9 +22,7 @@ const Banks = (props) => {
   const [items, setItems] = useState([]);
 
   const initialValues = {
-    bank_id: "",
-    account_number: "545456454",
-  };
+    bank_id: ""  };
   const getBankList = async () => {
     try {
       await axios
