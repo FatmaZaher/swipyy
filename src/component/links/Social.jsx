@@ -78,8 +78,6 @@ const Social = (props) => {
     socialLinkIsButton: "button",
   };
   const getAllSocialPlatforms = async () => {
-    props.onStartRequest(false);
-
     try {
       await axios
         .get("https://test-place.site/api/user/social/get", config)
@@ -89,6 +87,7 @@ const Social = (props) => {
     } catch (error) {}
   };
   const onSubmit = (values) => {
+    props.onStartRequest(false);
     axios
       .post("https://test-place.site/api/user/socialUser", values, config)
       .then((res) => {
@@ -105,7 +104,6 @@ const Social = (props) => {
       .then((res) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
-
       });
   };
   useEffect(() => {
@@ -116,7 +114,7 @@ const Social = (props) => {
     getSocials();
   };
   const handleChangeSelect = (id, value, url) => {
-    console.log(id);
+    props.onStartRequest(false);
     axios
       .patch(
         "https://test-place.site/api/user/socialUser/" + id,

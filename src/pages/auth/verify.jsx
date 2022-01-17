@@ -46,7 +46,8 @@ const Verify = () => {
     // setLoadingg(true);
     dispatch(verify(newCode))
       .then((res) => {
-        history.push("/links");
+        window.location.replace("/links");
+
       })
       .catch(() => {
         setLoadingg(false);

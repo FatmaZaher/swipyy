@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 
 import Editicon from "../icons/Editicon";
 import Deleteicon from "../icons/Deleteicon";
+import { useSelector } from "react-redux";
+
 import DropImg from "../form/DropImg";
 import { Accordion } from "react-bootstrap";
 import FormikControl from "../form/FormikControl";
@@ -11,6 +13,7 @@ import { Formik, Form } from "formik";
 import SwitchButton from "../SwitchButton";
 import axios from "axios";
 import UploadLoading from "../../assets/images/UploadLoading.svg";
+import LockModal from "../LockModal";
 
 const initialValues = {
   highTitle: "",
@@ -26,10 +29,17 @@ const imagesSizeList = [
 ];
 
 const Images = (props) => {
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
+
   const [color1, setColor1] = useState("#8055f0");
   const [color2, setColor2] = useState("#163152");
   const [color3, setColor3] = useState("#8055f0");
   const [settings, setSettings] = useState({});
+  const [isLockModalOpen, setIsLockModalOpen] = useState(false);
 
   const apiChange = async (values) => {
     try {
@@ -40,14 +50,26 @@ const Images = (props) => {
         });
     } catch (error) {}
   };
-  const settingsChange = (property, value) => {
-    let oldSettings = { ...settings };
-    oldSettings[property] = value;
-    let newSettings = oldSettings;
-    setSettings(newSettings);
+  // const settingsChange = (property, value) => {
+  //   let oldSettings = { ...settings };
+  //   oldSettings[property] = value;
+  //   let newSettings = oldSettings;
+  //   setSettings(newSettings);
+  // };
+  const checkIsPro = (value) => {
+    if (value === 1) {
+      if (currentUser.is_pro === false) {
+        setIsLockModalOpen(true);
+        return false;
+      }
+    }
+  };
+  const handleCloseLockModal = () => {
+    setIsLockModalOpen(false);
   };
   const changeSliderStatus = (value) => {
-    settingsChange("slider_status", value);
+    // settingsChange("slider_status", value);
+    if (checkIsPro(1) === false) return;
 
     const slider_status = value === true ? 1 : 0;
 
@@ -265,6 +287,10 @@ const Images = (props) => {
           </Accordion>
         </>
       ) : null}
+      <LockModal
+        modalIsOpen={isLockModalOpen}
+        onCloseLockModal={() => handleCloseLockModal()}
+      />
     </div>
   );
 };

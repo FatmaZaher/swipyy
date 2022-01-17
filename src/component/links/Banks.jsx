@@ -60,6 +60,8 @@ const Banks = (props) => {
     getBankList();
   }, []);
   const handleEditData = (key, e) => {
+    props.onStartRequest(true);
+
     getBanks();
   };
   const handleChangeSwitch = (id, value) => {

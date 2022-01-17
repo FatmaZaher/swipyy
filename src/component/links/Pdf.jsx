@@ -9,6 +9,7 @@ import UploadLoading from "../../assets/images/UploadLoading.svg";
 import { useSelector } from "react-redux";
 
 import axios from "axios";
+import LockModal from "../LockModal";
 const toFormData = (fromdata) => {
   const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
     (f) => (fd) => (pk) => (d) => {
@@ -43,53 +44,60 @@ const Pdf = (props) => {
   }
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+
   const [items, setItems] = useState([]);
   const checkSize = (size) => {
     if (currentUser.is_pro === true) {
       return true;
     } else {
-      if (size > 52428800) {
+      if (size > 153600) {
+        setIsLockModalOpen(true);
         return false;
       } else {
         return true;
       }
     }
   };
+  const handleCloseLockModal = () => {
+    setIsLockModalOpen(false);
+  };
   const changeHandler = async (event) => {
-
     setSelectedFile(event.target.files[0]);
     const file = event.target.files[0];
-    setIsFilePicked(true);
+
+    console.log(file.size);
+    if (checkSize(file.size) === false) return;
     const img = toFormData({
       src: event.target.files[0],
     });
-    if (file.size < 52428800) {
-      props.onStartRequest(false);
+    setIsFilePicked(true);
+    props.onStartRequest(false);
 
-      try {
-        await axios
-          .post("https://test-place.site/api/user/files", img, config)
-          .then((res) => {
-            getFiles();
-            setIsFilePicked(false);
-          })
-          .then((res) => {});
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      await axios
+        .post("https://test-place.site/api/user/files", img, config)
+        .then((res) => {
+          getFiles();
+          setIsFilePicked(false);
+        })
+        .then((res) => {});
+    } catch (error) {
+      console.log(error);
     }
   };
   const getFiles = () => {
     axios.get("https://test-place.site/api/user/files", config).then((res) => {
       setItems(res.data.data);
       props.onFinishRequest(false);
-
     });
   };
   useEffect(() => {
     getFiles();
   }, []);
   const handleEditData = (key, e) => {
+    props.onStartRequest(false);
+
     getFiles();
   };
 
@@ -160,7 +168,7 @@ const Pdf = (props) => {
                 overflow: "hidden",
               }}
             >
-              <a href={file.src}>{file.name || 'No name and add name'}</a>
+              <a href={file.src}>{file.name || "No name and add name"}</a>
             </p>
           </div>
           <div className="link-action">
@@ -179,6 +187,10 @@ const Pdf = (props) => {
           </div>
         </div>
       ))}
+      <LockModal
+        modalIsOpen={isLockModalOpen}
+        onCloseLockModal={() => handleCloseLockModal()}
+      />
     </div>
   );
 };

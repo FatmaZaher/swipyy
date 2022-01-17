@@ -55,8 +55,8 @@ const Login = (props) => {
     setLoading(true);
     dispatch(login(values.email, values.password))
       .then((res) => {
-        history.push("/links");
-        // window.location.reload();
+        window.location.replace("/links");
+
       })
       .catch(() => {
         setLoading(false);
