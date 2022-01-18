@@ -27,13 +27,14 @@ const validationSchema = Yup.object({
 
 const MobileSide = (props) => {
   const { user } = useSelector((state) => state.auth);
+  const [mobileSide, setMobileSide] = useState(false);
+  const [isLoad, setIsLoad] = useState(true);
   let currentUser = {};
   if (user) {
     currentUser = user.data;
+    var iframe = document.getElementById("mbile-frame");
+    iframe.src = `https://test-place.site/${currentUser.username}`;
   }
-  const [mobileSide, setMobileSide] = useState(false);
-  const [isLoad, setIsLoad] = useState(false);
-
   const { isRender } = props;
   const showMobileSide = () => setMobileSide(!mobileSide);
   const renderIframe = () => {
@@ -41,7 +42,12 @@ const MobileSide = (props) => {
       console.log("ameer");
     }, 2000);
   };
-  useEffect(() => {});
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoad(false);
+    }, 5000);
+  }, []);
   return (
     <>
       <div className="icon-view">
@@ -71,12 +77,12 @@ const MobileSide = (props) => {
             <img src={mobileLoader} alt="" />
           </div>
         ) : null}
-        {isRender === false ? (
-          <iframe
-            src={`https://test-place.site/${currentUser.username}`}
-            title="description"
-          />
+        {isLoad ? (
+          <div className="mobile-loading-box">
+            <img src={mobileLoader} alt="" />
+          </div>
         ) : null}
+        <iframe id="mbile-frame" title="description" />
         <a
           href={`https://test-place.site/${currentUser.username}`}
           rel="noreferrer"

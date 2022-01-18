@@ -49,7 +49,7 @@ const Analytic = () => {
     {
       title: "CTR",
       icon: <AutoGraphIcon />,
-      number: settings.ctr,
+      number: Math.round(settings.ctr),
     },
   ];
 

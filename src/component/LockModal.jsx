@@ -39,6 +39,7 @@ const LockModal = (props) => {
         style={customStyles}
       >
         <div className="text-center">
+          {props.children}
           <img
             src="https://cdn-f.heylink.me/static/media/Banner.704fb761.svg"
             alt=""

@@ -187,10 +187,14 @@ const Pdf = (props) => {
           </div>
         </div>
       ))}
-      <LockModal
+       <LockModal
         modalIsOpen={isLockModalOpen}
         onCloseLockModal={() => handleCloseLockModal()}
-      />
+      >
+        <div className="alert alert-danger mb-5" role="alert">
+         <h5>The  file is more than 150k please go to pro</h5>
+        </div>
+      </LockModal>
     </div>
   );
 };

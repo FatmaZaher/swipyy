@@ -255,6 +255,8 @@ const Appearance = (props) => {
     apiChange({ swipy_information_status });
   };
   const changeSwipyLogoStatus = (value) => {
+    if (checkIsPro(1) === false) return;
+
     const swipy_logo_status = value === true ? 1 : 0;
     apiChange({ swipy_logo_status });
   };
@@ -378,7 +380,14 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header>short username</Accordion.Header>
+          <Accordion.Header>
+            short username{" "}
+            <div className="pro-btn position-static">
+              <Link to="/payments">
+                <LinkButton type="" buttontext="PRO" />
+              </Link>
+            </div>
+          </Accordion.Header>
           <Accordion.Body>
             <div className="single-item mb-3">
               <div className="single-item-info">
