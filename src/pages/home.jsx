@@ -15,10 +15,7 @@ const Home = ({ component: Component, ...rest }) => {
   const finishRequest = (key, e) => {
     setIsRender(false);
   };
-  setTimeout(() => {
-    setIsRender(false);
 
-  }, 3000);
   // const showMobile = () => {
   //   console.log("iframe");
 

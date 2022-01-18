@@ -66,12 +66,17 @@ const Messages = (props) => {
 
     apiChange({ msg_name_status });
   };
-  const changeMsg_phone_status = (value) => {
-    const msg_phone_status = value === true ? 1 : 0;
+  const changeMsg_email_status = (value) => {
+    const msg_email_status = value === true ? 1 : 0;
 
-    apiChange({ msg_phone_status });
+    apiChange({ msg_email_status });
   };
-
+  const changeEmailLabel = (email_label) => {
+    apiChange({ email_label });
+  };
+   const changeNameLabel = (name_label) => {
+    apiChange({ name_label });
+  };
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -153,7 +158,11 @@ const Messages = (props) => {
                         type="text"
                         name="yourName"
                         placeholder="Your name"
-                        disabled
+                        value={settings.name_label}
+                        onBlur={(e) => changeNameLabel(e.target.value)}
+                        onChange={(e) =>
+                          settingsChange("name_label", e.target.value)
+                        }
                       />
                       <div className="single-item-switch">
                         <div className="checkbox">
@@ -195,20 +204,24 @@ const Messages = (props) => {
                       <FormikControl
                         control="input"
                         type="nubmer"
-                        name="yourPhone"
-                        placeholder="Your phone number"
-                        disabled
+                        name="yourEmail"
+                        placeholder="Your Email"
+                        value={settings.email_label}
+                        onBlur={(e) => changeEmailLabel(e.target.value)}
+                        onChange={(e) =>
+                          settingsChange("email_label", e.target.value)
+                        }
                       />
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
                             type="checkbox"
-                            name="msg_phone_status"
+                            name="msg_email_status"
                             checked={
-                              settings.msg_phone_status === 1 ? true : null
+                              settings.msg_email_status === 1 ? true : null
                             }
                             onChange={(e) =>
-                              changeMsg_phone_status(e.target.checked)
+                              changeMsg_email_status(e.target.checked)
                             }
                           />
                         </div>

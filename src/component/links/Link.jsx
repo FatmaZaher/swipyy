@@ -103,9 +103,13 @@ const Link = (props) => {
     getLinks();
   }, []);
   const handleEditData = (key, e) => {
+    props.onStartRequest(true);
+
     getLinks();
   };
   const handleChangeSwitch = (id, value) => {
+    props.onStartRequest(true);
+
     const newValue = value === true ? "active" : "inactive";
     axios
       .patch(
@@ -139,12 +143,12 @@ const Link = (props) => {
       </Formik>
 
       <div className="your-links pt-4">
-        <p className="your-links-header mb-3 mb-m-5">
+        {/* <p className="your-links-header mb-3 mb-m-5">
           Add Header
           <span className="icon">
             <HelpOutlineOutlinedIcon />
           </span>
-        </p>
+        </p> */}
         <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (

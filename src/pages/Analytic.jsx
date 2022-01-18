@@ -26,123 +26,32 @@ const allDate = [
 
 const Analytic = () => {
   const [settings, setSettings] = useState({});
+  const [viewsGlobal, setViewsGlobal] = useState(null);
+  const [uniqueChart, setUniqueChart] = useState(null);
+  const [globalMarket, setGlobalMarket] = useState(null);
 
   const analyticInfoData = [
     {
       title: "Views",
       icon: <RemoveRedEyeIcon />,
-      number: "156",
+      number: settings.views_count,
     },
     {
       title: "Unique Visitors",
       icon: <GroupsIcon />,
-      number: "16",
+      number: settings.unique_visitor_count,
     },
     {
       title: "Clicks",
       icon: <MouseIcon />,
-      number: "1",
+      number: settings.clicks,
     },
     {
       title: "CTR",
       icon: <AutoGraphIcon />,
-      number: "0.64%",
+      number: settings.ctr,
     },
   ];
-
-  const viewsOption = {
-    series: [
-      {
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: "Views",
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: [
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-        ],
-      },
-    },
-  };
-
-  const uniqueOption = {
-    series: [
-      {
-        name: "Desktops",
-        data: [10, 41, 35, 101, 489, 62, 69, 91, 188],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: "Unique Visitors",
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: [
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-        ],
-      },
-    },
-  };
 
   const clicksOption = {
     series: [
@@ -260,39 +169,6 @@ const Analytic = () => {
     },
   };
 
-  const globalMarket = {
-    series: [
-      {
-        data: [0, 0, 0, 0, 300, 0],
-      },
-    ],
-    options: {
-      chart: {
-        type: "bar",
-        height: 350,
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-          horizontal: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Asia",
-          "France",
-        ],
-      },
-    },
-  };
-
   const data = React.useMemo(
     () => [
       {
@@ -327,16 +203,93 @@ const Analytic = () => {
     []
   );
   const config = JSON.parse(localStorage.getItem("headers"));
+  const handleViewsChart = (values, text) => {
+    const categories = Object.keys(values);
+    const series = Object.values(values);
+
+    const viewsOption = {
+      series: [
+        {
+          data: series,
+        },
+      ],
+      options: {
+        chart: {
+          height: 350,
+          type: "line",
+          zoom: {
+            enabled: false,
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "straight",
+        },
+        title: {
+          text,
+          align: "left",
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+            opacity: 0.5,
+          },
+        },
+        xaxis: {
+          categories,
+        },
+      },
+    };
+    return viewsOption;
+  };
+  const handleGlobalMarket = (values, text) => {
+    const categories = Object.keys(values);
+    const series = Object.values(values);
+
+    const globalMarket = {
+      series: [
+        {
+          data: series,
+        },
+      ],
+      options: {
+        chart: {
+          type: "bar",
+          height: 350,
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        xaxis: {
+          categories,
+        },
+      },
+    };
+    return globalMarket;
+  };
 
   const getAllSettings = async () => {
     try {
       axios
         .get("https://test-place.site/api/user/analytics", config)
         .then((res) => {
-          setSettings(res.data.data.Settings);
+          const data = res.data.data;
+          setSettings(res.data.data);
+          setViewsGlobal(handleViewsChart(data.views_global, "Views"));
+          setUniqueChart(handleViewsChart(data.unique_chart, "unique Views"));
+          setGlobalMarket(handleGlobalMarket(data.views_global));
         });
     } catch (error) {}
   };
+
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -382,20 +335,24 @@ const Analytic = () => {
         </p>
         <div className="charts">
           <div id="views">
-            <Chart
-              options={viewsOption.options}
-              series={viewsOption.series}
-              type="line"
-              height={350}
-            />
+            {viewsGlobal ? (
+              <Chart
+                options={viewsGlobal.options}
+                series={viewsGlobal.series}
+                type="line"
+                height={350}
+              />
+            ) : null}
           </div>
           <div id="uniqueVisitors">
-            <Chart
-              options={uniqueOption.options}
-              series={uniqueOption.series}
-              type="line"
-              height={350}
-            />
+            {uniqueChart ? (
+              <Chart
+                options={uniqueChart.options}
+                series={uniqueChart.series}
+                type="line"
+                height={350}
+              />
+            ) : null}
           </div>
           <div id="clicks">
             <Chart
@@ -492,12 +449,14 @@ const Analytic = () => {
           <p className="your-links-header mb-3 mb-m-5">
             Views by Global Market
           </p>
-          <Chart
-            options={globalMarket.options}
-            series={globalMarket.series}
-            type="bar"
-            height={150}
-          />
+          {globalMarket ? (
+            <Chart
+              options={globalMarket.options}
+              series={globalMarket.series}
+              type="bar"
+              height={150}
+            />
+          ) : null}
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
