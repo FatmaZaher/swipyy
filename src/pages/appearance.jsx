@@ -103,11 +103,11 @@ const Appearance = (props) => {
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
 
   const [placements, setPlacements] = useState([
-    { id: "links", name: "links" },
-    { id: "social", name: "social" },
-    { id: "slider", name: "slider" },
-    { id: "messages", name: "messages" },
-    { id: "location", name: "location" },
+    "links",
+    "social",
+    "slider",
+    "messages",
+    "location",
   ]);
   const [themes, setThemes] = useState([]);
 
@@ -127,14 +127,15 @@ const Appearance = (props) => {
           setColor4(res.data.data.Settings.background_color);
           setColor5(res.data.data.Settings.social_icons_color);
           let themes = res.data.data.Settings.themes;
-
           themes.splice(0, 0, {
             class: "theme-class-01",
             id: 0,
             img: customTheme,
             name: "Custom theme",
           });
-
+          if (res.data.data.Settings.placement.length) {
+            setPlacements(res.data.data.Settings.placement);
+          }
           setThemes(themes);
         });
     } catch (error) {}
@@ -198,7 +199,7 @@ const Appearance = (props) => {
   };
 
   const changePlacement = () => {
-    apiChange({ placement: items });
+    apiChange({ placement: placements });
   };
   const changeAvatarType = (avatar_type_id, isPro) => {
     if (checkIsPro(isPro) === false) return;
@@ -265,43 +266,17 @@ const Appearance = (props) => {
     getAllSettings();
   }, []);
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [items, setItems] = useState([
-    {
-      id: "links",
-      title: "Links",
-      icon: "LinkBlue",
-    },
-    {
-      id: "social",
-      title: "Social",
-      icon: "SocialBlue",
-    },
-    {
-      id: "images",
-      title: "Slider",
-      icon: "SliderBlue",
-    },
-    {
-      id: "messages",
-      title: "Messages",
-      icon: "MeasssssBlue",
-    },
-    {
-      id: "location",
-      title: "Location",
-      icon: "LocationBlue",
-    },
-  ]);
+
   const renderIcon = (icon) => {
-    if (icon === "LinkBlue") {
+    if (icon === "links") {
       return <LinkBlue />;
-    } else if (icon === "SocialBlue") {
+    } else if (icon === "social") {
       return <SocialBlue />;
-    } else if (icon === "SliderBlue") {
+    } else if (icon === "slider") {
       return <SliderBlue />;
-    } else if (icon === "MeasssssBlue") {
+    } else if (icon === "messages") {
       return <MeasssssBlue />;
-    } else if (icon === "LocationBlue") {
+    } else if (icon === "location") {
       return <LocationBlue />;
     }
   };
@@ -313,7 +288,7 @@ const Appearance = (props) => {
       return;
     }
     setPlaceholderProps({});
-    setItems((items) =>
+    setPlacements((items) =>
       reorder(items, result.source.index, result.destination.index)
     );
   };
@@ -637,11 +612,7 @@ const Appearance = (props) => {
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {placements.map((item, index) => (
-                      <Draggable
-                        key={item.name}
-                        draggableId={item.name}
-                        index={index}
-                      >
+                      <Draggable key={item} draggableId={item} index={index}>
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
@@ -658,8 +629,8 @@ const Appearance = (props) => {
                               alt=""
                               className="drag-img"
                             />
-                            <div className="icon">{renderIcon(item.name)}</div>
-                            <div className="title">{item.name}</div>
+                            <div className="icon">{renderIcon(item)}</div>
+                            <div className="title">{item}</div>
                           </div>
                         )}
                       </Draggable>

@@ -29,6 +29,8 @@ const Analytic = () => {
   const [viewsGlobal, setViewsGlobal] = useState(null);
   const [uniqueChart, setUniqueChart] = useState(null);
   const [globalMarket, setGlobalMarket] = useState(null);
+  const [viewsChart, setViewsChart] = useState(null);
+  const [clicksChart, setClicksChart] = useState(null);
 
   const analyticInfoData = [
     {
@@ -147,28 +149,6 @@ const Analytic = () => {
     },
   };
 
-  const deviceCatOption = {
-    series: [100, 1000],
-    options: {
-      chart: {
-        type: "donut",
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
-    },
-  };
-
   const data = React.useMemo(
     () => [
       {
@@ -275,7 +255,34 @@ const Analytic = () => {
     };
     return globalMarket;
   };
+  const handleDevicesChart = (values) => {
+    const labels = Object.keys(values);
+    const series = Object.values(values);
 
+    const deviceCatOption = {
+      series,
+      options: {
+        chart: {
+          type: "donut",
+        },
+        labels,
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+    };
+    return deviceCatOption;
+  };
   const getAllSettings = async () => {
     try {
       axios
@@ -283,8 +290,10 @@ const Analytic = () => {
         .then((res) => {
           const data = res.data.data;
           setSettings(res.data.data);
-          setViewsGlobal(handleViewsChart(data.views_global, "Views"));
+          setViewsChart(handleViewsChart(data.views_chart, "Views"));
           setUniqueChart(handleViewsChart(data.unique_chart, "unique Views"));
+          setClicksChart(handleViewsChart(data.clicks_chart, "Clicks"));
+          // setDevicesChart(handleDevicesChart(data.device_table));
           setGlobalMarket(handleGlobalMarket(data.views_global));
         });
     } catch (error) {}
@@ -335,10 +344,10 @@ const Analytic = () => {
         </p>
         <div className="charts">
           <div id="views">
-            {viewsGlobal ? (
+            {viewsChart ? (
               <Chart
-                options={viewsGlobal.options}
-                series={viewsGlobal.series}
+                options={viewsChart.options}
+                series={viewsChart.series}
                 type="line"
                 height={350}
               />
@@ -355,12 +364,14 @@ const Analytic = () => {
             ) : null}
           </div>
           <div id="clicks">
-            <Chart
-              options={clicksOption.options}
-              series={clicksOption.series}
-              type="line"
-              height={350}
-            />
+            {clicksChart ? (
+              <Chart
+                options={clicksChart.options}
+                series={clicksChart.series}
+                type="line"
+                height={350}
+              />
+            ) : null}
           </div>
           <div id="ctr">
             <Chart
@@ -378,11 +389,11 @@ const Analytic = () => {
           <p className="your-links-header mb-3 mb-m-5">
             Link Performance by Date
           </p>
-          <Chart
+          {/* <Chart
             options={deviceCatOption.options}
             series={deviceCatOption.series}
             type="donut"
-          />
+          /> */}
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">Mobile Devieces</p>

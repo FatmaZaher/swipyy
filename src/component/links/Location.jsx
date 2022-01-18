@@ -42,6 +42,8 @@ const Location = (props) => {
     getLocations();
   }, []);
   const handleEditData = (key, e) => {
+    props.onStartRequest(true);
+
     getLocations();
   };
   const handleChangeSwitch = (id, value) => {

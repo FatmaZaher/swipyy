@@ -48,7 +48,7 @@ const DropImg = (props) => {
         )
         .then((res) => {
           setIsUpload(false);
-          props.onSaveData("ee");
+          props.onSaveData();
         });
     } catch (error) {}
   };
@@ -61,6 +61,19 @@ const DropImg = (props) => {
   useEffect(() => {
     setoldImages(item.images);
   });
+  const DeleteImg = async (id) => {
+    try {
+      await axios
+        .delete(
+          `https://test-place.site/api/user/slider/images/delete/${id}`,
+          config
+        )
+        .then((res) => {
+          setIsUpload(false);
+          props.onSaveData();
+        });
+    } catch (error) {}
+  };
   return (
     <>
       <ImageUploading
@@ -117,7 +130,7 @@ const DropImg = (props) => {
                   <img src={image.src} alt="" width="100" />
                   <div className="image-item__btn-wrapper">
                     {/* <button onClick={() => onImageUpdate(index)}>Update</button> */}
-                    <button onClick={() => onImageRemove(index)}>Remove</button>
+                    <button onClick={() => DeleteImg(image.id)}>Remove</button>
                   </div>
                 </div>
               ))}
