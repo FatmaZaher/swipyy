@@ -7,13 +7,13 @@ const languages = [
   {
     code: "en",
     name: "English",
-    country_code: "gb",
+    country_code: "EN",
   },
   {
     code: "ar",
     name: "العربية",
     dir: "rtl",
-    country_code: "sa",
+    country_code: "AR",
   },
 ];
 const LanguageSelector = () => {
@@ -33,40 +33,28 @@ const LanguageSelector = () => {
   return (
     <>
       <dropdown>
-        <input
+        {/* <input
           id="toggle2"
           type="checkbox"
           checked={switchLang ? true : null}
           onChange={() => setSwitchLang(true)}
-        />
+        /> */}
         <label htmlFor="toggle2" className="animate">
           E
         </label>
-        {switchLang ? (
-          <ul className="animate">
-            {languages.map(({ code, name, country_code }) => (
-              <li key={country_code}>
-                <a
-                  href="#"
-                  className={classNames("dropdown-item", {
-                    disabled: currentLanguageCode === code,
-                  })}
-                  onClick={() => {
-                    changeLanguage(code);
-                  }}
-                >
-                  <span
-                    className={`flag-icon flag-icon-${country_code} mx-2`}
-                    style={{
-                      opacity: currentLanguageCode === code ? 0.5 : 1,
-                    }}
-                  ></span>
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {languages.map(({ code, name, country_code }) => (
+          <label
+            key={country_code}
+            className={classNames("animate", {
+              "d-block": currentLanguageCode !== code,
+            })}
+            onClick={() => {
+              changeLanguage(code);
+            }}
+          >
+            {country_code}
+          </label>
+        ))}
       </dropdown>
     </>
   );

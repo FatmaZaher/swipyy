@@ -26,6 +26,10 @@ import Payments from "./pages/Payments";
 import Settings from "./pages/Settings";
 import ViewLayout from "./layouts/ViewLayout";
 import View from "./pages/View";
+const postcss = require("postcss");
+const rtl = require("postcss-rtl");
+
+postcss([rtl()]);
 const token = localStorage.getItem("user_token");
 
 function App() {

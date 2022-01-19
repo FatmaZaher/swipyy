@@ -51,10 +51,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 
-const initialValues = {
-  description: "",
-  details: [""],
-};
 const onSubmit = (values) => {
   console.log(values);
   // axios
@@ -101,7 +97,7 @@ const Appearance = (props) => {
   const [color4, setColor4] = useState("#8cc8cc");
   const [color5, setColor5] = useState("#8cc8cc");
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
-
+  const [details, setDetails] = useState([]);
   const [placements, setPlacements] = useState([
     "links",
     "social",
@@ -137,11 +133,14 @@ const Appearance = (props) => {
             setPlacements(res.data.data.Settings.placement);
           }
           setThemes(themes);
+          setDetails(res.data.data.Settings.details);
         });
     } catch (error) {}
   };
+  const initialValues = {
+    description: "",
+  };
   const settingsChange = (property, value) => {
-    console.log({ property, value });
     let oldSettings = { ...settings };
     oldSettings[property] = value;
     let newSettings = oldSettings;
@@ -182,6 +181,11 @@ const Appearance = (props) => {
     const avtar_status = value === true ? 1 : 0;
     apiChange({ avtar_status });
   };
+  const changeCoverStatus = (value) => {
+    const cover_status = value === true ? 1 : 0;
+    apiChange({ cover_status });
+  };
+
   const changeTitleStatus = (value) => {
     const title_status = value === true ? 1 : 0;
     apiChange({ title_status });
@@ -249,7 +253,7 @@ const Appearance = (props) => {
     apiChange({ social_icons_color: color5 });
   };
   const saveDetails = (details) => {
-    apiChange(details);
+    apiChange({ details });
   };
   const changeSwipyInformationStatuss = (value) => {
     const swipy_information_status = value === true ? 1 : 0;
@@ -324,7 +328,36 @@ const Appearance = (props) => {
       ),
     });
   };
-
+  const sumbitDetails = async (item) => {
+    console.log(item);
+    try {
+      if (item.newItem) {
+        apiChange({ details: [item.detail] });
+      } else {
+        await axios
+          .patch(
+            `https://test-place.site/api/user/appearance/update/detail/${item.id}`,
+            item,
+            config
+          )
+          .then((res) => {
+            getAllSettings();
+          });
+      }
+    } catch (error) {}
+  };
+  const addDetailsItem = () => {
+    let oldDetails = [...details];
+    oldDetails.push({ detail: "", newItem: true });
+    let newDetails = oldDetails;
+    setDetails(newDetails);
+  };
+  const editDetailsItem = (index, value) => {
+    let oldDetails = [...details];
+    oldDetails[index]["detail"] = value;
+    let newDetails = oldDetails;
+    setDetails(newDetails);
+  };
   return (
     <div className="appearance-page">
       <Accordion>
@@ -437,70 +470,139 @@ const Appearance = (props) => {
             </div>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="3">
-          <Accordion.Header>avatar & title</Accordion.Header>
-          <Accordion.Body>
-            <div className="avatar-title">
-              <div className="single-item mb-3">
-                <div className="single-item-img">
-                  <UploadImg
-                    config={config}
-                    uploadType="avatar"
-                    item={settings}
-                    onSaveData={() => handleEditData()}
-                  />
-                </div>
-                <div className="link-and-icon">
-                  <div className="single-item-switch">
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        name="show"
-                        checked={settings.avtar_status === 1 ? true : false}
-                        onChange={(e) => changeAvatarStatus(e.target.checked)}
-                      />
-                    </div>
-                  </div>
-                  <div className="link-action">
-                    {/* <Editicon /> */}
-                    {/* <Sharicon /> */}
-                  </div>
-                </div>
-              </div>
-              <div className="single-item mb-3">
-                <div className="single-item-info">
-                  <div className="my-link">
-                    <div className="link-text">
-                      <p className="profile-title m-0">{settings.title}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="link-and-icon">
-                  <div className="single-item-switch">
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        name="show"
-                        checked={settings.title_status === 1 ? true : false}
-                        onChange={(e) => changeTitleStatus(e.target.checked)}
-                      />
-                    </div>
-                  </div>
-                  <div className="link-action">
-                    <Editicon
-                      settingName="title"
-                      item={settings}
+        {settings.layout === "cover" ? (
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>COVER IMAGE & TITLE</Accordion.Header>
+            <Accordion.Body>
+              <div className="avatar-title">
+                <div className="single-item mb-3">
+                  <div className="single-item-img">
+                    <UploadImg
                       config={config}
+                      uploadType="cover_img"
+                      item={settings}
                       onSaveData={() => handleEditData()}
-                      api="user/appearance/update"
                     />
-                    {/* <Sharicon /> */}
+                  </div>
+                  <div className="link-and-icon">
+                    <div className="single-item-switch">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          name="show"
+                          checked={settings.cover_status === 1 ? true : false}
+                          onChange={(e) => changeCoverStatus(e.target.checked)}
+                        />
+                      </div>
+                    </div>
+                    <div className="link-action">
+                      {/* <Editicon /> */}
+                      {/* <Sharicon /> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="single-item mb-3">
+                  <div className="single-item-info">
+                    <div className="my-link">
+                      <div className="link-text">
+                        <p className="profile-title m-0">{settings.title}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="link-and-icon">
+                    <div className="single-item-switch">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          name="show"
+                          checked={settings.title_status === 1 ? true : false}
+                          onChange={(e) => changeTitleStatus(e.target.checked)}
+                        />
+                      </div>
+                    </div>
+                    <div className="link-action">
+                      <Editicon
+                        settingName="title"
+                        item={settings}
+                        config={config}
+                        onSaveData={() => handleEditData()}
+                        api="user/appearance/update"
+                      />
+                      {/* <Sharicon /> */}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
+            </Accordion.Body>
+          </Accordion.Item>
+        ) : null}
+        {settings.layout === "avatar" ? (
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>avatar & title</Accordion.Header>
+            <Accordion.Body>
+              <div className="avatar-title">
+                <div className="single-item mb-3">
+                  <div className="single-item-img">
+                    <UploadImg
+                      config={config}
+                      uploadType="avatar"
+                      item={settings}
+                      onSaveData={() => handleEditData()}
+                    />
+                  </div>
+                  <div className="link-and-icon">
+                    <div className="single-item-switch">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          name="show"
+                          checked={settings.avtar_status === 1 ? true : false}
+                          onChange={(e) => changeAvatarStatus(e.target.checked)}
+                        />
+                      </div>
+                    </div>
+                    <div className="link-action">
+                      {/* <Editicon /> */}
+                      {/* <Sharicon /> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="single-item mb-3">
+                  <div className="single-item-info">
+                    <div className="my-link">
+                      <div className="link-text">
+                        <p className="profile-title m-0">{settings.title}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="link-and-icon">
+                    <div className="single-item-switch">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          name="show"
+                          checked={settings.title_status === 1 ? true : false}
+                          onChange={(e) => changeTitleStatus(e.target.checked)}
+                        />
+                      </div>
+                    </div>
+                    <div className="link-action">
+                      <Editicon
+                        settingName="title"
+                        item={settings}
+                        config={config}
+                        onSaveData={() => handleEditData()}
+                        api="user/appearance/update"
+                      />
+                      {/* <Sharicon /> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        ) : null}
+
         <Accordion.Item eventKey="4">
           <Accordion.Header>description</Accordion.Header>
           <Accordion.Body>
@@ -566,35 +668,34 @@ const Appearance = (props) => {
                         />
                       </div>
                       <div className="field-array">
-                        <FieldArray name="details">
-                          {(fieldArrayProps) => {
-                            const { push, form } = fieldArrayProps;
-                            const { values } = form;
-                            const { details } = values;
-                            return (
-                              <div>
-                                {details.map((detail, index) => (
-                                  <div key={index} className="high-details">
-                                    <p className="high-title-head">Detail</p>
-                                    <Field
-                                      name={`details[${index}]`}
-                                      className="form-input"
-                                      placeholder="Type the detail here"
-                                      onBlur={(e) => saveDetails(details)}
-                                    />
-                                  </div>
-                                ))}
-                                <button
-                                  type="button"
-                                  className="form-button"
-                                  onClick={() => push("")}
-                                >
-                                  Add Another Detail
-                                </button>
-                              </div>
-                            );
-                          }}
-                        </FieldArray>
+                        {details.map((detail, index) => (
+                          <div key={index} className="high-details">
+                            <p className="high-title-head">Detail</p>
+                            <Field
+                              name={`details[${index}]`}
+                              className="form-input"
+                              placeholder="Type the detail here"
+                              value={detail.detail}
+                              onChange={(e) =>
+                                editDetailsItem(index, e.target.value)
+                              }
+                              onBlur={(e) => sumbitDetails(detail)}
+                            />
+                            <Deleteicon
+                              item={detail}
+                              config={config}
+                              onSaveData={() => handleEditData()}
+                              api="user/appearance/update/detail"
+                            />
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          className="form-button"
+                          onClick={() => addDetailsItem()}
+                        >
+                          Add Another Detail
+                        </button>
                       </div>
                     </Form>
                   </Formik>
@@ -625,7 +726,7 @@ const Appearance = (props) => {
                             className="link-dragg"
                           >
                             <img
-                              src="https://cdn-f.swippy.me/static/media/ic_swap_icon.60319cd6.svg"
+                              src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
                               alt=""
                               className="drag-img"
                             />

@@ -31,6 +31,8 @@ const Analytic = () => {
   const [globalMarket, setGlobalMarket] = useState(null);
   const [viewsChart, setViewsChart] = useState(null);
   const [clicksChart, setClicksChart] = useState(null);
+  const [countryTable, setCountryTable] = useState([]);
+  const [referrer, setReferrer] = useState([]);
 
   const analyticInfoData = [
     {
@@ -283,6 +285,11 @@ const Analytic = () => {
     };
     return deviceCatOption;
   };
+  const handleTable = (values, text) => {
+    const items = Object.entries(values);
+    return items;
+  };
+
   const getAllSettings = async () => {
     try {
       axios
@@ -293,6 +300,10 @@ const Analytic = () => {
           setViewsChart(handleViewsChart(data.views_chart, "Views"));
           setUniqueChart(handleViewsChart(data.unique_chart, "unique Views"));
           setClicksChart(handleViewsChart(data.clicks_chart, "Clicks"));
+
+          setCountryTable(handleTable(data.country_table));
+          setReferrer(handleTable(data.referrer));
+
           // setDevicesChart(handleDevicesChart(data.device_table));
           setGlobalMarket(handleGlobalMarket(data.views_global));
         });
@@ -302,8 +313,6 @@ const Analytic = () => {
   useEffect(() => {
     getAllSettings();
   }, []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
   return (
     <div className="analytic">
       <div className="analytic-header">
@@ -397,59 +406,16 @@ const Analytic = () => {
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">Mobile Devieces</p>
-          <table
-            {...getTableProps()}
-            style={{
-              fontSize: "14px",
-              margin: "30px 0 0 0",
-              width: "100%",
-            }}
-          >
+          <table class="table">
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      style={{
-                        borderBottom: "solid 1px #dee3ed8a",
-                        padding: "15px 0",
-                        color: "#bfbfbf",
-                        fontWeight: "400",
-                        minWidth: "30px",
-                      }}
-                    >
-                      {column.render("Header")}
-                    </th>
-                  ))}
-                </tr>
-              ))}
+              <tr>
+                <th></th>
+              </tr>
             </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            borderBottom: "solid 1px #dee3ed8a",
-                            padding: "15px 0",
-                            color: "#163152",
-                            fontWeight: "400",
-                            width: "30px",
-                            fontSize: "10px",
-                          }}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -479,176 +445,61 @@ const Analytic = () => {
       <div className="row-2">
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">Views by Country</p>
-          <table
-            {...getTableProps()}
-            style={{
-              fontSize: "14px",
-              margin: "30px 0 0 0",
-              width: "100%",
-            }}
-          >
+          <table class="table">
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      style={{
-                        borderBottom: "solid 1px #dee3ed8a",
-                        padding: "15px 0",
-                        color: "#bfbfbf",
-                        fontWeight: "400",
-                        minWidth: "30px",
-                      }}
-                    >
-                      {column.render("Header")}
-                    </th>
-                  ))}
-                </tr>
-              ))}
+              <tr>
+                <th>Country</th>
+                <th>View</th>
+              </tr>
             </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            borderBottom: "solid 1px #dee3ed8a",
-                            padding: "15px 0",
-                            color: "#163152",
-                            fontWeight: "400",
-                            width: "30px",
-                            fontSize: "10px",
-                          }}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+            <tbody>
+              {countryTable
+                ? countryTable.map((item, index) => (
+                    <tr key={index}>
+                      {item.map((country, countryIndex) => (
+                        <td key={countryIndex}>{country}</td>
+                      ))}
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </table>
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">Views by City</p>
-          <table
-            {...getTableProps()}
-            style={{
-              fontSize: "14px",
-              margin: "30px 0 0 0",
-              width: "100%",
-            }}
-          >
+          <table class="table">
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      style={{
-                        borderBottom: "solid 1px #dee3ed8a",
-                        padding: "15px 0",
-                        color: "#bfbfbf",
-                        fontWeight: "400",
-                        minWidth: "30px",
-                      }}
-                    >
-                      {column.render("Header")}
-                    </th>
-                  ))}
-                </tr>
-              ))}
+              <tr>
+                <th></th>
+              </tr>
             </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            borderBottom: "solid 1px #dee3ed8a",
-                            padding: "15px 0",
-                            color: "#163152",
-                            fontWeight: "400",
-                            width: "30px",
-                            fontSize: "10px",
-                          }}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
       <div className="mobile-device final mb-3">
         <p className="your-links-header mb-3 mb-m-5">Views by Referrer</p>
-        <table
-          {...getTableProps()}
-          style={{
-            fontSize: "14px",
-            margin: "30px 0 0 0",
-            width: "100%",
-          }}
-        >
+        <table class="table">
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps()}
-                    style={{
-                      borderBottom: "solid 1px #dee3ed8a",
-                      padding: "15px 0",
-                      color: "#bfbfbf",
-                      fontWeight: "400",
-                      minWidth: "30px",
-                    }}
-                  >
-                    {column.render("Header")}
-                  </th>
-                ))}
-              </tr>
-            ))}
+            <tr>
+              <th>referrer</th>
+              <th>View</th>
+            </tr>
           </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          borderBottom: "solid 1px #dee3ed8a",
-                          padding: "15px 0",
-                          color: "#163152",
-                          fontWeight: "400",
-                          width: "30px",
-                          fontSize: "10px",
-                        }}
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+          <tbody>
+            {referrer
+              ? referrer.map((item, index) => (
+                  <tr key={index}>
+                    {item.map((referrerItem, referrerIndex) => (
+                      <td key={referrerIndex}>{referrerItem}</td>
+                    ))}
+                  </tr>
+                ))
+              : null}
           </tbody>
         </table>
       </div>

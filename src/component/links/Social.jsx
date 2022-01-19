@@ -13,14 +13,10 @@ import FormikControl from "../../component/form/FormikControl";
 import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
 import axios from "axios";
+import Select from "react-select";
+
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-  return result;
-};
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
@@ -31,6 +27,29 @@ const Social = (props) => {
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
   const [socialPlatforms, setSocialPlatforms] = useState([]);
+
+  const sortItems = (values) => {
+    const ides = values.map((item) => item.id);
+
+    props.onStartRequest(true);
+    axios
+      .post(
+        "https://test-place.site/api/user/social/sort/update",
+        { sort_social: ides },
+        config
+      )
+      .then((res) => {
+        getSocials();
+      });
+  };
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    sortItems(result);
+
+    return result;
+  };
 
   const onDragEnd = (result) => {
     if (!result.destination) {
@@ -75,7 +94,7 @@ const Social = (props) => {
   const initialValues = {
     url: "",
     social_id: "",
-    socialLinkIsButton: "button",
+    type: "icon",
   };
   const getAllSocialPlatforms = async () => {
     try {
@@ -87,6 +106,7 @@ const Social = (props) => {
     } catch (error) {}
   };
   const onSubmit = (values) => {
+    console.log(values);
     props.onStartRequest(false);
     axios
       .post("https://test-place.site/api/user/socialUser", values, config)
@@ -113,6 +133,20 @@ const Social = (props) => {
   const handleEditData = (key, e) => {
     getSocials();
   };
+  const formatOptionLabel = ({ icon, id, name }) => (
+    <div className="social-list-item">
+      <div class="social-list-item-icon">
+        <img
+          src={
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/768px-Facebook_icon_2013.svg.png"
+          }
+          alt=""
+        />
+      </div>
+      <div className="text">{name}</div>
+    </div>
+  );
+
   const handleChangeSelect = (id, value, url) => {
     props.onStartRequest(false);
     axios
@@ -151,7 +185,14 @@ const Social = (props) => {
   //     icon: <WhatsAppIcon />,
   //   },
   // ];
-
+  const customStyles = {
+    control: () => ({
+      // none of react-select's styles are passed to <Control />
+      display: "flex",
+      height: 50,
+      border: "1px solid #ccc",
+    }),
+  };
   return (
     <div className="social-page">
       <Formik
@@ -161,12 +202,23 @@ const Social = (props) => {
       >
         {(formik) => (
           <Form className="form-page form-head">
-            <FormikControl
+            <div className="form-control me-3">
+              <Select
+                defaultValue={socialPlatforms[0]}
+                formatOptionLabel={formatOptionLabel}
+                options={socialPlatforms}
+                onChange={(e) => formik.setFieldValue("social_id", e.id)}
+                styles={customStyles}
+              />
+            </div>
+
+            {/* <FormikControl
               control="select"
               name="social_id"
               options={socialPlatforms}
               error="true"
-            />
+            /> */}
+
             <FormikControl
               control="input"
               type="text"
@@ -174,7 +226,13 @@ const Social = (props) => {
               placeholder="Paste your social link here"
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add Social Link" icon="yes" />
+
+            <LinkButton
+              type="submit"
+              buttontext="Add Social Link"
+              icon="yes"
+              disabled={formik.values.url === "" ? true : false}
+            />
           </Form>
         )}
       </Formik>
@@ -184,7 +242,7 @@ const Social = (props) => {
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {items.map((social, index) => (
                 <Draggable
-                  key={index}
+                  key={social.id}
                   draggableId={String(social.id)}
                   index={index}
                 >

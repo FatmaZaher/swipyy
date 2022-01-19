@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
-import Editticons from "./Editticons";
+import Editticons from "../icons/Editticons";
 
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -30,6 +30,12 @@ const Editicon = (props) => {
   const { item, config, api, settingName } = props;
   function openModal() {
     setIsOpen(true);
+  }
+  if (props.openModal === true) {
+    console.log(props.openModalItem);
+    if ((item.id = props.openModalItem.id)) {
+      console.log(item);
+    }
   }
   const initialValues = {};
   let inputName;

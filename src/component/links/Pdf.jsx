@@ -10,6 +10,27 @@ import { useSelector } from "react-redux";
 
 import axios from "axios";
 import LockModal from "../LockModal";
+
+import ReactDOM from "react-dom";
+import Modal from "react-modal";
+import Editticons from "../icons/Editticons";
+
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import FormikControl from "../form/FormikControl";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
 const toFormData = (fromdata) => {
   const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
     (f) => (fd) => (pk) => (d) => {
@@ -45,6 +66,9 @@ const Pdf = (props) => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [openEditlItem, setOpenEditlItem] = useState({});
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const [items, setItems] = useState([]);
   const checkSize = (size) => {
@@ -61,6 +85,38 @@ const Pdf = (props) => {
   };
   const handleCloseLockModal = () => {
     setIsLockModalOpen(false);
+  };
+  const initialValues = {
+    name: openEditlItem.name,
+  };
+
+  const validationSchema = Yup.object({});
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  function sucesesEdit() {
+    Swal.fire("Good job!", "Edited successfully!", "success");
+    setIsOpen(false);
+    getFiles();
+  }
+  const onSubmit = async (values) => {
+    try {
+      await axios
+        .post(
+          `https://test-place.site/api/${"user/files/update"}/${
+            openEditlItem.id
+          }`,
+          values,
+          config
+        )
+        .then((res) => {
+          sucesesEdit();
+        });
+    } catch (error) {}
   };
   const changeHandler = async (event) => {
     setSelectedFile(event.target.files[0]);
@@ -80,6 +136,8 @@ const Pdf = (props) => {
         .then((res) => {
           getFiles();
           setIsFilePicked(false);
+          setOpenModal(true);
+          handleOpenModal(res.data.data);
         })
         .then((res) => {});
     } catch (error) {
@@ -90,6 +148,7 @@ const Pdf = (props) => {
     axios.get("https://test-place.site/api/user/files", config).then((res) => {
       setItems(res.data.data);
       props.onFinishRequest(false);
+      setOpenModal(false);
     });
   };
   useEffect(() => {
@@ -100,7 +159,10 @@ const Pdf = (props) => {
 
     getFiles();
   };
-
+  const handleOpenModal = (item) => {
+    setOpenEditlItem(item);
+    setIsOpen(true);
+  };
   return (
     <div className="pdf">
       <div className="drop-pdf">
@@ -172,12 +234,45 @@ const Pdf = (props) => {
             </p>
           </div>
           <div className="link-action">
-            <Editicon
-              item={file}
-              config={config}
-              onSaveData={() => handleEditData()}
-              api="user/files/update"
-            />
+            <>
+              <div className="edit-icon" onClick={() => handleOpenModal(file)}>
+                <Editticons />
+              </div>
+              <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+                ariaHideApp={false}
+              >
+                <div>
+                  <h4>Edit</h4>
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                    className="modal-form"
+                  >
+                    {(formik) => (
+                      <Form className="login-form">
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          name={"name"}
+                          placeholder=""
+                          error="true"
+                          label={"pdf name"}
+                        />
+                        <div className="login-btn">
+                          <LinkButton type="submit" buttontext="Save Edit" />
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </Modal>
+            </>
             <Deleteicon
               item={file}
               config={config}
@@ -187,12 +282,12 @@ const Pdf = (props) => {
           </div>
         </div>
       ))}
-       <LockModal
+      <LockModal
         modalIsOpen={isLockModalOpen}
         onCloseLockModal={() => handleCloseLockModal()}
       >
         <div className="alert alert-danger mb-5" role="alert">
-         <h5>The  file is more than 150k please go to pro</h5>
+          <h5>The file is more than 150k please go to pro</h5>
         </div>
       </LockModal>
     </div>

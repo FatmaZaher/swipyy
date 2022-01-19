@@ -48,6 +48,11 @@ const UploadImg = (props) => {
         avatar: imageList[0].file,
       };
       api = "https://test-place.site/api/user/appearance/update";
+    } else if (uploadType === "cover_img") {
+      data = {
+        cover_img: imageList[0].file,
+      };
+      api = "https://test-place.site/api/user/appearance/update";
     }
     const img = toFormData(data);
     try {
@@ -90,15 +95,29 @@ const UploadImg = (props) => {
                     ) : (
                       <ImageDrop />
                     )
-                  ) : item.avatar ? (
-                    <img
-                      src={item.avatar}
-                      className="img-uploadded"
-                      alt={item.username}
-                    />
-                  ) : (
-                    <ImageDrop />
-                  )}
+                  ) : null}
+                  {uploadType === "avatar" ? (
+                    item.avatar ? (
+                      <img
+                        src={item.avatar}
+                        className="img-uploadded"
+                        alt={item.username}
+                      />
+                    ) : (
+                      <ImageDrop />
+                    )
+                  ) : null}
+                  {uploadType === "cover_img" ? (
+                    item.cover_img ? (
+                      <img
+                        src={item.cover_img}
+                        className="img-uploadded"
+                        alt={item.username}
+                      />
+                    ) : (
+                      <ImageDrop />
+                    )
+                  ) : null}
                 </div>
               </button>
             </div>

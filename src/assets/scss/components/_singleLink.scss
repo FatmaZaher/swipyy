@@ -7,7 +7,7 @@
   .link-and-icon {
     @include flex(center, start);
     width: 50%;
-    img{
+    > img{
       width: 10px;
       margin-right: 10px;
     }
@@ -28,6 +28,11 @@
       width: 20px;
       height: 20px;
       margin-right: 5px;
+    }
+    img{
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
     }
   }
   .single-item-img {

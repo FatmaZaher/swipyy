@@ -17,13 +17,22 @@ const HomeHeader = () => {
   if (user) {
     currentUser = user.data;
   }
+  const copyUserName = async () => {
+    await navigator.clipboard.writeText("swipyy.me/" + currentUser.username);
+    showLinkList();
+  };
+  const copyShortName = async () => {
+    await navigator.clipboard.writeText("swipyy.me/" + currentUser.short_name);
+    showLinkList();
+  };
+
   return (
     <>
       <div className="home-header">
         <div className="my-link">
           <p className="link-text">
             <span>
-              heylink.me/<a href="#">{currentUser.username}</a>
+              swipyy.me/<a href="#">{currentUser.username}</a>
             </span>
             <img
               src={group}
@@ -34,12 +43,20 @@ const HomeHeader = () => {
             <div
               className={linkList ? "link-icon-list" : "link-icon-list show"}
             >
-              <button type="button" className="link-icon form-button">
+              <button
+                type="button"
+                className="link-icon form-button"
+                onClick={copyUserName}
+              >
                 <LinksIcon />
                 Copy Full Link
               </button>
 
-              <button type="button" className="link-icon form-button">
+              <button
+                type="button"
+                className="link-icon form-button"
+                onClick={copyShortName}
+              >
                 <LinksIcon />
                 Copy Short Link
               </button>

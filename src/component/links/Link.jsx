@@ -16,12 +16,6 @@ import axios from "axios";
 import UploadImg from "../UploadImg";
 import { useTranslation } from "react-i18next";
 
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-  return result;
-};
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
@@ -35,12 +29,34 @@ const Link = (props) => {
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
 
-  const onDragEnd = (result) => {
+  const sortItems = (values) => {
+    const ides = values.map((item) => item.id);
+
+    props.onStartRequest(true);
+    axios
+      .post(
+        "https://test-place.site/api/user/link/sort/update",
+        { sort_link: ides },
+        config
+      )
+      .then((res) => {
+        getLinks();
+      });
+  };
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    sortItems(result);
+    return result;
+  };
+  const onDragEnd = async (result) => {
     if (!result.destination) {
       return;
     }
     setPlaceholderProps({});
-    setItems((items) =>
+    await setItems((items) =>
       reorder(items, result.source.index, result.destination.index)
     );
   };
@@ -153,76 +169,82 @@ const Link = (props) => {
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {items.map((link, index) => (
-                  <Draggable key={link.id} draggableId={link.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
+                {items
+                  ? items.map((link, index) => (
+                      <Draggable
+                        key={link.id}
+                        draggableId={String(link.id)}
+                        index={index}
                       >
-                        <div className="single-item mb-3">
-                          <div className="link-and-icon">
-                            <img
-                              src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
-                              alt=""
-                            />
-                            <div className="single-item-switch">
-                              <div className="checkbox">
-                                <input
-                                  type="checkbox"
-                                  name="show"
-                                  checked={
-                                    link.status === "active" ? true : false
-                                  }
-                                  onChange={(e) =>
-                                    handleChangeSwitch(
-                                      link.id,
-                                      e.target.checked
-                                    )
-                                  }
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <div className="single-item mb-3">
+                              <div className="link-and-icon">
+                                <img
+                                  src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                                  alt=""
+                                />
+                                <div className="single-item-switch">
+                                  <div className="checkbox">
+                                    <input
+                                      type="checkbox"
+                                      name="show"
+                                      checked={
+                                        link.status === "active" ? true : false
+                                      }
+                                      onChange={(e) =>
+                                        handleChangeSwitch(
+                                          link.id,
+                                          e.target.checked
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="drop-img">
+                                  <UploadImg
+                                    item={link}
+                                    config={config}
+                                    uploadType="link"
+                                    onSaveData={() => handleEditData()}
+                                  />
+                                </div>
+                                <div className="single-item-info">
+                                  <p className="name-from-link">{link.name}</p>
+                                  <span className="the-link">
+                                    <img src={tele} alt="" />
+                                    {link.url}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="link-action">
+                                <Editicon
+                                  item={link}
+                                  config={config}
+                                  onSaveData={() => handleEditData()}
+                                  api="user/link"
+                                />
+                                <Deleteicon
+                                  item={link}
+                                  config={config}
+                                  onSaveData={() => handleEditData()}
+                                  api="user/link"
                                 />
                               </div>
                             </div>
-                            <div className="drop-img">
-                              <UploadImg
-                                item={link}
-                                config={config}
-                                uploadType="link"
-                                onSaveData={() => handleEditData()}
-                              />
-                            </div>
-                            <div className="single-item-info">
-                              <p className="name-from-link">{link.name}</p>
-                              <span className="the-link">
-                                <img src={tele} alt="" />
-                                {link.url}
-                              </span>
-                            </div>
                           </div>
-                          <div className="link-action">
-                            <Editicon
-                              item={link}
-                              config={config}
-                              onSaveData={() => handleEditData()}
-                              api="user/link"
-                            />
-                            <Deleteicon
-                              item={link}
-                              config={config}
-                              onSaveData={() => handleEditData()}
-                              api="user/link"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+                        )}
+                      </Draggable>
+                    ))
+                  : null}
 
                 {provided.placeholder}
                 <div

@@ -88,7 +88,7 @@
     }
     dropdown label,
     dropdown ul li {
-      display: block;
+      display: none;
       width: 200px;
       background: #fff;
       padding: 15px 20px;
@@ -135,10 +135,9 @@
       top: 0;
     }
     .animate {
-      
       transition: all 0.3s;
       backface-visibility: hidden;
-      
+
       padding: 0;
       position: absolute;
       top: 44px;

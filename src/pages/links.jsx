@@ -90,7 +90,7 @@ const Links = (props) => {
           eventKey="link"
           title={
             <span>
-              <LinkIcon /> Links
+              <LinkIcon /> <strong>Links</strong>
             </span>
           }
         >
@@ -103,7 +103,7 @@ const Links = (props) => {
           eventKey="social"
           title={
             <span>
-              <SocialIcon /> Social
+              <SocialIcon /> <strong>Social</strong>
             </span>
           }
         >
@@ -116,7 +116,7 @@ const Links = (props) => {
           eventKey="location"
           title={
             <span>
-              <LocationIcon /> Location
+              <LocationIcon /> <strong>Location</strong>
             </span>
           }
         >
@@ -129,7 +129,7 @@ const Links = (props) => {
           eventKey="images"
           title={
             <span>
-              <ImagesIcon /> Images
+              <ImagesIcon /> <strong>Images</strong>
             </span>
           }
         >
@@ -142,7 +142,7 @@ const Links = (props) => {
           eventKey="pdf"
           title={
             <span>
-              <AttachFileIcon /> PDF
+              <AttachFileIcon /> <strong>PDF</strong>
             </span>
           }
         >
@@ -155,7 +155,7 @@ const Links = (props) => {
           eventKey="banks"
           title={
             <span>
-              <BankIcon /> Banks
+              <BankIcon /> <strong>Banks</strong>
             </span>
           }
         >

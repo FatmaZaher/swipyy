@@ -30,13 +30,13 @@ ul {
 @import "./components/singleLink";
 @import "./components/pdf";
 @import "./modal";
+@import "./rtl";
 
-.img-upload .img-uploadded{
+.img-upload .img-uploadded {
   width: 40px !important;
   height: 40px;
   object-fit: contain;
 }
-
 
 .mobile-loading-box {
   display: flex;
@@ -54,4 +54,21 @@ ul {
 
 .mobile-loading-box img {
   width: 100px;
+}
+.social-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.social-list-item-icon {
+}
+
+.social-list-item-icon img {
+  width: 35px;
+  height: 35px;
+}
+
+.social-list-item .text {
+  font-weight: bold;
+  margin: 0 10px;
 }
