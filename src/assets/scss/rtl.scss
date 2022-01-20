@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap");
+
 [dir="rtl"] {
+  * {
+    font-family: "Almarai", sans-serif;
+  }
   .mobile-side {
     left: 0;
     right: auto;
@@ -7,41 +12,20 @@
     right: 255px;
     left: auto;
   }
-  .sidebar .sidebarList .list-item a .icon{
-      margin-left: 10px;
-      margin-right: 0;
+  .sidebar .sidebarList .list-item a .icon {
+    margin-left: 10px;
+    margin-right: 0;
   }
   .links-page .nav-item .nav-link span svg {
     margin-left: 8px;
     margin-right: 0;
-
-}
-.appearance-page .link-dragg .drag-img{
+  }
+  .appearance-page .link-dragg .drag-img {
     left: 0;
     right: 10px;
-}
-.appearance-page .link-dragg .icon {
+  }
+  .appearance-page .link-dragg .icon {
     margin-left: 10px;
     margin-right: 0;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 }

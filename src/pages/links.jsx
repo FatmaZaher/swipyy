@@ -26,6 +26,7 @@ const Links = (props) => {
   // if (!currentUser) {
   //   return <Redirect to="/login" />;
   // }
+  const { t } = props;
   const LinksHeaderData = [
     {
       title: "Links",
@@ -81,6 +82,7 @@ const Links = (props) => {
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
       </ul> */}
       {/* <LinksHeader /> */}
+      {t("intro.label")}
       <Tabs
         defaultActiveKey="link"
         id="uncontrolled-tab-example"
@@ -97,6 +99,7 @@ const Links = (props) => {
           <Link
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
         <Tab
@@ -110,6 +113,7 @@ const Links = (props) => {
           <Social
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
         <Tab
@@ -123,6 +127,7 @@ const Links = (props) => {
           <Location
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
         <Tab
@@ -136,6 +141,7 @@ const Links = (props) => {
           <Images
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
         <Tab
@@ -149,6 +155,7 @@ const Links = (props) => {
           <Pdf
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
         <Tab
@@ -162,6 +169,7 @@ const Links = (props) => {
           <Banks
             onStartRequest={() => startRequest()}
             onFinishRequest={() => finishRequest()}
+            t={t}
           />
         </Tab>
       </Tabs>

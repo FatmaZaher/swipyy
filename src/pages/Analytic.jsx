@@ -393,7 +393,7 @@ const Analytic = () => {
         </div>
       </div>
       <div className="row-2">
-        {" "}
+        {" "}ص
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
             Link Performance by Date
