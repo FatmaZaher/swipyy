@@ -104,9 +104,9 @@ const DropImg = (props) => {
                 ) : (
                   <div>
                     Drop your image here, or browse &nbsp; ,
-                    <button onClick={onImageRemoveAll} className="remove-img">
+                    {/* <button onClick={onImageRemoveAll} className="remove-img">
                       remove all images
-                    </button>
+                    </button> */}
                     <p>
                       Supports: JPG,PNG, PDF{" "}
                       <span className="pro-btn">

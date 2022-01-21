@@ -1,5 +1,196 @@
 {
-  "intro": {
-    "label": "hellow"
-  }
+  "home-header": {
+    "copy-full": "Copy Full Link",
+    "copy-short": "Copy Short Link"
+  },
+  "links": {
+    "header": {
+      "links": "Links",
+      "social": "Social",
+      "location": "Location",
+      "images": "Images",
+      "banks": "Banks"
+    },
+    "link": {
+      "button-placholder": "Type youe link here",
+      "button": "Add your link ",
+      "add-your-link": "Add You Link*"
+    },
+    "social": {
+      "button-placholder": "Type youe link here",
+      "button": "Add your link ",
+      "add-your-link": "Add You Social Link*",
+      "select": {
+        "showAs": "Show as",
+        "button": "Button",
+        "icon": "Icon"
+      }
+    },
+    "location": {
+      "button-placholder": "Type or paste location address",
+      "button": "Add Location",
+      "location-header": "Locations",
+      "add-your-link": "Add You Location*"
+    },
+    "images": {
+      "image-sliders": "Image Sliders",
+      "new-image-slider": "New Image Slider",
+      "description-link": "Description & link",
+      "add-description": "Add Description",
+      "title": "Title",
+      "description": "Description",
+      "add-link": "Add Link"
+    },
+    "banks": {
+      "button": "Add Bank Account",
+      "location-header": "Bank Account",
+      "add-your-bank": "Add You Bank*"
+    }
+  },
+  "sidebar": {
+    "home": "Home",
+    "appearance": "appearance",
+    "messages": "Messages",
+    "analytic": "Analytic",
+    "payments": "Payments & Subscription",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "apperance": {
+    "username": "username",
+    "short-username": "short username",
+    "layout": {
+      "title": "Layout",
+      "avatar": "Avatar",
+      "cover-image": "Cover Image"
+    },
+    "cover-image-title": "COVER IMAGE & TITLE",
+    "avatar-title": "avatar & title",
+    "description": {
+      "title": "description",
+      "input-placeholder": "Type the description here..",
+      "note": "500 characters left"
+    },
+    "highlights": {
+      "title": "title",
+      "switch-text": "Add the main highlights on your swippy.me page",
+      "highlights-title": "Highlights Title",
+      "highlights-placeholder": "Type the Title Here",
+      "detail": "Detail",
+      "detail-placeholder": "Type the Detail Here",
+      "button": "Add Another Detail"
+    },
+    "placement-manager": {
+      "title": "placement manager",
+      "button": "save placement"
+    },
+    "custom-avatars": "custom avatars",
+    "theme": "theme",
+    "buttons": {
+      "title": "Buttons",
+      "buttons-style": "Buttons Style",
+      "buttons-icon-style": "Buttons Icon Style",
+      "button-background-color": "Button Background Color",
+      "button-font-color": "Button Font Color",
+      "title-description-font-color": "Title & Description Font Color"
+    },
+    "background": {
+      "title": "background",
+      "background-style": "Background Style",
+      "animated-background": "Animated Background",
+      "background-color": "Background Color"
+    },
+    "links-text-alignment": {
+      "title": "links text alignment",
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    },
+    "social-icon-style": {
+      "title": "social icon style",
+      "social-icon-style-color": "Social Icon Style Color"
+    },
+    "hide-swippy-logo": "Hide Swippy.com logo "
+  },
+  "messages": {
+    "title": "Messages",
+    "turn-on-of": "Turn ON / OFF Message",
+    "apperance": "Apperance",
+    "message-text": "Message Text",
+    "success": "Success Message Text",
+    "input-text": "Input Field Text",
+    "your-name": "Your name",
+    "your-email": "Your Email",
+    "index": "Index",
+    "export": "Export to CSV",
+    "email": "Email",
+    "name": "Name",
+    "phone": "Phone",
+    "text": "Text"
+  },
+  "analytic": {
+    "views": "Views",
+    "unique-visitors": "Unique Visitors",
+    "clicks": "Clicks",
+    "ctr": "CTR",
+    "link-date": "Link Performance by Date",
+    "export": "Export to CSV",
+    "mobile-devieces": "Mobile Devieces",
+    "views-global": "Views by Global Market",
+    "views-country-map": "Views by Country (map)",
+    "views-country": "Views by Country",
+    "country": "Country",
+    "view": "View",
+    "views-city": "Views by City",
+    "views-referre": "Views by Referre",
+    "referre": "referre"
+  },
+  "payments": {
+    "time-turn": "It's time to turn PRO",
+    "mobile-devieces": "Mobile Devieces",
+    "pargraphe": " Get even more out of your bio link! Advanced analytics,unlimited customisations, dedicated support and much more. Upgrade or downgrade at any time.",
+    "yearly": "Yearly",
+    "monthly": "Monthly",
+    "starter": "starter",
+    "forever": "Forever",
+    "currnet-plan": "your currnet plan",
+    "update": "Update",
+    "best-sell": "Best Sell"
+  },
+  "settings": {
+    "password-security": "PASSWORD & SECURITY",
+    "current-email": "Current Email",
+    "password": "Password",
+    "change-password": "Change Password",
+    "type-current-password": "type current password here..",
+    "current-password": "Current Password*",
+    "new-password": "New Password*",
+    "type-new-password": "type new password here..",
+    "repeat-password": "Repeat New password*",
+    "turn-on-of-notf": "Turn On / Off email notifications and promotional materials from HeyLink.me"
+  },
+  "modal-edit": {
+    "url": "Url",
+    "name": "Name",
+    "edit": "Edit",
+    "save-edit": "Save Edit",
+    "cancel": "Cancel"
+  },
+  "edit-success": {
+    "good-job": "Good job!",
+    "edited-success": "Edited successfully!",
+    "success": "Success"
+  },
+  "modal-delete": {
+    "title": "Are you sure?",
+    "text": "You won't be able to revert this!",
+    "cancelButtonText": "Cancel",
+    "confirmButtonText": "Yes, delete it!"
+  },
+  "delete-success": {
+    "deleted": "Deleted!",
+    "text": "Your file has been deleted.",
+    "success": "Success"
+  },
+  "view-live" : "View Live"
 }

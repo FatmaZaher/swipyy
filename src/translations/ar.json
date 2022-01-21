@@ -1,5 +1,196 @@
 {
-  "intro": {
-    "label": "مقدمة"
-  }
+  "home-header": {
+    "copy-full": "نسخ الرابط الكامل",
+    "copy-short": "نسخ الرابط القصير"
+  },
+  "links": {
+    "header": {
+      "links": "روابط",
+      "social": "اجتماعي",
+      "location": "موقع",
+      "images": "صور",
+      "banks": "بنوك"
+    },
+    "link": {
+      "button-placholder": "الصق الرابط الخاص بك هنا",
+      "button": "إضافة الرابط",
+      "add-your-link": "أضف الرابط*"
+    },
+    "social": {
+      "button-placholder": "الصق الرابط الخاص بك هنا",
+      "button": "إضافة الرابط",
+      "add-your-link": "أضف الرابط*",
+      "select": {
+        "showAs": "تظهر ك",
+        "button": "زر",
+        "icon": "أيقونة"
+      }
+    },
+    "location": {
+      "button-placholder": "الصق عنوان الموقع هنا  ",
+      "button": "إضافة الموقع",
+      "location-header": "المواقع",
+      "add-your-link": "أضف الموقع*"
+    },
+    "images": {
+      "image-sliders": "Image Sliders",
+      "new-image-slider": "إضافة صورة جديدة",
+      "description-link": "الرابط والوصف",
+      "add-description": "إضافة وصف",
+      "title": "عنوان",
+      "description": "وصف",
+      "add-link": "إضافة رابط"
+    },
+    "banks": {
+      "button": "إضافة بنك",
+      "location-header": "حساب البنك",
+      "add-your-link": "إضف البنك*"
+    }
+  },
+  "sidebar": {
+    "home": "الرئيسية",
+    "appearance": "المظهر",
+    "messages": "الرسائل",
+    "analytic": "التحليلات",
+    "payments": "الدفع و الإشتراكات",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "apperance": {
+    "username": "اسم المستخدم",
+    "short-username": "اسم مستخدم مختصر",
+    "layout": {
+      "title": "تنسيق",
+      "avatar": "صورة رمزية",
+      "cover-image": "خلفية صورة"
+    },
+    "cover-image-title": "صورة الغلاف والعنوان",
+    "avatar-title": "صورة رمزية وعنوان",
+    "description": {
+      "title": "وصف",
+      "input-placeholder": "أكتب الوصف هنا ..",
+      "note": "تبقى 500 حرف"
+    },
+    "highlights": {
+      "title": "نص مميز",
+      "switch-text": "إضافة نص مميز في صفحة swippy.me",
+      "highlights-title": "عنوان النص المميز",
+      "highlights-placeholder": "أضف النص هنا",
+      "detail": "تفصيل",
+      "detail-placeholder": "أضف التفصيل هنا",
+      "button": "إضافة تفصيل اخر"
+    },
+    "placement-manager": {
+      "title": "إدارة ترتيب المحتويات",
+      "button": "حفظ"
+    },
+    "custom-avatars": "صورة مخصصة",
+    "theme": "ثيم",
+    "buttons": {
+      "title": "أزرار",
+      "buttons-style": "تنسيق الأزرار",
+      "buttons-icon-style": "تنسيق أيقونة الزر",
+      "button-background-color": "لون خلفية الزر",
+      "button-font-color": "لون نص الزر",
+      "title-description-font-color": "لون نص العنوان والوصف "
+    },
+    "background": {
+      "title": "خلفية",
+      "background-style": "تنسيق الخلفية",
+      "animated-background": "خلفية متحركة",
+      "background-color": "لون الخلفية"
+    },
+    "links-text-alignment": {
+      "title": "اتجاه نص الرابط",
+      "left": "يسار",
+      "center": "منتصف",
+      "right": "يمين"
+    },
+    "social-icon-style": {
+      "title": "تنسيق ايقونة الروابط الاجتماعية",
+      "social-icon-style-color": "لون أيقونة الروابط الإجتماعية"
+    },
+    "hide-swippy-logo": "إخفاء شعار swippy.com "
+  },
+  "messages": {
+    "title": "الرسائل",
+    "turn-on-of": "تشغيل / إيقاف الرسائل",
+    "apperance": "المظهر",
+    "message-text": "نص الرسالة",
+    "success": "نص نجاح الرسالة",
+    "input-text": "نص حقل الإدخل",
+    "your-name": "الاسم",
+    "your-email": "الإيميل",
+    "index": "الفهرس",
+    "export": "تصدير ل CSV",
+    "email": "الإيميل",
+    "name": "الاسم",
+    "phone": "رقم الهاتف",
+    "text": "النص"
+  },
+  "analytic": {
+    "views": "المشاهدات",
+    "unique-visitors": "زائرين فريدين",
+    "clicks": "نقرات",
+    "ctr": "CTR",
+    "link-date": "أداء الرابط حسب التاريخ",
+    "export": "تصدير ل CSV",
+    "mobile-devieces": "أجهزة محمولة",
+    "views-global": "المشاهدات حسب السوق العالمية",
+    "views-country-map": "المشاهدات حسب الدولة (خريطة)",
+    "views-country": "مشاهدات حسب الدولة",
+    "country": "دولة",
+    "view": "مشاهدة",
+    "views-city": "المشاهدات حسب المدينة",
+    "views-referre": "المشاهدات حسب الآراء",
+    "referre": "الرأي"
+  },
+  "payments": {
+    "time-turn": "  حان الوقت للترقية ",
+    "mobile-devieces": "أجهزة محمولة",
+    "pargraphe": "احصل على المزيد من الرابط الحي الخاص بك! التحليلات المتقدمة ، والتخصيصات غير المحدودة ، والدعم المخصص وغير ذلك الكثير. قم بالترقية أو الرجوع إلى إصدار أقدم في أي وقت.",
+    "yearly": "سنوية",
+    "monthly": "شهرية",
+    "starter": "بداية",
+    "forever": "إلى الأبد",
+    "currnet-plan": "خطتك الحالية",
+    "update": "تحديث",
+    "best-sell": "أفضل بيع"
+  },
+  "settings": {
+    "password-security": "كلمة المرور و الأمان",
+    "current-email": "الايميل الحالي",
+    "password": "كلمة المرور",
+    "change-password": "تغيير كلمة المرور",
+    "type-current-password": "اكتب كلمة المرور الحالية هنا..",
+    "current-password": "كلمة المرور الحالية*",
+    "new-password": "كلمة السر الجديدة*",
+    "type-new-password": "اكتب كلمة المرور الجديدة هنا ..",
+    "repeat-password": "كرر كلمة المرور الجديدة *",
+    "turn-on-of-notf": "قم بتشغيل / إيقاف تشغيل إشعارات البريد الإلكتروني والمواد الترويجية من Swippy.me"
+  },
+  "modal-edit": {
+    "url": "الرابط",
+    "name": "الاسم",
+    "edit": "تعديل",
+    "save-edit": "حفظ التعديلات",
+    "cancel": "تراجع"
+  },
+  "edit-success": {
+    "good-job": "أحسنت!",
+    "edited-success": "تم التعديل بنجاح!",
+    "success": "نجاح"
+  },
+  "modal-delete": {
+    "title": "هل أنت متأكد?",
+    "text": "لن تتمكن من التراجع عن هذا!",
+    "cancelButtonText": "إلغاء",
+    "confirmButtonText": "نعم ، احذفها!"
+  },
+  "delete-success": {
+    "deleted": "تم الحذف!",
+    "text": "تم حذف ملفك.",
+    "success": "نجاح"
+  },
+  "view-live" : "عرض مباشر"
 }

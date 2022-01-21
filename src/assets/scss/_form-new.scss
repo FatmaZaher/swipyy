@@ -78,9 +78,12 @@
   }
 }
 .social-page {
+  .form-page{
+    width: unset;
+  }
   .form-head {
     .form-control {
-      width: calc(100% - 445px) !important;
+      width: calc(100% - 455px) !important;
       @include mobile {
         width: 100px !important;
       }
@@ -99,6 +102,10 @@
         }
       }
     }
+  }
+  .css-1k94rgl-Control{
+    border-radius: $btn-input-radius;
+    background-color: $back-color;
   }
 }
 .datepicker {

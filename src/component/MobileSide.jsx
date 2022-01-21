@@ -26,6 +26,8 @@ const validationSchema = Yup.object({
 });
 
 const MobileSide = (props) => {
+  const { t } = props;
+
   const { user } = useSelector((state) => state.auth);
   const [mobileSide, setMobileSide] = useState(false);
   const [isLoad, setIsLoad] = useState(true);
@@ -90,7 +92,7 @@ const MobileSide = (props) => {
           target="_blank"
         >
           <RemoveRedEyeIcon />
-          View Live
+          {t("view-live")}
         </a>
       </div>
     </>

@@ -11,6 +11,9 @@
   .home-page {
     right: 255px;
     left: auto;
+    @include mobile {
+      right: 0;
+    }
   }
   .sidebar .sidebarList .list-item a .icon {
     margin-left: 10px;
@@ -27,5 +30,110 @@
   .appearance-page .link-dragg .icon {
     margin-left: 10px;
     margin-right: 0;
+  }
+  .single-item .link-and-icon > img {
+    margin-right: 0;
+    margin-left: 15px;
+  }
+  .single-item-switch {
+    margin-left: 15px;
+    margin-right: 0;
+  }
+  .edit-icon {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+  .single-item .single-item-info {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+  .accordion-button::after {
+    margin-right: auto;
+    margin-left: 0;
+    transform: rotate(180deg);
+  }
+  .accordion-button:not(.collapsed)::after {
+    transform: rotate(90deg);
+  }
+  .appearance-page .social-icon .with-border {
+    padding: 0;
+    padding: 20px 20px 20px 0;
+  }
+  .analytic .analytic-info .analytic-info-list .list-item .icon {
+    margin-right: 0;
+    margin-left: 15px;
+  }
+  .payment-cards .single-pay-card .list-card .list-card-item span svg {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+  .single-item .single-item-info .the-link img {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+  .icon-mobile {
+   .form-button {
+      border-radius: 15px 0 0 15px;
+    }
+    @include mobile {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  .icon-view {
+    .form-button {
+      border-radius: 0 15px 15px 0;
+    }
+    @include mobile {
+      right: unset;
+      left: 0;
+    }
+  }
+  .sidebar {
+    @include mobile {
+      left: unset;
+      right: -100%;
+    }
+  }
+  .sidebar.show {
+    @include mobile {
+      left: unset;
+      right: 0;
+    }
+  }
+  .mobile-side{
+    right: unset;
+    left: 0;
+    @include mobile {
+      right: unset;
+      left: -100%;
+    }
+  }
+  .mobile-side.show {
+    @include mobile {
+      right: unset;
+      left: 0;
+    }
+  }
+
+  .home-header .link-icon-list{
+    right: unset;
+    left: 0;
+  }
+  .single-item .single-item-icon, .single-item .single-item-img{
+    margin-right: 0;
+    margin-left: 15px;
+  }
+  .highlights .high-title .high-title-head, .highlights .high-details .high-title-head{
+    border-radius: 0 6px 6px 0;
+  }
+  .appearance-page .links-align .form-button svg{
+    margin-right: 0;
+    margin-left: 5px;
+  }
+  .home-header .link-icon-list .link-icon svg{
+    margin-right: 0;
+    margin-left: 10px;
   }
 }

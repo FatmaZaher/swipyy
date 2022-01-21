@@ -82,7 +82,7 @@ const Links = (props) => {
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
       </ul> */}
       {/* <LinksHeader /> */}
-      {t("intro.label")}
+      {/* {t("intro.label")} */}
       <Tabs
         defaultActiveKey="link"
         id="uncontrolled-tab-example"
@@ -91,9 +91,15 @@ const Links = (props) => {
         <Tab
           eventKey="link"
           title={
-            <span>
-              <LinkIcon /> <strong>Links</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <LinkIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.links")}</strong>
+              </div>
+            </div>
           }
         >
           <Link
@@ -105,9 +111,15 @@ const Links = (props) => {
         <Tab
           eventKey="social"
           title={
-            <span>
-              <SocialIcon /> <strong>Social</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <SocialIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.social")}</strong>
+              </div>
+            </div>
           }
         >
           <Social
@@ -119,9 +131,15 @@ const Links = (props) => {
         <Tab
           eventKey="location"
           title={
-            <span>
-              <LocationIcon /> <strong>Location</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <LocationIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.location")}</strong>
+              </div>
+            </div>
           }
         >
           <Location
@@ -133,9 +151,15 @@ const Links = (props) => {
         <Tab
           eventKey="images"
           title={
-            <span>
-              <ImagesIcon /> <strong>Images</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <ImagesIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.images")}</strong>
+              </div>
+            </div>
           }
         >
           <Images
@@ -147,9 +171,15 @@ const Links = (props) => {
         <Tab
           eventKey="pdf"
           title={
-            <span>
-              <AttachFileIcon /> <strong>PDF</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <AttachFileIcon />
+              </div>
+
+              <div>
+                <strong>PDF</strong>
+              </div>
+            </div>
           }
         >
           <Pdf
@@ -161,9 +191,15 @@ const Links = (props) => {
         <Tab
           eventKey="banks"
           title={
-            <span>
-              <BankIcon /> <strong>Banks</strong>
-            </span>
+            <div>
+              <div className="link-svg">
+                <BankIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.banks")}</strong>
+              </div>
+            </div>
           }
         >
           <Banks

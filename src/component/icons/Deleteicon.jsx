@@ -8,18 +8,21 @@ import axios from "axios";
 const MySwal = withReactContent(Swal);
 
 const Deleteicon = (props) => {
+  const { t } = props;
+
   const { item, config, api } = props;
 
   const deletLink = () => {
     try {
       Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: t("modal-delete.title"),
+        text: t("modal-delete.text"),
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#8055f0",
         cancelButtonColor: "#163152",
-        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: t("modal-delete.cancelButtonText"),
+        confirmButtonText: t("modal-delete.confirmButtonText"),
       }).then((result) => {
         if (result.isConfirmed) {
           axios
@@ -27,7 +30,7 @@ const Deleteicon = (props) => {
             .then((res) => {
               props.onSaveData("ee");
 
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              Swal.fire(t("delete-success.deleted"), t("delete-success.text"), t("delete-success.success"));
             });
         }
       });

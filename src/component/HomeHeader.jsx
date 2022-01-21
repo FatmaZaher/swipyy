@@ -7,7 +7,9 @@ import LogoutIcon from "./icons/LogoutIcon";
 import { useSelector } from "react-redux";
 import LanguageSelector from "./LanguageSelector ";
 
-const HomeHeader = () => {
+const HomeHeader = (props) => {
+  const { t } = props; 
+
   const [linkList, setLinkList] = useState(false);
   const showLinkList = () => setLinkList(!linkList);
   const [personalList, setPersonalList] = useState(false);
@@ -49,7 +51,7 @@ const HomeHeader = () => {
                 onClick={copyUserName}
               >
                 <LinksIcon />
-                Copy Full Link
+                {t("home-header.copy-full")}
               </button>
 
               <button
@@ -58,7 +60,7 @@ const HomeHeader = () => {
                 onClick={copyShortName}
               >
                 <LinksIcon />
-                Copy Short Link
+                {t("home-header.copy-short")}
               </button>
             </div>
           </p>

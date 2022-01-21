@@ -324,7 +324,7 @@
   }
 
   .pro-btn {
-    margin-left: 5px;
+    margin: 0 5px;
     position: absolute;
     .form-button {
       width: auto;
@@ -392,14 +392,21 @@
   }
 }
 .align-pro {
-  position: relative;
   .pro-btn {
     display: inline;
     position: absolute;
     top: 0;
-    left: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
     .form-button {
       font-size: 10px;
+      margin: 0 !important;
+    }
+    @include mobile {
+      left: 40%;
+      .form-button {
+        font-size: 6px;
+      }
     }
   }
 }

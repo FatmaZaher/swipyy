@@ -159,6 +159,16 @@
       }
     }
   }
+  .edit-btn{
+    @include flex(center, space-between);
+    .login-btn{
+      width: 47%;
+      .cancel-btn{
+        background-color: $text-color;
+      }
+    }
+  }
+  
 
   // .field {
   //   // color: $text-color;

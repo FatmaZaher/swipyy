@@ -137,14 +137,12 @@
     .animate {
       transition: all 0.3s;
       backface-visibility: hidden;
-
       padding: 0;
       position: absolute;
       top: 44px;
       width: 37px;
       height: 37px;
       line-height: 37px;
-      z-index: 5545454;
     }
     @include mobile {
       dropdown,

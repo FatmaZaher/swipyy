@@ -14,6 +14,7 @@
     background: $nav-color;
     outline: none;
     border-radius: 30px;
+    position: relative;
     transition: all 0.4s;
     &:nth-child(3) {
       top: 150px;

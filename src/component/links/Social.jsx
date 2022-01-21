@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
+// import EditIcon from "@mui/icons-material/Edit";
+// import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+// import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
@@ -24,6 +24,8 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 const Social = (props) => {
+  const { t } = props;
+
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
   const [socialPlatforms, setSocialPlatforms] = useState([]);
@@ -115,8 +117,8 @@ const Social = (props) => {
       });
   };
   const validationSchema = Yup.object({
-    url: Yup.string().required("Add You Link*"),
-    social_id: Yup.string().required("Add You Link*"),
+    url: Yup.string().required(t("links.social.add-your-link")),
+    social_id: Yup.string().required(t("links.social.add-your-link")),
   });
   const getSocials = () => {
     axios
@@ -160,9 +162,9 @@ const Social = (props) => {
       });
   };
   const socialLinkIsButton = [
-    { id: "Show as", name: "Show as" },
-    { id: "button", name: "button" },
-    { id: "icon", name: "icon" },
+    { id: "Show as", name: t("links.social.select.showAs") },
+    { id: "button", name: t("links.social.select.button")},
+    { id: "icon", name: t("links.social.select.icon") },
   ];
 
   // const finalSpaceCharacters = [
@@ -202,7 +204,7 @@ const Social = (props) => {
       >
         {(formik) => (
           <Form className="form-page form-head">
-            <div className="form-control me-3">
+            <div className="form-control">
               <Select
                 defaultValue={socialPlatforms[0]}
                 formatOptionLabel={formatOptionLabel}
@@ -223,13 +225,13 @@ const Social = (props) => {
               control="input"
               type="text"
               name="url"
-              placeholder="Paste your social link here"
+              placeholder={t("links.social.button-placholder")}
               error="true"
             />
 
             <LinkButton
               type="submit"
-              buttontext="Add Social Link"
+              buttontext={t("links.social.button")}
               icon="yes"
               disabled={formik.values.url === "" ? true : false}
             />
@@ -294,12 +296,14 @@ const Social = (props) => {
                             config={config}
                             onSaveData={() => handleEditData()}
                             api="user/socialUser"
+                            t= {t}
                           />
                           <Deleteicon
                             item={social}
                             config={config}
                             onSaveData={() => handleEditData()}
                             api="user/socialUser"
+                            t= {t}
                           />
                         </div>
                       </div>

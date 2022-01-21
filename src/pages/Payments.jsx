@@ -33,6 +33,8 @@ const validationSchema = Yup.object({
 });
 
 const Payments = (props) => {
+  const { t } = props;
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [packageMonthly, setPackageMonthly] = useState({});
@@ -43,7 +45,6 @@ const Payments = (props) => {
   }
 
   const getAllPackageMonthly = async () => {
-
     try {
       axios
         .get("https://test-place.site/api/user/package/monthly", config)
@@ -74,7 +75,6 @@ const Payments = (props) => {
         )
         .then((res) => {
           window.location.replace(res.data.data.url);
-
 
           // setPackageMonthly(res.data.data.data[0]);
           // setSettings(res.data.data.Settings);
@@ -109,25 +109,24 @@ const Payments = (props) => {
         id="uncontrolled-tab-example"
         className="mb-5"
       >
-        <Tab eventKey="PRO" title="It's time to turn PRO">
-          <p className="your-links-header mb-3 mb-m-5">Mobile Devieces</p>
-          <p className="p-payment">
-            Get even more out of your bio link! Advanced analytics,unlimited
-            customisations, dedicated support and much more. Upgrade or
-            downgrade at any time.
+        <Tab eventKey="PRO" title={t("payments.time-turn")}>
+          <p className="your-links-header mb-3 mb-m-5">
+            {" "}
+            {t("payments.mobile-devieces")}
           </p>
+          <p className="p-payment">{t("payments.pargraphe")}</p>
           <div className="packages">
             <Tabs
               defaultActiveKey="yearly"
               id="uncontrolled-tab-example"
               className="my-3"
             >
-              <Tab eventKey="yearly" title="Yearly">
+              <Tab eventKey="yearly" title={t("payments.yearly")}>
                 <div className="payment-cards mt-5">
                   <div className="single-pay-card">
-                    <p className="title-card">starter</p>
+                    <p className="title-card">{t("payments.starter")}</p>
                     <p className="price-card">
-                      $00.00 <span>\Forever</span>
+                      $00.00 <span>\{t("payments.forever")}</span>
                     </p>
                     <ul className="list-card">
                       <li className="list-card-item">
@@ -155,7 +154,10 @@ const Payments = (props) => {
                         Lorem ipsum dolor{" "}
                       </li>
                     </ul>
-                    <LinkButton type="" buttontext="your currnet plan" />
+                    <LinkButton
+                      type=""
+                      buttontext={t("payments.currnet-plan")}
+                    />
                   </div>
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
@@ -173,14 +175,14 @@ const Payments = (props) => {
                         : null}
                     </ul>
                     <LinkButton
-                      buttontext="Update"
+                      buttontext={t("payments.update")}
                       onClick={() => submitPay(packageYearly.id)}
                     />
-                    <span className="the-best">Best Sell</span>
+                    <span className="the-best">{t("payments.best-sell")}</span>
                   </div>
                 </div>
               </Tab>
-              <Tab eventKey="monthlly" title="Monthly">
+              <Tab eventKey="monthlly" title={t("payments.monthly")}>
                 <div className="payment-cards mt-5">
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
@@ -198,17 +200,16 @@ const Payments = (props) => {
                         : null}
                     </ul>
                     <LinkButton
-                      buttontext="Update"
+                      buttontext={t("payments.update")}
                       onClick={() => submitPay(packageMonthly.id)}
                     />
-                    <span className="the-best">Best Sell</span>
+                    <span className="the-best">{t("payments.best-sell")}</span>
                   </div>
                 </div>
               </Tab>
             </Tabs>
           </div>
         </Tab>
-      
       </Tabs>
     </div>
   );

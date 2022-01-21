@@ -12,6 +12,8 @@ import axios from "axios";
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Location = (props) => {
+  const { t } = props;
+
   const [items, setItems] = useState([]);
 
   const initialValues = {
@@ -27,7 +29,7 @@ const Location = (props) => {
       });
   };
   const validationSchema = Yup.object({
-    name: Yup.string().required("Add You location*"),
+    name: Yup.string().required(t("links.location.add-your-link")),
   });
   const getLocations = () => {
     axios
@@ -35,7 +37,6 @@ const Location = (props) => {
       .then((res) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
-
       });
   };
   useEffect(() => {
@@ -87,15 +88,21 @@ const Location = (props) => {
               control="input"
               type="text"
               name="name"
-              placeholder="Type or paste location address"
+              placeholder={t("links.location.button-placholder")}
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add Location" icon="yes" />
+            <LinkButton
+              type="submit"
+              buttontext={t("links.location.button")}
+              icon="yes"
+            />
           </Form>
         )}
       </Formik>
       <div className="your-links pt-4">
-        <p className="your-links-header mb-3 mb-m-5">Locations</p>
+        <p className="your-links-header mb-3 mb-m-5">
+          {t("links.location.location-header")}
+        </p>
 
         {items.map((location, index) => (
           <div className="single-item mb-3">
@@ -108,12 +115,14 @@ const Location = (props) => {
                 config={config}
                 onSaveData={() => handleEditData()}
                 api="user/location"
+                t={t}
               />
               <Deleteicon
                 item={location}
                 config={config}
                 onSaveData={() => handleEditData()}
                 api="user/location"
+                t={t}
               />
             </div>
           </div>

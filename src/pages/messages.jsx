@@ -14,6 +14,8 @@ const initialValues = {
 };
 const validationSchema = Yup.object({});
 const Messages = (props) => {
+  const { t } = props;
+
   const [settings, setSettings] = useState({});
   const [messages, setMessages] = useState([]);
 
@@ -74,7 +76,7 @@ const Messages = (props) => {
   const changeEmailLabel = (email_label) => {
     apiChange({ email_label });
   };
-   const changeNameLabel = (name_label) => {
+  const changeNameLabel = (name_label) => {
     apiChange({ name_label });
   };
   useEffect(() => {
@@ -102,7 +104,7 @@ const Messages = (props) => {
   return (
     <>
       <div className="messages mb-3">
-        <p className="your-links-header mb-3">Messages</p>
+        <p className="your-links-header mb-3">{t("messages.title")}</p>
         <div className="messages-content">
           <div className="switch">
             <div className="single-item-switch">
@@ -115,11 +117,13 @@ const Messages = (props) => {
                 />
               </div>
             </div>
-            <span>Turn ON / OFF Message</span>
+            <span>{t("messages.turn-on-of")}</span>
           </div>
           {settings.message_status ? (
             <>
-              <p className="your-links-header my-3">Apperance</p>
+              <p className="your-links-header my-3">
+                {t("messages.apperance")}
+              </p>
               <div className="highlights">
                 <Formik>
                   <Form className="">
@@ -128,8 +132,8 @@ const Messages = (props) => {
                         control="input"
                         type="text"
                         name="messageText"
-                        placeholder="Message Text"
-                        label="Message Text"
+                        placeholder={t("messages.message-text")}
+                        label={t("messages.message-text")}
                         value={settings.message_text}
                         onChange={(e) =>
                           settingsChange("message_text", e.target.value)
@@ -142,8 +146,8 @@ const Messages = (props) => {
                         control="input"
                         type="text"
                         name="succesMessageText"
-                        placeholder="Succes Message Text"
-                        label="Succes Message Text"
+                        placeholder={t("messages.success")}
+                        label={t("messages.success")}
                         value={settings.message_success}
                         onChange={(e) =>
                           settingsChange("message_success", e.target.value)
@@ -151,13 +155,15 @@ const Messages = (props) => {
                         onBlur={(e) => changeMessage_success(e.target.value)}
                       />
                     </div>
-                    <p className="your-links-header my-3">Input Field Text</p>
+                    <p className="your-links-header my-3">
+                      {t("messages.input-text")}
+                    </p>
                     <div className="high-title with-border">
                       <FormikControl
                         control="input"
                         type="text"
                         name="yourName"
-                        placeholder="Your name"
+                        placeholder={t("messages.your-name")}
                         value={settings.name_label}
                         onBlur={(e) => changeNameLabel(e.target.value)}
                         onChange={(e) =>
@@ -205,7 +211,7 @@ const Messages = (props) => {
                         control="input"
                         type="nubmer"
                         name="yourEmail"
-                        placeholder="Your Email"
+                        placeholder={t("messages.your-email")}
                         value={settings.email_label}
                         onBlur={(e) => changeEmailLabel(e.target.value)}
                         onChange={(e) =>
@@ -236,10 +242,10 @@ const Messages = (props) => {
       </div>
       <div className="index">
         <div className="index-header">
-          <p className="your-links-header mb-3">Index</p>
+          <p className="your-links-header mb-3">{t("messages.index")}</p>
           <LinkButton
             type=""
-            buttontext="Export to CSV"
+            buttontext={t("messages.export")}
             exportIcon="true"
             onClick={() => exportCSV()}
           />
@@ -248,10 +254,10 @@ const Messages = (props) => {
           <table className="table">
             <thead>
               <tr>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Text</th>
+                <th>{t("messages.email")}</th>
+                <th>{t("messages.name")}</th>
+                <th>{t("messages.phone")}</th>
+                <th>{t("messages.text")}</th>
               </tr>
             </thead>
             <tbody>
@@ -265,44 +271,6 @@ const Messages = (props) => {
               ))}
             </tbody>
           </table>
-          {/* <Table responsive className="index-table mt-5">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Text</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date Received</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <th>Text</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date Received</th>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <th>Text</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date Received</th>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <th>Text</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date Received</th>
-                <td>1</td>
-              </tr>
-            </tbody>
-          </Table> */}
         </div>
       </div>
     </>

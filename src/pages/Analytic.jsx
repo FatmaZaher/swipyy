@@ -24,7 +24,9 @@ const allDate = [
   { key: "Last Month", value: "lastmonth" },
 ];
 
-const Analytic = () => {
+const Analytic = (props) => {
+  const { t } = props;
+
   const [settings, setSettings] = useState({});
   const [viewsGlobal, setViewsGlobal] = useState(null);
   const [uniqueChart, setUniqueChart] = useState(null);
@@ -36,22 +38,22 @@ const Analytic = () => {
 
   const analyticInfoData = [
     {
-      title: "Views",
+title: t("analytic.views"),
       icon: <RemoveRedEyeIcon />,
       number: settings.views_count,
     },
     {
-      title: "Unique Visitors",
+title: t("analytic.unique-visitors"),
       icon: <GroupsIcon />,
       number: settings.unique_visitor_count,
     },
     {
-      title: "Clicks",
+title: t("analytic.clicks"),
       icon: <MouseIcon />,
       number: settings.clicks,
     },
     {
-      title: "CTR",
+title: t("analytic.ctr"),
       icon: <AutoGraphIcon />,
       number: Math.round(settings.ctr),
     },
@@ -79,8 +81,9 @@ const Analytic = () => {
         curve: "straight",
       },
       title: {
-        text: "Clicks",
+        text: t("analytic.clicks"),
         align: "left",
+
       },
       grid: {
         row: {
@@ -126,7 +129,7 @@ const Analytic = () => {
         curve: "straight",
       },
       title: {
-        text: "CTR",
+        text: t("analytic.ctr"),
         align: "left",
       },
       grid: {
@@ -330,7 +333,7 @@ const Analytic = () => {
             </Form>
           )}
         </Formik>
-        <LinkButton type="" buttontext="Export to CSV" exportIcon="true" />
+<LinkButton type="" buttontext={t("analytic.export")} exportIcon="true" />
       </div>
       <div className="analytic-info mb-3">
         <ul className="analytic-info-list">
@@ -349,7 +352,7 @@ const Analytic = () => {
       </div>
       <div className="link-performance-charts mb-3">
         <p className="your-links-header mb-3 mb-m-5">
-          Link Performance by Date
+{t("analytic.link-date")}
         </p>
         <div className="charts">
           <div id="views">
@@ -393,10 +396,11 @@ const Analytic = () => {
         </div>
       </div>
       <div className="row-2">
-        {" "}ص
+        {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-            Link Performance by Date
+{t("analytic.link-date")}
+
           </p>
           {/* <Chart
             options={deviceCatOption.options}
@@ -405,7 +409,8 @@ const Analytic = () => {
           /> */}
         </div>
         <div className="mobile-device mb-3">
-          <p className="your-links-header mb-3 mb-m-5">Mobile Devieces</p>
+<p className="your-links-header mb-3 mb-m-5">{t("analytic.mobile-devieces")}
+</p>
           <table class="table">
             <thead>
               <tr>
@@ -424,7 +429,7 @@ const Analytic = () => {
         {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-            Views by Global Market
+{t("analytic.views-global")}
           </p>
           {globalMarket ? (
             <Chart
@@ -437,19 +442,20 @@ const Analytic = () => {
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-            Views by Country (map)
+{t("analytic.views-country-map")}
+
           </p>
           <MapChart />
         </div>
       </div>
       <div className="row-2">
         <div className="mobile-device mb-3">
-          <p className="your-links-header mb-3 mb-m-5">Views by Country</p>
+<p className="your-links-header mb-3 mb-m-5">{t("analytic.views-country")}</p>
           <table class="table">
             <thead>
               <tr>
-                <th>Country</th>
-                <th>View</th>
+  <th>{t("analytic.country")}</th>
+   <th>{t("analytic.view")}</th>
               </tr>
             </thead>
             <tbody>
@@ -466,7 +472,7 @@ const Analytic = () => {
           </table>
         </div>
         <div className="mobile-device mb-3">
-          <p className="your-links-header mb-3 mb-m-5">Views by City</p>
+ <p className="your-links-header mb-3 mb-m-5">{t("analytic.views-city")}</p>
           <table class="table">
             <thead>
               <tr>
@@ -482,12 +488,12 @@ const Analytic = () => {
         </div>
       </div>
       <div className="mobile-device final mb-3">
-        <p className="your-links-header mb-3 mb-m-5">Views by Referrer</p>
+ <p className="your-links-header mb-3 mb-m-5">{t("analytic.views-referre")}</p>
         <table class="table">
           <thead>
             <tr>
-              <th>referrer</th>
-              <th>View</th>
+  <th>{t("analytic.referre")}</th>
+   <th>{t("analytic.view")}</th>
             </tr>
           </thead>
           <tbody>

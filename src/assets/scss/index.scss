@@ -60,9 +60,6 @@ ul {
   align-items: center;
 }
 
-.social-list-item-icon {
-}
-
 .social-list-item-icon img {
   width: 35px;
   height: 35px;
@@ -71,4 +68,29 @@ ul {
 .social-list-item .text {
   font-weight: bold;
   margin: 0 10px;
+}
+@include mobile {
+  .social-list-item-icon img {
+    width: 15px;
+    height: 15px;
+  }
+  .social-list-item .text {
+    font-size: 8px;
+  }
+}
+
+.theme-style .avatar label {
+  height: 150px;
+  width: 100px;
+  img:nth-of-type(2) {
+    width: 100px;
+  }
+  @include mobile {
+    width: 60px;
+    height: 110px;
+    font-size: 10px;
+    img:nth-of-type(2) {
+      width: 60px;
+    }
+  }
 }

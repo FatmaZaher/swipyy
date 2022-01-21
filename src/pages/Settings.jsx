@@ -16,7 +16,9 @@ import Success from "../component/icons/Success";
 const MySwal = withReactContent(Swal);
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const Settings = () => {
+const Settings = (props) => {
+  const { t } = props;
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [settings, setSettings] = useState({});
@@ -26,7 +28,11 @@ const Settings = () => {
     new_password_confirmation: "",
   };
   function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire(
+      t("edit-success.good-job"),
+      t("edit-success.edited-success"),
+      t("edit-success.success")
+    );
     // Swal.fire({
     //   title: 'Image icon',
     //   iconHtml: '<img src="https://www.linkpicture.com/q/Icon-2_1.png">',
@@ -79,11 +85,13 @@ const Settings = () => {
   }, []);
   return (
     <div className="settings">
-      <p className="your-links-header mb-3 mb-m-5">PASSWORD & SECURITY</p>{" "}
+      <p className="your-links-header mb-3 mb-m-5">
+        {t("settings.password-security")}
+      </p>{" "}
       <div className="single-item mb-3">
         <div className="link-and-icon">
           <div className="single-item-info">
-            <p className="name-from-link">Current Email</p>
+            <p className="name-from-link">{t("settings.current-email")}</p>
             <span className="the-link">{settings.email}</span>
           </div>
         </div>
@@ -93,13 +101,14 @@ const Settings = () => {
             config={config}
             onSaveData={() => handleEditData()}
             api="user/settings/update"
+            t= {t}
           />
         </div>
       </div>
       <div className="single-item mb-3 mb-md-5">
         <div className="link-and-icon">
           <div className="single-item-info">
-            <p className="name-from-link">Paswword</p>
+            <p className="name-from-link">{t("settings.password")}</p>
             <span className="the-link">{settings.password}</span>
           </div>
         </div>
@@ -117,7 +126,7 @@ const Settings = () => {
             >
               <div>
                 <h4 ref={(_subtitle) => (subtitle = _subtitle)}>
-                  Change Password
+                  {t("settings.change-password")}
                 </h4>
                 <Formik
                   initialValues={initialValues}
@@ -131,30 +140,30 @@ const Settings = () => {
                         control="input"
                         type="password"
                         name="password"
-                        placeholder="type current password here.."
+                        placeholder={t("settings.type-current-password")}
                         error="true"
-                        label="Current Password*"
+                        label={t("settings.current-password")}
                       />
                       <FormikControl
                         control="input"
                         type="password"
                         name="new_password"
-                        placeholder="type the new password here.."
+                        placeholder={t("settings.type-new-password")}
                         error="true"
-                        label="New password*"
+                        label={t("settings.new-password")}
                       />
                       <FormikControl
                         control="input"
                         type="password"
                         name="new_password_confirmation"
-                        placeholder="type the new password here.."
+                        placeholder={t("settings.type-new-password")}
                         error="true"
-                        label="Repeat New password*"
+                        label={t("settings.repeat-password")}
                       />
                       <div className="login-btn">
                         <LinkButton
                           type="submit"
-                          buttontext="Change password"
+                          buttontext={t("settings.change-password")}
                         />
                       </div>
                     </Form>
@@ -167,8 +176,7 @@ const Settings = () => {
       </div>
       <div className="high-header">
         <p>
-          Turn On / Off email notifications and promotional materials from
-          HeyLink.me
+        {t("settings.turn-on-of-notf")}
         </p>
         <SwitchButton />
       </div>

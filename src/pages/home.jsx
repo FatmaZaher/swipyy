@@ -37,7 +37,7 @@ const Home = ({ component: Component, ...rest }) => {
         <Dashboardlayout>
           <Sidebar t={t} />
           <div className="home-page">
-            <HomeHeader />
+            <HomeHeader t={t} />
             <Component
               onStartRequest={() => startRequest()}
               onFinishRequest={() => finishRequest()}

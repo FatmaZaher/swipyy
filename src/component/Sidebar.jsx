@@ -17,36 +17,37 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useSelector } from "react-redux";
 import axios from "axios";
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const { t } = props;
   const SidebarData = [
     {
-      title: "Home",
+      title: t("sidebar.home"),
       icon: <LinksIcon />,
       link: "/links",
     },
     {
-      title: "Appearance",
+      title: t("sidebar.appearance"),
       icon: <AppearanceIcon />,
       link: "/appearance",
     },
     {
-      title: "Messages",
+      title: t("sidebar.messages"),
       icon: <MessageIcon />,
       link: "/messages",
     },
     {
-      title: "Analytic",
+      title: t("sidebar.analytic"),
       icon: <AnalyticIcon />,
       link: "/analytic",
     },
     {
-      title: "Payments & Subscription",
+      title: t("sidebar.payments"),
       icon: <PaymentIcon />,
       link: "/payments",
     },
     ,
     {
-      title: "Settings",
+      title: t("sidebar.settings"),
       icon: <SettingsIcon />,
       link: "/settings",
     },
@@ -112,7 +113,7 @@ const Sidebar = () => {
               <div className="icon">
                 <PaymentIcon />
               </div>
-              <div className="title">Logout</div>
+              <div className="title">{t("sidebar.logout")}</div>
             </a>
           </li>
         </ul>

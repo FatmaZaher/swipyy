@@ -29,6 +29,8 @@ const imagesSizeList = [
 ];
 
 const Images = (props) => {
+  const { t } = props;
+
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
@@ -115,7 +117,7 @@ const Images = (props) => {
   };
   return (
     <div className="images">
-      <p className="your-links-header mb-3 mb-m-5">Image Sliders</p>
+      <p className="your-links-header mb-3 mb-m-5">{t("links.images.image-sliders")}</p>
       <div className="single-item mb-3">
         <div className="link-and-icon">
           <div className="single-item-switch">
@@ -129,7 +131,7 @@ const Images = (props) => {
             </div>
           </div>
           <div className="single-item-info">
-            <p className="name-from-link">New Image Slider</p>
+            <p className="name-from-link">{t("links.images.new-image-slider")}</p>
           </div>
         </div>
         <div className="link-action">
@@ -149,11 +151,11 @@ const Images = (props) => {
           </div>
           <Accordion>
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Description & link</Accordion.Header>
+              <Accordion.Header>{t("links.images.description-link")}</Accordion.Header>
               <Accordion.Body>
                 <div className="add-description">
                   <div className="high-header">
-                    <p>Add Description</p>
+                    <p>{t("links.images.add-description")}</p>
                     <div className="single-item-switch">
                       <div className="checkbox">
                         <input
@@ -177,7 +179,7 @@ const Images = (props) => {
                           <FormikControl
                             control="input"
                             name="title"
-                            label="Title"
+                            label={t("links.images.title")}
                             placeholder="image slider title"
                             value={settings.title}
                             onBlur={(e) => changeTitle(e.target.value)}
@@ -185,7 +187,7 @@ const Images = (props) => {
                           <FormikControl
                             control="input"
                             name="description"
-                            label="Description"
+                            label={t("links.images.description")}
                             placeholder="image slider Description"
                             value={settings.description}
                             onBlur={(e) => changeDescription(e.target.value)}
@@ -197,7 +199,7 @@ const Images = (props) => {
                 </div>
                 <div className="add-description">
                   <div className="high-header">
-                    <p>Add Link</p>
+                    <p>{t("links.images.add-link")}</p>
                     <div className="single-item-switch">
                       <div className="checkbox">
                         <input

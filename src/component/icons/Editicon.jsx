@@ -24,6 +24,8 @@ const customStyles = {
 };
 
 const Editicon = (props) => {
+  const { t } = props;
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isName, setIsName] = React.useState(false);
@@ -46,7 +48,7 @@ const Editicon = (props) => {
     initialValues.url = item ? item.url : null;
     initialValues.name = item ? item.name : null;
     inputName = "url";
-    labelName = "url";
+    labelName = t("modal-edit.url");
   } else if (api === "user/socialUser") {
     initialValues.url = item ? item.url : null;
     inputName = "url";
@@ -102,7 +104,11 @@ const Editicon = (props) => {
     setIsOpen(false);
   }
   function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire(
+      t("modal-edit.good-job"),
+      t("modal-edit.edited-success"),
+      t("modal-edit.success")
+    );
     setIsOpen(false);
   }
 
@@ -125,7 +131,9 @@ const Editicon = (props) => {
         ariaHideApp={false}
       >
         <div>
-          <h4 ref={(_subtitle) => (subtitle = _subtitle)}>Edit</h4>
+          <h4 ref={(_subtitle) => (subtitle = _subtitle)}>
+            {t("modal-edit.edit")}
+          </h4>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -141,7 +149,7 @@ const Editicon = (props) => {
                     name="name"
                     placeholder=""
                     error="true"
-                    label="name"
+                    label={t("modal-edit.name")}
                   />
                 ) : null}
                 <FormikControl
@@ -152,8 +160,21 @@ const Editicon = (props) => {
                   error="true"
                   label={labelName}
                 />
-                <div className="login-btn">
-                  <LinkButton type="submit" buttontext="Save Edit" />
+                <div className="edit-btn">
+                  <div className="login-btn">
+                    <LinkButton
+                      type="submit"
+                      buttontext={t("modal-edit.save-edit")}
+                    />
+                  </div>
+                  <div className="login-btn">
+                    <LinkButton
+                      type="button"
+                      buttontext={t("modal-edit.cancel")}
+                      onClick={closeModal}
+                      className="cancel-btn"
+                    />
+                  </div>
                 </div>
               </Form>
             )}

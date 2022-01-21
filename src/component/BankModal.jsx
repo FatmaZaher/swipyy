@@ -11,6 +11,8 @@ import axios from "axios";
 const MySwal = withReactContent(Swal);
 
 const BankModal = (props) => {
+  const { t } = props;
+
   const { bank, banksList, config } = props;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   let subtitle;
@@ -59,12 +61,16 @@ const BankModal = (props) => {
   }
 
   function closeModal() {
-    console.log('closeModal closeModal');
+    console.log("closeModal closeModal");
 
     setIsOpen(false);
   }
   function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire(
+      t("edit-success.good-job"),
+      t("edit-success.edited-success"),
+      t("edit-success.success")
+    );
     setIsOpen(false);
   }
   return (
@@ -106,7 +112,7 @@ const BankModal = (props) => {
                   label="Account Bank Number"
                 />
                 <FormikControl
-                  control="input"  
+                  control="input"
                   type="text"
                   name="iban"
                   placeholder="type IBAN number here..."
@@ -114,10 +120,7 @@ const BankModal = (props) => {
                   label="IBAN"
                 />
                 <div className="login-btn">
-                  <LinkButton
-                    type="submit"
-                    buttontext="Save"
-                  />
+                  <LinkButton type="submit" buttontext="Save" />
                 </div>
               </Form>
             )}

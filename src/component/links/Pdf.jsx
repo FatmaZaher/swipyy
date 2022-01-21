@@ -58,6 +58,8 @@ const toFormData = (fromdata) => {
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Pdf = (props) => {
+  const { t } = props;
+
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
@@ -278,6 +280,7 @@ const Pdf = (props) => {
               config={config}
               onSaveData={() => handleEditData()}
               api="user/files"
+              t= {t}
             />
           </div>
         </div>

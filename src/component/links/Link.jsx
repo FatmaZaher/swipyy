@@ -23,8 +23,12 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 const config = JSON.parse(localStorage.getItem("headers"));
 const queryAttr = "data-rbd-drag-handle-draggable-id";
+
+
 const Link = (props) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
+  const { t } = props;
+
 
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
@@ -106,7 +110,7 @@ const Link = (props) => {
   };
 
   const validationSchema = Yup.object({
-    url: Yup.string().required("Add You Link*"),
+    url: Yup.string().required(t("links.link.add-your-link")),
   });
   const getLinks = () => {
     axios.get("https://test-place.site/api/user/link", config).then((res) => {
@@ -150,10 +154,10 @@ const Link = (props) => {
               control="input"
               type="text"
               name="url"
-              placeholder="Paste your link here"
+              placeholder={t("links.link.button-placholder")}
               error="true"
             />
-            <LinkButton type="submit" buttontext="Add your Link" icon="yes" />
+            <LinkButton type="submit" buttontext={t("links.link.button")} icon="yes" />
           </Form>
         )}
       </Formik>
@@ -231,12 +235,14 @@ const Link = (props) => {
                                   config={config}
                                   onSaveData={() => handleEditData()}
                                   api="user/link"
+                                  t= {t}
                                 />
                                 <Deleteicon
                                   item={link}
                                   config={config}
                                   onSaveData={() => handleEditData()}
                                   api="user/link"
+                                  t= {t}
                                 />
                               </div>
                             </div>

@@ -104,15 +104,30 @@
 .links-page {
   .nav-item {
     .nav-link {
-      span {
-        @include flex(center, space-between);
-        svg {
-          width: 19px;
-          margin-right: 8px;
+      width: 85px;
+      > div {
+        // @include flex(center, spdace-between);
+        font-size: 14px;
+        .link-svg {
+          height: 40px;
+          width: 40px;
+          line-height: 40px;
+          border-radius: 50%;
+          background-color: $back-color;
+          margin: 0 auto;
+          margin-bottom: 5px;
+          svg {
+            height: 35px;
+          }
         }
       }
     }
     .nav-link.active {
+      background-color: #8cc8cc38;
+      color: $text-color;
+      .link-svg {
+        background-color: $text-color;
+      }
       svg {
         path {
           fill: $white-color;

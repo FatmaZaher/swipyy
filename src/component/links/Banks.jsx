@@ -18,11 +18,14 @@ import axios from "axios";
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Banks = (props) => {
+  const { t } = props;
+
   const [banksList, setBanksList] = useState([]);
   const [items, setItems] = useState([]);
 
   const initialValues = {
-    bank_id: ""  };
+    bank_id: "",
+  };
   const getBankList = async () => {
     try {
       await axios
@@ -43,7 +46,7 @@ const Banks = (props) => {
   };
 
   const validationSchema = Yup.object({
-    bank_id: Yup.string().required("Add You Link*"),
+    bank_id: Yup.string().required(t("links.banks.add-your-bank")),
   });
   const getBanks = () => {
     axios
@@ -92,14 +95,16 @@ const Banks = (props) => {
             />
             <LinkButton
               type="submit"
-              buttontext="Add Bank Account"
+              buttontext={t("links.banks.button")}
               icon="yes"
             />
           </Form>
         )}
       </Formik>
       <div className="your-links pt-4">
-        <p className="your-links-header mb-3 mb-m-5">Bank Account</p>
+        <p className="your-links-header mb-3 mb-m-5">
+          {t("links.banks.location-header")}
+        </p>
         {items.map((bank, index) => (
           <div className="single-item mb-3">
             <div className="link-and-icon">
@@ -123,6 +128,7 @@ const Banks = (props) => {
                 onSaveData={() => handleEditData()}
                 config={config}
                 api="user/bankUser"
+                t= {t}
               />
             </div>
           </div>

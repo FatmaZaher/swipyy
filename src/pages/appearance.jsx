@@ -84,6 +84,8 @@ const backgroundStyles = [
 const config = JSON.parse(localStorage.getItem("headers"));
 
 const Appearance = (props) => {
+  const { t } = props;
+
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
@@ -362,7 +364,9 @@ const Appearance = (props) => {
     <div className="appearance-page">
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>username {currentUser.username}</Accordion.Header>
+          <Accordion.Header>
+            {t("apperance.username")} {currentUser.username}
+          </Accordion.Header>
           <Accordion.Body>
             <div className="single-item mb-3">
               <div className="single-item-info">
@@ -381,6 +385,7 @@ const Appearance = (props) => {
                   config={config}
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
+                  t= {t}
                 />
                 {/* <Sharicon /> */}
               </div>
@@ -389,7 +394,7 @@ const Appearance = (props) => {
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            short username{" "}
+            {t("apperance.short-username")}{" "}
             <div className="pro-btn position-static">
               <Link to="/payments">
                 <LinkButton type="" buttontext="PRO" />
@@ -414,6 +419,7 @@ const Appearance = (props) => {
                   config={config}
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
+                  t= {t}
                 />
                 {/* <Sharicon /> */}
               </div>
@@ -421,7 +427,7 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
-          <Accordion.Header>layout</Accordion.Header>
+          <Accordion.Header>{t("apperance.layout.title")}</Accordion.Header>
           <Accordion.Body>
             <div className="layout">
               <div className="avatar">
@@ -440,7 +446,7 @@ const Appearance = (props) => {
                   ) : (
                     <img src={layout1} alt="" />
                   )}
-                  <p className="mt-2">Avatar</p>
+                  <p className="mt-2">{t("apperance.layout.avatar")}</p>
                 </label>
               </div>
               <div className="avatar">
@@ -464,7 +470,7 @@ const Appearance = (props) => {
                       <LinkButton type="" buttontext="PRO" />
                     </Link>
                   </div>
-                  <p className="mt-2">Cover Image</p>
+                  <p className="mt-2">{t("apperance.layout.cover-image")}</p>
                 </label>
               </div>
             </div>
@@ -472,7 +478,9 @@ const Appearance = (props) => {
         </Accordion.Item>
         {settings.layout === "cover" ? (
           <Accordion.Item eventKey="3">
-            <Accordion.Header>COVER IMAGE & TITLE</Accordion.Header>
+            <Accordion.Header>
+              {t("apperance.cover-image-title")}
+            </Accordion.Header>
             <Accordion.Body>
               <div className="avatar-title">
                 <div className="single-item mb-3">
@@ -527,6 +535,7 @@ const Appearance = (props) => {
                         config={config}
                         onSaveData={() => handleEditData()}
                         api="user/appearance/update"
+                        t= {t}
                       />
                       {/* <Sharicon /> */}
                     </div>
@@ -538,7 +547,7 @@ const Appearance = (props) => {
         ) : null}
         {settings.layout === "avatar" ? (
           <Accordion.Item eventKey="3">
-            <Accordion.Header>avatar & title</Accordion.Header>
+            <Accordion.Header>{t("apperance.avatar-title")}</Accordion.Header>
             <Accordion.Body>
               <div className="avatar-title">
                 <div className="single-item mb-3">
@@ -593,6 +602,7 @@ const Appearance = (props) => {
                         config={config}
                         onSaveData={() => handleEditData()}
                         api="user/appearance/update"
+                        t= {t}
                       />
                       {/* <Sharicon /> */}
                     </div>
@@ -604,7 +614,9 @@ const Appearance = (props) => {
         ) : null}
 
         <Accordion.Item eventKey="4">
-          <Accordion.Header>description</Accordion.Header>
+          <Accordion.Header>
+            {t("apperance.description.title")}
+          </Accordion.Header>
           <Accordion.Body>
             <div className="description">
               <Formik
@@ -616,8 +628,8 @@ const Appearance = (props) => {
                   <FormikControl
                     control="textarea"
                     name="description"
-                    placeholder="Type the description here.."
-                    note="500 characters left"
+                    placeholder={t("apperance.description.input-placeholder")}
+                    note={t("apperance.description.note")}
                     value={settings.description}
                     onBlur={(e) => changeDescription(e.target.value)}
                     onChange={(e) =>
@@ -630,10 +642,10 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="5">
-          <Accordion.Header>highlights</Accordion.Header>
+          <Accordion.Header>{t("apperance.highlights.title")}</Accordion.Header>
           <Accordion.Body>
             <div className="high-header">
-              <p>Add the main highlights on your swippy.me page</p>
+              <p>{t("apperance.highlights.switch-text")}</p>
               <div className="single-item-switch">
                 <div className="checkbox">
                   <input
@@ -655,11 +667,15 @@ const Appearance = (props) => {
                   >
                     <Form className="">
                       <div className="high-title">
-                        <p className="high-title-head">Highlights Title</p>
+                        <p className="high-title-head">
+                          {t("apperance.highlights.highlights-title")}
+                        </p>
                         <FormikControl
                           control="input"
                           name="highTitle"
-                          placeholder="Type the tilte here"
+                          placeholder={t(
+                            "apperance.highlights.highlights-placeholder"
+                          )}
                           value={settings.highlights}
                           onChange={(e) =>
                             settingsChange("highlights", e.target.value)
@@ -670,11 +686,15 @@ const Appearance = (props) => {
                       <div className="field-array">
                         {details.map((detail, index) => (
                           <div key={index} className="high-details">
-                            <p className="high-title-head">Detail</p>
+                            <p className="high-title-head">
+                              {t("apperance.highlights.detail")}
+                            </p>
                             <Field
                               name={`details[${index}]`}
                               className="form-input"
-                              placeholder="Type the detail here"
+                              placeholder={t(
+                                "apperance.highlights.detail-placeholder"
+                              )}
                               value={detail.detail}
                               onChange={(e) =>
                                 editDetailsItem(index, e.target.value)
@@ -686,6 +706,7 @@ const Appearance = (props) => {
                               config={config}
                               onSaveData={() => handleEditData()}
                               api="user/appearance/update/detail"
+                              t= {t}
                             />
                           </div>
                         ))}
@@ -694,7 +715,7 @@ const Appearance = (props) => {
                           className="form-button"
                           onClick={() => addDetailsItem()}
                         >
-                          Add Another Detail
+                          {t("apperance.highlights.button")}
                         </button>
                       </div>
                     </Form>
@@ -706,7 +727,9 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="6">
-          <Accordion.Header>placement manager</Accordion.Header>
+          <Accordion.Header>
+            {t("apperance.placement-manager.title")}
+          </Accordion.Header>
           <Accordion.Body>
             <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
               <Droppable droppableId="droppable">
@@ -756,12 +779,12 @@ const Appearance = (props) => {
               className="form-button"
               onClick={() => changePlacement()}
             >
-              Save placement
+              {t("apperance.placement-manager.button")}
             </button>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">
-          <Accordion.Header>custom avatars</Accordion.Header>
+          <Accordion.Header>{t("apperance.custom-avatars")}</Accordion.Header>
           <Accordion.Body>
             <div className="custom-avatars">
               {settings.avatars_type
@@ -821,9 +844,9 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="8">
-          <Accordion.Header>theme</Accordion.Header>
+          <Accordion.Header>{t("apperance.theme")}</Accordion.Header>
           <Accordion.Body>
-            <div className="custom-avatars">
+            <div className="custom-avatars theme-style">
               {themes.map((theme, themeIndex) => {
                 return (
                   <div
@@ -842,7 +865,7 @@ const Appearance = (props) => {
                       />
                       <label htmlFor={"theme-" + theme.id} className="d-block">
                         <img src={checkIcon} alt="" className="check-icon" />
-                        <img width="100px" src={theme.img} alt="" />
+                        <img src={theme.img} alt="" />
                         <p className="mt-2">{theme.name}</p>
                         {theme.is_pro ? (
                           <div className="pro-btn">
@@ -863,11 +886,13 @@ const Appearance = (props) => {
         {settings.is_theme_pro === 0 ? (
           <>
             <Accordion.Item eventKey="9">
-              <Accordion.Header>buttons</Accordion.Header>
+              <Accordion.Header>
+                {t("apperance.buttons.title")}
+              </Accordion.Header>
               <Accordion.Body>
                 <div className="buttons">
                   <div className="buttons-style">
-                    <p>Buttons Style</p>
+                    <p>{t("apperance.buttons.buttons-style")}</p>
                     <div className="buttons-style-shap">
                       <div className="custom-avatars">
                         {settings.buttons
@@ -921,7 +946,7 @@ const Appearance = (props) => {
                   </div>
 
                   <div className="buttons-icon-style">
-                    <p>Buttons Icon Style</p>
+                    <p>{t("apperance.buttons.buttons-icon-style")}</p>
                     <div className="buttons-style-shap">
                       <div className="custom-avatars">
                         {settings.button_icon_style
@@ -992,9 +1017,9 @@ const Appearance = (props) => {
                   </div>
                 </div>
                 <div className="button-color my-3">
-                  <p>
-                    Button Background Color
-                    <div className="pro-btn back-pro">
+                  <div className="d-flex">
+                    {t("apperance.buttons.button-background-color")}
+                    <div>
                       <input
                         type="color"
                         value={color1}
@@ -1002,10 +1027,10 @@ const Appearance = (props) => {
                         onBlur={(e) => changebtn_background_color()}
                       />
                     </div>
-                  </p>
-                  <p>
-                    Button Font Color
-                    <div className="pro-btn font-pro">
+                  </div>
+                  <div className="d-flex">
+                    {t("apperance.buttons.button-font-color")}
+                    <div>
                       <input
                         type="color"
                         value={color2}
@@ -1013,10 +1038,10 @@ const Appearance = (props) => {
                         onBlur={(e) => changebtn_font_color()}
                       />
                     </div>
-                  </p>
-                  <p>
-                    Title & Description Font Color
-                    <div className="pro-btn title-pro">
+                  </div>
+                  <div className="d-flex">
+                    {t("apperance.buttons.title-description-font-color")}
+                    <div>
                       <input
                         type="color"
                         value={color3}
@@ -1024,7 +1049,7 @@ const Appearance = (props) => {
                         onBlur={(e) => changetitile_descreption_color()}
                       />
                     </div>
-                  </p>
+                  </div>
                 </div>
                 {/* <div className="description">
               <p>Buttons Style</p>
@@ -1045,9 +1070,11 @@ const Appearance = (props) => {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="10">
-              <Accordion.Header>background</Accordion.Header>
+              <Accordion.Header>
+                {t("apperance.background.title")}
+              </Accordion.Header>
               <Accordion.Body>
-                <p>Background Style</p>
+                <p>{t("apperance.background.background-style")}</p>
                 <div className="custom-avatars">
                   {backgroundStyles.map((background, index) => {
                     return (
@@ -1084,7 +1111,9 @@ const Appearance = (props) => {
                     );
                   })}
                 </div>
-                <p className="mt-4">Animated Background</p>
+                <p className="mt-4">
+                  {t("apperance.background.animated-background")}
+                </p>
                 <div className="custom-avatars">
                   {settings.background_animated
                     ? settings.background_animated.map((background, index) => {
@@ -1144,7 +1173,9 @@ const Appearance = (props) => {
                 </div>
                 <div className="upload-button">
                   <div>
-                    <p className="mt-4">Background Color</p>
+                    <p className="mt-4">
+                      {t("apperance.background.background-color")}
+                    </p>
                     <input
                       type="color"
                       value={color4}
@@ -1165,7 +1196,9 @@ const Appearance = (props) => {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="12">
-              <Accordion.Header>links text alignment</Accordion.Header>
+              <Accordion.Header>
+                {t("apperance.links-text-alignment.title")}
+              </Accordion.Header>
               <Accordion.Body>
                 <div className="links-align">
                   <div className="avatar-back">
@@ -1183,7 +1216,7 @@ const Appearance = (props) => {
                       <label htmlFor="left" className="d-block form-button">
                         <img src={checkIcon} alt="" className="check-icon" />
                         <LeftAlign />
-                        Left
+                        {t("apperance.links-text-alignment.left")}
                       </label>
                     </div>
                   </div>
@@ -1210,7 +1243,7 @@ const Appearance = (props) => {
                           </div>
                         </span>
                         <CenterAlign />
-                        Center
+                        {t("apperance.links-text-alignment.center")}
                       </label>
                     </div>
                   </div>
@@ -1236,7 +1269,7 @@ const Appearance = (props) => {
                         </span>
                         <img src={checkIcon} alt="" className="check-icon" />
                         <RightAlign />
-                        Right
+                        {t("apperance.links-text-alignment.right")}
                       </label>
                     </div>
                   </div>
@@ -1274,10 +1307,12 @@ const Appearance = (props) => {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="13">
-              <Accordion.Header>social icon style</Accordion.Header>
+              <Accordion.Header>
+                {t("apperance.social-icon-style.title")}
+              </Accordion.Header>
               <Accordion.Body>
                 <div className="social-icon">
-                  <p>SOCIAL ICONS STYLE</p>
+                  <p> {t("apperance.social-icon-style.social-icon-style-color")}</p>
                   <input
                     type="color"
                     value={color5}
@@ -1293,7 +1328,7 @@ const Appearance = (props) => {
         <div className="social-icon">
           <div className="high-title with-border">
             <p>
-              Hide swippy.me Logo
+              {t("apperance.hide-swippy-logo")}
               <div className="pro-btn">
                 <Link to="/payments">
                   <LinkButton type="" buttontext="PRO" />
