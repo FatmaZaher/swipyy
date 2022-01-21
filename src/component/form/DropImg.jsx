@@ -7,6 +7,8 @@ import axios from "axios";
 import UploadLoading from "../../assets/images/UploadLoading.svg";
 
 const DropImg = (props) => {
+  const { t } = props;
+
   const { config, item } = props;
   const [images, setImages] = useState([]);
   const [oldImages, setoldImages] = useState([]);
@@ -100,15 +102,15 @@ const DropImg = (props) => {
                   <ImageDrop />
                 </div>
                 {isDragging ? (
-                  <div>leave here</div>
+                  <div>{t("leave-here")}</div>
                 ) : (
                   <div>
-                    Drop your image here, or browse &nbsp; ,
+                    {t("drop-image")} &nbsp; ,
                     {/* <button onClick={onImageRemoveAll} className="remove-img">
                       remove all images
                     </button> */}
                     <p>
-                      Supports: JPG,PNG, PDF{" "}
+                    {t("supports")}: JPG,PNG, PDF{" "}
                       <span className="pro-btn">
                         <Link to="/payments">
                           <LinkButton type="" buttontext="PRO" />
@@ -130,7 +132,7 @@ const DropImg = (props) => {
                   <img src={image.src} alt="" width="100" />
                   <div className="image-item__btn-wrapper">
                     {/* <button onClick={() => onImageUpdate(index)}>Update</button> */}
-                    <button onClick={() => DeleteImg(image.id)}>Remove</button>
+                    <button onClick={() => DeleteImg(image.id)}>{t("remove")}</button>
                   </div>
                 </div>
               ))}

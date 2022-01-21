@@ -179,7 +179,8 @@
   "edit-success": {
     "good-job": "Good job!",
     "edited-success": "Edited successfully!",
-    "success": "Success"
+    "success": "Success",
+    "payment-success": "The payment done successfully, enjoy your pro plan!"
   },
   "modal-delete": {
     "title": "Are you sure?",
@@ -192,5 +193,12 @@
     "text": "Your file has been deleted.",
     "success": "Success"
   },
-  "view-live" : "View Live"
+  "view-live" : "View Live",
+  "leave-here": "leave here",
+  "drop-image": "Drop your image here, or browse",
+  "supports": "Supports",
+  "remove": "Remove",
+  "bigger-than":"a file is bigger than 150kb go to ",
+  "go-to":"bigger than 150kb go to ",
+  "select-file":"Select a file to show details"
 }

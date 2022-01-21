@@ -147,6 +147,7 @@ const Images = (props) => {
               config={config}
               uploadType="link"
               onSaveData={() => handleEditData()}
+              t = {t}
             />
           </div>
           <Accordion>

@@ -27,9 +27,15 @@ const validationSchema = Yup.object({
   repaetPassword: Yup.string().required("Enter Your Password*"),
 });
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
+  const { t } = props;
+
   function sucesesChange() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire(
+      t("edit-success.good-job"),
+      t("edit-success.edited-success"),
+      t("edit-success.success")
+    );
   }
   return (
     <div className="login-page">

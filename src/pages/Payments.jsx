@@ -90,9 +90,9 @@ const Payments = (props) => {
   }
   function sucesesEdit() {
     Swal.fire(
-      "Good job!",
-      "The payment done successfully, enjoy your pro plan!",
-      "success"
+      t("edit-success.good-job"),
+      t("edit-success.payment-success"),
+      t("edit-success.success")
     );
     setIsOpen(false);
   }

@@ -101,7 +101,11 @@ const Pdf = (props) => {
     setIsOpen(false);
   }
   function sucesesEdit() {
-    Swal.fire("Good job!", "Edited successfully!", "success");
+    Swal.fire(
+      t("edit-success.good-job"),
+      t("edit-success.edited-success"),
+      t("edit-success.success")
+    );
     setIsOpen(false);
     getFiles();
   }
@@ -195,7 +199,7 @@ const Pdf = (props) => {
                 </div>
               ) : (
                 <p className="more-size">
-                  <sapn>a file is bigger than 150kb go to </sapn>
+                  <sapn> {t("bigger-than")}</sapn>
 
                   <div className="pro-btn">
                     <Link to="/payments">
@@ -208,7 +212,7 @@ const Pdf = (props) => {
           ) : (
             <>
               <p className="more-size">
-                <span>bigger than 150kb go to </span>
+                <span>{t("go-to")}</span>
 
                 <div className="pro-btn">
                   <Link to="/payments">
@@ -216,7 +220,7 @@ const Pdf = (props) => {
                   </Link>
                 </div>
               </p>
-              <p>Select a file to show details</p>
+              <p>{t("select-file")}</p>
             </>
           )}
         </div>
@@ -280,7 +284,7 @@ const Pdf = (props) => {
               config={config}
               onSaveData={() => handleEditData()}
               api="user/files"
-              t= {t}
+              t={t}
             />
           </div>
         </div>
