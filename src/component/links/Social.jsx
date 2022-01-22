@@ -103,7 +103,14 @@ const Social = (props) => {
       await axios
         .get("https://test-place.site/api/user/social/get", config)
         .then((res) => {
-          setSocialPlatforms(res.data.data);
+          const newPlatforms = res.data.data.map((item) => {
+            return {
+              value: item.name,
+              icon: item.icon,
+              id: item.id,
+            };
+          });
+          setSocialPlatforms(newPlatforms);
         });
     } catch (error) {}
   };
@@ -135,17 +142,12 @@ const Social = (props) => {
   const handleEditData = (key, e) => {
     getSocials();
   };
-  const formatOptionLabel = ({ icon, id, name }) => (
+  const formatOptionLabel = ({ icon, id, value }) => (
     <div className="social-list-item">
       <div class="social-list-item-icon">
-        <img
-          src={
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/768px-Facebook_icon_2013.svg.png"
-          }
-          alt=""
-        />
+        <img src={icon} alt="" />
       </div>
-      <div className="text">{name}</div>
+      <div className="text">{value}</div>
     </div>
   );
 
@@ -163,7 +165,7 @@ const Social = (props) => {
   };
   const socialLinkIsButton = [
     { id: "Show as", name: t("links.social.select.showAs") },
-    { id: "button", name: t("links.social.select.button")},
+    { id: "button", name: t("links.social.select.button") },
     { id: "icon", name: t("links.social.select.icon") },
   ];
 
@@ -296,14 +298,14 @@ const Social = (props) => {
                             config={config}
                             onSaveData={() => handleEditData()}
                             api="user/socialUser"
-                            t= {t}
+                            t={t}
                           />
                           <Deleteicon
                             item={social}
                             config={config}
                             onSaveData={() => handleEditData()}
                             api="user/socialUser"
-                            t= {t}
+                            t={t}
                           />
                         </div>
                       </div>

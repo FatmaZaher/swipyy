@@ -78,14 +78,16 @@
   }
 }
 .social-page {
-  .form-page{
+  .form-page {
     width: unset;
   }
   .form-head {
+    flex-wrap: wrap;
     .form-control {
       width: calc(100% - 455px) !important;
       @include mobile {
-        width: 100px !important;
+        width: 100% !important;
+        margin-bottom: 15px;
       }
     }
   }
@@ -103,7 +105,7 @@
       }
     }
   }
-  .css-1k94rgl-Control{
+  .css-1k94rgl-Control {
     border-radius: $btn-input-radius;
     background-color: $back-color;
   }

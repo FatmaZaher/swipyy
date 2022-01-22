@@ -254,8 +254,9 @@ const Messages = (props) => {
           <table className="table">
             <thead>
               <tr>
-                <th>{t("messages.email")}</th>
                 <th>{t("messages.name")}</th>
+
+                <th>{t("messages.email")}</th>
                 <th>{t("messages.phone")}</th>
                 <th>{t("messages.text")}</th>
               </tr>
@@ -263,8 +264,9 @@ const Messages = (props) => {
             <tbody>
               {messages.map((message) => (
                 <tr>
-                  <td>{message.enail}</td>
                   <td>{message.name}</td>
+
+                  <td>{message.email}</td>
                   <td>{message.phone}</td>
                   <td>{message.text}</td>
                 </tr>

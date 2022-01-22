@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import personal from "../assets/images/personal.png";
@@ -80,28 +79,7 @@ const MobileViewContent = () => {
           <ShareIcon />
         </p>
       </div>
-      <OwlCarousel
-        className="owl-theme"
-        items="1"
-        autoplay
-        loop
-        nav
-        margin={10}
-        stagePadding={10}
-      >
-        <div class="item">
-          <img src={personal} alt="" />
-        </div>
-        <div class="item">
-          <img src={personal} alt="" />
-        </div>
-        <div class="item">
-          <img src={personal} alt="" />
-        </div>
-        <div class="item">
-          <img src={personal} alt="" />
-        </div>
-      </OwlCarousel>
+    
     </div>
   );
 };

@@ -34,6 +34,10 @@ const Analytic = (props) => {
   const [viewsChart, setViewsChart] = useState(null);
   const [clicksChart, setClicksChart] = useState(null);
   const [countryTable, setCountryTable] = useState([]);
+  const [cityTable, setCityTable] = useState([]);
+  const [deviceTable, setDeviceTable] = useState([]);
+
+  
   const [referrer, setReferrer] = useState([]);
 
   const analyticInfoData = [
@@ -305,6 +309,9 @@ title: t("analytic.ctr"),
           setClicksChart(handleViewsChart(data.clicks_chart, "Clicks"));
 
           setCountryTable(handleTable(data.country_table));
+          setCityTable(handleTable(data.city_table));
+          setDeviceTable(handleTable(data.city_table));
+
           setReferrer(handleTable(data.referrer));
 
           // setDevicesChart(handleDevicesChart(data.device_table));
@@ -418,6 +425,16 @@ title: t("analytic.ctr"),
               </tr>
             </thead>
             <tbody>
+            
+            {deviceTable
+                ? deviceTable.map((item, index) => (
+                    <tr key={index}>
+                      {item.map((device, deviceIndex) => (
+                        <td key={deviceIndex}>{device}</td>
+                      ))}
+                    </tr>
+                  ))
+                : null}
               <tr>
                 <td></td>
               </tr>
@@ -476,13 +493,21 @@ title: t("analytic.ctr"),
           <table class="table">
             <thead>
               <tr>
-                <th></th>
+                <th>Cite</th>
+
+                <th>View</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-              </tr>
+            {cityTable
+                ? cityTable.map((item, index) => (
+                    <tr key={index}>
+                      {item.map((city, cityIndex) => (
+                        <td key={cityIndex}>{city}</td>
+                      ))}
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </table>
         </div>

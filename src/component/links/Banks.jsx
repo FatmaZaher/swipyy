@@ -122,13 +122,14 @@ const Banks = (props) => {
                 banksList={banksList}
                 config={config}
                 onSaveData={() => handleEditData()}
+                t={t}
               />
               <Deleteicon
                 item={bank}
                 onSaveData={() => handleEditData()}
                 config={config}
                 api="user/bankUser"
-                t= {t}
+                t={t}
               />
             </div>
           </div>

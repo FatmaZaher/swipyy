@@ -184,8 +184,8 @@ const Appearance = (props) => {
     apiChange({ avtar_status });
   };
   const changeCoverStatus = (value) => {
-    const cover_status = value === true ? 1 : 0;
-    apiChange({ cover_status });
+    const cover_img_status = value === true ? 1 : 0;
+    apiChange({ cover_img_status });
   };
 
   const changeTitleStatus = (value) => {
@@ -497,8 +497,8 @@ const Appearance = (props) => {
                       <div className="checkbox">
                         <input
                           type="checkbox"
-                          name="show"
-                          checked={settings.cover_status === 1 ? true : false}
+                          name="cover_img_status"
+                          checked={settings.cover_img_status === 1 ? true : false}
                           onChange={(e) => changeCoverStatus(e.target.checked)}
                         />
                       </div>

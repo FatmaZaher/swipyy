@@ -26,6 +26,7 @@ const BankModal = (props) => {
     iban: bank.iban,
     bank_id: bank.bank_id,
   };
+  console.log();
   const customStyles = {
     content: {
       top: "50%",
@@ -66,6 +67,7 @@ const BankModal = (props) => {
     setIsOpen(false);
   }
   function sucesesEdit() {
+    console.log('sucesesEdit sucesesEdit sucesesEdit');
     Swal.fire(
       t("edit-success.good-job"),
       t("edit-success.edited-success"),
@@ -101,7 +103,10 @@ const BankModal = (props) => {
                   name="bank_id"
                   options={banksList}
                   error="true"
-                  value={bank.bank_id}
+                  value={formik.values.bank_id}
+                  onChange={(e) =>
+                    formik.setFieldValue("bank_id", e.target.value)
+                  }
                 />
                 <FormikControl
                   control="input"
