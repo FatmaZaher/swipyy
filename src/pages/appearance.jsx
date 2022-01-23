@@ -65,17 +65,17 @@ const validationSchema = Yup.object({
 
 const backgroundStyles = [
   {
-    id: "0",
+    id: "soild",
     img: background1,
     text: "Falt",
   },
   {
-    id: "1",
+    id: "up",
     img: background2,
     text: "Up",
   },
   {
-    id: "2",
+    id: "down",
     img: background3,
     text: "Down",
   },
@@ -148,6 +148,18 @@ const Appearance = (props) => {
     let newSettings = oldSettings;
     setSettings(newSettings);
   };
+  const hexToRGB = (hex, alpha) => {
+    var r = parseInt(hex.slice(1, 3), 16),
+      g = parseInt(hex.slice(3, 5), 16),
+      b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+      return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+      return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+  };
+
   const apiChange = async (values) => {
     props.onStartRequest(true);
 
@@ -215,7 +227,7 @@ const Appearance = (props) => {
   const changeTheme = (theme_id, isPro) => {
     if (checkIsPro(isPro) === false) return;
 
-    apiChange({ theme_id });
+    apiChange({ theme_id, background_final: null });
   };
   const changeButton = (button_type_id) => {
     apiChange({ button_type_id });
@@ -233,12 +245,30 @@ const Appearance = (props) => {
     apiChange({ titile_descreption_color: color3 });
   };
 
-  const changeBackgroundColor = () => {
-    apiChange({ background_color: color4 });
+  const changeBackground = (background_type) => {
+    let color = "";
+    if (background_type === "soild") {
+      color = color4;
+    } else if (background_type === "up") {
+      color = `linear-gradient(0deg, ${hexToRGB(color4, 1)}, ${hexToRGB(
+        color4,
+        0.5
+      )})`;
+    } else if (background_type === "down") {
+      color = `linear-gradient(180deg,  ${hexToRGB(color4, 1)}, ${hexToRGB(
+        color4,
+        0.5
+      )})`;
+    }
+    apiChange({
+      background_type,
+      background_final: color,
+      background_color: color4,
+    });
   };
-
-  const changeBackground = (background_id) => {
-    apiChange({ background_id });
+  const changeBackgroundColor = () => {
+    changeBackground(settings.background_type);
+    // apiChange({ background_color: color4, background_final: color4 });
   };
   const changeBackgroundAnimate = (background_animated_id, isPro) => {
     if (checkIsPro(isPro) === false) return;
@@ -385,7 +415,7 @@ const Appearance = (props) => {
                   config={config}
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
-                  t= {t}
+                  t={t}
                 />
                 {/* <Sharicon /> */}
               </div>
@@ -419,7 +449,7 @@ const Appearance = (props) => {
                   config={config}
                   onSaveData={() => handleEditData()}
                   api="user/appearance/update"
-                  t= {t}
+                  t={t}
                 />
                 {/* <Sharicon /> */}
               </div>
@@ -498,7 +528,9 @@ const Appearance = (props) => {
                         <input
                           type="checkbox"
                           name="cover_img_status"
-                          checked={settings.cover_img_status === 1 ? true : false}
+                          checked={
+                            settings.cover_img_status === 1 ? true : false
+                          }
                           onChange={(e) => changeCoverStatus(e.target.checked)}
                         />
                       </div>
@@ -535,7 +567,7 @@ const Appearance = (props) => {
                         config={config}
                         onSaveData={() => handleEditData()}
                         api="user/appearance/update"
-                        t= {t}
+                        t={t}
                       />
                       {/* <Sharicon /> */}
                     </div>
@@ -602,7 +634,7 @@ const Appearance = (props) => {
                         config={config}
                         onSaveData={() => handleEditData()}
                         api="user/appearance/update"
-                        t= {t}
+                        t={t}
                       />
                       {/* <Sharicon /> */}
                     </div>
@@ -706,7 +738,7 @@ const Appearance = (props) => {
                               config={config}
                               onSaveData={() => handleEditData()}
                               api="user/appearance/update/detail"
-                              t= {t}
+                              t={t}
                             />
                           </div>
                         ))}
@@ -1091,8 +1123,7 @@ const Appearance = (props) => {
                             value={background.id}
                             onChange={() => changeBackground(background.id)}
                             checked={
-                              background.id ===
-                              parseInt(settings.background_type)
+                              background.id === settings.background_type
                                 ? true
                                 : null
                             }
@@ -1312,7 +1343,10 @@ const Appearance = (props) => {
               </Accordion.Header>
               <Accordion.Body>
                 <div className="social-icon">
-                  <p> {t("apperance.social-icon-style.social-icon-style-color")}</p>
+                  <p>
+                    {" "}
+                    {t("apperance.social-icon-style.social-icon-style-color")}
+                  </p>
                   <input
                     type="color"
                     value={color5}
