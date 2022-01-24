@@ -227,7 +227,7 @@ const Appearance = (props) => {
   const changeTheme = (theme_id, isPro) => {
     if (checkIsPro(isPro) === false) return;
 
-    apiChange({ theme_id, background_final: null });
+    apiChange({ theme_id, background_final: "empty" });
   };
   const changeButton = (button_type_id) => {
     apiChange({ button_type_id });
@@ -1049,37 +1049,50 @@ const Appearance = (props) => {
                   </div>
                 </div>
                 <div className="button-color my-3">
-                  <div className="d-flex">
-                    {t("apperance.buttons.button-background-color")}
-                    <div>
+                  <div className="input-color-box-parent">
+                    <h3> {t("apperance.buttons.button-background-color")}</h3>
+                    <div className="input-color-box">
                       <input
                         type="color"
+                        id="changebtn_background_color"
                         value={color1}
                         onChange={(e) => setColor1(e.target.value)}
                         onBlur={(e) => changebtn_background_color()}
                       />
+                      <span>{color1}</span>
+                      <label htmlFor="changebtn_background_color"></label>
                     </div>
                   </div>
-                  <div className="d-flex">
-                    {t("apperance.buttons.button-font-color")}
-                    <div>
+
+                  <div className="input-color-box-parent">
+                    <h3>{t("apperance.buttons.button-font-color")}</h3>
+                    <div className="input-color-box">
                       <input
                         type="color"
+                        id="changebtn_font_color"
                         value={color2}
                         onChange={(e) => setColor2(e.target.value)}
                         onBlur={(e) => changebtn_font_color()}
                       />
+                      <span>{color2}</span>
+                      <label htmlFor="changebtn_font_color"></label>
                     </div>
                   </div>
-                  <div className="d-flex">
-                    {t("apperance.buttons.title-description-font-color")}
-                    <div>
+                  <div className="input-color-box-parent">
+                    <h3>
+                      {t("apperance.buttons.title-description-font-color")}
+                    </h3>
+
+                    <div className="input-color-box">
                       <input
                         type="color"
+                        id="changetitile_descreption_color"
                         value={color3}
                         onChange={(e) => setColor3(e.target.value)}
                         onBlur={(e) => changetitile_descreption_color()}
                       />
+                      <span>{color3}</span>
+                      <label htmlFor="changetitile_descreption_color"></label>
                     </div>
                   </div>
                 </div>
@@ -1203,17 +1216,21 @@ const Appearance = (props) => {
                     : null}
                 </div>
                 <div className="upload-button">
-                  <div>
-                    <p className="mt-4">
-                      {t("apperance.background.background-color")}
-                    </p>
-                    <input
-                      type="color"
-                      value={color4}
-                      onChange={(e) => setColor4(e.target.value)}
-                      onBlur={(e) => changeBackgroundColor()}
-                    />
+                  <div className="input-color-box-parent">
+                    <h3>{t("apperance.background.background-color")}</h3>
+                    <div className="input-color-box">
+                      <input
+                        type="color"
+                        id="changeBackgroundColor"
+                        value={color4}
+                        onChange={(e) => setColor4(e.target.value)}
+                        onBlur={(e) => changeBackgroundColor()}
+                      />
+                      <span>{color4}</span>
+                      <label htmlFor="changeBackgroundColor"></label>
+                    </div>
                   </div>
+
                   <div>
                     {/* <p className="mt-4">Upload Image</p> */}
                     {/* <UploadImg
@@ -1343,16 +1360,23 @@ const Appearance = (props) => {
               </Accordion.Header>
               <Accordion.Body>
                 <div className="social-icon">
-                  <p>
-                    {" "}
-                    {t("apperance.social-icon-style.social-icon-style-color")}
-                  </p>
-                  <input
-                    type="color"
-                    value={color5}
-                    onChange={(e) => setColor5(e.target.value)}
-                    onBlur={(e) => changeSocialColor()}
-                  />
+                  <div className="input-color-box-parent">
+                    <h3>
+                      {t("apperance.social-icon-style.social-icon-style-color")}
+                    </h3>
+                    <div className="input-color-box">
+                      <input
+                        type="color"
+                        id="changeSocialColor"
+                        value={color5}
+                        onChange={(e) => setColor5(e.target.value)}
+                        onBlur={(e) => changeSocialColor()}
+                      />
+                      <span>{color5}</span>
+                      <label htmlFor="changeSocialColor"></label>
+                    </div>
+                  </div>
+
                   {/* <LinkButton type="" buttontext="#8cc8cc" /> */}
                 </div>
               </Accordion.Body>

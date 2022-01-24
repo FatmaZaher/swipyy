@@ -123,11 +123,11 @@
       }
     }
     .nav-link.active {
-      background-color: #8055f0;
+      background-color: rgba(129, 85, 240, 0.2);
 
-      color: $text-color;
+      color:#8055f0;
       .link-svg {
-        background-color: $text-color;
+        background-color: #8055f0;
       }
       svg {
         path {

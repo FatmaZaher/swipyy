@@ -31,12 +31,17 @@
   width: 100%;
   z-index: 1;
   @include flex(center, space-between);
+  background-color: $white-color;
+  .nav-item {
+    width: calc((100% / 6) - 1%);
+    @include flex(center, center);
+  }
   .nav-link {
     text-decoration: none;
     padding: 12px 0;
     border-radius: $btn-input-radius;
     color: $text-color;
-    background-color: $white-color;
+    // background-color: $white-color;
     @include flex(center, center);
     cursor: pointer;
     transition: $transition;
@@ -55,6 +60,18 @@
       padding: $btn-input-padding-mobile;
       margin-bottom: 10px;
       width: 105px;
+      strong {
+        font-size: 11px;
+      }
+      .link-svg {
+        width: 30px !important;
+        height: 30px !important;
+        line-height: 28px !important;
+        svg {
+          width: 20px !important;
+          height: 20px !important;
+        }
+      }
     }
   }
 }

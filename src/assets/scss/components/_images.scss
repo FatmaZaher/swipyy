@@ -14,9 +14,46 @@
 .color-div {
   @include flex(center, space-between);
 }
-input[type="color"] {
-  width: 100px;
-  height: 20px;
-  border-color: $back-color;
+.input-color-box-parent{
+  margin-bottom: 20px;
+  h3{
+    font-size: 13px;
+    font-weight: bold;
+    color: #222;
+  }
 }
+.input-color-box {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 5px;
 
+  input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+
+    position: absolute;
+    left: 0;
+    width: 100% !important;
+    height: 100%;
+    top: 0;
+  }
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #000;
+    font-size: 16px;
+    z-index: 2;
+    transform: translate(-50% , -50%);
+  }
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+}

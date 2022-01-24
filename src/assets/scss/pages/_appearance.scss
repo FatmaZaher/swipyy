@@ -235,6 +235,11 @@
   }
   .links-align {
     @include flex(center, start);
+    .avatar {
+      @include mobile {
+        margin: 0 5px;
+      }
+    }
     .form-button {
       width: 130px;
       margin-right: 15px;
@@ -243,8 +248,17 @@
       height: auto;
       line-height: 0;
       color: $text-color;
+
       svg {
         margin-right: 5px;
+      }
+      @include mobile {
+        width: 75px;
+        margin-right: 0;
+        svg {
+          width: 15px;
+          height: 15px;
+        }
       }
 
       // &:hover{
@@ -289,6 +303,7 @@
     .high-details {
       margin: 15px 0;
     }
+
     .with-border {
       @include flex(center, space-between);
       border: 1px solid $border-color;
@@ -520,6 +535,17 @@
   }
   .field-array {
     .high-details {
+      background: #f3f3f39c;
+      padding: 0 10px;
+      .trash-icon {
+        background: var(--bs-danger);
+        padding: 10px;
+        border-radius: 5px;
+        path {
+          fill: #fff !important;
+        }
+      }
+
       .form-input {
         width: 100%;
         margin-right: 0;
