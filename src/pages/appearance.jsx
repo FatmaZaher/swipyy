@@ -93,11 +93,11 @@ const Appearance = (props) => {
   }
   const [settings, setSettings] = useState({});
 
-  const [color1, setColor1] = useState("");
-  const [color2, setColor2] = useState("");
-  const [color3, setColor3] = useState("");
-  const [color4, setColor4] = useState("#8cc8cc");
-  const [color5, setColor5] = useState("#8cc8cc");
+  const [color1, setColor1] = useState("#000000");
+  const [color2, setColor2] = useState("#000000");
+  const [color3, setColor3] = useState("#000000");
+  const [color4, setColor4] = useState("#000000");
+  const [color5, setColor5] = useState("#000000");
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [placements, setPlacements] = useState([
@@ -1051,7 +1051,7 @@ const Appearance = (props) => {
                 <div className="button-color my-3">
                   <div className="input-color-box-parent">
                     <h3> {t("apperance.buttons.button-background-color")}</h3>
-                    <div className="input-color-box" style={{ bacground:color1 }}>
+                    <div className="input-color-box" style={{ background:color1 }}>
                       <input
                         type="color"
                         id="changebtn_background_color"
@@ -1066,7 +1066,7 @@ const Appearance = (props) => {
 
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.buttons.button-font-color")}</h3>
-                    <div className="input-color-box" style={{ bacground:color2 }}>
+                    <div className="input-color-box" style={{ background:color2 }}>
                       <input
                         type="color"
                         id="changebtn_font_color"
@@ -1083,7 +1083,7 @@ const Appearance = (props) => {
                       {t("apperance.buttons.title-description-font-color")}
                     </h3>
 
-                    <div className="input-color-box" style={{ bacground:color3 }}>
+                    <div className="input-color-box" style={{ background:color3 }}>
                       <input
                         type="color"
                         id="changetitile_descreption_color"
@@ -1218,7 +1218,7 @@ const Appearance = (props) => {
                 <div className="upload-button">
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.background.background-color")}</h3>
-                    <div className="input-color-box" style={{ bacground:color4 }}>
+                    <div className="input-color-box" style={{ background:color4 }}>
                       <input
                         type="color"
                         id="changeBackgroundColor"
@@ -1364,7 +1364,7 @@ const Appearance = (props) => {
                     <h3>
                       {t("apperance.social-icon-style.social-icon-style-color")}
                     </h3>
-                    <div className="input-color-box" style={{ bacground:color5 }}>
+                    <div className="input-color-box" style={{ background:color5 }}>
                       <input
                         type="color"
                         id="changeSocialColor"
