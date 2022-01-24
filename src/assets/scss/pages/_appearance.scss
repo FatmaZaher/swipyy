@@ -327,6 +327,7 @@
   .button-color {
     color: $grad-color;
     @include flex(center, space-between);
+    flex-wrap:wrap;
     @include mobile {
       display: block;
       p {
@@ -577,4 +578,8 @@
       }
     }
   }
+}
+.upload__image-wrapper button {
+  border: 1px solid #ccc;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }

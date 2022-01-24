@@ -1051,7 +1051,7 @@ const Appearance = (props) => {
                 <div className="button-color my-3">
                   <div className="input-color-box-parent">
                     <h3> {t("apperance.buttons.button-background-color")}</h3>
-                    <div className="input-color-box">
+                    <div className="input-color-box" style={{ bacground:color1 }}>
                       <input
                         type="color"
                         id="changebtn_background_color"
@@ -1066,7 +1066,7 @@ const Appearance = (props) => {
 
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.buttons.button-font-color")}</h3>
-                    <div className="input-color-box">
+                    <div className="input-color-box" style={{ bacground:color2 }}>
                       <input
                         type="color"
                         id="changebtn_font_color"
@@ -1083,7 +1083,7 @@ const Appearance = (props) => {
                       {t("apperance.buttons.title-description-font-color")}
                     </h3>
 
-                    <div className="input-color-box">
+                    <div className="input-color-box" style={{ bacground:color3 }}>
                       <input
                         type="color"
                         id="changetitile_descreption_color"
@@ -1218,7 +1218,7 @@ const Appearance = (props) => {
                 <div className="upload-button">
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.background.background-color")}</h3>
-                    <div className="input-color-box">
+                    <div className="input-color-box" style={{ bacground:color4 }}>
                       <input
                         type="color"
                         id="changeBackgroundColor"
@@ -1364,7 +1364,7 @@ const Appearance = (props) => {
                     <h3>
                       {t("apperance.social-icon-style.social-icon-style-color")}
                     </h3>
-                    <div className="input-color-box">
+                    <div className="input-color-box" style={{ bacground:color5 }}>
                       <input
                         type="color"
                         id="changeSocialColor"
