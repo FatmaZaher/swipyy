@@ -38,6 +38,7 @@ import RightAlign from "../component/icons/RightAlign";
 import axios from "axios";
 import UploadImg from "../component/UploadImg";
 import LockModal from "../component/LockModal";
+import ProBtn from "../component/ProBtn";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -424,12 +425,7 @@ const Appearance = (props) => {
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            {t("apperance.short-username")}{" "}
-            <div className="pro-btn position-static">
-              <Link to="/payments">
-                <LinkButton type="" buttontext="PRO" />
-              </Link>
-            </div>
+            {t("apperance.short-username")} <ProBtn isStatic={true} />
           </Accordion.Header>
           <Accordion.Body>
             <div className="single-item mb-3">
@@ -495,11 +491,7 @@ const Appearance = (props) => {
                   ) : (
                     <img src={layout2} alt="" />
                   )}
-                  <div className="pro-btn">
-                    <Link to="/payments">
-                      <LinkButton type="" buttontext="PRO" />
-                    </Link>
-                  </div>
+                  <ProBtn />
                   <p className="mt-2">{t("apperance.layout.cover-image")}</p>
                 </label>
               </div>
@@ -859,13 +851,7 @@ const Appearance = (props) => {
                               className="check-icon"
                             />
                             <img src={avatar_type.img} alt="" />
-                            {avatar_type.is_pro ? (
-                              <div className="pro-btn">
-                                <Link to="/payments">
-                                  <LinkButton type="" buttontext="PRO" />
-                                </Link>
-                              </div>
-                            ) : null}
+                            {avatar_type.is_pro ? <ProBtn /> : null}
                           </label>
                         </div>
                       </div>
@@ -899,13 +885,7 @@ const Appearance = (props) => {
                         <img src={checkIcon} alt="" className="check-icon" />
                         <img src={theme.img} alt="" />
                         <p className="mt-2">{theme.name}</p>
-                        {theme.is_pro ? (
-                          <div className="pro-btn">
-                            <Link to="/payments">
-                              <LinkButton type="" buttontext="PRO" />
-                            </Link>
-                          </div>
-                        ) : null}
+                        {theme.is_pro ? <ProBtn /> : null}
                       </label>
                     </div>
                   </div>
@@ -1029,12 +1009,7 @@ const Appearance = (props) => {
                                         />
                                         {buttonIcon.is_pro ? (
                                           <div className="pro-btn">
-                                            <Link to="/payments">
-                                              <LinkButton
-                                                type=""
-                                                buttontext="PRO"
-                                              />
-                                            </Link>
+                                            <ProBtn />
                                           </div>
                                         ) : null}
                                       </label>
@@ -1051,7 +1026,10 @@ const Appearance = (props) => {
                 <div className="button-color my-3">
                   <div className="input-color-box-parent">
                     <h3> {t("apperance.buttons.button-background-color")}</h3>
-                    <div className="input-color-box" style={{ background:color1 }}>
+                    <div
+                      className="input-color-box"
+                      style={{ background: color1 }}
+                    >
                       <input
                         type="color"
                         id="changebtn_background_color"
@@ -1066,7 +1044,10 @@ const Appearance = (props) => {
 
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.buttons.button-font-color")}</h3>
-                    <div className="input-color-box" style={{ background:color2 }}>
+                    <div
+                      className="input-color-box"
+                      style={{ background: color2 }}
+                    >
                       <input
                         type="color"
                         id="changebtn_font_color"
@@ -1083,7 +1064,10 @@ const Appearance = (props) => {
                       {t("apperance.buttons.title-description-font-color")}
                     </h3>
 
-                    <div className="input-color-box" style={{ background:color3 }}>
+                    <div
+                      className="input-color-box"
+                      style={{ background: color3 }}
+                    >
                       <input
                         type="color"
                         id="changetitile_descreption_color"
@@ -1201,13 +1185,7 @@ const Appearance = (props) => {
                                 />
                                 <img src={background.img} alt="" />
                                 <p className="mt-2">{background.name}</p>
-                                {background.is_pro ? (
-                                  <div className="pro-btn">
-                                    <Link to="/payments">
-                                      <LinkButton type="" buttontext="PRO" />
-                                    </Link>
-                                  </div>
-                                ) : null}
+                                {background.is_pro ? <ProBtn /> : null}
                               </label>
                             </div>
                           </div>
@@ -1218,7 +1196,10 @@ const Appearance = (props) => {
                 <div className="upload-button">
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.background.background-color")}</h3>
-                    <div className="input-color-box" style={{ background:color4 }}>
+                    <div
+                      className="input-color-box"
+                      style={{ background: color4 }}
+                    >
                       <input
                         type="color"
                         id="changeBackgroundColor"
@@ -1284,11 +1265,7 @@ const Appearance = (props) => {
                       <label htmlFor="center" className="d-block form-button">
                         <img src={checkIcon} alt="" className="check-icon" />
                         <span className="align-pro">
-                          <div className="pro-btn">
-                            <Link to="/payments">
-                              <LinkButton type="" buttontext="PRO" />
-                            </Link>
-                          </div>
+                          <ProBtn />
                         </span>
                         <CenterAlign />
                         {t("apperance.links-text-alignment.center")}
@@ -1309,11 +1286,7 @@ const Appearance = (props) => {
                       />
                       <label htmlFor="right" className="d-block form-button">
                         <span className="align-pro">
-                          <div className="pro-btn">
-                            <Link to="/payments">
-                              <LinkButton type="" buttontext="PRO" />
-                            </Link>
-                          </div>
+                          <ProBtn />
                         </span>
                         <img src={checkIcon} alt="" className="check-icon" />
                         <RightAlign />
@@ -1364,7 +1337,10 @@ const Appearance = (props) => {
                     <h3>
                       {t("apperance.social-icon-style.social-icon-style-color")}
                     </h3>
-                    <div className="input-color-box" style={{ background:color5 }}>
+                    <div
+                      className="input-color-box"
+                      style={{ background: color5 }}
+                    >
                       <input
                         type="color"
                         id="changeSocialColor"
@@ -1387,11 +1363,7 @@ const Appearance = (props) => {
           <div className="high-title with-border">
             <p>
               {t("apperance.hide-swippy-logo")}
-              <div className="pro-btn">
-                <Link to="/payments">
-                  <LinkButton type="" buttontext="PRO" />
-                </Link>
-              </div>
+              <ProBtn />
             </p>
 
             <div className="single-item-switch">
