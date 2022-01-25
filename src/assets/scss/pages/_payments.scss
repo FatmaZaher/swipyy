@@ -138,6 +138,9 @@
 // 	left: 5px;
 //   margin: auto;
 // }
+.payments .nav .nav-item {
+  width: calc((100% / 2) - 10%);
+}
 .pay-card {
   padding: 30px;
   border: 1px solid $border-color;

@@ -95,6 +95,7 @@ const Location = (props) => {
               type="submit"
               buttontext={t("links.location.button")}
               icon="yes"
+              disabled={formik.values.name === "" ? true : false}
             />
           </Form>
         )}

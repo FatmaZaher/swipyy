@@ -65,6 +65,7 @@
   }
   &[disabled] {
     opacity: 0.5;
+    background-color: $grad-color;
   }
 }
 .link-page,

@@ -24,11 +24,9 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const config = JSON.parse(localStorage.getItem("headers"));
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 
-
 const Link = (props) => {
   // const { t } = useTranslation();
   const { t } = props;
-
 
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
@@ -157,7 +155,12 @@ const Link = (props) => {
               placeholder={t("links.link.button-placholder")}
               error="true"
             />
-            <LinkButton type="submit" buttontext={t("links.link.button")} icon="yes" />
+            <LinkButton
+              type="submit"
+              buttontext={t("links.link.button")}
+              icon="yes"
+              disabled={formik.values.url === "" ? true : false}
+            />
           </Form>
         )}
       </Formik>
@@ -235,14 +238,14 @@ const Link = (props) => {
                                   config={config}
                                   onSaveData={() => handleEditData()}
                                   api="user/link"
-                                  t= {t}
+                                  t={t}
                                 />
                                 <Deleteicon
                                   item={link}
                                   config={config}
                                   onSaveData={() => handleEditData()}
                                   api="user/link"
-                                  t= {t}
+                                  t={t}
                                 />
                               </div>
                             </div>

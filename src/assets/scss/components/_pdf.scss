@@ -4,6 +4,11 @@
   input[type="file"] {
     color: $white-color;
     width: 100px;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -146%);
+    opacity: 0;
   }
   input[type="file"]::-webkit-file-upload-button {
     border: none;

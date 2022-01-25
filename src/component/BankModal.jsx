@@ -13,8 +13,10 @@ const MySwal = withReactContent(Swal);
 const BankModal = (props) => {
   const { t } = props;
 
+
   const { bank, banksList, config } = props;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+
   let subtitle;
   const validationSchema = Yup.object({
     account_number: Yup.string().required("Select Your Bank*"),

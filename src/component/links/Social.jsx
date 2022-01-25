@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
-// import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-// import EditIcon from "@mui/icons-material/Edit";
-// import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-// import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import TwitterIcon from "@mui/icons-material/Twitter";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import LinkButton from "../../component/form/LinkButton";
 import FormikControl from "../../component/form/FormikControl";
@@ -14,6 +8,7 @@ import Deleteicon from "../../component/icons/Deleteicon";
 import Editicon from "../../component/icons/Editicon";
 import axios from "axios";
 import Select from "react-select";
+import Editticons from "../icons/Editticons";
 
 const config = JSON.parse(localStorage.getItem("headers"));
 
@@ -164,7 +159,7 @@ const Social = (props) => {
       });
   };
   const socialLinkIsButton = [
-    { id: "Show as", name: t("links.social.select.showAs") },
+    // { id: "Show as", name: t("links.social.select.showAs") },
     { id: "button", name: t("links.social.select.button") },
     { id: "icon", name: t("links.social.select.icon") },
   ];
@@ -240,7 +235,8 @@ const Social = (props) => {
           </Form>
         )}
       </Formik>
-      <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+      <div className="social-content">
+       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -278,7 +274,7 @@ const Social = (props) => {
                         <div className="link-action">
                           <Formik initialValues={initialValues}>
                             <Form className="form-page">
-                              <FormikControl
+                              {/* <FormikControl
                                 control="select"
                                 name="socialLinkIsButton"
                                 value={social.type}
@@ -290,10 +286,96 @@ const Social = (props) => {
                                     social.url
                                   )
                                 }
-                              />
+                              /> */}
+                              <div
+                                role="group"
+                                aria-labelledby="my-radio-group"
+                                className="button-icon"
+                              >
+                                {/* {socialLinkIsButton.map((option) => {
+                                  return (
+                                    <label>
+                                      <Field
+                                        key={option.id}
+                                        type="radio"
+                                        name="socialLinkIsButton"
+                                        value={social.type}
+                                        checked={
+                                          social.type == option.id
+                                            ? true
+                                            : false
+                                        }
+                                        onChange={(e) =>
+                                          handleChangeSelect(
+                                            social.id,
+                                            option.id,
+                                            social.url
+                                          )
+                                        }
+                                      />
+                                      {option.name}
+                                    </label>
+                                  );
+                                })} */}
+                                <span>
+                                  <Editticons />
+                                  show as{" "}
+                                </span>
+                                <label
+                                  className={
+                                    social.type == "button"
+                                      ? "input-selected"
+                                      : null
+                                  }
+                                >
+                                  <Field
+                                    key="button"
+                                    type="radio"
+                                    name="socialLinkIsButton"
+                                    value={social.type}
+                                    checked={
+                                      social.type == "button" ? true : false
+                                    }
+                                    onChange={(e) =>
+                                      handleChangeSelect(
+                                        social.id,
+                                        "button",
+                                        social.url
+                                      )
+                                    }
+                                  />
+                                  {t("links.social.select.button")}
+                                </label>
+                                <label
+                                  className={
+                                    social.type == "icon"
+                                      ? "input-selected"
+                                      : null
+                                  }
+                                >
+                                  <Field
+                                    key="icon"
+                                    type="radio"
+                                    name="socialLinkIsButton"
+                                    value={social.type}
+                                    checked={
+                                      social.type == "icon" ? true : false
+                                    }
+                                    onChange={(e) =>
+                                      handleChangeSelect(
+                                        social.id,
+                                        "icon",
+                                        social.url
+                                      )
+                                    }
+                                  />
+                                  {t("links.social.select.icon")}
+                                </label>
+                              </div>
                             </Form>
                           </Formik>
-                          <Editicon
+                          <div className="d-flex">
+                             <Editicon
                             item={social}
                             config={config}
                             onSaveData={() => handleEditData()}
@@ -307,6 +389,8 @@ const Social = (props) => {
                             api="user/socialUser"
                             t={t}
                           />
+                          </div>
+                         
                         </div>
                       </div>
                     </div>
@@ -327,7 +411,9 @@ const Social = (props) => {
             </div>
           )}
         </Droppable>
-      </DragDropContext>
+      </DragDropContext> 
+      </div>
+      
     </div>
   );
 };

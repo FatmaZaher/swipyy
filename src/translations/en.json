@@ -200,5 +200,6 @@
   "remove": "Remove",
   "bigger-than":"a file is bigger than 150kb go to ",
   "go-to":"bigger than 150kb go to ",
+  "upload": "Upload",
   "select-file":"Select a file to show details"
 }

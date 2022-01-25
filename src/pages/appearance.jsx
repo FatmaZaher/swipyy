@@ -394,11 +394,15 @@ const Appearance = (props) => {
   return (
     <div className="appearance-page">
       <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>
-            {t("apperance.username")} {currentUser.username}
-          </Accordion.Header>
-          <Accordion.Body>
+        <div className="row w-100 m-0">
+          <div className="col-md-6">
+            {/* <Accordion.Item eventKey="0">
+          <Accordion.Header> */}
+            <div className="apperance-head">
+              {t("apperance.username")} {currentUser.username}
+            </div>
+            {/* </Accordion.Header>
+          <Accordion.Body> */}
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
@@ -421,13 +425,17 @@ const Appearance = (props) => {
                 {/* <Sharicon /> */}
               </div>
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            {t("apperance.short-username")} <ProBtn isStatic={true} />
-          </Accordion.Header>
-          <Accordion.Body>
+            {/* </Accordion.Body>
+        </Accordion.Item> */}
+          </div>
+          <div className="col-md-6">
+            {/* <Accordion.Item eventKey="1">
+          <Accordion.Header> */}
+            <div className="apperance-head">
+              {t("apperance.short-username")} <ProBtn isStatic={true} />
+            </div>
+            {/* </Accordion.Header>
+          <Accordion.Body> */}
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
@@ -450,11 +458,15 @@ const Appearance = (props) => {
                 {/* <Sharicon /> */}
               </div>
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>{t("apperance.layout.title")}</Accordion.Header>
-          <Accordion.Body>
+            {/* </Accordion.Body>
+        </Accordion.Item> */}
+          </div>
+          <div className="col-md-6">
+            {/* <Accordion.Item eventKey="2">
+          <Accordion.Header> */}
+            <div className="apperance-head">{t("apperance.layout.title")}</div>
+            {/* </Accordion.Header>
+          <Accordion.Body> */}
             <div className="layout">
               <div className="avatar">
                 <input
@@ -496,146 +508,163 @@ const Appearance = (props) => {
                 </label>
               </div>
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        {settings.layout === "cover" ? (
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>
-              {t("apperance.cover-image-title")}
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="avatar-title">
-                <div className="single-item mb-3">
-                  <div className="single-item-img">
-                    <UploadImg
-                      config={config}
-                      uploadType="cover_img"
-                      item={settings}
-                      onSaveData={() => handleEditData()}
-                    />
-                  </div>
-                  <div className="link-and-icon">
-                    <div className="single-item-switch">
-                      <div className="checkbox">
-                        <input
-                          type="checkbox"
-                          name="cover_img_status"
-                          checked={
-                            settings.cover_img_status === 1 ? true : false
-                          }
-                          onChange={(e) => changeCoverStatus(e.target.checked)}
-                        />
-                      </div>
-                    </div>
-                    <div className="link-action">
-                      {/* <Editicon /> */}
-                      {/* <Sharicon /> */}
-                    </div>
-                  </div>
+            {/* </Accordion.Body>
+        </Accordion.Item> */}
+          </div>
+          <div className="col-md-6">
+            {settings.layout === "cover" ? (
+              // <Accordion.Item eventKey="3">
+              //   <Accordion.Header>
+              //   </Accordion.Header>
+              //   <Accordion.Body>
+              <div>
+                <div className="apperance-head">
+                  {t("apperance.cover-image-title")}
                 </div>
-                <div className="single-item mb-3">
-                  <div className="single-item-info">
-                    <div className="my-link">
-                      <div className="link-text">
-                        <p className="profile-title m-0">{settings.title}</p>
+
+                <div className="avatar-title">
+                  <div className="single-item mb-3">
+                    <div className="single-item-img">
+                      <UploadImg
+                        config={config}
+                        uploadType="cover_img"
+                        item={settings}
+                        onSaveData={() => handleEditData()}
+                      />
+                    </div>
+                    <div className="link-and-icon">
+                      <div className="single-item-switch">
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            name="cover_img_status"
+                            checked={
+                              settings.cover_img_status === 1 ? true : false
+                            }
+                            onChange={(e) =>
+                              changeCoverStatus(e.target.checked)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="link-action">
+                        {/* <Editicon /> */}
+                        {/* <Sharicon /> */}
                       </div>
                     </div>
                   </div>
-                  <div className="link-and-icon">
-                    <div className="single-item-switch">
-                      <div className="checkbox">
-                        <input
-                          type="checkbox"
-                          name="show"
-                          checked={settings.title_status === 1 ? true : false}
-                          onChange={(e) => changeTitleStatus(e.target.checked)}
-                        />
+                  <div className="single-item mb-3">
+                    <div className="single-item-info">
+                      <div className="my-link">
+                        <div className="link-text">
+                          <p className="profile-title m-0">{settings.title}</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="link-action">
-                      <Editicon
-                        settingName="title"
-                        item={settings}
-                        config={config}
-                        onSaveData={() => handleEditData()}
-                        api="user/appearance/update"
-                        t={t}
-                      />
-                      {/* <Sharicon /> */}
+                    <div className="link-and-icon">
+                      <div className="single-item-switch">
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            name="show"
+                            checked={settings.title_status === 1 ? true : false}
+                            onChange={(e) =>
+                              changeTitleStatus(e.target.checked)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="link-action">
+                        <Editicon
+                          settingName="title"
+                          item={settings}
+                          config={config}
+                          onSaveData={() => handleEditData()}
+                          api="user/appearance/update"
+                          t={t}
+                        />
+                        {/* <Sharicon /> */}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        ) : null}
-        {settings.layout === "avatar" ? (
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>{t("apperance.avatar-title")}</Accordion.Header>
-            <Accordion.Body>
-              <div className="avatar-title">
-                <div className="single-item mb-3">
-                  <div className="single-item-img">
-                    <UploadImg
-                      config={config}
-                      uploadType="avatar"
-                      item={settings}
-                      onSaveData={() => handleEditData()}
-                    />
-                  </div>
-                  <div className="link-and-icon">
-                    <div className="single-item-switch">
-                      <div className="checkbox">
-                        <input
-                          type="checkbox"
-                          name="show"
-                          checked={settings.avtar_status === 1 ? true : false}
-                          onChange={(e) => changeAvatarStatus(e.target.checked)}
-                        />
-                      </div>
-                    </div>
-                    <div className="link-action">
-                      {/* <Editicon /> */}
-                      {/* <Sharicon /> */}
-                    </div>
-                  </div>
+            ) : //   </Accordion.Body>
+            // </Accordion.Item>
+            null}
+            {settings.layout === "avatar" ? (
+              <div>
+                <div className="apperance-head">
+                  {t("apperance.avatar-title")}
                 </div>
-                <div className="single-item mb-3">
-                  <div className="single-item-info">
-                    <div className="my-link">
-                      <div className="link-text">
-                        <p className="profile-title m-0">{settings.title}</p>
+                <div className="avatar-title">
+                  <div className="single-item mb-3">
+                    <div className="single-item-img">
+                      <UploadImg
+                        config={config}
+                        uploadType="avatar"
+                        item={settings}
+                        onSaveData={() => handleEditData()}
+                      />
+                    </div>
+                    <div className="link-and-icon">
+                      <div className="single-item-switch">
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            name="show"
+                            checked={settings.avtar_status === 1 ? true : false}
+                            onChange={(e) =>
+                              changeAvatarStatus(e.target.checked)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="link-action">
+                        {/* <Editicon /> */}
+                        {/* <Sharicon /> */}
                       </div>
                     </div>
                   </div>
-                  <div className="link-and-icon">
-                    <div className="single-item-switch">
-                      <div className="checkbox">
-                        <input
-                          type="checkbox"
-                          name="show"
-                          checked={settings.title_status === 1 ? true : false}
-                          onChange={(e) => changeTitleStatus(e.target.checked)}
-                        />
+                  <div className="single-item mb-3">
+                    <div className="single-item-info">
+                      <div className="my-link">
+                        <div className="link-text">
+                          <p className="profile-title m-0">{settings.title}</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="link-action">
-                      <Editicon
-                        settingName="title"
-                        item={settings}
-                        config={config}
-                        onSaveData={() => handleEditData()}
-                        api="user/appearance/update"
-                        t={t}
-                      />
-                      {/* <Sharicon /> */}
+                    <div className="link-and-icon">
+                      <div className="single-item-switch">
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            name="show"
+                            checked={settings.title_status === 1 ? true : false}
+                            onChange={(e) =>
+                              changeTitleStatus(e.target.checked)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="link-action">
+                        <Editicon
+                          settingName="title"
+                          item={settings}
+                          config={config}
+                          onSaveData={() => handleEditData()}
+                          api="user/appearance/update"
+                          t={t}
+                        />
+                        {/* <Sharicon /> */}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        ) : null}
+            ) : null}
+          </div>
+        </div>
 
         <Accordion.Item eventKey="4">
           <Accordion.Header>
@@ -883,7 +912,9 @@ const Appearance = (props) => {
                       />
                       <label htmlFor={"theme-" + theme.id} className="d-block">
                         <img src={checkIcon} alt="" className="check-icon" />
-                        <img src={theme.img} alt="" />
+                        <div className="theme-img">
+                          <img src={theme.img} alt="" />
+                        </div>
                         <p className="mt-2">{theme.name}</p>
                         {theme.is_pro ? <ProBtn /> : null}
                       </label>

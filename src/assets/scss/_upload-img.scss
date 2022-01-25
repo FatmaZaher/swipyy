@@ -6,6 +6,7 @@
   padding: 30px;
   border: dashed 2px $border-color !important;
   border-radius: $btn-input-radius;
+  position: relative;
   .upload__image-wrapper {
     font-size: 13px;
     text-align: center;
@@ -31,6 +32,16 @@
       color: $blue-color;
     }
   }
+  .upload{
+    position: absolute;
+   
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -146%);
+    z-index: 1;
+    color: $blue-color;
+    font-weight: 600;
+  }
 }
 .link-page {
   .drop-img {
@@ -45,6 +56,7 @@
     .img-upload {
       margin: 0 !important;
       height: 100%;
+      position: relative;
       svg {
         width: 25px;
       }

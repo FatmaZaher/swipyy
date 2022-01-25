@@ -22,6 +22,7 @@ const Banks = (props) => {
 
   const [banksList, setBanksList] = useState([]);
   const [items, setItems] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const initialValues = {
     bank_id: "",
@@ -43,6 +44,7 @@ const Banks = (props) => {
       .then((res) => {
         getBanks();
       });
+      setOpen(true);
   };
 
   const validationSchema = Yup.object({
@@ -97,6 +99,7 @@ const Banks = (props) => {
               type="submit"
               buttontext={t("links.banks.button")}
               icon="yes"
+              disabled={formik.values.bank_id === "" ? true : false}
             />
           </Form>
         )}
@@ -123,6 +126,7 @@ const Banks = (props) => {
                 config={config}
                 onSaveData={() => handleEditData()}
                 t={t}
+
               />
               <Deleteicon
                 item={bank}

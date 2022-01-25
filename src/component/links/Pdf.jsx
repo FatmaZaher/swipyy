@@ -173,7 +173,7 @@ const Pdf = (props) => {
     <div className="pdf">
       <div className="drop-pdf">
         <div>
-          <div className="img-upload mb-3">
+          <div className="img-upload mb-5">
             {/* <ImageDrop /> */}
             <UploadFileIcon />
           </div>
@@ -183,7 +183,7 @@ const Pdf = (props) => {
             onChange={changeHandler}
             accept="application/pdf"
           />
-
+          <p className="upload">{t("upload")}</p>
           {isFilePicked ? (
             <div>
               {checkSize() ? (
@@ -226,8 +226,8 @@ const Pdf = (props) => {
         </div>
       </div>
       {items.map((file, index) => (
-        <div className="single-item mb-3">
-          <div className="single-item-info">
+        <div className="single-item mt-3">
+          <div className="single-item-info mt-3">
             <p
               className="name-from-link"
               style={{
@@ -236,7 +236,9 @@ const Pdf = (props) => {
                 overflow: "hidden",
               }}
             >
-              <a href={file.src}>{file.name || "No name and add name"}</a>
+              <a className="pdf-title" href={file.src}>
+                {file.name || "No name and add name"}
+              </a>
             </p>
           </div>
           <div className="link-action">

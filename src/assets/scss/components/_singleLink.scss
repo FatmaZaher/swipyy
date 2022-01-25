@@ -3,11 +3,11 @@
   border: 1px solid $border-color;
   border-radius: $btn-input-radius;
   @include flex(center, space-between);
-  
+
   .link-and-icon {
     @include flex(center, start);
     width: 50%;
-    > img{
+    > img {
       width: 10px;
       margin-right: 10px;
     }
@@ -29,7 +29,7 @@
       height: 20px;
       margin-right: 5px;
     }
-    img{
+    img {
       width: 30px;
       height: 30px;
       object-fit: contain;
@@ -46,12 +46,13 @@
     }
     @include mobile {
       width: 25px;
-    height: 25px;
+      height: 25px;
     }
   }
   .single-item-info {
-    width: 50%;
+    width: 55%;
     margin-left: 15px;
+    overflow: hidden;
     .name-from-link {
       font-weight: 700;
       margin-bottom: 5px;
@@ -92,7 +93,7 @@
         width: 20px;
         height: 20px;
         line-height: 20px;
-        svg{
+        svg {
           width: 10px;
         }
       }
@@ -110,5 +111,20 @@
   }
   @include mobile {
     padding: 10px;
+  }
+}
+
+.pdf {
+  .name-from-link {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    background-color: $main-color;
+    border-radius: 5px;
+    a.pdf-title {
+      text-decoration: none;
+      color: $white-color;
+    }
   }
 }
