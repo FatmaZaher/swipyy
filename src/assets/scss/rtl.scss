@@ -136,4 +136,10 @@
     margin-right: 0;
     margin-left: 10px;
   }
+  .social-page .button-icon label:first-of-type{
+    border-radius: 0 10px 10px 0;
+  }
+  .social-page .button-icon label:nth-of-type(2){
+    border-radius: 10px 0 0 10px;
+  }
 }

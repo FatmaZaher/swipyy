@@ -319,7 +319,7 @@ const Social = (props) => {
                                 })} */}
                                 <span>
                                   <Editticons />
-                                  show as{" "}
+                                  {t("links.social.select.showAs")}
                                 </span>
                                 <label
                                   className={
