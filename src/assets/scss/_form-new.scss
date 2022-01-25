@@ -83,7 +83,10 @@
     width: unset;
   }
   .form-head {
-    flex-wrap: wrap;
+    @include mobile {
+      flex-wrap: wrap;
+
+    }
     .form-control {
       width: calc(100% - 455px) !important;
       @include mobile {

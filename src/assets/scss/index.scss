@@ -63,10 +63,15 @@ ul {
   display: flex;
   align-items: center;
 }
-
+.social-list-item-icon{
+  background: #8cc8cc;
+    border-radius: 7px;
+    padding: 7px;
+    box-sizing: border-box;
+}
 .social-list-item-icon img {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
 }
 
 .social-list-item .text {
