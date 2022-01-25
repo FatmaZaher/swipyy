@@ -37,27 +37,26 @@ const Analytic = (props) => {
   const [cityTable, setCityTable] = useState([]);
   const [deviceTable, setDeviceTable] = useState([]);
 
-  
   const [referrer, setReferrer] = useState([]);
 
   const analyticInfoData = [
     {
-title: t("analytic.views"),
+      title: t("analytic.views"),
       icon: <RemoveRedEyeIcon />,
       number: settings.views_count,
     },
     {
-title: t("analytic.unique-visitors"),
+      title: t("analytic.unique-visitors"),
       icon: <GroupsIcon />,
       number: settings.unique_visitor_count,
     },
     {
-title: t("analytic.clicks"),
+      title: t("analytic.clicks"),
       icon: <MouseIcon />,
       number: settings.clicks,
     },
     {
-title: t("analytic.ctr"),
+      title: t("analytic.ctr"),
       icon: <AutoGraphIcon />,
       number: Math.round(settings.ctr),
     },
@@ -87,7 +86,6 @@ title: t("analytic.ctr"),
       title: {
         text: t("analytic.clicks"),
         align: "left",
-
       },
       grid: {
         row: {
@@ -340,7 +338,11 @@ title: t("analytic.ctr"),
             </Form>
           )}
         </Formik>
-<LinkButton type="" buttontext={t("analytic.export")} exportIcon="true" />
+        <LinkButton
+          type=""
+          buttontext={t("analytic.export")}
+          exportIcon="true"
+        />
       </div>
       <div className="analytic-info mb-3">
         <ul className="analytic-info-list">
@@ -359,7 +361,7 @@ title: t("analytic.ctr"),
       </div>
       <div className="link-performance-charts mb-3">
         <p className="your-links-header mb-3 mb-m-5">
-{t("analytic.link-date")}
+          {t("analytic.link-date")}
         </p>
         <div className="charts">
           <div id="views">
@@ -406,8 +408,7 @@ title: t("analytic.ctr"),
         {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-{t("analytic.link-date")}
-
+            {t("analytic.link-date")}
           </p>
           {/* <Chart
             options={deviceCatOption.options}
@@ -416,8 +417,9 @@ title: t("analytic.ctr"),
           /> */}
         </div>
         <div className="mobile-device mb-3">
-<p className="your-links-header mb-3 mb-m-5">{t("analytic.mobile-devieces")}
-</p>
+          <p className="your-links-header mb-3 mb-m-5">
+            {t("analytic.mobile-devieces")}
+          </p>
           <table class="table">
             <thead>
               <tr>
@@ -425,8 +427,7 @@ title: t("analytic.ctr"),
               </tr>
             </thead>
             <tbody>
-            
-            {deviceTable
+              {deviceTable
                 ? deviceTable.map((item, index) => (
                     <tr key={index}>
                       {item.map((device, deviceIndex) => (
@@ -446,7 +447,7 @@ title: t("analytic.ctr"),
         {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-{t("analytic.views-global")}
+            {t("analytic.views-global")}
           </p>
           {globalMarket ? (
             <Chart
@@ -459,20 +460,21 @@ title: t("analytic.ctr"),
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-{t("analytic.views-country-map")}
-
+            {t("analytic.views-country-map")}
           </p>
           <MapChart />
         </div>
       </div>
       <div className="row-2">
         <div className="mobile-device mb-3">
-<p className="your-links-header mb-3 mb-m-5">{t("analytic.views-country")}</p>
+          <p className="your-links-header mb-3 mb-m-5">
+            {t("analytic.views-country")}
+          </p>
           <table class="table">
             <thead>
               <tr>
-  <th>{t("analytic.country")}</th>
-   <th>{t("analytic.view")}</th>
+                <th>{t("analytic.country")}</th>
+                <th>{t("analytic.view")}</th>
               </tr>
             </thead>
             <tbody>
@@ -489,7 +491,9 @@ title: t("analytic.ctr"),
           </table>
         </div>
         <div className="mobile-device mb-3">
- <p className="your-links-header mb-3 mb-m-5">{t("analytic.views-city")}</p>
+          <p className="your-links-header mb-3 mb-m-5">
+            {t("analytic.views-city")}
+          </p>
           <table class="table">
             <thead>
               <tr>
@@ -499,7 +503,7 @@ title: t("analytic.ctr"),
               </tr>
             </thead>
             <tbody>
-            {cityTable
+              {cityTable
                 ? cityTable.map((item, index) => (
                     <tr key={index}>
                       {item.map((city, cityIndex) => (
@@ -513,12 +517,14 @@ title: t("analytic.ctr"),
         </div>
       </div>
       <div className="mobile-device final mb-3">
- <p className="your-links-header mb-3 mb-m-5">{t("analytic.views-referre")}</p>
+        <p className="your-links-header mb-3 mb-m-5">
+          {t("analytic.views-referre")}
+        </p>
         <table class="table">
           <thead>
             <tr>
-  <th>{t("analytic.referre")}</th>
-   <th>{t("analytic.view")}</th>
+              <th>{t("analytic.referre")}</th>
+              <th>{t("analytic.view")}</th>
             </tr>
           </thead>
           <tbody>
