@@ -318,7 +318,7 @@ const Social = (props) => {
                                   );
                                 })} */}
                                 <span>
-                                  <Editticons />
+                                  
                                   {t("links.social.select.showAs")}
                                 </span>
                                 <label
