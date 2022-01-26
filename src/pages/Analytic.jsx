@@ -36,7 +36,11 @@ const Analytic = (props) => {
   const [countryTable, setCountryTable] = useState([]);
   const [cityTable, setCityTable] = useState([]);
   const [deviceTable, setDeviceTable] = useState([]);
+  const [linkTable, setLinkTable] = useState([]);
+  const [devicesChart, setDevicesChart] = useState(null);
 
+
+  
   const [referrer, setReferrer] = useState([]);
 
   const analyticInfoData = [
@@ -311,8 +315,8 @@ const Analytic = (props) => {
           setDeviceTable(handleTable(data.city_table));
 
           setReferrer(handleTable(data.referrer));
-
-          // setDevicesChart(handleDevicesChart(data.device_table));
+          setLinkTable(data.link);
+           setDevicesChart(handleDevicesChart(data.device_category));
           setGlobalMarket(handleGlobalMarket(data.views_global));
         });
     } catch (error) {}
@@ -404,17 +408,41 @@ const Analytic = (props) => {
           </div>
         </div>
       </div>
+      <div className="mobile-device final mb-3">
+        <p className="your-links-header mb-3 mb-m-5">{t("analytic.links")}</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{t("analytic.url")}</th>
+              <th>{t("analytic.type")}</th>
+
+              <th>{t("analytic.count")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {linkTable
+              ? linkTable.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.url}</td>
+                    <td>{item.type}</td>
+                    <td>{item.count}</td>
+                  </tr>
+                ))
+              : null}
+          </tbody>
+        </table>
+      </div>
       <div className="row-2">
         {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.link-date")}
           </p>
-          {/* <Chart
-            options={deviceCatOption.options}
-            series={deviceCatOption.series}
+          <Chart
+            options={devicesChart.options}
+            series={devicesChart.series}
             type="donut"
-          /> */}
+          />
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">

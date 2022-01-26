@@ -12,7 +12,7 @@
       "banks": "Banks"
     },
     "link": {
-      "button-placholder": "Type youe link here",
+      "button-placholder": "Type your username here",
       "button": "Add your link ",
       "add-your-link": "Add You Link*"
     },
@@ -143,7 +143,12 @@
     "view": "View",
     "views-city": "Views by City",
     "views-referre": "Views by Referre",
-    "referre": "referre"
+    "referre": "referre",
+    "count": "Click counts ",
+    "type": "type ",
+    "url": "url ",
+    "links":"Links"
+
   },
   "payments": {
     "time-turn": "It's time to turn PRO",
@@ -193,13 +198,13 @@
     "text": "Your file has been deleted.",
     "success": "Success"
   },
-  "view-live" : "View Live",
+  "view-live": "View Live",
   "leave-here": "leave here",
   "drop-image": "Drop your image here, or browse",
   "supports": "Supports",
   "remove": "Remove",
-  "bigger-than":"a file is bigger than 150kb go to ",
-  "go-to":"bigger than 150kb go to ",
+  "bigger-than": "a file is bigger than 150kb go to ",
+  "go-to": "bigger than 150kb go to ",
   "upload": "Upload",
-  "select-file":"Select a file to show details"
+  "select-file": "Select a file to show details"
 }
