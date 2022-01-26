@@ -24,6 +24,7 @@ const Social = (props) => {
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
   const [socialPlatforms, setSocialPlatforms] = useState([]);
+  const [socialPlaceholder, setSocialPlaceholder] = useState(null);
 
   const sortItems = (values) => {
     const ides = values.map((item) => item.id);
@@ -103,6 +104,7 @@ const Social = (props) => {
               value: item.name,
               icon: item.icon,
               id: item.id,
+              placeholder:item.placeholder
             };
           });
           setSocialPlatforms(newPlatforms);
@@ -129,6 +131,11 @@ const Social = (props) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
       });
+  };
+  const handleSocialPlatform = (value, func) => {
+    func("social_id", value.id);
+    console.log(value);
+    setSocialPlaceholder(value.placeholder);
   };
   useEffect(() => {
     getSocials();
@@ -206,7 +213,7 @@ const Social = (props) => {
                 defaultValue={socialPlatforms[0]}
                 formatOptionLabel={formatOptionLabel}
                 options={socialPlatforms}
-                onChange={(e) => formik.setFieldValue("social_id", e.id)}
+                onChange={(e) => handleSocialPlatform(e, formik.setFieldValue)}
                 styles={customStyles}
               />
             </div>
@@ -222,7 +229,9 @@ const Social = (props) => {
               control="input"
               type="text"
               name="url"
-              placeholder={t("links.social.button-placholder")}
+              placeholder={
+                socialPlaceholder || t("links.social.button-placholder")
+              }
               error="true"
             />
 
@@ -236,45 +245,45 @@ const Social = (props) => {
         )}
       </Formik>
       <div className="social-content">
-       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {items.map((social, index) => (
-                <Draggable
-                  key={social.id}
-                  draggableId={String(social.id)}
-                  index={index}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      <div className="single-item mb-3">
-                        <div className="link-and-icon">
-                          <img
-                            src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
-                            alt=""
-                          />
-                          <div className="single-item-icon">
-                            <img src={social.icon} alt="" />
+        <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {items.map((social, index) => (
+                  <Draggable
+                    key={social.id}
+                    draggableId={String(social.id)}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        <div className="single-item mb-3">
+                          <div className="link-and-icon">
+                            <img
+                              src="https://cdn-f.heylink.me/static/media/ic_swap_icon.60319cd6.svg"
+                              alt=""
+                            />
+                            <div className="single-item-icon">
+                              <img src={social.icon} alt="" />
+                            </div>
+                            <div className="single-item-info">
+                              <p className="name-from-link">{social.social}</p>
+                              <span className="the-link">{social.url}</span>
+                            </div>
                           </div>
-                          <div className="single-item-info">
-                            <p className="name-from-link">{social.social}</p>
-                            <span className="the-link">{social.url}</span>
-                          </div>
-                        </div>
 
-                        <div className="link-action">
-                          <Formik initialValues={initialValues}>
-                            <Form className="form-page">
-                              {/* <FormikControl
+                          <div className="link-action">
+                            <Formik initialValues={initialValues}>
+                              <Form className="form-page">
+                                {/* <FormikControl
                                 control="select"
                                 name="socialLinkIsButton"
                                 value={social.type}
@@ -287,12 +296,12 @@ const Social = (props) => {
                                   )
                                 }
                               /> */}
-                              <div
-                                role="group"
-                                aria-labelledby="my-radio-group"
-                                className="button-icon"
-                              >
-                                {/* {socialLinkIsButton.map((option) => {
+                                <div
+                                  role="group"
+                                  aria-labelledby="my-radio-group"
+                                  className="button-icon"
+                                >
+                                  {/* {socialLinkIsButton.map((option) => {
                                   return (
                                     <label>
                                       <Field
@@ -317,104 +326,102 @@ const Social = (props) => {
                                     </label>
                                   );
                                 })} */}
-                                <span>
-                                  
-                                  {t("links.social.select.showAs")}
-                                </span>
-                                <label
-                                  className={
-                                    social.type == "button"
-                                      ? "input-selected"
-                                      : null
-                                  }
-                                >
-                                  <Field
-                                    key="button"
-                                    type="radio"
-                                    name="socialLinkIsButton"
-                                    value={social.type}
-                                    checked={
-                                      social.type == "button" ? true : false
+                                  <span>{t("links.social.select.showAs")}</span>
+                                  <label
+                                    className={
+                                      social.type == "button"
+                                        ? "input-selected"
+                                        : null
                                     }
-                                    onChange={(e) =>
-                                      handleChangeSelect(
-                                        social.id,
-                                        "button",
-                                        social.url
-                                      )
+                                  >
+                                    <Field
+                                      key="button"
+                                      type="radio"
+                                      name="socialLinkIsButton"
+                                      value={social.type}
+                                      checked={
+                                        social.type == "button" ? true : false
+                                      }
+                                      onChange={(e) =>
+                                        handleChangeSelect(
+                                          social.id,
+                                          "button",
+                                          social.url
+                                        )
+                                      }
+                                    />
+                                    {t("links.social.select.button")}
+                                  </label>
+                                  <label
+                                    className={
+                                      social.type == "icon"
+                                        ? "input-selected"
+                                        : null
                                     }
-                                  />
-                                  {t("links.social.select.button")}
-                                </label>
-                                <label
-                                  className={
-                                    social.type == "icon"
-                                      ? "input-selected"
-                                      : null
-                                  }
-                                >
-                                  <Field
-                                    key="icon"
-                                    type="radio"
-                                    name="socialLinkIsButton"
-                                    value={social.type}
-                                    checked={
-                                      social.type == "icon" ? true : false
-                                    }
-                                    onChange={(e) =>
-                                      handleChangeSelect(
-                                        social.id,
-                                        "icon",
-                                        social.url
-                                      )
-                                    }
-                                  />
-                                  {t("links.social.select.icon")}
-                                </label>
+                                  >
+                                    <Field
+                                      key="icon"
+                                      type="radio"
+                                      name="socialLinkIsButton"
+                                      value={social.type}
+                                      checked={
+                                        social.type == "icon" ? true : false
+                                      }
+                                      onChange={(e) =>
+                                        handleChangeSelect(
+                                          social.id,
+                                          "icon",
+                                          social.url
+                                        )
+                                      }
+                                    />
+                                    {t("links.social.select.icon")}
+                                  </label>
+                                </div>
+                              </Form>
+                            </Formik>
+                            <div className="d-flex">
+                              <div className="mx-3">
+                                {" "}
+                                <Editicon
+                                  item={social}
+                                  config={config}
+                                  onSaveData={() => handleEditData()}
+                                  api="user/socialUser"
+                                  t={t}
+                                />
                               </div>
-                            </Form>
-                          </Formik>
-                          <div className="d-flex">
-                            <div className="mx-3"> <Editicon
-                            item={social}
-                            config={config}
-                            onSaveData={() => handleEditData()}
-                            api="user/socialUser"
-                            t={t}
-                          /></div>
-                            
-                          <Deleteicon
-                            item={social}
-                            config={config}
-                            onSaveData={() => handleEditData()}
-                            api="user/socialUser"
-                            t={t}
-                          />
+
+                              <Deleteicon
+                                item={social}
+                                config={config}
+                                onSaveData={() => handleEditData()}
+                                api="user/socialUser"
+                                t={t}
+                              />
+                            </div>
                           </div>
-                         
                         </div>
                       </div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+                    )}
+                  </Draggable>
+                ))}
 
-              {provided.placeholder}
-              <div
-                style={{
-                  position: "absolute",
-                  top: placeholderProps.clientY,
-                  left: placeholderProps.clientX,
-                  height: placeholderProps.clientHeight,
-                  width: placeholderProps.clientWidth,
-                }}
-              />
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext> 
+                {provided.placeholder}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: placeholderProps.clientY,
+                    left: placeholderProps.clientX,
+                    height: placeholderProps.clientHeight,
+                    width: placeholderProps.clientWidth,
+                  }}
+                />
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
-      
     </div>
   );
 };
