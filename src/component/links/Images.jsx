@@ -58,6 +58,12 @@ const Images = (props) => {
   //   let newSettings = oldSettings;
   //   setSettings(newSettings);
   // };
+  const settingsChange = (property, value) => {
+    let oldSettings = { ...settings };
+    oldSettings[property] = value;
+    let newSettings = oldSettings;
+    setSettings(newSettings);
+  };
   const checkIsPro = (value) => {
     if (value === 1) {
       if (currentUser.is_pro === false) {
@@ -183,6 +189,7 @@ const Images = (props) => {
                             label={t("links.images.title")}
                             placeholder="image slider title"
                             value={settings.title}
+                            onChange={e => settingsChange('title' ,e.target.value )}
                             onBlur={(e) => changeTitle(e.target.value)}
                           />
                           <FormikControl
@@ -191,6 +198,8 @@ const Images = (props) => {
                             label={t("links.images.description")}
                             placeholder="image slider Description"
                             value={settings.description}
+                            onChange={e => settingsChange('description' ,e.target.value )}
+
                             onBlur={(e) => changeDescription(e.target.value)}
                           />
                         </>
@@ -222,6 +231,8 @@ const Images = (props) => {
                             label="Link Text"
                             placeholder="image slider Link text"
                             value={settings.link_text}
+                            onChange={e => settingsChange('link_text' ,e.target.value )}
+
                             onBlur={(e) => changeLinkText(e.target.value)}
                           />
                           <FormikControl
@@ -230,6 +241,8 @@ const Images = (props) => {
                             label="Link URL"
                             placeholder="image slider Link URL"
                             value={settings.link_url}
+                            onChange={e => settingsChange('link_url' ,e.target.value )}
+
                             onBlur={(e) => changeLinkUrl(e.target.value)}
                           />
                         </>

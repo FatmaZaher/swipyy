@@ -83,12 +83,25 @@
     width: unset;
   }
   .form-head {
+    justify-content: center;
     @include mobile {
       flex-wrap: wrap;
 
     }
+    .form-button{
+      border-radius: 50px;
+      @include mobile {
+        width: 100% !important;
+        margin-bottom: 15px;
+
+      }
+    }
     .form-control {
-      width: calc(100% - 455px) !important;
+      width: 300px !important;
+      margin-right:20px;
+      input{
+        border-radius: 50px;
+      }
       @include mobile {
         width: 100% !important;
         margin-bottom: 15px;

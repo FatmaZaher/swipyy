@@ -82,44 +82,44 @@
       margin-left: 5px;
     }
   }
-  .link-action {
-    color: $text-color;
-    cursor: pointer;
-    @include flex(center, center);
-    .edit-icon,
-    .trash-icon {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      background-color: $text-color;
-      color: $white-color;
-      border-radius: $btn-input-radius;
-      @include mobile {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        svg {
-          width: 10px;
-        }
-      }
-    }
-    .trash-icon {
-      background-color: $back-color;
-      color: $text-color;
-    }
-    .edit-icon {
-      margin-right: 10px;
-    }
-    svg {
-      width: 18px;
-    }
-  }
+ 
   @include mobile {
     padding: 10px;
   }
 }
-
+.link-action {
+  color: $text-color;
+  cursor: pointer;
+  @include flex(center, center);
+  .edit-icon,
+  .trash-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: $text-color;
+    color: $white-color;
+    border-radius: $btn-input-radius;
+    @include mobile {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      svg {
+        width: 10px;
+      }
+    }
+  }
+  .trash-icon {
+    background-color: $back-color;
+    color: $text-color;
+  }
+  .edit-icon {
+    margin-right: 10px;
+  }
+  svg {
+    width: 18px;
+  }
+}
 .pdf {
   .name-from-link {
     display: inline-block;

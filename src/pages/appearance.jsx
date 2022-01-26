@@ -39,6 +39,7 @@ import axios from "axios";
 import UploadImg from "../component/UploadImg";
 import LockModal from "../component/LockModal";
 import ProBtn from "../component/ProBtn";
+import Editticons from "../component/icons/Editticons";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -320,6 +321,14 @@ const Appearance = (props) => {
   const handleEditData = (key, e) => {
     getAllSettings();
   };
+
+  const editAvatarImage = () => {
+    document.querySelector('.avatar-avatar [type="file"]').click();
+  };
+  const editCoverImage = () => {
+    document.querySelector('.cover-cover [type="file"]').click();
+  };
+
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -524,7 +533,7 @@ const Appearance = (props) => {
 
                 <div className="avatar-title">
                   <div className="single-item mb-3">
-                    <div className="single-item-img">
+                    <div className="single-item-img cover-cover">
                       <UploadImg
                         config={config}
                         uploadType="cover_img"
@@ -533,6 +542,14 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
+                    <div
+                        className="link-action"
+                        onClick={() => editCoverImage()}
+                      >
+                        <div className="edit-icon">
+                          <Editticons />
+                        </div>
+                      </div>
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -562,6 +579,7 @@ const Appearance = (props) => {
                       </div>
                     </div>
                     <div className="link-and-icon">
+                    
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -599,7 +617,7 @@ const Appearance = (props) => {
                 </div>
                 <div className="avatar-title">
                   <div className="single-item mb-3">
-                    <div className="single-item-img">
+                    <div className="single-item-img avatar-avatar">
                       <UploadImg
                         config={config}
                         uploadType="avatar"
@@ -608,6 +626,15 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
+                      <div
+                        className="link-action"
+                        onClick={() => editAvatarImage()}
+                      >
+                        <div className="edit-icon">
+                          <Editticons />
+                        </div>
+                      </div>
+
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input

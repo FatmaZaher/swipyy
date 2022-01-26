@@ -375,13 +375,14 @@ const Social = (props) => {
                             </Form>
                           </Formik>
                           <div className="d-flex">
-                             <Editicon
+                            <div className="mx-3"> <Editicon
                             item={social}
                             config={config}
                             onSaveData={() => handleEditData()}
                             api="user/socialUser"
                             t={t}
-                          />
+                          /></div>
+                            
                           <Deleteicon
                             item={social}
                             config={config}

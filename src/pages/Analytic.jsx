@@ -20,8 +20,11 @@ const initialValues = {
 
 const validationSchema = Yup.object({});
 const allDate = [
-  { key: "Last Week", value: "lastWeek" },
-  { key: "Last Month", value: "lastmonth" },
+  { id: 7, name: "last Week" },
+  { id: 14, name: "Last 2 Weeks" },
+  { id: 30, name: "Last Month" },
+  { id: 90, name: "Last 3 Months" },
+  { id: 180, name: "Last 6 Months" },
 ];
 
 const Analytic = (props) => {
@@ -38,9 +41,8 @@ const Analytic = (props) => {
   const [deviceTable, setDeviceTable] = useState([]);
   const [linkTable, setLinkTable] = useState([]);
   const [devicesChart, setDevicesChart] = useState(null);
+  const [duration, setDuration] = useState(180);
 
-
-  
   const [referrer, setReferrer] = useState([]);
 
   const analyticInfoData = [
@@ -273,10 +275,10 @@ const Analytic = (props) => {
     const deviceCatOption = {
       series,
       options: {
+        labels,
         chart: {
           type: "donut",
         },
-        labels,
         responsive: [
           {
             breakpoint: 480,
@@ -299,10 +301,13 @@ const Analytic = (props) => {
     return items;
   };
 
-  const getAllSettings = async () => {
+  const getAllSettings = async (value) => {
     try {
       axios
-        .get("https://test-place.site/api/user/analytics", config)
+        .get(
+          `https://test-place.site/api/user/analytics/${value || duration}`,
+          config
+        )
         .then((res) => {
           const data = res.data.data;
           setSettings(res.data.data);
@@ -316,12 +321,16 @@ const Analytic = (props) => {
 
           setReferrer(handleTable(data.referrer));
           setLinkTable(data.link);
-           setDevicesChart(handleDevicesChart(data.device_category));
+          setDevicesChart(handleDevicesChart(data.device_category));
+          console.log(handleDevicesChart(data.device_category));
           setGlobalMarket(handleGlobalMarket(data.views_global));
         });
     } catch (error) {}
   };
-
+  const getNewCharts = (value) => {
+    setDuration(value);
+    getAllSettings(value);
+  };
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -337,7 +346,9 @@ const Analytic = (props) => {
               <FormikControl
                 control="select"
                 name="theDate"
+                value={duration}
                 options={allDate}
+                onChange={(e) => getNewCharts(e.target.value)}
               />
             </Form>
           )}
@@ -438,11 +449,13 @@ const Analytic = (props) => {
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.link-date")}
           </p>
-          <Chart
-            options={devicesChart.options}
-            series={devicesChart.series}
-            type="donut"
-          />
+          {devicesChart ? (
+            <Chart
+              options={devicesChart.options}
+              series={devicesChart.series}
+              type="donut"
+            />
+          ) : null}
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
@@ -471,7 +484,7 @@ const Analytic = (props) => {
           </table>
         </div>
       </div>
-      <div className="row-2">
+      <div className="">
         {" "}
         <div className="device-category-charts mb-3">
           <p className="your-links-header mb-3 mb-m-5">
@@ -486,12 +499,12 @@ const Analytic = (props) => {
             />
           ) : null}
         </div>
-        <div className="mobile-device mb-3">
+        {/* <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-country-map")}
           </p>
           <MapChart />
-        </div>
+        </div> */}
       </div>
       <div className="row-2">
         <div className="mobile-device mb-3">
