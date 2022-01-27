@@ -11,7 +11,6 @@ import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import { useTable } from "react-table";
 import { Table } from "react-bootstrap";
 
-
 import Chart from "react-apexcharts";
 import MapChart from "../component/MapChart";
 import axios from "axios";
@@ -333,6 +332,34 @@ const Analytic = (props) => {
     setDuration(value);
     getAllSettings(value);
   };
+  const exportCSV = async (path) => {
+    try {
+      axios
+        .get(
+          `https://test-place.site/api/user/analytics/export/${path}/${duration}`,
+          {
+            ...config,
+            responseType: "blob",
+          }
+        )
+
+        .then((blob) => {
+          const href = window.URL.createObjectURL(blob.data);
+          const a = document.createElement("a");
+          a.download = `${path}.csv`;
+          a.href = href;
+          a.click();
+          a.href = "";
+        });
+    } catch (error) {}
+  };
+  const exportLinks = () => {
+    exportCSV('links')
+  };
+  const exportReferrer = () => {
+    exportCSV('referrer')
+
+  };
   useEffect(() => {
     getAllSettings();
   }, []);
@@ -355,11 +382,13 @@ const Analytic = (props) => {
             </Form>
           )}
         </Formik>
-        <LinkButton
-          type=""
-          buttontext={t("analytic.export")}
-          exportIcon="true"
-        />
+        <div className="black-btn">
+          <LinkButton
+            type=""
+            buttontext={t("analytic.export")}
+            exportIcon="true"
+          />
+        </div>
       </div>
       <div className="analytic-info mb-3">
         <ul className="analytic-info-list">
@@ -443,6 +472,14 @@ const Analytic = (props) => {
               : null}
           </tbody>
         </Table>
+        <div className="black-btn mt-5">
+          <LinkButton
+            type=""
+            buttontext={t("analytic.export")}
+            exportIcon="true"
+            onClick={() => exportLinks()}
+          />
+        </div>
       </div>
       <div className="row-2">
         {" "}
@@ -581,6 +618,14 @@ const Analytic = (props) => {
               : null}
           </tbody>
         </table>
+        <div className="black-btn mt-5">
+          <LinkButton
+            type=""
+            buttontext={t("analytic.export")}
+            exportIcon="true"
+            onClick={() => exportReferrer()}
+          />
+        </div>
       </div>
     </div>
   );

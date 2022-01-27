@@ -277,6 +277,13 @@ const Appearance = (props) => {
 
     apiChange({ background_animated_id });
   };
+
+  const changeFont = (font_id, isPro) => {
+    if (checkIsPro(isPro) === false) return;
+
+    apiChange({ font_id });
+  };
+
   const changeTextAlign = (text_alignment, isPro) => {
     if (checkIsPro(isPro) === false) return;
 
@@ -518,6 +525,7 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
+                    
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -597,14 +605,7 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
-                      <div
-                        className="link-action"
-                        onClick={() => editAvatarImage()}
-                      >
-                        <div className="edit-icon">
-                          <Editticons />
-                        </div>
-                      </div>
+                      
 
                       <div className="single-item-switch">
                         <div className="checkbox">
@@ -616,6 +617,14 @@ const Appearance = (props) => {
                               changeAvatarStatus(e.target.checked)
                             }
                           />
+                        </div>
+                      </div>
+                      <div
+                        className="link-action"
+                        onClick={() => editAvatarImage()}
+                      >
+                        <div className="edit-icon">
+                          <Editticons />
                         </div>
                       </div>
                       <div className="link-action">
@@ -1257,131 +1266,52 @@ const Appearance = (props) => {
             <Accordion.Item eventKey="11" className="font-section">
               <Accordion.Header>{t("apperance.font.title")}</Accordion.Header>
               <Accordion.Body>
-                <div className="font-style-tabs">
-                  <Tabs
-                    defaultActiveKey={t("apperance.font.language")}
-                    id="font-tab-example"
-                    className="mb-3"
-                  >
-                    <Tab eventKey="arabic" title="ع">
-                      <div className="custom-avatars">
-                        {settings.background_animated
-                          ? settings.background_animated.map(
-                              (background, index) => {
-                                return (
-                                  <div
-                                    className={`avatar-back ${
-                                      background.is_pro ? "align-pro" : null
-                                    }`}
-                                  >
-                                    <div
-                                      className="avatar buttons-style-shap-list"
-                                      key={background.id}
-                                      index={index}
-                                    >
-                                      <input
-                                        type="radio"
-                                        id={background.id}
-                                        name="animat"
-                                        value={background.id}
-                                        onChange={() =>
-                                          changeBackgroundAnimate(
-                                            background.id,
-                                            background.is_pro
-                                          )
-                                        }
-                                        checked={
-                                          background.id ===
-                                          parseInt(
-                                            settings.background_animated_id
-                                          )
-                                            ? true
-                                            : null
-                                        }
-                                      />
-                                      <label
-                                        htmlFor={background.id}
-                                        className="d-block"
-                                      >
-                                        <img
-                                          src={checkIcon}
-                                          alt=""
-                                          className="check-icon"
-                                        />
-                                        <img src={background.img} alt="" />
-                                        <p className="mt-2">
-                                          {background.name}
-                                        </p>
-                                        {background.is_pro ? <ProBtn /> : null}
-                                      </label>
-                                    </div>
-                                  </div>
-                                );
-                              }
-                            )
-                          : null}
-                      </div>
-                    </Tab>
-                    <Tab eventKey="english" title="En">
-                      <div className="custom-avatars">
-                        {settings.background_animated
-                          ? settings.background_animated.map(
-                              (background, index) => {
-                                return (
-                                  <div
-                                    className={`avatar-back ${
-                                      background.is_pro ? "align-pro" : null
-                                    }`}
-                                  >
-                                    <div
-                                      className="avatar buttons-style-shap-list"
-                                      key={background.id}
-                                      index={index}
-                                    >
-                                      <input
-                                        type="radio"
-                                        id={background.id}
-                                        name="animat"
-                                        value={background.id}
-                                        onChange={() =>
-                                          changeBackgroundAnimate(
-                                            background.id,
-                                            background.is_pro
-                                          )
-                                        }
-                                        checked={
-                                          background.id ===
-                                          parseInt(
-                                            settings.background_animated_id
-                                          )
-                                            ? true
-                                            : null
-                                        }
-                                      />
-                                      <label
-                                        htmlFor={background.id}
-                                        className="d-block"
-                                      >
-                                        <img
-                                          src={checkIcon}
-                                          alt=""
-                                          className="check-icon"
-                                        />
-                                        <img src={background.img} alt="" />
-                                        <p className="mt-2">
-                                          {background.name}
-                                        </p>
-                                        {background.is_pro ? <ProBtn /> : null}
-                                      </label>
-                                    </div>
-                                  </div>
-                                );
-                              }
-                            )
-                          : null}
-                      </div>
-                    </Tab>
-                  </Tabs>
+                <div className="custom-avatars">
+                  {settings.fonts
+                    ? settings.fonts.map((font, index) => {
+                        return (
+                          <div
+                            className={`avatar-back ${
+                              font.is_pro ? "align-pro" : null
+                            }`}
+                          >
+                            <div
+                              className="avatar buttons-style-shap-list"
+                              key={font.id}
+                              index={index}
+                            >
+                              <input
+                                type="radio"
+                                id={"font" + font.id}
+                                name="animat"
+                                value={font.id}
+                                onChange={() =>
+                                  changeFont(font.id, font.is_pro)
+                                }
+                                checked={
+                                  font.id === parseInt(settings.font_id)
+                                    ? true
+                                    : null
+                                }
+                              />
+                              <label
+                                htmlFor={"font" + font.id}
+                                className="d-block"
+                              >
+                                <img
+                                  src={checkIcon}
+                                  alt=""
+                                  className="check-icon"
+                                />
+                                <img src={font.img} alt="" />
+                                <p className="mt-2">{font.name}</p>
+                                {font.is_pro ? <ProBtn /> : null}
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
               </Accordion.Body>
             </Accordion.Item>

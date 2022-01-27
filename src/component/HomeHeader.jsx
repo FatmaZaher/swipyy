@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import LanguageSelector from "./LanguageSelector ";
 
 const HomeHeader = (props) => {
-  const { t } = props; 
+  const { t } = props;
 
   const [linkList, setLinkList] = useState(false);
   const showLinkList = () => setLinkList(!linkList);
@@ -66,7 +66,7 @@ const HomeHeader = (props) => {
           </p>
         </div>
         <div className="personal-pho" onClick={showPersonalList}>
-          <img src={personal} alt="" />
+          <img src={currentUser.img || personal} alt="" />
           {/* <div
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >
