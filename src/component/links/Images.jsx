@@ -14,6 +14,7 @@ import SwitchButton from "../SwitchButton";
 import axios from "axios";
 import UploadLoading from "../../assets/images/UploadLoading.svg";
 import LockModal from "../LockModal";
+import LinkButton from "../form/LinkButton";
 
 const initialValues = {
   highTitle: "",
@@ -40,6 +41,11 @@ const Images = (props) => {
   const [color1, setColor1] = useState("#8055f0");
   const [color2, setColor2] = useState("#163152");
   const [color3, setColor3] = useState("#8055f0");
+  const [linkUrl, setlinkUrl] = useState("");
+  const [linkText, setlinkText] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const [settings, setSettings] = useState({});
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
 
@@ -64,6 +70,9 @@ const Images = (props) => {
     let newSettings = oldSettings;
     setSettings(newSettings);
   };
+  const onClick = (value) => {
+
+  }
   const checkIsPro = (value) => {
     if (value === 1) {
       if (currentUser.is_pro === false) {
@@ -123,7 +132,9 @@ const Images = (props) => {
   };
   return (
     <div className="images">
-      <p className="your-links-header mb-3 mb-m-5">{t("links.images.image-sliders")}</p>
+      <p className="your-links-header mb-3 mb-m-5">
+        {t("links.images.image-sliders")}
+      </p>
       <div className="single-item mb-3">
         <div className="link-and-icon">
           <div className="single-item-switch">
@@ -137,7 +148,9 @@ const Images = (props) => {
             </div>
           </div>
           <div className="single-item-info">
-            <p className="name-from-link">{t("links.images.new-image-slider")}</p>
+            <p className="name-from-link">
+              {t("links.images.new-image-slider")}
+            </p>
           </div>
         </div>
         <div className="link-action">
@@ -153,12 +166,14 @@ const Images = (props) => {
               config={config}
               uploadType="link"
               onSaveData={() => handleEditData()}
-              t = {t}
+              t={t}
             />
           </div>
           <Accordion>
             <Accordion.Item eventKey="0">
-              <Accordion.Header>{t("links.images.description-link")}</Accordion.Header>
+              <Accordion.Header>
+                {t("links.images.description-link")}
+              </Accordion.Header>
               <Accordion.Body>
                 <div className="add-description">
                   <div className="high-header">
@@ -180,7 +195,7 @@ const Images = (props) => {
                   </div>
 
                   <Formik initialValues={initialValues}>
-                    <Form className="">
+                    <Form className="mb-3">
                       {settings.description_status ? (
                         <>
                           <FormikControl
@@ -189,8 +204,12 @@ const Images = (props) => {
                             label={t("links.images.title")}
                             placeholder="image slider title"
                             value={settings.title}
-                            onChange={e => settingsChange('title' ,e.target.value )}
-                            onBlur={(e) => changeTitle(e.target.value)}
+                            onChange={(e) =>
+                              setTitle(e.target.value)
+
+                              // settingsChange("title", e.target.value)
+                            }
+                            // onBlur={(e) => changeTitle(e.target.value)}
                           />
                           <FormikControl
                             control="input"
@@ -198,9 +217,25 @@ const Images = (props) => {
                             label={t("links.images.description")}
                             placeholder="image slider Description"
                             value={settings.description}
-                            onChange={e => settingsChange('description' ,e.target.value )}
+                            onChange={(e) =>
+                              setDescription(e.target.value)
 
-                            onBlur={(e) => changeDescription(e.target.value)}
+                              // settingsChange("description", e.target.value)
+                            }
+                            // onBlur={(e) => changeDescription(e.target.value)}
+                          />
+                          <LinkButton
+                            type="submit"
+                            buttontext={t("modal-edit.save-edit")}
+                            onClick={() => {
+                              console.log("save title"+ title)
+                              settingsChange("title", title)
+                              changeTitle(title)
+                              settingsChange("description", description)
+                              changeDescription(description)
+                            }}
+                            // icon="yes"
+                            // disabled={formik.values.url === "" ? true : false}
                           />
                         </>
                       ) : null}
@@ -231,9 +266,11 @@ const Images = (props) => {
                             label="Link Text"
                             placeholder="image slider Link text"
                             value={settings.link_text}
-                            onChange={e => settingsChange('link_text' ,e.target.value )}
-
-                            onBlur={(e) => changeLinkText(e.target.value)}
+                            onChange={(e) =>
+                              setlinkText(e.target.value)
+                              // settingsChange("link_text", e.target.value)
+                            }
+                            // onBlur={(e) => changeLinkText(e.target.value)}
                           />
                           <FormikControl
                             control="input"
@@ -241,9 +278,25 @@ const Images = (props) => {
                             label="Link URL"
                             placeholder="image slider Link URL"
                             value={settings.link_url}
-                            onChange={e => settingsChange('link_url' ,e.target.value )}
+                            onChange={(e) =>
+                              setlinkUrl(e.target.value)
 
-                            onBlur={(e) => changeLinkUrl(e.target.value)}
+                              // settingsChange("link_url", e.target.value)
+                            }
+                            // onBlur={(e) => changeLinkUrl(e.target.value)}
+                          />
+                           <LinkButton
+                            type="submit"
+                            buttontext={t("modal-edit.save-edit")}
+                            onClick={() => {
+                              console.log("save link"+ linkUrl)
+                              settingsChange("link_url", linkUrl)
+                              changeLinkUrl(linkUrl)
+                              settingsChange("link_text", linkText)
+                              changeLinkUrl(linkText)
+                            }}
+                            // icon="yes"
+                            // disabled={formik.values.url === "" ? true : false}
                           />
                         </>
                       ) : null}

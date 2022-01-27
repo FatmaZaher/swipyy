@@ -404,14 +404,10 @@ const Appearance = (props) => {
     <div className="appearance-page">
       <Accordion>
         <div className="row w-100 m-0">
-          <div className="col-md-6">
-            {/* <Accordion.Item eventKey="0">
-          <Accordion.Header> */}
+          <div className="col-md-6 mb-3 mb-md-0">
             <div className="apperance-head">
               {t("apperance.username")} {currentUser.username}
             </div>
-            {/* </Accordion.Header>
-          <Accordion.Body> */}
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
@@ -431,20 +427,13 @@ const Appearance = (props) => {
                   api="user/appearance/update"
                   t={t}
                 />
-                {/* <Sharicon /> */}
               </div>
             </div>
-            {/* </Accordion.Body>
-        </Accordion.Item> */}
           </div>
-          <div className="col-md-6">
-            {/* <Accordion.Item eventKey="1">
-          <Accordion.Header> */}
+          <div className="col-md-6 mb-3 mb-md-0">
             <div className="apperance-head">
               {t("apperance.short-username")} <ProBtn isStatic={true} />
             </div>
-            {/* </Accordion.Header>
-          <Accordion.Body> */}
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
@@ -464,18 +453,11 @@ const Appearance = (props) => {
                   api="user/appearance/update"
                   t={t}
                 />
-                {/* <Sharicon /> */}
               </div>
             </div>
-            {/* </Accordion.Body>
-        </Accordion.Item> */}
           </div>
-          <div className="col-md-6">
-            {/* <Accordion.Item eventKey="2">
-          <Accordion.Header> */}
+          <div className="col-md-6 mb-3 mb-md-0">
             <div className="apperance-head">{t("apperance.layout.title")}</div>
-            {/* </Accordion.Header>
-          <Accordion.Body> */}
             <div className="layout">
               <div className="avatar">
                 <input
@@ -517,15 +499,9 @@ const Appearance = (props) => {
                 </label>
               </div>
             </div>
-            {/* </Accordion.Body>
-        </Accordion.Item> */}
           </div>
           <div className="col-md-6">
             {settings.layout === "cover" ? (
-              // <Accordion.Item eventKey="3">
-              //   <Accordion.Header>
-              //   </Accordion.Header>
-              //   <Accordion.Body>
               <div>
                 <div className="apperance-head">
                   {t("apperance.cover-image-title")}
@@ -542,14 +518,6 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
-                    <div
-                        className="link-action"
-                        onClick={() => editCoverImage()}
-                      >
-                        <div className="edit-icon">
-                          <Editticons />
-                        </div>
-                      </div>
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -564,9 +532,13 @@ const Appearance = (props) => {
                           />
                         </div>
                       </div>
-                      <div className="link-action">
-                        {/* <Editicon /> */}
-                        {/* <Sharicon /> */}
+                      <div
+                        className="link-action"
+                        onClick={() => editCoverImage()}
+                      >
+                        <div className="edit-icon">
+                          <Editticons />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -579,7 +551,6 @@ const Appearance = (props) => {
                       </div>
                     </div>
                     <div className="link-and-icon">
-                    
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -1282,6 +1253,139 @@ const Appearance = (props) => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
+
+            <Accordion.Item eventKey="11" className="font-section">
+              <Accordion.Header>{t("apperance.font.title")}</Accordion.Header>
+              <Accordion.Body>
+                <div className="font-style-tabs">
+                  <Tabs
+                    defaultActiveKey={t("apperance.font.language")}
+                    id="font-tab-example"
+                    className="mb-3"
+                  >
+                    <Tab eventKey="arabic" title="ع">
+                      <div className="custom-avatars">
+                        {settings.background_animated
+                          ? settings.background_animated.map(
+                              (background, index) => {
+                                return (
+                                  <div
+                                    className={`avatar-back ${
+                                      background.is_pro ? "align-pro" : null
+                                    }`}
+                                  >
+                                    <div
+                                      className="avatar buttons-style-shap-list"
+                                      key={background.id}
+                                      index={index}
+                                    >
+                                      <input
+                                        type="radio"
+                                        id={background.id}
+                                        name="animat"
+                                        value={background.id}
+                                        onChange={() =>
+                                          changeBackgroundAnimate(
+                                            background.id,
+                                            background.is_pro
+                                          )
+                                        }
+                                        checked={
+                                          background.id ===
+                                          parseInt(
+                                            settings.background_animated_id
+                                          )
+                                            ? true
+                                            : null
+                                        }
+                                      />
+                                      <label
+                                        htmlFor={background.id}
+                                        className="d-block"
+                                      >
+                                        <img
+                                          src={checkIcon}
+                                          alt=""
+                                          className="check-icon"
+                                        />
+                                        <img src={background.img} alt="" />
+                                        <p className="mt-2">
+                                          {background.name}
+                                        </p>
+                                        {background.is_pro ? <ProBtn /> : null}
+                                      </label>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )
+                          : null}
+                      </div>
+                    </Tab>
+                    <Tab eventKey="english" title="En">
+                      <div className="custom-avatars">
+                        {settings.background_animated
+                          ? settings.background_animated.map(
+                              (background, index) => {
+                                return (
+                                  <div
+                                    className={`avatar-back ${
+                                      background.is_pro ? "align-pro" : null
+                                    }`}
+                                  >
+                                    <div
+                                      className="avatar buttons-style-shap-list"
+                                      key={background.id}
+                                      index={index}
+                                    >
+                                      <input
+                                        type="radio"
+                                        id={background.id}
+                                        name="animat"
+                                        value={background.id}
+                                        onChange={() =>
+                                          changeBackgroundAnimate(
+                                            background.id,
+                                            background.is_pro
+                                          )
+                                        }
+                                        checked={
+                                          background.id ===
+                                          parseInt(
+                                            settings.background_animated_id
+                                          )
+                                            ? true
+                                            : null
+                                        }
+                                      />
+                                      <label
+                                        htmlFor={background.id}
+                                        className="d-block"
+                                      >
+                                        <img
+                                          src={checkIcon}
+                                          alt=""
+                                          className="check-icon"
+                                        />
+                                        <img src={background.img} alt="" />
+                                        <p className="mt-2">
+                                          {background.name}
+                                        </p>
+                                        {background.is_pro ? <ProBtn /> : null}
+                                      </label>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )
+                          : null}
+                      </div>
+                    </Tab>
+                  </Tabs>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+
             <Accordion.Item eventKey="12">
               <Accordion.Header>
                 {t("apperance.links-text-alignment.title")}

@@ -9,6 +9,8 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import MouseIcon from "@mui/icons-material/Mouse";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import { useTable } from "react-table";
+import { Table } from "react-bootstrap";
+
 
 import Chart from "react-apexcharts";
 import MapChart from "../component/MapChart";
@@ -421,12 +423,11 @@ const Analytic = (props) => {
       </div>
       <div className="mobile-device final mb-3">
         <p className="your-links-header mb-3 mb-m-5">{t("analytic.links")}</p>
-        <table class="table">
+        <Table responsive>
           <thead>
             <tr>
               <th>{t("analytic.url")}</th>
               <th>{t("analytic.type")}</th>
-
               <th>{t("analytic.count")}</th>
             </tr>
           </thead>
@@ -441,7 +442,7 @@ const Analytic = (props) => {
                 ))
               : null}
           </tbody>
-        </table>
+        </Table>
       </div>
       <div className="row-2">
         {" "}

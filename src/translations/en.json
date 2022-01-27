@@ -12,12 +12,12 @@
       "banks": "Banks"
     },
     "link": {
-      "button-placholder": "Type your username here",
+      "button-placholder": "Type your link here",
       "button": "Add your link ",
       "add-your-link": "Add You Link*"
     },
     "social": {
-      "button-placholder": "Type youe link here",
+      "button-placholder": "Type youe username here",
       "button": "Add your link ",
       "add-your-link": "Add You Social Link*",
       "select": {
@@ -99,6 +99,10 @@
       "background-style": "Background Style",
       "animated-background": "Animated Background",
       "background-color": "Background Color"
+    },
+    "font": {
+      "title": "Fonts",
+      "language": "english"
     },
     "links-text-alignment": {
       "title": "links text alignment",

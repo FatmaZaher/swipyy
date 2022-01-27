@@ -19,7 +19,7 @@
     "social": {
       "button-placholder": "إكتب إسم المستخدم الخاص بك هنا",
       "button": "إضافة الرابط",
-      "add-your-link": "أضف الرابط*",
+      "add-your-link": "أضف إسم مستخدم*",
       "select": {
         "showAs": "تظهر ك",
         "button": "زر",
@@ -99,6 +99,10 @@
       "background-style": "تنسيق الخلفية",
       "animated-background": "خلفية متحركة",
       "background-color": "لون الخلفية"
+    },
+    "font": {
+      "title": "الخطوط",
+      "language": "arabic"
     },
     "links-text-alignment": {
       "title": "اتجاه نص الرابط",
