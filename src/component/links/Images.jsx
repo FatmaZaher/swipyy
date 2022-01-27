@@ -70,9 +70,7 @@ const Images = (props) => {
     let newSettings = oldSettings;
     setSettings(newSettings);
   };
-  const onClick = (value) => {
-
-  }
+  const onClick = (value) => {};
   const checkIsPro = (value) => {
     if (value === 1) {
       if (currentUser.is_pro === false) {
@@ -100,17 +98,12 @@ const Images = (props) => {
     const link_status = value === true ? 1 : 0;
     apiChange({ link_status });
   };
-  const changeDescription = (description) => {
-    apiChange({ description });
-  };
-  const changeTitle = (title) => {
-    apiChange({ title });
-  };
-  const changeLinkText = (link_text) => {
-    apiChange({ link_text });
+
+  const changeTitleDescription = () => {
+    apiChange({ description: settings.description, title: settings.title });
   };
   const changeLinkUrl = (link_url) => {
-    apiChange({ link_url });
+    apiChange({ link_url: settings.link_url, link_text: settings.link_text });
   };
 
   const getAllSlider = async () => {
@@ -205,9 +198,7 @@ const Images = (props) => {
                             placeholder="image slider title"
                             value={settings.title}
                             onChange={(e) =>
-                              setTitle(e.target.value)
-
-                              // settingsChange("title", e.target.value)
+                              settingsChange("title", e.target.value)
                             }
                             // onBlur={(e) => changeTitle(e.target.value)}
                           />
@@ -218,9 +209,7 @@ const Images = (props) => {
                             placeholder="image slider Description"
                             value={settings.description}
                             onChange={(e) =>
-                              setDescription(e.target.value)
-
-                              // settingsChange("description", e.target.value)
+                              settingsChange("description", e.target.value)
                             }
                             // onBlur={(e) => changeDescription(e.target.value)}
                           />
@@ -228,11 +217,7 @@ const Images = (props) => {
                             type="submit"
                             buttontext={t("modal-edit.save-edit")}
                             onClick={() => {
-                              console.log("save title"+ title)
-                              settingsChange("title", title)
-                              changeTitle(title)
-                              settingsChange("description", description)
-                              changeDescription(description)
+                              changeTitleDescription();
                             }}
                             // icon="yes"
                             // disabled={formik.values.url === "" ? true : false}
@@ -267,8 +252,7 @@ const Images = (props) => {
                             placeholder="image slider Link text"
                             value={settings.link_text}
                             onChange={(e) =>
-                              setlinkText(e.target.value)
-                              // settingsChange("link_text", e.target.value)
+                              settingsChange("link_text", e.target.value)
                             }
                             // onBlur={(e) => changeLinkText(e.target.value)}
                           />
@@ -279,21 +263,15 @@ const Images = (props) => {
                             placeholder="image slider Link URL"
                             value={settings.link_url}
                             onChange={(e) =>
-                              setlinkUrl(e.target.value)
-
-                              // settingsChange("link_url", e.target.value)
+                              settingsChange("link_url", e.target.value)
                             }
                             // onBlur={(e) => changeLinkUrl(e.target.value)}
                           />
-                           <LinkButton
+                          <LinkButton
                             type="submit"
                             buttontext={t("modal-edit.save-edit")}
                             onClick={() => {
-                              console.log("save link"+ linkUrl)
-                              settingsChange("link_url", linkUrl)
-                              changeLinkUrl(linkUrl)
-                              settingsChange("link_text", linkText)
-                              changeLinkUrl(linkText)
+                              changeLinkUrl();
                             }}
                             // icon="yes"
                             // disabled={formik.values.url === "" ? true : false}
