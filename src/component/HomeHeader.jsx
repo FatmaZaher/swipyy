@@ -66,7 +66,7 @@ const HomeHeader = (props) => {
           </p>
         </div>
         <div className="personal-pho" onClick={showPersonalList}>
-          <img src={currentUser.img || personal} alt="" />
+          <img src={currentUser.cover_img || personal} alt="" />
           {/* <div
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >

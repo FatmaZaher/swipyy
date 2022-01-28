@@ -1303,7 +1303,7 @@ const Appearance = (props) => {
                                   alt=""
                                   className="check-icon"
                                 />
-                                <img src={font.img} alt="" />
+                                <img height="100px" src={font.img} alt="" />
                                 <p className="mt-2">{font.name}</p>
                                 {font.is_pro ? <ProBtn /> : null}
                               </label>
