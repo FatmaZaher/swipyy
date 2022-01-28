@@ -139,7 +139,7 @@
     "ctr": "CTR",
     "link-date": "Link Performance by Date",
     "export": "Export to CSV",
-    "mobile-devieces": "Mobile Devieces",
+    "mobile-devices": "Devices",
     "views-global": "Views by Global Market",
     "views-country-map": "Views by Country (map)",
     "views-country": "Views by Country",
@@ -156,7 +156,7 @@
   },
   "payments": {
     "time-turn": "It's time to turn PRO",
-    "mobile-devieces": "Mobile Devieces",
+    "mobile-devices": "Mobile devices",
     "pargraphe": " Get even more out of your bio link! Advanced analytics,unlimited customisations, dedicated support and much more. Upgrade or downgrade at any time.",
     "yearly": "Yearly",
     "monthly": "Monthly",

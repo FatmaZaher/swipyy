@@ -50,6 +50,8 @@ const Images = (props) => {
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
 
   const apiChange = async (values) => {
+    props.onStartRequest(false);
+
     try {
       axios
         .post("https://test-place.site/api/user/slider/update", values, config)

@@ -303,6 +303,8 @@ const Analytic = (props) => {
   };
 
   const getAllSettings = async (value) => {
+    props.onStartRequest(false);
+
     try {
       axios
         .get(
@@ -318,13 +320,16 @@ const Analytic = (props) => {
 
           setCountryTable(handleTable(data.country_table));
           setCityTable(handleTable(data.city_table));
-          setDeviceTable(handleTable(data.city_table));
+          setDeviceTable(handleTable(data.device_table));
 
           setReferrer(handleTable(data.referrer));
           setLinkTable(data.link);
           setDevicesChart(handleDevicesChart(data.device_category));
           console.log(handleDevicesChart(data.device_category));
           setGlobalMarket(handleGlobalMarket(data.views_global));
+
+          props.onFinishRequest(false);
+
         });
     } catch (error) {}
   };
@@ -354,11 +359,10 @@ const Analytic = (props) => {
     } catch (error) {}
   };
   const exportLinks = () => {
-    exportCSV('links')
+    exportCSV("links");
   };
   const exportReferrer = () => {
-    exportCSV('referrer')
-
+    exportCSV("referrer");
   };
   useEffect(() => {
     getAllSettings();
@@ -382,13 +386,6 @@ const Analytic = (props) => {
             </Form>
           )}
         </Formik>
-        <div className="black-btn">
-          <LinkButton
-            type=""
-            buttontext={t("analytic.export")}
-            exportIcon="true"
-          />
-        </div>
       </div>
       <div className="analytic-info mb-3">
         <ul className="analytic-info-list">
@@ -497,7 +494,7 @@ const Analytic = (props) => {
         </div>
         <div className="mobile-device mb-3">
           <p className="your-links-header mb-3 mb-m-5">
-            {t("analytic.mobile-devieces")}
+            {t("analytic.mobile-devices")}
           </p>
           <table class="table">
             <thead>
