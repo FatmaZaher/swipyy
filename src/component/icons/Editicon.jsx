@@ -45,37 +45,39 @@ const Editicon = (props) => {
   let newItemId = item ? `/${item.id}` : "";
   let method = axios.patch;
   if (api === "user/link") {
-    initialValues.url = item ? item.url : null;
-    initialValues.name = item ? item.name : null;
+    initialValues.url = item ? item.url : "";
+    initialValues.name = item ? item.name : "";
     inputName = "url";
     labelName = t("modal-edit.url");
   } else if (api === "user/socialUser") {
-    initialValues.url = item ? item.url : null;
+    initialValues.url = item ? item.url : "";
     inputName = "url";
   } else if (api === "user/files/update") {
-    initialValues.name = item ? item.name : null;
+    initialValues.name = item ? item.name : "";
     inputName = "name";
     method = axios.post;
   } else if (api === "user/location") {
-    initialValues.name = item ? item.location : null;
-    inputName = "name";
+    initialValues.url = item ? item.url : "";
+    initialValues.name = item ? item.location : "";
+    inputName = "url";
+    labelName = t("modal-edit.url");
   } else if (api === "user/appearance/update") {
     newItemId = "";
     method = axios.post;
     if (settingName === "username") {
-      initialValues.username = item ? item.username : null;
+      initialValues.username = item ? item.username : "";
       inputName = "username";
     }
     if (settingName === "short_name") {
-      initialValues.short_name = item ? item.short_name : null;
+      initialValues.short_name = item ? item.short_name : "";
       inputName = "short_name";
     }
     if (settingName === "title") {
-      initialValues.title = item ? item.title : null;
+      initialValues.title = item ? item.title : "";
       inputName = "title";
     }
   } else if (api === "user/settings/update") {
-    initialValues.email = item ? item.email : null;
+    initialValues.email = item ? item.email : "";
     inputName = "email";
   }
 
@@ -114,6 +116,9 @@ const Editicon = (props) => {
 
   useEffect(() => {
     if (api === "user/link") {
+      setIsName(true);
+    }
+    if (api === "user/location") {
       setIsName(true);
     }
   }, []);

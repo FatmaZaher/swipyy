@@ -36,7 +36,7 @@ ul {
   width: 40px !important;
   height: 40px;
   object-fit: contain;
-  @include mobile{
+  @include mobile {
     width: 20px !important;
     height: 20px;
   }
@@ -63,11 +63,11 @@ ul {
   display: flex;
   align-items: center;
 }
-.social-list-item-icon{
+.social-list-item-icon {
   background: #8cc8cc;
-    border-radius: 7px;
-    padding: 7px;
-    box-sizing: border-box;
+  border-radius: 7px;
+  padding: 7px;
+  box-sizing: border-box;
 }
 .social-list-item-icon img {
   width: 25px;
@@ -101,5 +101,20 @@ ul {
     img:nth-of-type(2) {
       width: 60px;
     }
+  }
+}
+.location-form {
+  .form-control {
+    margin: 0 10px 20px ;
+    input{
+      border-radius: 50px;
+    }
+  }
+  button{
+    border-radius: 50px;
+ 
+  }
+  @include mobile {
+    flex-wrap: wrap;
   }
 }

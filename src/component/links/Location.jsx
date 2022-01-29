@@ -18,6 +18,7 @@ const Location = (props) => {
 
   const initialValues = {
     name: "",
+    url:""
   };
   const onSubmit = (values) => {
     props.onStartRequest(true);
@@ -67,7 +68,7 @@ const Location = (props) => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="form-page">
+          <Form className="form-page location-form">
             {/* <div className="form-control">
               <Field
                 type="text"
@@ -84,11 +85,19 @@ const Location = (props) => {
               <AddOutlinedIcon />
               Add Location
             </button> */}
+           
             <FormikControl
               control="input"
               type="text"
               name="name"
               placeholder={t("links.location.button-placholder")}
+              error="true"
+            />
+             <FormikControl
+              control="input"
+              type="text"
+              name="url"
+              placeholder={t("links.location.button-url")}
               error="true"
             />
             <LinkButton

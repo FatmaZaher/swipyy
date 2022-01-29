@@ -28,6 +28,8 @@
     },
     "location": {
       "button-placholder": "Type or paste location address",
+      "button-url": "Paste the location link from Google ",
+
       "button": "Add Location",
       "location-header": "Locations",
       "add-your-link": "Add You Location*"

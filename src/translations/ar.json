@@ -28,6 +28,8 @@
     },
     "location": {
       "button-placholder": "الصق عنوان الموقع هنا  ",
+      "button-url": "الصق رابط الموقع من جوجل  ",
+
       "button": "إضافة الموقع",
       "location-header": "المواقع",
       "add-your-link": "أضف الموقع*"
