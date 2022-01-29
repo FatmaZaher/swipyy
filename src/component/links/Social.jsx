@@ -158,7 +158,7 @@ const Social = (props) => {
     axios
       .patch(
         "https://test-place.site/api/user/socialUser/" + id,
-        { type: value, url },
+        { type: value },
         config
       )
       .then((res) => {
