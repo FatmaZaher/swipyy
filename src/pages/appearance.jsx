@@ -439,7 +439,7 @@ const Appearance = (props) => {
           </div>
           <div className="col-md-6 mb-3 mb-md-0">
             <div className="apperance-head">
-              ID Link <ProBtn isStatic={true} />
+              ID Link 
             </div>
             <div className="single-item mb-3">
               <div className="single-item-info">
