@@ -407,7 +407,7 @@ const Analytic = (props) => {
         <p className="your-links-header mb-3 mb-m-5">
           {t("analytic.link-date")}
         </p>
-        <div className="charts">
+        <div className="charts" dir="ltr">
           <div id="views">
             {viewsChart ? (
               <Chart
@@ -481,7 +481,7 @@ const Analytic = (props) => {
       </div>
       <div className="row-2">
         {" "}
-        <div className="device-category-charts mb-3">
+        <div className="device-category-charts mb-3" dir="ltr">
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.link-date")}
           </p>
