@@ -279,13 +279,14 @@ const Analytic = (props) => {
         labels,
         chart: {
           type: "donut",
+          height:100
         },
         responsive: [
           {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200,
+                width: 150,
               },
               legend: {
                 position: "bottom",

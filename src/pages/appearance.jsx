@@ -439,28 +439,19 @@ const Appearance = (props) => {
           </div>
           <div className="col-md-6 mb-3 mb-md-0">
             <div className="apperance-head">
-              {t("apperance.short-username")} <ProBtn isStatic={true} />
+              ID Link <ProBtn isStatic={true} />
             </div>
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      swippy.me/<a href="#">{settings.short_name}</a>
+                      Swipyy.com/<a href="#">{settings.short_name}</a>
                     </span>
                   </p>
                 </div>
               </div>
-              <div className="link-action">
-                <Editicon
-                  settingName="short_name"
-                  item={settings}
-                  config={config}
-                  onSaveData={() => handleEditData()}
-                  api="user/appearance/update"
-                  t={t}
-                />
-              </div>
+              
             </div>
           </div>
           <div className="col-md-6 mb-3 mb-md-0">
@@ -563,7 +554,7 @@ const Appearance = (props) => {
                         <div className="checkbox">
                           <input
                             type="checkbox"
-                            name="show"
+                            name="title_status"
                             checked={settings.title_status === 1 ? true : false}
                             onChange={(e) =>
                               changeTitleStatus(e.target.checked)

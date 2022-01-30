@@ -134,6 +134,8 @@ const Social = (props) => {
   };
   const handleSocialPlatform = (value, func) => {
     func("social_id", value.id);
+    func("url", '');
+
     console.log(value);
     setSocialPlaceholder(value.placeholder);
   };
