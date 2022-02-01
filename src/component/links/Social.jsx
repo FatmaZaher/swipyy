@@ -32,7 +32,7 @@ const Social = (props) => {
     props.onStartRequest(true);
     axios
       .post(
-        "https://test-place.site/api/user/social/sort/update",
+        "https://swipyy.com/api/user/social/sort/update",
         { sort_social: ides },
         config
       )
@@ -97,7 +97,7 @@ const Social = (props) => {
   const getAllSocialPlatforms = async () => {
     try {
       await axios
-        .get("https://test-place.site/api/user/social/get", config)
+        .get("https://swipyy.com/api/user/social/get", config)
         .then((res) => {
           const newPlatforms = res.data.data.map((item) => {
             return {
@@ -115,7 +115,7 @@ const Social = (props) => {
     console.log(values);
     props.onStartRequest(false);
     axios
-      .post("https://test-place.site/api/user/socialUser", values, config)
+      .post("https://swipyy.com/api/user/socialUser", values, config)
       .then((res) => {
         getSocials();
       });
@@ -126,7 +126,7 @@ const Social = (props) => {
   });
   const getSocials = () => {
     axios
-      .get("https://test-place.site/api/user/socialUser", config)
+      .get("https://swipyy.com/api/user/socialUser", config)
       .then((res) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
@@ -159,7 +159,7 @@ const Social = (props) => {
     props.onStartRequest(false);
     axios
       .patch(
-        "https://test-place.site/api/user/socialUser/" + id,
+        "https://swipyy.com/api/user/socialUser/" + id,
         { type: value },
         config
       )

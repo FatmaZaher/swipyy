@@ -56,7 +56,7 @@ const queryAttr = "data-rbd-drag-handle-draggable-id";
 const onSubmit = (values) => {
   console.log(values);
   // axios
-  //   .post("https://test-place.site/api/user/link", values, config)
+  //   .post("https://swipyy.com/api/user/link", values, config)
   //   .then((res) => {
   //     getLinks();
   //   });
@@ -116,7 +116,7 @@ const Appearance = (props) => {
 
     try {
       axios
-        .get("https://test-place.site/api/user/appearance", config)
+        .get("https://swipyy.com/api/user/appearance", config)
         .then((res) => {
           props.onFinishRequest(true);
 
@@ -167,11 +167,7 @@ const Appearance = (props) => {
 
     try {
       axios
-        .post(
-          "https://test-place.site/api/user/appearance/update",
-          values,
-          config
-        )
+        .post("https://swipyy.com/api/user/appearance/update", values, config)
         .then((res) => {
           getAllSettings();
         });
@@ -274,7 +270,6 @@ const Appearance = (props) => {
   };
   const changeBackgroundAnimate = (background_animated_id, isPro) => {
     if (checkIsPro(isPro) === false) return;
-
     apiChange({ background_animated_id });
   };
 
@@ -385,7 +380,7 @@ const Appearance = (props) => {
       } else {
         await axios
           .patch(
-            `https://test-place.site/api/user/appearance/update/detail/${item.id}`,
+            `https://swipyy.com/api/user/appearance/update/detail/${item.id}`,
             item,
             config
           )
@@ -438,9 +433,7 @@ const Appearance = (props) => {
             </div>
           </div>
           <div className="col-md-6 mb-3 mb-md-0">
-            <div className="apperance-head">
-              ID Link 
-            </div>
+            <div className="apperance-head">ID Link</div>
             <div className="single-item mb-3">
               <div className="single-item-info">
                 <div className="my-link">
@@ -451,7 +444,6 @@ const Appearance = (props) => {
                   </p>
                 </div>
               </div>
-              
             </div>
           </div>
           <div className="col-md-6 mb-3 mb-md-0">
@@ -516,7 +508,6 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
-                    
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -596,8 +587,6 @@ const Appearance = (props) => {
                       />
                     </div>
                     <div className="link-and-icon">
-                      
-
                       <div className="single-item-switch">
                         <div className="checkbox">
                           <input
@@ -896,7 +885,7 @@ const Appearance = (props) => {
                 return (
                   <div
                     className={`avatar-back ${
-                      theme.is_pro ? "align-pro" : null
+                      parseInt(theme.is_pro) ? "align-pro" : null
                     }`}
                   >
                     <div className="avatar" key={theme.id} index={themeIndex}>
@@ -914,7 +903,7 @@ const Appearance = (props) => {
                           <img src={theme.img} alt="" />
                         </div>
                         <p className="mt-2">{theme.name}</p>
-                        {theme.is_pro ? <ProBtn /> : null}
+                        {parseInt(theme.is_pro) ? <ProBtn /> : null}
                       </label>
                     </div>
                   </div>
@@ -1148,11 +1137,7 @@ const Appearance = (props) => {
                             name="background"
                             value={background.id}
                             onChange={() => changeBackground(background.id)}
-                            checked={
-                              background.id === settings.background_type
-                                ? true
-                                : null
-                            }
+                            checked={background.id === settings.background_type}
                           />
                           <label htmlFor={background.id} className="d-block">
                             <img
@@ -1161,6 +1146,9 @@ const Appearance = (props) => {
                               className="check-icon"
                             />
                             <img src={background.img} alt="" />
+                            {/* {background.id === settings.background_type
+                              ? "checked"
+                              : "nott"} */}
                             <p className="mt-2">{background.text}</p>
                           </label>
                         </div>
@@ -1187,7 +1175,7 @@ const Appearance = (props) => {
                             >
                               <input
                                 type="radio"
-                                id={background.id}
+                                id={"background_animated" + background.id}
                                 name="animat"
                                 value={background.id}
                                 onChange={() =>
@@ -1196,15 +1184,11 @@ const Appearance = (props) => {
                                     background.is_pro
                                   )
                                 }
-                                checked={
-                                  background.id ===
-                                  parseInt(settings.background_animated_id)
-                                    ? true
-                                    : null
-                                }
+                                checked={background.id === 2}
                               />
+
                               <label
-                                htmlFor={background.id}
+                                htmlFor={"background_animated" + background.id}
                                 className="d-block"
                               >
                                 <img
@@ -1214,6 +1198,14 @@ const Appearance = (props) => {
                                 />
                                 <img src={background.img} alt="" />
                                 <p className="mt-2">{background.name}</p>
+                                {/* {background.id}
+                                <br />
+                                {settings.background_animated_id}
+                                {background.id ===
+                                parseInt(settings.background_animated_id)
+                                  ? "checked"
+                                  : "nott"} */}
+
                                 {background.is_pro ? <ProBtn /> : null}
                               </label>
                             </div>

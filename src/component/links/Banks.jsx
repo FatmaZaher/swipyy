@@ -30,7 +30,7 @@ const Banks = (props) => {
   const getBankList = async () => {
     try {
       await axios
-        .get("https://test-place.site/api/user/bank/get", config)
+        .get("https://swipyy.com/api/user/bank/get", config)
         .then((res) => {
           setBanksList(res.data.data);
         });
@@ -40,7 +40,7 @@ const Banks = (props) => {
     props.onStartRequest(false);
 
     axios
-      .post("https://test-place.site/api/user/bankUser", values, config)
+      .post("https://swipyy.com/api/user/bankUser", values, config)
       .then((res) => {
         getBanks();
       });
@@ -52,7 +52,7 @@ const Banks = (props) => {
   });
   const getBanks = () => {
     axios
-      .get("https://test-place.site/api/user/bankUser", config)
+      .get("https://swipyy.com/api/user/bankUser", config)
       .then((res) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
@@ -71,7 +71,7 @@ const Banks = (props) => {
     const newValue = value === true ? "active" : "inactive";
     axios
       .patch(
-        "https://test-place.site/api/user/bankUser/" + id,
+        "https://swipyy.com/api/user/bankUser/" + id,
         { status: newValue },
         config
       )

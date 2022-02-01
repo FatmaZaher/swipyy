@@ -24,7 +24,7 @@ const Location = (props) => {
     props.onStartRequest(true);
 
     axios
-      .post("https://test-place.site/api/user/location", values, config)
+      .post("https://swipyy.com/api/user/location", values, config)
       .then((res) => {
         getLocations();
       });
@@ -34,7 +34,7 @@ const Location = (props) => {
   });
   const getLocations = () => {
     axios
-      .get("https://test-place.site/api/user/location", config)
+      .get("https://swipyy.com/api/user/location", config)
       .then((res) => {
         setItems(res.data.data);
         props.onFinishRequest(false);
@@ -52,7 +52,7 @@ const Location = (props) => {
     const newValue = value === true ? "active" : "inactive";
     axios
       .patch(
-        "https://test-place.site/api/user/location/" + id,
+        "https://swipyy.com/api/user/location/" + id,
         { status: newValue },
         config
       )

@@ -47,7 +47,7 @@ const Payments = (props) => {
   const getAllPackageMonthly = async () => {
     try {
       axios
-        .get("https://test-place.site/api/user/package/monthly", config)
+        .get("https://swipyy.com/api/user/package/monthly", config)
         .then((res) => {
           setPackageMonthly(res.data.data.data[0]);
           // setSettings(res.data.data.Settings);
@@ -57,7 +57,7 @@ const Payments = (props) => {
   const getAllPackageYearly = async () => {
     try {
       axios
-        .get("https://test-place.site/api/user/package/yearly", config)
+        .get("https://swipyy.com/api/user/package/yearly", config)
         .then((res) => {
           setPackageYearly(res.data.data.data[0]);
 
@@ -69,7 +69,7 @@ const Payments = (props) => {
     try {
       axios
         .post(
-          "https://test-place.site/api/user/payment/" + packageId,
+          "https://swipyy.com/api/user/payment/" + packageId,
           {},
           config
         )

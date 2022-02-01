@@ -44,7 +44,7 @@ const BankModal = (props) => {
     try {
       await axios
         .put(
-          `https://test-place.site/api/user/bankUser/${bank.id}`,
+          `https://swipyy.com/api/user/bankUser/${bank.id}`,
           values,
           config
         )

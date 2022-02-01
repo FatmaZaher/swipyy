@@ -37,7 +37,7 @@ const Link = (props) => {
     props.onStartRequest(true);
     axios
       .post(
-        "https://test-place.site/api/user/link/sort/update",
+        "https://swipyy.com/api/user/link/sort/update",
         { sort_link: ides },
         config
       )
@@ -101,7 +101,7 @@ const Link = (props) => {
   const onSubmit = (values) => {
     props.onStartRequest(true);
     axios
-      .post("https://test-place.site/api/user/link", values, config)
+      .post("https://swipyy.com/api/user/link", values, config)
       .then((res) => {
         getLinks();
       });
@@ -111,7 +111,7 @@ const Link = (props) => {
     url: Yup.string().required(t("links.link.add-your-link")),
   });
   const getLinks = () => {
-    axios.get("https://test-place.site/api/user/link", config).then((res) => {
+    axios.get("https://swipyy.com/api/user/link", config).then((res) => {
       props.onFinishRequest(false);
 
       setItems(res.data.data);
@@ -131,7 +131,7 @@ const Link = (props) => {
     const newValue = value === true ? "active" : "inactive";
     axios
       .patch(
-        "https://test-place.site/api/user/link/" + id,
+        "https://swipyy.com/api/user/link/" + id,
         { status: newValue },
         config
       )

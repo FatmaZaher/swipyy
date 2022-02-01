@@ -26,7 +26,7 @@ const Messages = (props) => {
 
     try {
       axios
-        .get("https://test-place.site/api/user/message", config)
+        .get("https://swipyy.com/api/user/message", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
           setMessages(res.data.data.table);
@@ -46,7 +46,7 @@ const Messages = (props) => {
 
     try {
       axios
-        .post("https://test-place.site/api/user/message/update", values, config)
+        .post("https://swipyy.com/api/user/message/update", values, config)
         .then((res) => {
           getAllSettings();
         });
@@ -85,7 +85,7 @@ const Messages = (props) => {
   const exportCSV = async () => {
     try {
       axios
-        .get("https://test-place.site/api/user/message/export", {
+        .get("https://swipyy.com/api/user/message/export", {
           ...config,
           responseType: "blob",
         })

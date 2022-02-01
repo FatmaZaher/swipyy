@@ -309,7 +309,7 @@ const Analytic = (props) => {
     try {
       axios
         .get(
-          `https://test-place.site/api/user/analytics/${value || duration}`,
+          `https://swipyy.com/api/user/analytics/${value || duration}`,
           config
         )
         .then((res) => {
@@ -342,7 +342,7 @@ const Analytic = (props) => {
     try {
       axios
         .get(
-          `https://test-place.site/api/user/analytics/export/${path}/${duration}`,
+          `https://swipyy.com/api/user/analytics/export/${path}/${duration}`,
           {
             ...config,
             responseType: "blob",

@@ -85,7 +85,7 @@ const Editicon = (props) => {
   const onSubmit = async (values) => {
     try {
       await method(
-        `https://test-place.site/api/${api}${newItemId}`,
+        `https://swipyy.com/api/${api}${newItemId}`,
         values,
         config
       ).then((res) => {

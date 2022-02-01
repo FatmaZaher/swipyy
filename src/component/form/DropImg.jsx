@@ -44,7 +44,7 @@ const DropImg = (props) => {
     try {
       await axios
         .post(
-          "https://test-place.site/api/user/slider/update",
+          "https://swipyy.com/api/user/slider/update",
           newValues,
           config
         )
@@ -67,7 +67,7 @@ const DropImg = (props) => {
     try {
       await axios
         .delete(
-          `https://test-place.site/api/user/slider/images/delete/${id}`,
+          `https://swipyy.com/api/user/slider/images/delete/${id}`,
           config
         )
         .then((res) => {

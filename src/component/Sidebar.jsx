@@ -64,7 +64,7 @@ const Sidebar = (props) => {
   const Logout = () => {
     try {
       axios
-        .post("https://test-place.site/api/logout", {}, config)
+        .post("https://swipyy.com/api/logout", {}, config)
         .then((res) => {
 
           localStorage.removeItem('headers')

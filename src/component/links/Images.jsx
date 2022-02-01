@@ -54,7 +54,7 @@ const Images = (props) => {
 
     try {
       axios
-        .post("https://test-place.site/api/user/slider/update", values, config)
+        .post("https://swipyy.com/api/user/slider/update", values, config)
         .then((res) => {
           getAllSlider();
         });
@@ -111,7 +111,7 @@ const Images = (props) => {
   const getAllSlider = async () => {
     try {
       axios
-        .get("https://test-place.site/api/user/slider", config)
+        .get("https://swipyy.com/api/user/slider", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
           props.onFinishRequest(false);

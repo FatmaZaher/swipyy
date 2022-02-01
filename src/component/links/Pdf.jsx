@@ -113,7 +113,7 @@ const Pdf = (props) => {
     try {
       await axios
         .post(
-          `https://test-place.site/api/${"user/files/update"}/${
+          `https://swipyy.com/api/${"user/files/update"}/${
             openEditlItem.id
           }`,
           values,
@@ -138,7 +138,7 @@ const Pdf = (props) => {
 
     try {
       await axios
-        .post("https://test-place.site/api/user/files", img, config)
+        .post("https://swipyy.com/api/user/files", img, config)
         .then((res) => {
           getFiles();
           setIsFilePicked(false);
@@ -151,7 +151,7 @@ const Pdf = (props) => {
     }
   };
   const getFiles = () => {
-    axios.get("https://test-place.site/api/user/files", config).then((res) => {
+    axios.get("https://swipyy.com/api/user/files", config).then((res) => {
       setItems(res.data.data);
       props.onFinishRequest(false);
       setOpenModal(false);

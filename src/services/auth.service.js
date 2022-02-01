@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "https://test-place.site/api/";
+const API_URL = "https://swipyy.com/api/";
 // const headers = {
 //   'Content-Type': 'application/json',
 //   'Authorization': 'JWT fefege...'

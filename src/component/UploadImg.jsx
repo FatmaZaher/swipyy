@@ -42,17 +42,17 @@ const UploadImg = (props) => {
         url: item.url,
         _method: "patch",
       };
-      api = "https://test-place.site/api/user/link/" + item.id;
+      api = "https://swipyy.com/api/user/link/" + item.id;
     } else if (uploadType === "avatar") {
       data = {
         avatar: imageList[0].file,
       };
-      api = "https://test-place.site/api/user/appearance/update";
+      api = "https://swipyy.com/api/user/appearance/update";
     } else if (uploadType === "cover_img") {
       data = {
         cover_img: imageList[0].file,
       };
-      api = "https://test-place.site/api/user/appearance/update";
+      api = "https://swipyy.com/api/user/appearance/update";
     }
     const img = toFormData(data);
     try {

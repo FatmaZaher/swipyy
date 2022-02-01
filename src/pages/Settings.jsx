@@ -44,7 +44,7 @@ const Settings = (props) => {
   }
   const onSubmit = (values) => {
     axios
-      .post("https://test-place.site/api/user/settings/update", values, config)
+      .post("https://swipyy.com/api/user/settings/update", values, config)
       .then((res) => {
         getAllSettings();
         sucesesEdit();
@@ -70,7 +70,7 @@ const Settings = (props) => {
   const getAllSettings = async () => {
     try {
       axios
-        .get("https://test-place.site/api/user/settings", config)
+        .get("https://swipyy.com/api/user/settings", config)
         .then((res) => {
           setSettings(res.data.data.Settings);
         });

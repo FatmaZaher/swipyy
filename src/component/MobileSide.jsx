@@ -35,7 +35,7 @@ const MobileSide = (props) => {
   if (user) {
     currentUser = user.data;
     var iframe = document.getElementById("mbile-frame");
-    iframe.src = `https://test-place.site/${currentUser.username}`;
+    iframe.src = `https://swipyy.com/${currentUser.username}`;
   }
   const { isRender } = props;
   const showMobileSide = () => setMobileSide(!mobileSide);
@@ -86,7 +86,7 @@ const MobileSide = (props) => {
         ) : null}
         <iframe id="mbile-frame" title="description" />
         <a
-          href={`https://test-place.site/${currentUser.username}`}
+          href={`https://swipyy.com/${currentUser.username}`}
           rel="noreferrer"
           className="link upgrad-btn"
           target="_blank"

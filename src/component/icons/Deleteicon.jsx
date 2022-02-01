@@ -26,7 +26,7 @@ const Deleteicon = (props) => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`https://test-place.site/api/${api}/${item.id}`, config)
+            .delete(`https://swipyy.com/api/${api}/${item.id}`, config)
             .then((res) => {
               props.onSaveData("ee");
 
