@@ -15,6 +15,8 @@ import { user } from "./actions/auth";
 
 import SignUp from "./pages/auth/signUp";
 import ChangePassword from "./pages/auth/changePassword";
+import Reset from "./pages/auth/reset";
+
 import Login from "./pages/auth/login";
 import Verify from "./pages/auth/verify";
 import LoginLayoutRoute from "./layouts/LoginLayoutRoute ";
@@ -49,7 +51,13 @@ function App() {
       });
     } else {
       const url = window.location.pathname;
-      if (url === "/login" || url === "signUp" || url === "/changePassword") {
+      if (
+        url === "/login" ||
+        url === "signUp" ||
+        url === "/changePassword" ||
+        url === "/reset" ||
+        url === "/confirm"
+      ) {
       } else {
         window.location.replace("/login");
       }
@@ -67,6 +75,8 @@ function App() {
           <LoginLayoutRoute path="/signUp" component={SignUp} />
           <LoginLayoutRoute path="/verify" component={Verify} />
           <LoginLayoutRoute path="/changePassword" component={ChangePassword} />
+          <LoginLayoutRoute path="/reset" component={Reset} />
+
           <Home path="/links" component={Links} />
           <Home path="/appearance" component={Appearance} />
           <Home path="/messages" component={Messages} />

@@ -268,9 +268,15 @@ const Appearance = (props) => {
     changeBackground(settings.background_type);
     // apiChange({ background_color: color4, background_final: color4 });
   };
-  const changeBackgroundAnimate = (background_animated_id, isPro) => {
+  const changeBackgroundAnimate = (event, background_animated_id, isPro) => {
+    const isChecked =
+      background_animated_id == settings.background_animated_id ? 1 : 0;
     if (checkIsPro(isPro) === false) return;
-    apiChange({ background_animated_id });
+    if (isChecked) {
+      apiChange({ background_animated_id: 0 });
+    } else {
+      apiChange({ background_animated_id });
+    }
   };
 
   const changeFont = (font_id, isPro) => {
@@ -1174,17 +1180,27 @@ const Appearance = (props) => {
                               index={index}
                             >
                               <input
-                                type="radio"
+                                type="checkbox"
                                 id={"background_animated" + background.id}
                                 name="animat"
+                                className={`${
+                                  background.id ==
+                                  settings.background_animated_id
+                                    ? "input-active"
+                                    : null
+                                }`}
+                                checked={
+                                  background.id ===
+                                  settings.background_animated_id
+                                }
                                 value={background.id}
-                                onChange={() =>
+                                onChange={(e) =>
                                   changeBackgroundAnimate(
+                                    e,
                                     background.id,
                                     background.is_pro
                                   )
                                 }
-                                checked={background.id === 2}
                               />
 
                               <label
