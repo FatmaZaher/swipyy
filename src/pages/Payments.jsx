@@ -128,7 +128,7 @@ const Payments = (props) => {
                     <p className="price-card">
                       $00.00 <span>\{t("payments.forever")}</span>
                     </p>
-                    <ul className="list-card">
+                    {/* <ul className="list-card">
                       <li className="list-card-item">
                         <span>
                           <CheckCircleOutlineIcon />
@@ -153,7 +153,7 @@ const Payments = (props) => {
                         </span>
                         Lorem ipsum dolor{" "}
                       </li>
-                    </ul>
+                    </ul> */}
                     <LinkButton
                       type=""
                       buttontext={t("payments.currnet-plan")}
@@ -162,9 +162,34 @@ const Payments = (props) => {
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
                     <p className="price-card">${packageYearly.amount}</p>
-                    <ul className="list-card">
+                    {/* <ul className="list-card">
                       {packageYearly.dtails
                         ? packageYearly.dtails.map((item, index) => (
+                            <li className="list-card-item">
+                              <span>
+                                <CheckCircleOutlineIcon />
+                              </span>
+                              {item.text}
+                            </li>
+                          ))
+                        : null}
+                    </ul> */}
+                    <LinkButton
+                      buttontext={t("payments.update")}
+                      onClick={() => submitPay(packageYearly.id)}
+                    />
+                    <span className="the-best">{t("payments.best-sell")}</span>
+                  </div>
+                </div>
+              </Tab>
+              <Tab eventKey="6-months" title={t("payments.6-months")}>
+                <div className="payment-cards mt-5">
+                  <div className="single-pay-card">
+                    <p className="title-card">pro</p>
+                    <p className="price-card">${packageMonthly.amount}</p>
+                    <ul className="list-card">
+                      {packageMonthly.dtails
+                        ? packageMonthly.dtails.map((item, index) => (
                             <li className="list-card-item">
                               <span>
                                 <CheckCircleOutlineIcon />
@@ -176,7 +201,7 @@ const Payments = (props) => {
                     </ul>
                     <LinkButton
                       buttontext={t("payments.update")}
-                      onClick={() => submitPay(packageYearly.id)}
+                      onClick={() => submitPay(packageMonthly.id)}
                     />
                     <span className="the-best">{t("payments.best-sell")}</span>
                   </div>

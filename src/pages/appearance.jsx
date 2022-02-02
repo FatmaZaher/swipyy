@@ -525,7 +525,7 @@ const Appearance = (props) => {
                             type="checkbox"
                             name="cover_img_status"
                             checked={
-                              settings.cover_img_status === 1 ? true : false
+                              settings.cover_img_status == 1 ? true : false
                             }
                             onChange={(e) =>
                               changeCoverStatus(e.target.checked)
@@ -557,7 +557,7 @@ const Appearance = (props) => {
                           <input
                             type="checkbox"
                             name="title_status"
-                            checked={settings.title_status === 1 ? true : false}
+                            checked={settings.title_status == 1 ? true : false}
                             onChange={(e) =>
                               changeTitleStatus(e.target.checked)
                             }
@@ -603,7 +603,7 @@ const Appearance = (props) => {
                           <input
                             type="checkbox"
                             name="show"
-                            checked={settings.avtar_status === 1 ? true : false}
+                            checked={settings.avtar_status == 1 ? true : false}
                             onChange={(e) =>
                               changeAvatarStatus(e.target.checked)
                             }
@@ -638,7 +638,7 @@ const Appearance = (props) => {
                           <input
                             type="checkbox"
                             name="show"
-                            checked={settings.title_status === 1 ? true : false}
+                            checked={settings.title_status == 1 ? true : false}
                             onChange={(e) =>
                               changeTitleStatus(e.target.checked)
                             }
@@ -702,13 +702,13 @@ const Appearance = (props) => {
                   <input
                     type="checkbox"
                     name="show"
-                    checked={settings.highlights_status === 1 ? true : false}
+                    checked={settings.highlights_status == 1 ? true : false}
                     onChange={(e) => changeHighlightsStatus(e.target.checked)}
                   />
                 </div>
               </div>
             </div>
-            {settings.highlights_status === 1 ? (
+            {settings.highlights_status == 1 ? (
               <>
                 <div className="highlights">
                   <Formik
@@ -1480,7 +1480,7 @@ const Appearance = (props) => {
                 <input
                   type="checkbox"
                   name="show"
-                  checked={settings.swipy_logo_status === 1 ? true : false}
+                  checked={settings.swipy_logo_status == 1 ? true : false}
                   onChange={(e) => changeSwipyLogoStatus(e.target.checked)}
                 />
               </div>

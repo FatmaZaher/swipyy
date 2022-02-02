@@ -28,7 +28,8 @@
     .nav {
       @include flex(center, center);
       background-color: $back-color;
-      width: 196px;
+      width: 100%;
+      max-width: 320px;
       padding: 12px 0;
       margin: 0;
       .nav-link {
@@ -56,7 +57,7 @@
     background-color: $white-color;
     border-radius: 30px;
     border: 1px solid $border-color;
-    min-height: 340px;
+    min-height: 193px;
     width: 300px;
     margin-right: 15px;
     text-align: center;
@@ -139,7 +140,8 @@
 //   margin: auto;
 // }
 .payments .nav .nav-item {
-  width: calc((100% / 2) - 10%);
+  width: calc((100% / 3) - 10%);
+  margin: 0 5%;
 }
 .pay-card {
   padding: 30px;
