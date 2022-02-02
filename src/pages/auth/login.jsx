@@ -55,8 +55,10 @@ const Login = (props) => {
     setLoading(true);
     dispatch(login(values.email, values.password))
       .then((res) => {
-        console.log(res);
-        // window.location.replace("/links");
+        if (res.status.status === "true") {
+          window.location.replace("/links");
+        }
+        setLoading(false);
 
       })
       .catch(() => {
@@ -113,7 +115,7 @@ const Login = (props) => {
                       name="checkboxOption"
                       options={checkboxOptions}
                     />
-                    <Link to="/changePassword" className="forget-password">
+                    <Link to="/reset" className="forget-password">
                       Forget Password?
                     </Link>
                   </div>

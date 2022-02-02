@@ -92,14 +92,12 @@ export const login = (email, password) => (dispatch) => {
         type: "SET_USER",
         payload: data.data.user,
       });
+      return data;
     },
     (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+      console.log(error.response);
+      const message = error.response.data.status.message;
+
       dispatch({
         type: LOGIN_FAIL,
       });
@@ -109,7 +107,7 @@ export const login = (email, password) => (dispatch) => {
         payload: message,
       });
 
-      // return Promise.reject();
+      return Promise.reject();
     }
   );
 };

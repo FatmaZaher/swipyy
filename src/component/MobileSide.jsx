@@ -35,7 +35,7 @@ const MobileSide = (props) => {
   if (user) {
     currentUser = user.data;
     var iframe = document.getElementById("mbile-frame");
-    iframe.src = `https://swipyy.com/${currentUser.username}`;
+    iframe.src = `https://swipyy.com/live/${currentUser.username}`;
   }
   const { isRender } = props;
   const showMobileSide = () => setMobileSide(!mobileSide);
