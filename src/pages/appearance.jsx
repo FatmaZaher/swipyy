@@ -182,6 +182,7 @@ const Appearance = (props) => {
     }
   };
   const changeLayout = (layout, isPro) => {
+    console.log(layout);
     if (checkIsPro(isPro) === false) return;
     apiChange({ layout });
   };
@@ -457,11 +458,13 @@ const Appearance = (props) => {
             <div className="layout">
               <div className="avatar">
                 <input
-                  type="radio"
+                  type="checkbox"
                   id="layout1"
                   name="drone"
                   value="layout1"
-                  checked={settings.layout === "avatar" ? true : null}
+                  className={`${
+                    settings.layout === "avatar" ? "input-active" : null
+                  }`}
                   onChange={() => changeLayout("avatar", 0)}
                 />
                 <label htmlFor="layout1" className="d-block">
@@ -476,12 +479,14 @@ const Appearance = (props) => {
               </div>
               <div className="avatar">
                 <input
-                  type="radio"
+                  type="checkbox"
                   id="layout2"
                   name="drone"
                   value="layout2"
+                  className={`${
+                    settings.layout === "cover" ? "input-active" : null
+                  }`}
                   onChange={() => changeLayout("cover", 1)}
-                  checked={settings.layout === "cover" ? true : null}
                 />
                 <label htmlFor="layout2" className="d-block align-pro">
                   <img src={checkIcon} alt="" className="check-icon" />
@@ -851,16 +856,16 @@ const Appearance = (props) => {
                             id={"avatar_type-" + avatar_type.id}
                             name="avatar_type"
                             value={avatar_type.id}
+                            className={`${
+                              avatar_type.id == settings.avtar_type_id
+                                ? "input-active"
+                                : null
+                            }`}
                             onChange={() =>
                               changeAvatarType(
                                 avatar_type.id,
-                                avatar_type.is_pro
+                                parseInt(avatar_type.is_pro)
                               )
-                            }
-                            checked={
-                              avatar_type.id === settings.avtar_type_id
-                                ? true
-                                : null
                             }
                           />
                           <label
@@ -873,7 +878,7 @@ const Appearance = (props) => {
                               className="check-icon"
                             />
                             <img src={avatar_type.img} alt="" />
-                            {avatar_type.is_pro ? <ProBtn /> : null}
+                            {parseInt(avatar_type.is_pro) ? <ProBtn /> : null}
                           </label>
                         </div>
                       </div>
@@ -898,10 +903,14 @@ const Appearance = (props) => {
                       <input
                         type="radio"
                         id={"theme-" + theme.id}
+                        className={`${
+                          theme.id == settings.theme_id ? "input-active" : null
+                        }`}
                         name="theme"
                         value={theme.id}
-                        onChange={() => changeTheme(theme.id, theme.is_pro)}
-                        checked={theme.id === settings.theme_id ? true : null}
+                        onChange={() =>
+                          changeTheme(theme.id, parseInt(theme.is_pro))
+                        }
                       />
                       <label htmlFor={"theme-" + theme.id} className="d-block">
                         <img src={checkIcon} alt="" className="check-icon" />
@@ -919,7 +928,7 @@ const Appearance = (props) => {
           </Accordion.Body>
         </Accordion.Item>
 
-        {settings.is_theme_pro === 0 ? (
+        {settings.is_theme_pro == 0 ? (
           <>
             <Accordion.Item eventKey="9">
               <Accordion.Header>
@@ -948,6 +957,7 @@ const Appearance = (props) => {
                                       type="radio"
                                       id={"button-" + button.id}
                                       name="buttonStyle"
+                                      className="by-checked"
                                       value={button.id}
                                       onChange={() => changeButton(button.id)}
                                       checked={
@@ -1005,6 +1015,7 @@ const Appearance = (props) => {
                                         id={"button_style" + buttonIcon.id}
                                         name="button_style"
                                         value={buttonIcon.id}
+                                        className="by-checked"
                                         onChange={() =>
                                           changeButtonIcon(buttonIcon.id)
                                         }
@@ -1142,6 +1153,7 @@ const Appearance = (props) => {
                             id={background.id}
                             name="background"
                             value={background.id}
+                            className="by-checked"
                             onChange={() => changeBackground(background.id)}
                             checked={background.id === settings.background_type}
                           />
@@ -1285,13 +1297,13 @@ const Appearance = (props) => {
                                 name="animat"
                                 value={font.id}
                                 onChange={() =>
-                                  changeFont(font.id, font.is_pro)
+                                  changeFont(font.id, parseInt(font.is_pro))
                                 }
-                                checked={
-                                  font.id === parseInt(settings.font_id)
-                                    ? true
+                                className={`${
+                                  font.id == settings.font_id
+                                    ? "input-active"
                                     : null
-                                }
+                                }`}
                               />
                               <label
                                 htmlFor={"font" + font.id}
@@ -1304,7 +1316,7 @@ const Appearance = (props) => {
                                 />
                                 <img height="100px" src={font.img} alt="" />
                                 <p className="mt-2">{font.name}</p>
-                                {font.is_pro ? <ProBtn /> : null}
+                                {parseInt(font.is_pro) ? <ProBtn /> : null}
                               </label>
                             </div>
                           </div>
@@ -1328,9 +1340,11 @@ const Appearance = (props) => {
                         id="left"
                         name="textalign"
                         value="left"
-                        checked={
-                          settings.text_alignment === "left" ? true : null
-                        }
+                        className={`${
+                          settings.text_alignment === "left"
+                            ? "input-active"
+                            : null
+                        }`}
                         onChange={(e) => changeTextAlign(e.target.value, 0)}
                       />
                       <label htmlFor="left" className="d-block form-button">
@@ -1347,9 +1361,11 @@ const Appearance = (props) => {
                         id="center"
                         name="textalign"
                         value="center"
-                        checked={
-                          settings.text_alignment === "center" ? true : null
-                        }
+                        className={`${
+                          settings.text_alignment === "center"
+                            ? "input-active"
+                            : null
+                        }`}
                         onChange={(e) => changeTextAlign(e.target.value, 1)}
                       />
 
@@ -1370,9 +1386,11 @@ const Appearance = (props) => {
                         id="right"
                         name="textalign"
                         value="right"
-                        checked={
-                          settings.text_alignment === "right" ? true : null
-                        }
+                        className={`${
+                          settings.text_alignment === "right"
+                            ? "input-active"
+                            : null
+                        }`}
                         onChange={(e) => changeTextAlign(e.target.value, 1)}
                       />
                       <label htmlFor="right" className="d-block form-button">
