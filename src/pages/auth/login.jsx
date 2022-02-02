@@ -55,7 +55,8 @@ const Login = (props) => {
     setLoading(true);
     dispatch(login(values.email, values.password))
       .then((res) => {
-        window.location.replace("/links");
+        console.log(res);
+        // window.location.replace("/links");
 
       })
       .catch(() => {

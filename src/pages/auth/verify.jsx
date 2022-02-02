@@ -20,15 +20,14 @@ const Verify = () => {
   const [loadingg, setLoadingg] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
+  const [newMessage, setNewMessage] = useState(null);
+
   const dispatch = useDispatch();
 
   const length = 4;
   const [code, setCode] = useState([...Array(length)].map(() => ""));
   const [loading, setLoading] = useState(false);
-  const onComplete = (code) => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 10000);
-  };
+
   const newCode = code.reduce((t, s) => {
     return t + s;
   });
@@ -46,12 +45,18 @@ const Verify = () => {
     // setLoadingg(true);
     dispatch(verify(newCode))
       .then((res) => {
-        window.location.replace("/links");
-
+        if (res.status.status === "true") {
+          window.location.replace("/links");
+        }
       })
       .catch(() => {
         setLoadingg(false);
       });
+  };
+  const onComplete = (code) => {
+    onSubmit();
+    setLoading(true);
+    setTimeout(() => setLoading(false), 10000);
   };
   if (isLoggedIn) {
     return history.push("/links");
@@ -120,7 +125,7 @@ const Verify = () => {
                           />
                         );
                       })}
-                      {/* <ErrorMessage /> */}
+                     <ErrorMessage /> 
                     </div>
                   </div>
                   <div className="login-btn my-3">

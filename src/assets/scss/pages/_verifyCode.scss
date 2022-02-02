@@ -5,10 +5,16 @@
   border-radius: $btn-input-radius;
   margin: 15px 0;
   input {
-    width: 40px !important;
+    width: 60px !important;
     text-align: center;
-    border: none;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 3px solid #ccc;
+    border-radius: 0;
     margin: 0 5px;
+    height: 40px;
+    font-size: 20px;
+    &:focus{
+      box-shadow: none;
+      border-color:#8055f0 ;
+    }
   }
 }
