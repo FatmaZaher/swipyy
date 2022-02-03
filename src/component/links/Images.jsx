@@ -110,12 +110,10 @@ const Images = (props) => {
 
   const getAllSlider = async () => {
     try {
-      axios
-        .get("https://swipyy.com/api/user/slider", config)
-        .then((res) => {
-          setSettings(res.data.data.Settings);
-          props.onFinishRequest(false);
-        });
+      axios.get("https://swipyy.com/api/user/slider", config).then((res) => {
+        setSettings(res.data.data.Settings);
+        props.onFinishRequest(false);
+      });
     } catch (error) {}
   };
 
@@ -137,7 +135,7 @@ const Images = (props) => {
               <input
                 type="checkbox"
                 name="show"
-                checked={settings.slider_status === 1 ? true : false}
+                checked={settings.slider_status == 1 ? true : false}
                 onChange={(e) => changeSliderStatus(e.target.checked)}
               />
             </div>
@@ -153,7 +151,7 @@ const Images = (props) => {
           <Deleteicon /> */}
         </div>
       </div>
-      {settings.slider_status ? (
+      {settings.slider_status == 1 ? (
         <>
           <div className="drop-img">
             <DropImg
