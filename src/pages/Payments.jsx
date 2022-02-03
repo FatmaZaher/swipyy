@@ -39,6 +39,7 @@ const Payments = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [packageMonthly, setPackageMonthly] = useState({});
   const [packageYearly, setPackageYearly] = useState({});
+  const [packageHalf, setPackageHalf] = useState({});
 
   function openModal() {
     setIsOpen(true);
@@ -50,6 +51,16 @@ const Payments = (props) => {
         .get("https://swipyy.com/api/user/package/monthly", config)
         .then((res) => {
           setPackageMonthly(res.data.data.data[0]);
+          // setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
+  };
+  const getAllPackageHalf = async () => {
+    try {
+      axios
+        .get("https://swipyy.com/api/user/package/half", config)
+        .then((res) => {
+          setPackageHalf(res.data.data.data[0]);
           // setSettings(res.data.data.Settings);
         });
     } catch (error) {}
@@ -68,11 +79,7 @@ const Payments = (props) => {
   const submitPay = async (packageId) => {
     try {
       axios
-        .post(
-          "https://swipyy.com/api/user/payment/" + packageId,
-          {},
-          config
-        )
+        .post("https://swipyy.com/api/user/payment/" + packageId, {}, config)
         .then((res) => {
           window.location.replace(res.data.data.url);
 
@@ -101,6 +108,7 @@ const Payments = (props) => {
 
     getAllPackageMonthly();
     getAllPackageYearly();
+    getAllPackageHalf()
   }, []);
   return (
     <div className="payments">
@@ -186,8 +194,8 @@ const Payments = (props) => {
                 <div className="payment-cards mt-5">
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
-                    <p className="price-card">${packageMonthly.amount}</p>
-                    <ul className="list-card">
+                    <p className="price-card">${packageHalf.amount}</p>
+                    {/* <ul className="list-card">
                       {packageMonthly.dtails
                         ? packageMonthly.dtails.map((item, index) => (
                             <li className="list-card-item">
@@ -198,10 +206,10 @@ const Payments = (props) => {
                             </li>
                           ))
                         : null}
-                    </ul>
+                    </ul> */}
                     <LinkButton
                       buttontext={t("payments.update")}
-                      onClick={() => submitPay(packageMonthly.id)}
+                      onClick={() => submitPay(packageHalf.id)}
                     />
                     <span className="the-best">{t("payments.best-sell")}</span>
                   </div>
@@ -212,7 +220,7 @@ const Payments = (props) => {
                   <div className="single-pay-card">
                     <p className="title-card">pro</p>
                     <p className="price-card">${packageMonthly.amount}</p>
-                    <ul className="list-card">
+                    {/* <ul className="list-card">
                       {packageMonthly.dtails
                         ? packageMonthly.dtails.map((item, index) => (
                             <li className="list-card-item">
@@ -223,7 +231,7 @@ const Payments = (props) => {
                             </li>
                           ))
                         : null}
-                    </ul>
+                    </ul> */}
                     <LinkButton
                       buttontext={t("payments.update")}
                       onClick={() => submitPay(packageMonthly.id)}

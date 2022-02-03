@@ -628,7 +628,7 @@ const Appearance = (props) => {
                     <div className="single-item-info">
                       <div className="my-link">
                         <div className="link-text">
-                          <p className="profile-title m-0">{settings.title}</p>
+                          <p className="profile-title m-0">{settings.title || 'title'}</p>
                         </div>
                       </div>
                     </div>
@@ -1210,7 +1210,7 @@ const Appearance = (props) => {
                                   changeBackgroundAnimate(
                                     e,
                                     background.id,
-                                    background.is_pro
+                                   parseInt(background.is_pro) 
                                   )
                                 }
                               />
