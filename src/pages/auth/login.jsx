@@ -71,9 +71,9 @@ const Login = (props) => {
       setLoading(true);
       dispatch(
         loginSocial(
-          response.profileObj.name,
-          response.profileObj.email,
-          response.profileObj.picture.data.url,
+          response.name,
+          response.email,
+          response.picture.data.url,
           response.accessToken
         )
       ).then((res) => {
