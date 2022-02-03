@@ -70,6 +70,27 @@ const login = (email, password) => {
       return response.data;
     });
 };
+const loginSocial = (name, email, image) => {
+  return axios
+    .post(
+      API_URL + "auth/login/social",
+      {
+        name,
+        email,
+        image,
+      },
+      { headers: authHeader() }
+    )
+    .then((response) => {
+      // const token = response.data.data.access_token
+      // if (token) {
+      //   localStorage.setItem("user_token", token);
+      // }
+
+      return response.data;
+    });
+};
+
 const user = () => {
   return axios
     .get(API_URL + "user", { headers: authHeader() })
@@ -90,4 +111,5 @@ export default {
   logout,
   user,
   verify,
+  loginSocial,
 };

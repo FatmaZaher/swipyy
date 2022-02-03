@@ -11,7 +11,13 @@ import FormikControl from "../../component/form/FormikControl";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
+import { loginSocial } from "../../actions/auth";
+import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
+
+const responseFacebook = (response) => {
+  console.log(response);
+};
 
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // const clientId =
@@ -42,7 +48,21 @@ const Login = (props) => {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
-    console.log(response);
+    setLoading(true);
+    dispatch(
+      loginSocial(
+        response.profileObj.name,
+        response.profileObj.email,
+        response.profileObj.imageUrl
+      )
+    ).then((res) => {
+      if (res.status.status === "true") {
+        window.location.replace("/links");
+      }
+      setLoading(false);
+    });
+
+    console.log(JSON.stringify(response));
   };
   const initialValues = {
     email: "",
@@ -151,7 +171,12 @@ const Login = (props) => {
                 buttonText="Login"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
-                cookiePolicy={"https://app.swipyy.com"}
+              />
+              <FacebookLogin
+                appId="355571643079716"
+                autoLoad={true}
+                fields="name,email,picture"
+                callback={responseFacebook}
               />
               <Link to="/" className="link other-link mb-3">
                 <div className="img-link">

@@ -108,6 +108,43 @@ export const login = (email, password) => (dispatch) => {
     }
   );
 };
+export const loginSocial = (name , email,  image) => (dispatch) => {
+  return AuthService.loginSocial(name, email , image).then(
+    (data) => {
+
+      localStorage.setItem("user_token", data.data.access_token);
+      const headers = JSON.stringify({
+        headers: {
+          Authorization: "Bearer " + data.data.access_token,
+        },
+      });
+      localStorage.setItem("headers", headers);
+
+      dispatch({
+        type: "SET_USER",
+        payload: data.data.user,
+      });
+      return data;
+    },
+    (error) => {
+      console.log(error.response);
+      const message = error.response.data.status.message;
+
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+
 export const user = () => (dispatch) => {
   return AuthService.user().then((res) => {
     dispatch({
