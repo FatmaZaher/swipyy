@@ -74,8 +74,8 @@ const Images = (props) => {
   };
   const onClick = (value) => {};
   const checkIsPro = (value) => {
-    if (value === 1) {
-      if (currentUser.is_pro === false) {
+    if (value == 1) {
+      if (currentUser.is_pro == false) {
         setIsLockModalOpen(true);
         return false;
       }
@@ -86,18 +86,18 @@ const Images = (props) => {
   };
   const changeSliderStatus = (value) => {
     // settingsChange("slider_status", value);
-    if (checkIsPro(1) === false) return;
+    if (checkIsPro(1) == false) return;
 
-    const slider_status = value === true ? 1 : 0;
+    const slider_status = value == true ? 1 : 0;
 
     apiChange({ slider_status });
   };
   const changeDescriptionStatus = (value) => {
-    const description_status = value === true ? 1 : 0;
+    const description_status = value == true ? 1 : 0;
     apiChange({ description_status });
   };
   const changeLinkStatus = (value) => {
-    const link_status = value === true ? 1 : 0;
+    const link_status = value == true ? 1 : 0;
     apiChange({ link_status });
   };
 
@@ -177,7 +177,7 @@ const Images = (props) => {
                           type="checkbox"
                           name="show"
                           checked={
-                            settings.description_status === 1 ? true : false
+                            settings.description_status == 1 ? true : false
                           }
                           onChange={(e) =>
                             changeDescriptionStatus(e.target.checked)
@@ -220,7 +220,7 @@ const Images = (props) => {
                               changeTitleDescription();
                             }}
                             // icon="yes"
-                            // disabled={formik.values.url === "" ? true : false}
+                            // disabled={formik.values.url == "" ? true : false}
                           />
                         </>
                       ) : null}
@@ -235,7 +235,7 @@ const Images = (props) => {
                         <input
                           type="checkbox"
                           name="show"
-                          checked={settings.link_status === 1 ? true : false}
+                          checked={settings.link_status == 1 ? true : false}
                           onChange={(e) => changeLinkStatus(e.target.checked)}
                         />
                       </div>
@@ -274,7 +274,7 @@ const Images = (props) => {
                               changeLinkUrl();
                             }}
                             // icon="yes"
-                            // disabled={formik.values.url === "" ? true : false}
+                            // disabled={formik.values.url == "" ? true : false}
                           />
                         </>
                       ) : null}

@@ -25,13 +25,11 @@ const Messages = (props) => {
     props.onStartRequest(true);
 
     try {
-      axios
-        .get("https://swipyy.com/api/user/message", config)
-        .then((res) => {
-          setSettings(res.data.data.Settings);
-          setMessages(res.data.data.table);
-          props.onFinishRequest(true);
-        });
+      axios.get("https://swipyy.com/api/user/message", config).then((res) => {
+        setSettings(res.data.data.Settings);
+        setMessages(res.data.data.table);
+        props.onFinishRequest(true);
+      });
     } catch (error) {}
   };
   const settingsChange = (property, value) => {
@@ -53,7 +51,7 @@ const Messages = (props) => {
     } catch (error) {}
   };
   const changeMessageStatus = (value) => {
-    const message_status = value === true ? 1 : 0;
+    const message_status = value == true ? 1 : 0;
     apiChange({ message_status });
   };
   const changMessage_text = (message_text) => {
@@ -64,12 +62,12 @@ const Messages = (props) => {
   };
   const changeMsg_name_status = (value) => {
     console.log(value);
-    const msg_name_status = value === true ? 1 : 0;
+    const msg_name_status = value == true ? 1 : 0;
 
     apiChange({ msg_name_status });
   };
   const changeMsg_email_status = (value) => {
-    const msg_email_status = value === true ? 1 : 0;
+    const msg_email_status = value == true ? 1 : 0;
 
     apiChange({ msg_email_status });
   };
@@ -112,7 +110,7 @@ const Messages = (props) => {
                 <input
                   type="checkbox"
                   name="show"
-                  checked={settings.message_status === 1 ? true : null}
+                  checked={settings.message_status == 1 ? true : null}
                   onChange={(e) => changeMessageStatus(e.target.checked)}
                 />
               </div>
@@ -177,7 +175,7 @@ const Messages = (props) => {
                             name="msg_name_status"
                             value={1}
                             checked={
-                              settings.msg_name_status === 1 ? true : null
+                              settings.msg_name_status == 1 ? true : null
                             }
                             onChange={(e) =>
                               changeMsg_name_status(e.target.checked)
@@ -198,7 +196,7 @@ const Messages = (props) => {
                         <input
                           type="checkbox"
                           name="show"
-                          checked={settings.message_status === 1 ? true : null}
+                          checked={settings.message_status == 1 ? true : null}
                           onChange={(e) =>
                             changeMessageStatus(e.target.checked)
                           }
@@ -224,7 +222,7 @@ const Messages = (props) => {
                             type="checkbox"
                             name="msg_email_status"
                             checked={
-                              settings.msg_email_status === 1 ? true : null
+                              settings.msg_email_status == 1 ? true : null
                             }
                             onChange={(e) =>
                               changeMsg_email_status(e.target.checked)

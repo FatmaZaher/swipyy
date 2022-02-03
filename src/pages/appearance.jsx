@@ -1202,7 +1202,7 @@ const Appearance = (props) => {
                                     : null
                                 }`}
                                 checked={
-                                  background.id ===
+                                  background.id ==
                                   settings.background_animated_id
                                 }
                                 value={background.id}
