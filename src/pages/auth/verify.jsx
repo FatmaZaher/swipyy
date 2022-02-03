@@ -40,10 +40,10 @@ const Verify = () => {
   };
 
   const validationSchema = Yup.object({});
-  const onSubmit = () => {
-    console.log(newCode);
+  const onSubmit = (code) => {
+    console.log(code);
     // setLoadingg(true);
-    dispatch(verify(newCode))
+    dispatch(verify(code || newCode))
       .then((res) => {
         if (res.status.status === "true") {
           window.location.replace("/links");
@@ -54,7 +54,7 @@ const Verify = () => {
       });
   };
   const onComplete = (code) => {
-    onSubmit();
+    onSubmit(code);
     setLoading(true);
     setTimeout(() => setLoading(false), 10000);
   };
@@ -72,7 +72,10 @@ const Verify = () => {
       inputs.current[slot + 1].focus();
     }
     if (newCode.every((num) => num !== "")) {
-      onComplete(newCode.join(""));
+      if (newCode.length === 4) {
+        console.log(newCode);
+        onComplete(newCode.join(""));
+      }
     }
   };
 
@@ -125,7 +128,7 @@ const Verify = () => {
                           />
                         );
                       })}
-                     {/* <ErrorMessage />  */}
+                      {/* <ErrorMessage />  */}
                     </div>
                   </div>
                   <div className="login-btn my-3">

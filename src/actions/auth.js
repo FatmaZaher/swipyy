@@ -108,8 +108,8 @@ export const login = (email, password) => (dispatch) => {
     }
   );
 };
-export const loginSocial = (name , email,  image) => (dispatch) => {
-  return AuthService.loginSocial(name, email , image).then(
+export const loginSocial = (name , email,  avatar_img , accessToken) => (dispatch) => {
+  return AuthService.loginSocial(name, email , avatar_img , accessToken).then(
     (data) => {
 
       localStorage.setItem("user_token", data.data.access_token);

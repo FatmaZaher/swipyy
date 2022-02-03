@@ -70,14 +70,15 @@ const login = (email, password) => {
       return response.data;
     });
 };
-const loginSocial = (name, email, image) => {
+const loginSocial = (name, email, avarar_img, accessToken) => {
   return axios
     .post(
       API_URL + "auth/login/social",
       {
         name,
         email,
-        image,
+        avarar_img,
+        accessToken,
       },
       { headers: authHeader() }
     )

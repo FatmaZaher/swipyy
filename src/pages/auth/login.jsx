@@ -44,36 +44,45 @@ const Login = (props) => {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
-    setLoading(true);
-    dispatch(
-      loginSocial(
-        response.profileObj.name,
-        response.profileObj.email,
-        response.profileObj.imageUrl
-      )
-    ).then((res) => {
-      if (res.status.status === "true") {
-        window.location.replace("/links");
-      }
-      setLoading(false);
-    });
+    console.log(response);
+
+    if (Object.keys(response).length > 1) {
+      setLoading(true);
+      dispatch(
+        loginSocial(
+          response.profileObj.name,
+          response.profileObj.email,
+          response.profileObj.imageUrl,
+          response.accessToken
+        )
+      ).then((res) => {
+        if (res.status.status === "true") {
+          window.location.replace("/links");
+        }
+        setLoading(false);
+      });
+    }
 
     console.log(JSON.stringify(response));
   };
   const responseFacebook = (response) => {
-    setLoading(true);
-    dispatch(
-      loginSocial(
-        response.profileObj.name,
-        response.profileObj.email,
-        response.profileObj.picture.data.url
-      )
-    ).then((res) => {
-      if (res.status.status === "true") {
-        window.location.replace("/links");
-      }
-      setLoading(false);
-    });
+    console.log(response);
+    if (Object.keys(response).length > 1) {
+      setLoading(true);
+      dispatch(
+        loginSocial(
+          response.profileObj.name,
+          response.profileObj.email,
+          response.profileObj.picture.data.url,
+          response.accessToken
+        )
+      ).then((res) => {
+        if (res.status.status === "true") {
+          window.location.replace("/links");
+        }
+        setLoading(false);
+      });
+    }
   };
   const initialValues = {
     email: "",
@@ -192,7 +201,6 @@ const Login = (props) => {
               />
               <FacebookLogin
                 appId="355571643079716"
-                autoLoad={true}
                 fields="name,email,picture"
                 callback={responseFacebook}
                 render={(renderProps) => (
