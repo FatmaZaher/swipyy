@@ -55,6 +55,9 @@
             48px,
             48px
           );
+          max-width: 300px;
+          margin-right: auto;
+          margin-left: auto;
           .img-link {
             width: 30px;
             @include mobile {
@@ -64,6 +67,12 @@
             }
           }
         }
+        button.kep-login-facebook {
+          width: 100%;
+          max-width: 300px;
+          border-radius: 5px !important;
+          padding: 15px;
+      }
       }
       .not-member {
         .sign-login {

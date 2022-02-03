@@ -15,10 +15,6 @@ import { loginSocial } from "../../actions/auth";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
 
-const responseFacebook = (response) => {
-  console.log(response);
-};
-
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // const clientId =
 //   "658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com";
@@ -63,6 +59,21 @@ const Login = (props) => {
     });
 
     console.log(JSON.stringify(response));
+  };
+  const responseFacebook = (response) => {
+    setLoading(true);
+    dispatch(
+      loginSocial(
+        response.profileObj.name,
+        response.profileObj.email,
+        response.profileObj.picture.data.url
+      )
+    ).then((res) => {
+      if (res.status.status === "true") {
+        window.location.replace("/links");
+      }
+      setLoading(false);
+    });
   };
   const initialValues = {
     email: "",
@@ -160,30 +171,42 @@ const Login = (props) => {
             </Formik>
             <div className="other-login text-center">
               <p>or</p>
-              <Link to="/" className="link other-link mb-3">
-                <div className="img-link">
-                  <img src={google} alt="" />
-                </div>
-                <span> Sign in with Google</span>
-              </Link>
+
               <GoogleLogin
                 clientId="920258247825-124qt28gas3buqomvf6lksmkush8t8o3.apps.googleusercontent.com"
                 buttonText="Login"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    className="link other-link mb-3"
+                  >
+                    <div className="img-link">
+                      <img src={google} alt="" />
+                    </div>
+                    <span> Sign in with Google</span>
+                  </button>
+                )}
               />
               <FacebookLogin
                 appId="355571643079716"
                 autoLoad={true}
                 fields="name,email,picture"
                 callback={responseFacebook}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    className="link other-link mb-3"
+                  >
+                    <div className="img-link">
+                      <img src={facebook} alt="" />
+                    </div>
+                    <span>Sign in with Facebook</span>
+                  </button>
+                )}
               />
-              <Link to="/" className="link other-link mb-3">
-                <div className="img-link">
-                  <img src={facebook} alt="" />
-                </div>
-                <span>Sign in with Facebook</span>
-              </Link>
             </div>
             <div className="not-member text-center my-3">
               <p>

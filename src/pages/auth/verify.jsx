@@ -125,7 +125,7 @@ const Verify = () => {
                           />
                         );
                       })}
-                     <ErrorMessage /> 
+                     {/* <ErrorMessage />  */}
                     </div>
                   </div>
                   <div className="login-btn my-3">
