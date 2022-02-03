@@ -24,13 +24,13 @@ const SignUp = () => {
     // name: "",
     email: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
   };
 
   const validationSchema = Yup.object({
     email: Yup.string()
-    .email("invalid email format*")
-    .required("Enter Your Email*"),
+      .email("invalid email format*")
+      .required("Enter Your Email*"),
     password: Yup.string().required("Enter Your password*"),
     password_confirmation: Yup.string().required("Enter Your password*"),
     // name: Yup.string().required("Enter Your Name*"),
@@ -39,11 +39,21 @@ const SignUp = () => {
     console.log(values);
     setSuccessful(false);
 
-    dispatch(register( values.email, values.password, values.password_confirmation))
-      .then(() => {
+    dispatch(
+      register(values.email, values.password, values.password_confirmation)
+    )
+      .then((res) => {
         setSuccessful(true);
-        console.log('register done');
+        console.log("register done");
         history.push("/verify");
+      })
+      .then((res) => {
+        if (res.status.status === "true") {
+          setSuccessful(true);
+
+          history.push("/verify");
+        }
+        setSuccessful(false);
       })
       .catch(() => {
         setSuccessful(false);

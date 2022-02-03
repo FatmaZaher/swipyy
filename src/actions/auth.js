@@ -25,14 +25,11 @@ export const register = (name, email, password) => (dispatch) => {
       });
       // return dispatch(user())
       // return Promise.resolve();
+      return response;
     },
     (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+      console.log(error.response);
+      const message = error.response.data.status.message;
 
       dispatch({
         type: REGISTER_FAIL,

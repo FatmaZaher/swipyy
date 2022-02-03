@@ -118,7 +118,12 @@
           margin-bottom: 5px;
           svg {
             height: 35px;
+            filter: invert(62%) sepia(22%) saturate(367%) hue-rotate(194deg) brightness(86%) contrast(90%);
+
           }
+        }
+        strong{
+          color:#878cac
         }
       }
     }
@@ -130,9 +135,13 @@
         background-color: #8055f0;
       }
       svg {
+        filter:none !important;
         path {
           fill: $white-color;
         }
+      }
+      strong{
+        color:#8055f0 !important
       }
     }
   }

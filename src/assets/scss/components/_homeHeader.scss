@@ -20,7 +20,9 @@
     font-size: 13px;
     img {
       width: 100%;
-      height: 50px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
       object-fit: cover;
     }
   }
@@ -40,8 +42,14 @@
       border-radius: 0;
       width: 100%;
       transition: $transition;
+      display: flex;
+      align-items: center;
+      line-height: 1.3;
+      height: auto;padding: 10px;
       svg {
         margin-right: 10px;
+        width: 19px;
+        min-width: 19px;
         path {
           fill: $grad-color;
         }
@@ -160,7 +168,7 @@
     .personal-pho {
       height: 30px;
       width: 30px;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }

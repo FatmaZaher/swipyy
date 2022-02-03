@@ -11,6 +11,8 @@ import FormikControl from "../../component/form/FormikControl";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
+import { GoogleLogin } from "react-google-login";
+
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // const clientId =
 //   "658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com";
@@ -39,7 +41,9 @@ const Login = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
   const initialValues = {
     email: "",
     password: "",
@@ -53,17 +57,12 @@ const Login = (props) => {
   const onSubmit = (values) => {
     console.log(values);
     setLoading(true);
-    dispatch(login(values.email, values.password))
-      .then((res) => {
-        if (res.status.status === "true") {
-          window.location.replace("/links");
-        }
-        setLoading(false);
-
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    dispatch(login(values.email, values.password)).then((res) => {
+      if (res.status.status === "true") {
+        window.location.replace("/links");
+      }
+      setLoading(false);
+    });
   };
   if (isLoggedIn) {
     return history.push("/links");
@@ -147,6 +146,13 @@ const Login = (props) => {
                 </div>
                 <span> Sign in with Google</span>
               </Link>
+              <GoogleLogin
+                clientId="920258247825-124qt28gas3buqomvf6lksmkush8t8o3.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"https://app.swipyy.com"}
+              />
               <Link to="/" className="link other-link mb-3">
                 <div className="img-link">
                   <img src={facebook} alt="" />
@@ -189,4 +195,3 @@ const Login = (props) => {
   );
 };
 export default Login;
- 

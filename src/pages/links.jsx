@@ -29,13 +29,14 @@ const Links = (props) => {
   const { t } = props;
   const LinksHeaderData = [
     {
-      title: "Links",
-      icon: <LinkIcon />,
-    },
-    {
       title: "Social",
       icon: <SocialDistanceOutlinedIcon />,
     },
+    {
+      title: "Links",
+      icon: <LinkIcon />,
+    },
+
     {
       title: "Location",
       icon: <LocationOnOutlinedIcon />,
@@ -88,6 +89,26 @@ const Links = (props) => {
         id="uncontrolled-tab-example"
         className="mb-3"
       >
+         <Tab
+          eventKey="social"
+          title={
+            <div>
+              <div className="link-svg">
+                <SocialIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.social")}</strong>
+              </div>
+            </div>
+          }
+        >
+          <Social
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+            t={t}
+          />
+        </Tab>
         <Tab
           eventKey="link"
           title={
@@ -108,26 +129,7 @@ const Links = (props) => {
             t={t}
           />
         </Tab>
-        <Tab
-          eventKey="social"
-          title={
-            <div>
-              <div className="link-svg">
-                <SocialIcon />
-              </div>
-
-              <div>
-                <strong>{t("links.header.social")}</strong>
-              </div>
-            </div>
-          }
-        >
-          <Social
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
+       
         <Tab
           eventKey="location"
           title={
