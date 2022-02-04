@@ -430,7 +430,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      swippy.me/<a href="#">{settings.username}</a>
+                    swipyy.com/<a href="#">{settings.username}</a>
                     </span>
                   </p>
                 </div>
@@ -454,7 +454,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                      Swipyy.com/<a href="#">{settings.short_name}</a>
+                    swipyy.com/<a href="#">{settings.short_name}</a>
                     </span>
                   </p>
                 </div>

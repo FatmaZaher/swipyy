@@ -25,11 +25,11 @@ const HomeHeader = (props) => {
     currentUser = user.data;
   }
   const copyUserName = async () => {
-    await navigator.clipboard.writeText("swipyy.me/" + currentUser.username);
+    await navigator.clipboard.writeText("swipyy.com/" + currentUser.username);
     showLinkList();
   };
   const copyShortName = async () => {
-    await navigator.clipboard.writeText("swipyy.me/" + currentUser.short_name);
+    await navigator.clipboard.writeText("swipyy.com/" + currentUser.short_name);
     showLinkList();
   };
   const config = JSON.parse(localStorage.getItem("headers"));
@@ -45,7 +45,7 @@ const HomeHeader = (props) => {
         <div className="my-link">
           <p className="link-text">
             <span>
-              swipyy.me/<a href="#">{currentUser.username}</a>
+              swipyy.com/<a href="#">{currentUser.username}</a>
             </span>
             <img
               src={group}
