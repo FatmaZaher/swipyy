@@ -48,6 +48,8 @@ const Login = (props) => {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
+  const [newMessage, setNewMessage] = useState(null);
+
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
     console.log(response);
@@ -62,8 +64,11 @@ const Login = (props) => {
           response.accessToken
         )
       ).then((res) => {
-        if (res.status.status === "true") {
+        if (res.status.code === "200") {
           window.location.replace("/links");
+        } else {
+          console.log(res.status.message);
+          setNewMessage(res.status.message);
         }
         setLoading(false);
       });
@@ -104,8 +109,16 @@ const Login = (props) => {
     console.log(values);
     setLoading(true);
     dispatch(login(values.email, values.password)).then((res) => {
-      if (res.status.status === "true") {
+      if (res.status.code === "200") {
         window.location.replace("/links");
+      } else {
+        console.log(res.status.message);
+        setNewMessage(res.status.message);
+        setTimeout(() => {
+          if (res.status.message == "Please Active your account ") {
+            console.log("ameeeer");
+          }
+        }, 3000);
       }
       setLoading(false);
     });
@@ -153,7 +166,7 @@ const Login = (props) => {
                     type="password"
                     name="password"
                     label={t("login.password_label")}
-                    placeholder={t("login.password_placeholder")}
+                    placeholder="*************"
                     error="true"
                   />
                   <div className="remmeber-forget">
@@ -163,7 +176,7 @@ const Login = (props) => {
                       name="checkboxOption"
                       options={checkboxOptions}
                     />
-                    <Link to="/reset" className="forget-password">
+                    <Link to="/forget" className="forget-password">
                       {t("login.forget_password")}
                     </Link>
                   </div>
@@ -177,12 +190,20 @@ const Login = (props) => {
                       {t("login.btn")}
                     </button>
                   </div>
-                  {message && (
+                  {newMessage ? (
                     <div className="form-group">
                       <div className="alert alert-danger" role="alert">
-                        {message}
+                        {newMessage}
                       </div>
                     </div>
+                  ) : (
+                    message && (
+                      <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                          {message}
+                        </div>
+                      </div>
+                    )
                   )}
                 </Form>
               )}

@@ -156,7 +156,7 @@ const Verify = () => {
               <p>
                 {t("verify.is_remember")}
                 <Link to="/login" className="link sign-login">
-                  {t("verify.signin")}
+                  {t("verify.sign_in")}
                 </Link>
               </p>
             </div>

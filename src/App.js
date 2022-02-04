@@ -14,9 +14,9 @@ import Home from "./pages/home";
 import { user } from "./actions/auth";
 
 import SignUp from "./pages/auth/signUp";
-import ChangePassword from "./pages/auth/changePassword";
-import Reset from "./pages/auth/reset";
-
+import forgetPassword from "./pages/auth/forgetPassword";
+import checkCode from "./pages/auth/checkCode";
+import resetPassword from "./pages/auth/resetPassword";
 import Login from "./pages/auth/login";
 import Verify from "./pages/auth/verify";
 import LoginLayoutRoute from "./layouts/LoginLayoutRoute ";
@@ -28,7 +28,6 @@ import Payments from "./pages/Payments";
 import Settings from "./pages/Settings";
 import ViewLayout from "./layouts/ViewLayout";
 import View from "./pages/View";
-
 
 const token = localStorage.getItem("user_token");
 
@@ -51,10 +50,10 @@ function App() {
       const url = window.location.pathname;
       if (
         url === "/login" ||
-        url === "signUp" ||
-        url === "/changePassword" ||
+        url === "/signUp" ||
+        url === "/forget" ||
         url === "/reset" ||
-        url === "/confirm"
+        url === "/check"
       ) {
       } else {
         window.location.replace("/login");
@@ -71,9 +70,12 @@ function App() {
           </Route>
           <LoginLayoutRoute path="/login" component={Login} />
           <LoginLayoutRoute path="/signUp" component={SignUp} />
+
           <LoginLayoutRoute path="/verify" component={Verify} />
-          <LoginLayoutRoute path="/changePassword" component={ChangePassword} />
-          <LoginLayoutRoute path="/reset" component={Reset} />
+
+          <LoginLayoutRoute path="/forget" component={forgetPassword} />
+          <LoginLayoutRoute path="/check" component={checkCode} />
+          <LoginLayoutRoute path="/reset" component={resetPassword} />
 
           <Home path="/links" component={Links} />
           <Home path="/appearance" component={Appearance} />

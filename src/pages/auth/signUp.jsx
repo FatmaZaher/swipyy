@@ -120,7 +120,7 @@ const SignUp = () => {
                     type="password"
                     name="password"
                     label={t("register.password_label")}
-                    placeholder={t("register.password_placeholder")}
+                    placeholder="*************"
                     error="true"
                   />
                   <FormikControl
@@ -128,7 +128,7 @@ const SignUp = () => {
                     type="password"
                     name="password_confirmation"
                     label={t("register.password_confirm_label")}
-                    placeholder={t("register.password_confirm_placeholder")}
+                    placeholder="*************"
                     error="true"
                   />
 
@@ -181,7 +181,7 @@ const SignUp = () => {
               <p>
               {t("register.is_remember")}
                 <Link to="/login" className="link sign-login">
-                {t("register.signin")}
+                {t("register.sign_in")}
                 </Link>
               </p>
             </div>

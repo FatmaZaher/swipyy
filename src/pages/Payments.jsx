@@ -125,7 +125,8 @@ const Payments = (props) => {
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.starter")}</p>
                 <p className="price-card">
-                  $00.00 <span>\{t("payments.forever")}</span>
+                  00.00 {t("payments.sar")}{" "}
+                  <span>\{t("payments.forever")}</span>
                 </p>
                 {/* <ul className="list-card">
                       <li className="list-card-item">
@@ -157,7 +158,9 @@ const Payments = (props) => {
               </div>
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.monthly")}</p>
-                <p className="price-card">${packageMonthly.amount}</p>
+                <p className="price-card">
+                  {packageMonthly.amount} {t("payments.sar")}
+                </p>
                 {/* <ul className="list-card">
                       {packageMonthly.dtails
                         ? packageMonthly.dtails.map((item, index) => (
@@ -177,7 +180,9 @@ const Payments = (props) => {
               </div>
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.6-months")}</p>
-                <p className="price-card">${packageHalf.amount}</p>
+                <p className="price-card">
+                  {packageHalf.amount} {t("payments.sar")}
+                </p>
                 {/* <ul className="list-card">
                       {packageMonthly.dtails
                         ? packageMonthly.dtails.map((item, index) => (
@@ -199,7 +204,9 @@ const Payments = (props) => {
 
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.yearly")}</p>
-                <p className="price-card">${packageYearly.amount}</p>
+                <p className="price-card">
+                  {packageYearly.amount} {t("payments.sar")}
+                </p>
                 {/* <ul className="list-card">
                       {packageYearly.dtails
                         ? packageYearly.dtails.map((item, index) => (
@@ -230,9 +237,7 @@ const Payments = (props) => {
                       <div className="col-sm text-muted font-weight-bold">
                         {t("payments.start_date")}
                       </div>
-                      <div
-                        className="col-sm text-sm-right font-weight-600"
-                      >
+                      <div className="col-sm text-sm-right font-weight-600">
                         {packageDetails.start_date}
                       </div>
                     </div>
@@ -261,7 +266,10 @@ const Payments = (props) => {
                         {t("payments.payment_amout")}
                       </div>
                       <div className="col-sm text-sm-right text-6 font-weight-500">
-                        <span className="room-single-price">$14.95</span>{" "}
+                        <span className="room-single-price">
+                          {" "}
+                          {t("payments.sar")} {packageDetails.amount}
+                        </span>{" "}
                       </div>
                     </div>
                   </div>
