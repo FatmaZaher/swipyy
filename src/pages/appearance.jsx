@@ -19,6 +19,7 @@ import customTheme from "../assets/images/custom-theme.png";
 import background1 from "../assets/images/background1.png";
 import background2 from "../assets/images/background2.png";
 import background3 from "../assets/images/background3.png";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 import FormikControl from "../component/form/FormikControl";
 import { Formik, Form, FieldArray, Field } from "formik";
@@ -40,6 +41,7 @@ import UploadImg from "../component/UploadImg";
 import LockModal from "../component/LockModal";
 import ProBtn from "../component/ProBtn";
 import Editticons from "../component/icons/Editticons";
+import BankIcon from "../component/icons/BankIcon";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -103,11 +105,13 @@ const Appearance = (props) => {
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [placements, setPlacements] = useState([
-    "links",
-    "social",
     "slider",
-    "messages",
     "location",
+    "social",
+    "links",
+    "messages",
+    "banks",
+    "files",
   ]);
   const [themes, setThemes] = useState([]);
 
@@ -325,6 +329,10 @@ const Appearance = (props) => {
       return <MeasssssBlue />;
     } else if (icon === "location") {
       return <LocationBlue />;
+    } else if (icon === "banks") {
+      return <BankIcon />;
+    } else if (icon === "files") {
+      return <AttachFileIcon />;
     }
   };
   const handleEditData = (key, e) => {
@@ -628,7 +636,9 @@ const Appearance = (props) => {
                     <div className="single-item-info">
                       <div className="my-link">
                         <div className="link-text">
-                          <p className="profile-title m-0">{settings.title || 'title'}</p>
+                          <p className="profile-title m-0">
+                            {settings.title || "title"}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1015,18 +1025,15 @@ const Appearance = (props) => {
                                         id={"button_style" + buttonIcon.id}
                                         name="button_style"
                                         value={buttonIcon.id}
-                                        className="by-checked"
                                         onChange={() =>
                                           changeButtonIcon(buttonIcon.id)
                                         }
-                                        checked={
-                                          buttonIcon.id ===
-                                          parseInt(
-                                            settings.button_icon_style_id
-                                          )
-                                            ? true
+                                        className={`${
+                                          buttonIcon.id ==
+                                          settings.button_icon_style_id
+                                            ? "input-active"
                                             : null
-                                        }
+                                        }`}
                                       />
                                       <label
                                         htmlFor={"button_style" + buttonIcon.id}
@@ -1210,7 +1217,7 @@ const Appearance = (props) => {
                                   changeBackgroundAnimate(
                                     e,
                                     background.id,
-                                   parseInt(background.is_pro) 
+                                    parseInt(background.is_pro)
                                   )
                                 }
                               />

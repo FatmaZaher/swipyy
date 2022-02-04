@@ -3,6 +3,50 @@
     "copy-full": "نسخ الرابط الكامل",
     "copy-short": "نسخ ID Link"
   },
+  "login": {
+    "title": "تسجيل الدخول",
+    "email_label": "عنوان البريد الإلكتروني أو اسم المستخدم **",
+    "email_placeholder": "أدخل عنوان البريد الإلكتروني أو اسم المستخدم",
+    "email_valid": "أدخل بريدك الإلكتروني *",
+    "email_required": "أدخل بريدك الإلكتروني *",
+
+    "password_label": "أدخل كلمة المرور *",
+    "password_valid": "أدخل كلمة المرور الخاصة بك *",
+    "remember_me": "تذكرني",
+    "forget_password": "نسيت كلمة المرور؟",
+    "or": "أو",
+
+    "btn": "تسجيل الدخول",
+    "login_by_google": "تسجيل الدخول باستخدام Google",
+    "login_by_facebook": "تسجيل الدخول باستخدام Facebook",
+    "not_remember": "لست عضوا؟ ",
+    "sign_up": "تسجيل"
+  },
+  "register": {
+    "title": "التسجيل",
+    "email_label": "عنوان البريد الإلكتروني **",
+    "email_placeholder": "أدخل عنوان البريد الإلكتروني",
+    "email_valid": "أدخل بريدك الإلكتروني *",
+    "password_label": "كلمة المرور *",
+    "password_valid": "أدخل كلمة المرور الخاصة بك *",
+    "password_confirm_label": "تأكيد كلمة المرور *",
+    "password_confirm_placeholder": "تأكيد كلمة المرور",
+    "password_confirm_valid": "أدخل تأكيد كلمة المرور",
+    "أوافق": "أوافق على شروط الخدمة وسياسة الخصوصية",
+    "btn": "تسجيل",
+
+    "is_remember": " هل أنت عضو؟ ",
+    "signin": "تسجيل الدخول"
+  },
+  "reset": {
+    "title": "نسيت كلمة المرور",
+    "email_label": "عنوان البريد الإلكتروني **",
+    "email_placeholder": "أدخل عنوان البريد الإلكتروني",
+    "email_valid": "أدخل بريدك الإلكتروني *",
+    "btn": "إعادة تعيين كلمة المرور",
+    "is_remember": " هل أنت عضو؟",
+    "signin": "تسجيل الدخول"
+  },
   "links": {
     "header": {
       "links": "روابط",
@@ -27,7 +71,7 @@
       }
     },
     "location": {
-      "button-placholder": "الصق عنوان الموقع هنا  ",
+      "button-placholder": "على سبيل المثال المنزل ، العمل ، الفرع ..",
       "button-url": "الصق رابط الموقع من جوجل  ",
 
       "button": "إضافة الموقع",
@@ -153,7 +197,7 @@
     "count": "عدد النقرات",
     "type": "النوع ",
     "url": "الرابط ",
-    "links":"الروابط"
+    "links": "الروابط"
   },
   "payments": {
     "time-turn": "  حان الوقت للترقية ",
@@ -166,7 +210,7 @@
     "currnet-plan": "خطتك الحالية",
     "update": "تحديث",
     "best-sell": "أفضل بيع",
-    "6-months":"6 شهور"
+    "6-months": "6 شهور"
   },
   "settings": {
     "password-security": "كلمة المرور و الأمان",
@@ -178,7 +222,7 @@
     "new-password": "كلمة السر الجديدة*",
     "type-new-password": "اكتب كلمة المرور الجديدة هنا ..",
     "repeat-password": "كرر كلمة المرور الجديدة *",
-    "turn-on-of-notf": "قم بتشغيل / إيقاف تشغيل إشعارات البريد الإلكتروني والمواد الترويجية من Swippy.me"
+    "turn-on-of-notf": "قم بتشغيل / إيقاف تشغيل إشعارات البريد الإلكتروني والمواد الترويجية من swipyy.com"
   },
   "modal-edit": {
     "url": "الرابط",

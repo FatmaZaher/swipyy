@@ -108,7 +108,7 @@ const Payments = (props) => {
 
     getAllPackageMonthly();
     getAllPackageYearly();
-    getAllPackageHalf()
+    getAllPackageHalf();
   }, []);
   return (
     <div className="payments">
@@ -119,24 +119,17 @@ const Payments = (props) => {
       >
         <Tab eventKey="PRO" title={t("payments.time-turn")}>
           <p className="your-links-header mb-3 mb-m-5">
-            {" "}
             {t("payments.mobile-devieces")}
           </p>
           <p className="p-payment">{t("payments.pargraphe")}</p>
           <div className="packages">
-            <Tabs
-              defaultActiveKey="yearly"
-              id="uncontrolled-tab-example"
-              className="my-3"
-            >
-              <Tab eventKey="yearly" title={t("payments.yearly")}>
-                <div className="payment-cards mt-5">
-                  <div className="single-pay-card">
-                    <p className="title-card">{t("payments.starter")}</p>
-                    <p className="price-card">
-                      $00.00 <span>\{t("payments.forever")}</span>
-                    </p>
-                    {/* <ul className="list-card">
+            <div className="payment-cards mt-5">
+              <div className="single-pay-card">
+                <p className="title-card">{t("payments.starter")}</p>
+                <p className="price-card">
+                  $00.00 <span>\{t("payments.forever")}</span>
+                </p>
+                {/* <ul className="list-card">
                       <li className="list-card-item">
                         <span>
                           <CheckCircleOutlineIcon />
@@ -162,15 +155,54 @@ const Payments = (props) => {
                         Lorem ipsum dolor{" "}
                       </li>
                     </ul> */}
-                    <LinkButton
-                      type=""
-                      buttontext={t("payments.currnet-plan")}
-                    />
-                  </div>
-                  <div className="single-pay-card">
-                    <p className="title-card">pro</p>
-                    <p className="price-card">${packageYearly.amount}</p>
-                    {/* <ul className="list-card">
+                <LinkButton type="" buttontext={t("payments.currnet-plan")} />
+              </div>
+              <div className="single-pay-card">
+                <p className="title-card">{t("payments.monthly")}</p>
+                <p className="price-card">${packageMonthly.amount}</p>
+                {/* <ul className="list-card">
+                      {packageMonthly.dtails
+                        ? packageMonthly.dtails.map((item, index) => (
+                            <li className="list-card-item">
+                              <span>
+                                <CheckCircleOutlineIcon />
+                              </span>
+                              {item.text}
+                            </li>
+                          ))
+                        : null}
+                    </ul> */}
+                <LinkButton
+                  buttontext={t("payments.update")}
+                  onClick={() => submitPay(packageMonthly.id)}
+                />
+              </div>
+              <div className="single-pay-card">
+                <p className="title-card">{t("payments.6-months")}</p>
+                <p className="price-card">${packageHalf.amount}</p>
+                {/* <ul className="list-card">
+                      {packageMonthly.dtails
+                        ? packageMonthly.dtails.map((item, index) => (
+                            <li className="list-card-item">
+                              <span>
+                                <CheckCircleOutlineIcon />
+                              </span>
+                              {item.text}
+                            </li>
+                          ))
+                        : null}
+                    </ul> */}
+                <LinkButton
+                  buttontext={t("payments.update")}
+                  onClick={() => submitPay(packageHalf.id)}
+                />
+                <span className="the-best">{t("payments.best-sell")}</span>
+              </div>
+             
+              <div className="single-pay-card">
+                <p className="title-card">{t("payments.yearly")}</p>
+                <p className="price-card">${packageYearly.amount}</p>
+                {/* <ul className="list-card">
                       {packageYearly.dtails
                         ? packageYearly.dtails.map((item, index) => (
                             <li className="list-card-item">
@@ -182,65 +214,12 @@ const Payments = (props) => {
                           ))
                         : null}
                     </ul> */}
-                    <LinkButton
-                      buttontext={t("payments.update")}
-                      onClick={() => submitPay(packageYearly.id)}
-                    />
-                    <span className="the-best">{t("payments.best-sell")}</span>
-                  </div>
-                </div>
-              </Tab>
-              <Tab eventKey="6-months" title={t("payments.6-months")}>
-                <div className="payment-cards mt-5">
-                  <div className="single-pay-card">
-                    <p className="title-card">pro</p>
-                    <p className="price-card">${packageHalf.amount}</p>
-                    {/* <ul className="list-card">
-                      {packageMonthly.dtails
-                        ? packageMonthly.dtails.map((item, index) => (
-                            <li className="list-card-item">
-                              <span>
-                                <CheckCircleOutlineIcon />
-                              </span>
-                              {item.text}
-                            </li>
-                          ))
-                        : null}
-                    </ul> */}
-                    <LinkButton
-                      buttontext={t("payments.update")}
-                      onClick={() => submitPay(packageHalf.id)}
-                    />
-                    <span className="the-best">{t("payments.best-sell")}</span>
-                  </div>
-                </div>
-              </Tab>
-              <Tab eventKey="monthlly" title={t("payments.monthly")}>
-                <div className="payment-cards mt-5">
-                  <div className="single-pay-card">
-                    <p className="title-card">pro</p>
-                    <p className="price-card">${packageMonthly.amount}</p>
-                    {/* <ul className="list-card">
-                      {packageMonthly.dtails
-                        ? packageMonthly.dtails.map((item, index) => (
-                            <li className="list-card-item">
-                              <span>
-                                <CheckCircleOutlineIcon />
-                              </span>
-                              {item.text}
-                            </li>
-                          ))
-                        : null}
-                    </ul> */}
-                    <LinkButton
-                      buttontext={t("payments.update")}
-                      onClick={() => submitPay(packageMonthly.id)}
-                    />
-                    <span className="the-best">{t("payments.best-sell")}</span>
-                  </div>
-                </div>
-              </Tab>
-            </Tabs>
+                <LinkButton
+                  buttontext={t("payments.update")}
+                  onClick={() => submitPay(packageYearly.id)}
+                />
+              </div>
+            </div>
           </div>
         </Tab>
       </Tabs>

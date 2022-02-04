@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -12,8 +14,11 @@ import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import { useHistory } from "react-router-dom";
+import LanguageSelector from "../../component/LanguageSelector ";
 
 const SignUp = () => {
+  const { t } = useTranslation();
+
   const history = useHistory();
   const [successful, setSuccessful] = useState(false);
   const { message } = useSelector((state) => state.message);
@@ -29,10 +34,12 @@ const SignUp = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("invalid email format*")
-      .required("Enter Your Email*"),
-    password: Yup.string().required("Enter Your password*"),
-    password_confirmation: Yup.string().required("Enter Your password*"),
+      .email(t("register.email_valid"))
+      .required(t("register.email_required")),
+    password: Yup.string().required(t("register.password_valid")),
+    password_confirmation: Yup.string().required(
+      t("register.password_confirm_valid")
+    ),
     // name: Yup.string().required("Enter Your Name*"),
   });
   const onSubmit = (values) => {
@@ -76,12 +83,15 @@ const SignUp = () => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-login-side">
+        <div className="right-login-side-language">
+          <LanguageSelector />
+        </div>
         <div>
           <div className="logo-mobile">
             <img src={logo} alt="" className="logo" />
           </div>
           <div className="login-section">
-            <h2 className="login-head">Sign up</h2>
+            <h2 className="login-head">{t("register.title")}</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -101,38 +111,38 @@ const SignUp = () => {
                     control="input"
                     type="email"
                     name="email"
-                    label="Email address**"
-                    placeholder="Enter email address"
+                    label={t("register.email_label")}
+                    placeholder={t("register.email_placeholder")}
                     error="true"
                   />
                   <FormikControl
                     control="input"
                     type="password"
                     name="password"
-                    label="Create password*"
-                    placeholder="Password"
+                    label={t("register.password_label")}
+                    placeholder={t("register.password_placeholder")}
                     error="true"
                   />
                   <FormikControl
                     control="input"
                     type="password"
                     name="password_confirmation"
-                    label="Confirm Password*"
-                    placeholder="Confirm Password"
+                    label={t("register.password_confirm_label")}
+                    placeholder={t("register.password_confirm_placeholder")}
                     error="true"
                   />
 
                   <div className="remmeber-forget">
                     <FormikControl
                       control="checkbox"
-                      label="I agree to the Terms of Service and Privacy Policy"
+                      label={t("register.agree")}
                       name="checkboxOption"
                       options={checkboxOptions}
                     />
                   </div>
                   <div className="login-btn my-3">
                     <button type="submit" disabled={!formik.isValid}>
-                      Sign up
+                    {t("register.btn")}
                     </button>
                   </div>
                   {message && (
@@ -153,8 +163,8 @@ const SignUp = () => {
               )}
             </Formik>
             <div className="other-login text-center">
-              <p>or</p>
-              <Link to="/" className="link other-link mb-3">
+              {/* <p>or</p> */}
+              {/* <Link to="/" className="link other-link mb-3">
                 <div className="img-link">
                   <img src={google} alt="" />
                 </div>
@@ -165,13 +175,13 @@ const SignUp = () => {
                   <img src={facebook} alt="" />
                 </div>
                 <span>Sign in with Facebook</span>
-              </Link>
+              </Link> */}
             </div>
             <div className="not-member text-center my-3">
               <p>
-                Not a member?{" "}
+              {t("register.is_remember")}
                 <Link to="/login" className="link sign-login">
-                  Sign in
+                {t("register.signin")}
                 </Link>
               </p>
             </div>

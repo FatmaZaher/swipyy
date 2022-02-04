@@ -35,13 +35,11 @@ const HomeHeader = (props) => {
   const config = JSON.parse(localStorage.getItem("headers"));
 
   const Logout = () => {
-    try {
-      axios.post("https://swipyy.com/api/logout", {}, config).then((res) => {
-        localStorage.removeItem("headers");
-        localStorage.removeItem("user_token");
-        window.location.replace("/login");
-      });
-    } catch (error) {}
+    const Logout = () => {
+      localStorage.removeItem("headers");
+      localStorage.removeItem("user_token");
+      window.location.replace("/login");
+    };
   };
   return (
     <>
@@ -87,7 +85,7 @@ const HomeHeader = (props) => {
             <p className="link-icon personal-info">
               {currentUser.username}
               <br />
-              <span>{currentUser.email}</span>
+              {/* <span>{currentUser.email}</span> */}
             </p>
             <a to="/appearance" className="link-icon form-button">
               <AppearanceIcon />

@@ -86,7 +86,7 @@ const Images = (props) => {
   };
   const changeSliderStatus = (value) => {
     // settingsChange("slider_status", value);
-    if (checkIsPro(1) == false) return;
+    // if (checkIsPro(1) == false) return;
 
     const slider_status = value == true ? 1 : 0;
 

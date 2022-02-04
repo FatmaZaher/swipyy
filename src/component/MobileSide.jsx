@@ -49,6 +49,7 @@ const MobileSide = (props) => {
     setTimeout(() => {
       setIsLoad(false);
     }, 5000);
+    
   }, []);
   return (
     <>

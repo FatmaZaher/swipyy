@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -13,7 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import LanguageSelector from "../../component/LanguageSelector ";
 const SignUp = () => {
+  const { t } = useTranslation();
+
   const history = useHistory();
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
@@ -26,7 +31,9 @@ const SignUp = () => {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string(),
+    email: Yup.string()
+      .email(t("reset.email_valid"))
+      .required(t("reset.email_required")),
 
     // name: Yup.string().required("Enter Your Name*"),
   });
@@ -51,12 +58,15 @@ const SignUp = () => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-login-side">
+        <div className="right-login-side-language">
+          <LanguageSelector />
+        </div>
         <div>
           <div className="logo-mobile">
             <img src={logo} alt="" className="logo" />
           </div>
           <div className="login-section">
-            <h2 className="login-head">Sign up</h2>
+            <h2 className="login-head">{t("reset.title")}</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -76,8 +86,8 @@ const SignUp = () => {
                     control="input"
                     type="email"
                     name="email"
-                    label="Email address**"
-                    placeholder="Enter email address"
+                    label={t("reset.email_label")}
+                    placeholder={t("reset.email_placeholder")}
                     error="true"
                   />
 
@@ -106,9 +116,9 @@ const SignUp = () => {
 
             <div className="not-member text-center my-3">
               <p>
-                Not a member?{" "}
+                {t("reset.is_remember")}
                 <Link to="/login" className="link sign-login">
-                  Sign in
+                  {t("reset.signin")}
                 </Link>
               </p>
             </div>

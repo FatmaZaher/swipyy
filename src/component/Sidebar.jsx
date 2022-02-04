@@ -62,18 +62,9 @@ const Sidebar = (props) => {
   const config = JSON.parse(localStorage.getItem("headers"));
 
   const Logout = () => {
-    try {
-      axios
-        .post("https://swipyy.com/api/logout", {}, config)
-        .then((res) => {
-
-          localStorage.removeItem('headers')
-          localStorage.removeItem('user_token')
-          window.location.replace("/login");
-
-
-        });
-    } catch (error) {}
+    localStorage.removeItem("headers");
+    localStorage.removeItem("user_token");
+    window.location.replace("/login");
   };
   return (
     <>

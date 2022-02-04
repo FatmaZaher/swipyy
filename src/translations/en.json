@@ -3,6 +3,50 @@
     "copy-full": "Copy Full Link",
     "copy-short": "Copy ID Link"
   },
+  "login": {
+    "title": "Sign in",
+    "email_label": "Email address or user name**",
+    "email_placeholder": "Enter email address or user name",
+    "email_valid": "Enter Your Email*",
+    "email_required": "Enter Your Email*",
+
+    "password_label": "Enter password*    ",
+    "password_valid": "Enter Your Password*",
+    "remember_me": "Remember Me",
+    "forget_password": "Forget Password?",
+    "or": "Or",
+
+    "btn": "Sign in",
+    "login_by_google": " Sign in with Google",
+    "login_by_facebook": "Sign in with Facebook",
+    "not_remember": "Not a member?",
+    "sign_up": "Sign up"
+  },
+  "register": {
+    "title": "Sign up",
+    "email_label": "Email address**",
+    "email_placeholder": "Enter email address",
+    "email_valid": "Enter Your Email*",
+    "password_label": "Password*    ",
+    "password_valid": "Enter Your Password*",
+    "password_confirm_label": "Confirm Password*",
+    "password_confirm_placeholder": "Confirm Password",
+    "password_confirm_valid": "Enter Your Confirm Password",
+    "agree": "I agree to the Terms of Service and Privacy Policy",
+    "btn": "Sign up",
+
+    "is_remember": "Are you a member ?",
+    "sign_in": "Sign in"
+  },
+  "reset": {
+    "title": "Forget a password",
+    "email_label": "Email address**",
+    "email_placeholder": "Enter email address",
+    "email_valid": "Enter Your Email*",
+    "btn": "Reset your password",
+    "is_remember": "Are you a member ?",
+    "sign_in": "Sign in"
+  },
   "links": {
     "header": {
       "links": "Links",
@@ -27,7 +71,7 @@
       }
     },
     "location": {
-      "button-placholder": "Type or paste location address",
+      "button-placholder": "For example home, work, branch ..",
       "button-url": "Paste the location link from Google ",
 
       "button": "Add Location",
@@ -153,8 +197,7 @@
     "count": "Click counts ",
     "type": "type ",
     "url": "url ",
-    "links":"Links"
-
+    "links": "Links"
   },
   "payments": {
     "time-turn": "It's time to turn PRO",
@@ -166,7 +209,8 @@
     "forever": "Forever",
     "currnet-plan": "your currnet plan",
     "update": "Update",
-    "best-sell": "Best Sell","6-months":"6 months"
+    "best-sell": "Best Sell",
+    "6-months": "6 months"
   },
   "settings": {
     "password-security": "PASSWORD & SECURITY",
@@ -178,7 +222,7 @@
     "new-password": "New Password*",
     "type-new-password": "type new password here..",
     "repeat-password": "Repeat New password*",
-    "turn-on-of-notf": "Turn On / Off email notifications and promotional materials from HeyLink.me"
+    "turn-on-of-notf": "Turn On / Off email notifications and promotional materials from swipyy.com"
   },
   "modal-edit": {
     "url": "Url",

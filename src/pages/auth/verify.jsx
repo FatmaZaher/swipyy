@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { verify } from "../../actions/auth";
 
 import ReactCodeInput from "react-verification-code-input";
+import LanguageSelector from "../../component/LanguageSelector ";
 
 const Verify = () => {
   const history = useHistory();
@@ -96,6 +97,9 @@ const Verify = () => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-login-side">
+      <div className="right-login-side-language">
+          <LanguageSelector />
+        </div>
         <div>
           <div className="logo-mobile">
             <img src={logo} alt="" className="logo" />

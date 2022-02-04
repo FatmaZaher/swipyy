@@ -30,8 +30,8 @@
     width: 50%;
     margin-left: auto;
     min-height: 100vh;
-    @include flex( center, unset);
-    > div{
+    @include flex(center, unset);
+    > div {
       width: 100%;
     }
     .logo-mobile {
@@ -72,7 +72,7 @@
           max-width: 300px;
           border-radius: 5px !important;
           padding: 15px;
-      }
+        }
       }
       .not-member {
         .sign-login {
@@ -168,16 +168,15 @@
       }
     }
   }
-  .edit-btn{
+  .edit-btn {
     @include flex(center, space-between);
-    .login-btn{
+    .login-btn {
       width: 47%;
-      .cancel-btn{
+      .cancel-btn {
         background-color: $text-color;
       }
     }
   }
-  
 
   // .field {
   //   // color: $text-color;
@@ -199,4 +198,28 @@
   //     border-radius: $btn-input-radius;
   //   }
   // }
+}
+
+.right-login-side-language {
+  position: fixed;
+  top: 10px;
+  z-index: 10000000;
+  background: #8055f0;
+  width: 40px !important;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 90px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  label {
+    display: none;
+  }
+  @include mobile {
+    background: #fff;
+    color: #8055f0;
+    font-size: 16px;
+  }
 }

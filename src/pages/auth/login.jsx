@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -12,13 +14,17 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
 import { loginSocial } from "../../actions/auth";
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+
 import { GoogleLogin } from "react-google-login";
+import LanguageSelector from "../../component/LanguageSelector ";
 
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // const clientId =
 //   "658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com";
 const Login = (props) => {
+  const { t } = useTranslation();
+
   // const [showloginButton, setShowloginButton] = useState(true);
   // const [showlogoutButton, setShowlogoutButton] = useState(false);
   // const onLoginSuccess = (res) => {
@@ -90,9 +96,9 @@ const Login = (props) => {
   };
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("invalid email format*")
-      .required("Enter Your Email*"),
-    password: Yup.string().required("Enter Your Password*"),
+      .email(t("login.email_valid"))
+      .required(t("login.email_required")),
+    password: Yup.string().required(t("login.password_valid")),
   });
   const onSubmit = (values) => {
     console.log(values);
@@ -118,12 +124,15 @@ const Login = (props) => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-login-side">
+        <div className="right-login-side-language">
+          <LanguageSelector />
+        </div>
         <div>
           <div className="logo-mobile">
             <img src={logo} alt="" className="logo" />
           </div>
           <div className="login-section">
-            <h2 className="login-head">Sign in</h2>
+            <h2 className="login-head">{t("login.title")}</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -135,27 +144,27 @@ const Login = (props) => {
                     control="input"
                     type="email"
                     name="email"
-                    label="Email address or user name**"
-                    placeholder="Enter email address or user name"
+                    label={t("login.email_label")}
+                    placeholder={t("login.email_placeholder")}
                     error="true"
                   />
                   <FormikControl
                     control="input"
                     type="password"
                     name="password"
-                    label="Enter password*"
-                    placeholder="Password"
+                    label={t("login.password_label")}
+                    placeholder={t("login.password_placeholder")}
                     error="true"
                   />
                   <div className="remmeber-forget">
                     <FormikControl
                       control="checkbox"
-                      label="Remember Me"
+                      label={t("login.remember_me")}
                       name="checkboxOption"
                       options={checkboxOptions}
                     />
                     <Link to="/reset" className="forget-password">
-                      Forget Password?
+                      {t("login.forget_password")}
                     </Link>
                   </div>
                   <div className="login-btn my-3">
@@ -165,7 +174,7 @@ const Login = (props) => {
                       {loading && (
                         <span className="spinner-border spinner-border-sm"></span>
                       )}
-                      Sign in
+                      {t("login.btn")}
                     </button>
                   </div>
                   {message && (
@@ -179,7 +188,7 @@ const Login = (props) => {
               )}
             </Formik>
             <div className="other-login text-center">
-              <p>or</p>
+              <p>{t("login.or")}</p>
 
               <GoogleLogin
                 clientId="920258247825-124qt28gas3buqomvf6lksmkush8t8o3.apps.googleusercontent.com"
@@ -195,7 +204,7 @@ const Login = (props) => {
                     <div className="img-link">
                       <img src={google} alt="" />
                     </div>
-                    <span> Sign in with Google</span>
+                    <span> {t("login.login_by_google")}</span>
                   </button>
                 )}
               />
@@ -211,16 +220,16 @@ const Login = (props) => {
                     <div className="img-link">
                       <img src={facebook} alt="" />
                     </div>
-                    <span>Sign in with Facebook</span>
+                    <span>{t("login.login_by_facebook")}</span>
                   </button>
                 )}
               />
             </div>
             <div className="not-member text-center my-3">
               <p>
-                Not a member?{" "}
+                {t("login.not_remember")}
                 <Link to="/signUp" className="link sign-login">
-                  Sign up
+                  {t("login.sign_up")}
                 </Link>
               </p>
             </div>
