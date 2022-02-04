@@ -3,17 +3,22 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import cookies from "js-cookie";
 import classNames from "classnames";
+import saudi from "../assets/images/flags/saudi-arabia.png";
+import united from "../assets/images/flags/united-states.png";
+
 const languages = [
   {
     code: "en",
     name: "English",
     country_code: "EN",
+    image: united,
   },
   {
     code: "ar",
     name: "العربية",
     dir: "rtl",
     country_code: "AR",
+    image: saudi,
   },
 ];
 const LanguageSelector = () => {
@@ -42,7 +47,7 @@ const LanguageSelector = () => {
         <label htmlFor="toggle2" className="animate">
           E
         </label>
-        {languages.map(({ code, name, country_code }) => (
+        {languages.map(({ code, name, country_code , image }) => (
           <label
             key={country_code}
             className={classNames("animate", {
@@ -52,7 +57,7 @@ const LanguageSelector = () => {
               changeLanguage(code);
             }}
           >
-            {country_code}
+            <img src={image} alt="" />
           </label>
         ))}
       </dropdown>

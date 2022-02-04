@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -17,6 +19,8 @@ import ReactCodeInput from "react-verification-code-input";
 import LanguageSelector from "../../component/LanguageSelector ";
 
 const Verify = () => {
+  const { t } = useTranslation();
+
   const history = useHistory();
   const [loadingg, setLoadingg] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -97,7 +101,7 @@ const Verify = () => {
         <img src={shap2} alt="" className="shap2" />
       </div>
       <div className="right-login-side">
-      <div className="right-login-side-language">
+        <div className="right-login-side-language">
           <LanguageSelector />
         </div>
         <div>
@@ -105,7 +109,8 @@ const Verify = () => {
             <img src={logo} alt="" className="logo" />
           </div>
           <div className="login-section">
-            <h2 className="login-head">Identity Verification</h2>
+            <h2 className="login-head">{t("verify.title")}</h2>
+            <p>{t("verify.note")}</p>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -141,7 +146,7 @@ const Verify = () => {
                       {loading && (
                         <span className="spinner-border spinner-border-sm"></span>
                       )}
-                      Verify
+                      {t("verify.btn")}
                     </button>
                   </div>
                 </Form>
@@ -149,9 +154,9 @@ const Verify = () => {
             </Formik>
             <div className="not-member text-center my-3">
               <p>
-                Not a member?{" "}
+                {t("verify.is_remember")}
                 <Link to="/login" className="link sign-login">
-                  Sign in
+                  {t("verify.signin")}
                 </Link>
               </p>
             </div>

@@ -35,11 +35,9 @@ const HomeHeader = (props) => {
   const config = JSON.parse(localStorage.getItem("headers"));
 
   const Logout = () => {
-    const Logout = () => {
-      localStorage.removeItem("headers");
-      localStorage.removeItem("user_token");
-      window.location.replace("/login");
-    };
+    localStorage.removeItem("headers");
+    localStorage.removeItem("user_token");
+    window.location.replace("/login");
   };
   return (
     <>
