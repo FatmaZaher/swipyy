@@ -66,6 +66,12 @@ const Messages = (props) => {
 
     apiChange({ msg_name_status });
   };
+  const changeMsg_phone_status = (value) => {
+    console.log(value);
+    const msg_phone_status = value == true ? 1 : 0;
+
+    apiChange({ msg_phone_status });
+  };
   const changeMsg_email_status = (value) => {
     const msg_email_status = value == true ? 1 : 0;
 
@@ -76,6 +82,9 @@ const Messages = (props) => {
   };
   const changeNameLabel = (name_label) => {
     apiChange({ name_label });
+  };
+  const changePhoneLabel = (phone_label) => {
+    apiChange({ phone_label });
   };
   useEffect(() => {
     getAllSettings();
@@ -226,6 +235,33 @@ const Messages = (props) => {
                             }
                             onChange={(e) =>
                               changeMsg_email_status(e.target.checked)
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="high-title with-border">
+                      <FormikControl
+                        control="input"
+                        type="nubmer"
+                        name="yourEmail"
+                        placeholder={t("messages.your-phone")}
+                        value={settings.phone_label}
+                        onBlur={(e) => changePhoneLabel(e.target.value)}
+                        onChange={(e) =>
+                          settingsChange("phone_label", e.target.value)
+                        }
+                      />
+                      <div className="single-item-switch">
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            name="msg_email_status"
+                            checked={
+                              settings.msg_phone_status == 1 ? true : null
+                            }
+                            onChange={(e) =>
+                              changeMsg_phone_status(e.target.checked)
                             }
                           />
                         </div>

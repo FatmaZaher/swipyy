@@ -40,6 +40,7 @@ const Payments = (props) => {
   const [packageMonthly, setPackageMonthly] = useState({});
   const [packageYearly, setPackageYearly] = useState({});
   const [packageHalf, setPackageHalf] = useState({});
+  const [packageDetails, setPackageDetails] = useState(null);
 
   function openModal() {
     setIsOpen(true);
@@ -51,6 +52,7 @@ const Payments = (props) => {
         .get("https://swipyy.com/api/user/package/monthly", config)
         .then((res) => {
           setPackageMonthly(res.data.data.data[0]);
+          setPackageDetails(res.data.data.membership);
           // setSettings(res.data.data.Settings);
         });
     } catch (error) {}
@@ -118,10 +120,6 @@ const Payments = (props) => {
         className="mb-5"
       >
         <Tab eventKey="PRO" title={t("payments.time-turn")}>
-          <p className="your-links-header mb-3 mb-m-5">
-            {t("payments.mobile-devieces")}
-          </p>
-          <p className="p-payment">{t("payments.pargraphe")}</p>
           <div className="packages">
             <div className="payment-cards mt-5">
               <div className="single-pay-card">
@@ -198,7 +196,7 @@ const Payments = (props) => {
                 />
                 <span className="the-best">{t("payments.best-sell")}</span>
               </div>
-             
+
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.yearly")}</p>
                 <p className="price-card">${packageYearly.amount}</p>
@@ -222,6 +220,57 @@ const Payments = (props) => {
             </div>
           </div>
         </Tab>
+        {packageDetails ? (
+          <Tab eventKey="details" title={t("payments.membership_details")}>
+            <div className="success-page">
+              <div className="container">
+                <div className="success-list ">
+                  <div className="bg-light shadow-sm rounded p-3 p-sm-4 mb-4">
+                    <div className="row">
+                      <div className="col-sm text-muted font-weight-bold">
+                        {t("payments.start_date")}
+                      </div>
+                      <div
+                        className="col-sm text-sm-right font-weight-600"
+                      >
+                        {packageDetails.start_date}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm text-muted font-weight-bold">
+                        {t("payments.end_date")}
+                      </div>
+                      <div className="col-sm text-sm-right font-weight-600">
+                        {packageDetails.end_date}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm text-muted font-weight-bold">
+                        {t("payments.payment_method")}
+                      </div>
+                      <div className="col-sm text-sm-right font-weight-600">
+                        Credit Card
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm text-muted font-weight-bold">
+                        {t("payments.payment_amout")}
+                      </div>
+                      <div className="col-sm text-sm-right text-6 font-weight-500">
+                        <span className="room-single-price">$14.95</span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </Tab>
+        ) : null}
       </Tabs>
     </div>
   );

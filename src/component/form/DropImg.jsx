@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import ImageUploading from "react-images-uploading";
 import ImageDrop from "../icons/ImageDrop";
 import LinkButton from "../../component/form/LinkButton";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import UploadLoading from "../../assets/images/UploadLoading.svg";
+import LockModal from "../LockModal";
 
 const DropImg = (props) => {
   const { t } = props;
@@ -13,7 +16,12 @@ const DropImg = (props) => {
   const [images, setImages] = useState([]);
   const [oldImages, setoldImages] = useState([]);
   const [isUpoad, setIsUpload] = useState(false);
-
+  const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const maxNumber = 69;
   const toFormData = (fromdata) => {
     const toFormDataInner = ((f) => f(f))((h) => (f) => f((x) => h(h)(f)(x)))(
@@ -38,16 +46,20 @@ const DropImg = (props) => {
     )(new FormData())();
     return toFormDataInner(fromdata);
   };
+  const checkIsPro = (value) => {
+    if (value > 1) {
+      if (currentUser.is_pro == false) {
+        setIsLockModalOpen(true);
+        return false;
+      }
+    }
+  };
   const submitImages = async (values) => {
     const newValues = toFormData(values);
     setIsUpload(true);
     try {
       await axios
-        .post(
-          "https://swipyy.com/api/user/slider/update",
-          newValues,
-          config
-        )
+        .post("https://swipyy.com/api/user/slider/update", newValues, config)
         .then((res) => {
           setIsUpload(false);
           props.onSaveData();
@@ -56,6 +68,10 @@ const DropImg = (props) => {
   };
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
+    let old_length = oldImages.length;
+    let new_length = imageList.length;
+    let final = old_length + new_length;
+    if (checkIsPro(final) == false) return;
     const newImage = imageList.map((item) => item.file);
     submitImages({ imgs: newImage });
     // setImages(imageList);
@@ -75,6 +91,9 @@ const DropImg = (props) => {
           props.onSaveData();
         });
     } catch (error) {}
+  };
+  const handleCloseLockModal = () => {
+    setIsLockModalOpen(false);
   };
   return (
     <>
@@ -110,7 +129,7 @@ const DropImg = (props) => {
                       remove all images
                     </button> */}
                     <p>
-                    {t("supports")}: JPG,PNG, PDF{" "}
+                      {t("supports")}: JPG,PNG, PDF{" "}
                       <span className="pro-btn">
                         <Link to="/payments">
                           <LinkButton type="" buttontext="PRO" />
@@ -132,7 +151,9 @@ const DropImg = (props) => {
                   <img src={image.src} alt="" width="100" />
                   <div className="image-item__btn-wrapper">
                     {/* <button onClick={() => onImageUpdate(index)}>Update</button> */}
-                    <button onClick={() => DeleteImg(image.id)}>{t("remove")}</button>
+                    <button onClick={() => DeleteImg(image.id)}>
+                      {t("remove")}
+                    </button>
                   </div>
                 </div>
               ))}
@@ -140,6 +161,14 @@ const DropImg = (props) => {
           </div>
         )}
       </ImageUploading>
+      <LockModal
+        modalIsOpen={isLockModalOpen}
+        onCloseLockModal={() => handleCloseLockModal()}
+      >
+        <div className="alert alert-danger mb-5" role="alert">
+          <h5>The images is more than one image please go to pro</h5>
+        </div>
+      </LockModal>
     </>
   );
 };

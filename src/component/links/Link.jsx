@@ -150,7 +150,7 @@ const Link = (props) => {
           <Form className="form-page">
             <FormikControl
               control="input"
-              type="text"
+              type="url"
               name="url"
               placeholder={t("links.link.button-placholder")}
               error="true"

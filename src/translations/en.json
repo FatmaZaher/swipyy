@@ -171,6 +171,8 @@
     "input-text": "Input Field Text",
     "your-name": "Your name",
     "your-email": "Your Email",
+    "your-phone": "Yout phone",
+
     "index": "Index",
     "export": "Export to CSV",
     "email": "Email",
@@ -210,7 +212,12 @@
     "currnet-plan": "your currnet plan",
     "update": "Update",
     "best-sell": "Best Sell",
-    "6-months": "6 months"
+    "6-months": "6 months",
+    "membership_details": "Membership details",
+    "start_date": "Start Date    ",
+    "end_date": "End Date    ",
+    "payment_method": "Payment Method    ",
+    "payment_amout": "Payment Amount    "
   },
   "settings": {
     "password-security": "PASSWORD & SECURITY",

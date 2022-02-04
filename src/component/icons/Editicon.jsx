@@ -42,6 +42,8 @@ const Editicon = (props) => {
   const initialValues = {};
   let inputName;
   let labelName = "";
+  let inputType = "text";
+
   let newItemId = item ? `/${item.id}` : "";
   let method = axios.patch;
   if (api === "user/link") {
@@ -49,6 +51,7 @@ const Editicon = (props) => {
     initialValues.name = item ? item.name : "";
     inputName = "url";
     labelName = t("modal-edit.url");
+    inputType = "url"
   } else if (api === "user/socialUser") {
     initialValues.url = item ? item.url : "";
     inputName = "url";
@@ -159,7 +162,7 @@ const Editicon = (props) => {
                 ) : null}
                 <FormikControl
                   control="input"
-                  type="text"
+                  type={inputType}
                   name={inputName}
                   placeholder=""
                   error="true"

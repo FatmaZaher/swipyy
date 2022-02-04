@@ -105,16 +105,61 @@ ul {
 }
 .location-form {
   .form-control {
-    margin: 0 10px 20px ;
-    input{
+    margin: 0 10px 20px;
+    input {
       border-radius: 50px;
     }
   }
-  button{
+  button {
     border-radius: 50px;
- 
   }
   @include mobile {
     flex-wrap: wrap;
+  }
+}
+
+.success-page {
+  background: #f5f5f5;
+  padding-top: 70px;
+  .success-img img {
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 50px;
+    max-height: 400px;
+  }
+
+  .success-title {
+    text-align: center;
+  }
+  .success-title h2 {
+    color: #000;
+    font-weight: bold;
+  }
+  .success-title p {
+  }
+  .font-weight-bold {
+    color: #000 !important;
+    font-size: 16px;
+  }
+
+  .success-list {
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .success-page .bg-light {
+    background: #fff !important;
+  }
+  .field-status {
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  @media (max-wdith: 700px) {
+    .field-status {
+      display: inline-block;
+      margin-top: 15px;
+    }
   }
 }

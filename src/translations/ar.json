@@ -171,6 +171,8 @@
     "input-text": "نص حقل الإدخل",
     "your-name": "الاسم",
     "your-email": "الإيميل",
+    "your-phone": "رقم الهاتف",
+
     "index": "الفهرس",
     "export": "تصدير ل CSV",
     "email": "الإيميل",
@@ -210,7 +212,12 @@
     "currnet-plan": "خطتك الحالية",
     "update": "تحديث",
     "best-sell": "أفضل بيع",
-    "6-months": "6 شهور"
+    "6-months": "6 شهور",
+    "membership_details": "تفاصيل العضوية",
+    "start_date": "تاريخ البدء",
+    "end_date": "تاريخ الانتهاء",
+    "payment_method": "طريقة الدفع",
+    "payment_amout": "مبلغ الدفع"
   },
   "settings": {
     "password-security": "كلمة المرور و الأمان",
