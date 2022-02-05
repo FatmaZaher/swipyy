@@ -25,6 +25,9 @@ import Appearance from "./pages/appearance";
 import Messages from "./pages/messages";
 import Analytic from "./pages/Analytic";
 import Payments from "./pages/Payments";
+import PaymentsSuccess from "./pages/PaymentsSuccess";
+
+
 import Settings from "./pages/Settings";
 import ViewLayout from "./layouts/ViewLayout";
 import View from "./pages/View";
@@ -82,6 +85,8 @@ function App() {
           <Home path="/messages" component={Messages} />
           <Home path="/analytic" component={Analytic} />
           <Home path="/payments" component={Payments} />
+          <Home path="/payments_response" component={PaymentsSuccess} />
+
           <Home path="/settings" component={Settings} />
           <ViewLayout path="/view" component={View} />
         </Switch>

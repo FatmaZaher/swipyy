@@ -225,8 +225,17 @@
     "end_date": "End Date    ",
     "payment_method": "Payment Method    ",
     "payment_amout": "Payment Amount    ",
-    "sar":"SAR"
-
+    "sar": "SAR",
+    "success_title": "Recharge Successful",
+    "success_desc": "We are processing the same and you will be notified via email.",
+    "transaction_id": "Transaction ID",
+    "date": "Date",
+    "transaction_status": "Transaction Status",
+    "customer_name": "Customer Name",
+    "payment_amount": "Payment Amount",
+    "status_failed": "Failed",
+    "status_success": "Success",
+    "failed_title": "Sorry! Payment is not successful yet... Please try again"
   },
   "settings": {
     "password-security": "PASSWORD & SECURITY",
@@ -246,9 +255,9 @@
     "edit": "Edit",
     "save-edit": "Save Edit",
     "cancel": "Cancel",
-    "good-job":"Good Job",
-    "edited-success":"edited success",
-    "success":"Success"
+    "good-job": "Good Job",
+    "edited-success": "edited success",
+    "success": "Success"
   },
   "edit-success": {
     "good-job": "Good job!",

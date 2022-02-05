@@ -225,7 +225,17 @@
     "end_date": "تاريخ الانتهاء",
     "payment_method": "طريقة الدفع",
     "payment_amout": "مبلغ الدفع",
-    "sar": "ريال"
+    "sar": "ريال",
+    "success_title": "تمت عمليه الدفع بنجاح",
+    "success_desc": "سوف يصلك بريد إلكتروني بتفاصيل العملية",
+    "transaction_id": "رقم المعاملة",
+    "date": "التاريخ",
+    "transaction_status": "حالة عملية التحويل",
+    "customer_name": "إسم العميل",
+    "payment_amount": "مبلغ الدفع",
+    "status_failed": "عملية فاشلة",
+    "status_success": "عملية ناجحة",
+    "failed_title": "نأسف ! عملية الدفع لم تنجح بعد ... يرجى المحاولة مرة أخرى"
   },
   "settings": {
     "password-security": "كلمة المرور و الأمان",
