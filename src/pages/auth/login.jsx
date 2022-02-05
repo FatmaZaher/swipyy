@@ -67,7 +67,6 @@ const Login = (props) => {
         if (res.status.code === "200") {
           window.location.replace("/links");
         } else {
-          console.log(res.status.message);
           setNewMessage(res.status.message);
         }
         setLoading(false);
@@ -112,13 +111,25 @@ const Login = (props) => {
       if (res.status.code === "200") {
         window.location.replace("/links");
       } else {
-        console.log(res.status.message);
         setNewMessage(res.status.message);
         setTimeout(() => {
           if (res.status.message == "Please Active your account ") {
-            console.log("ameeeer");
+            setTimeout(() => {
+              setNewMessage("You will be redirect to activate your account");
+
+              setTimeout(() => {
+                console.log("res.data.data.access_token");
+                const token = res.data.access_token;
+                console.log(token);
+
+                if (token) {
+                  localStorage.setItem("user_token", token);
+                }
+                history.push("/verify");
+              }, 2000);
+            }, 1000);
           }
-        }, 3000);
+        }, 1000);
       }
       setLoading(false);
     });
