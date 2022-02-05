@@ -224,8 +224,8 @@
     "start_date": "تاريخ البدء",
     "end_date": "تاريخ الانتهاء",
     "payment_method": "طريقة الدفع",
-    "payment_amout": "مبلغ الدفع", 
-    "sar":"ريال"
+    "payment_amout": "مبلغ الدفع",
+    "sar": "ريال"
   },
   "settings": {
     "password-security": "كلمة المرور و الأمان",
@@ -244,7 +244,10 @@
     "name": "الاسم",
     "edit": "تعديل",
     "save-edit": "حفظ التعديلات",
-    "cancel": "تراجع"
+    "cancel": "تراجع",
+    "good-job": "تم بنجاح",
+    "edited-success": "تم التعديل بنجاح",
+    "success": "نجاح"
   },
   "edit-success": {
     "good-job": "أحسنت!",

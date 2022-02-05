@@ -245,7 +245,10 @@
     "name": "Name",
     "edit": "Edit",
     "save-edit": "Save Edit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "good-job":"Good Job",
+    "edited-success":"edited success",
+    "success":"Success"
   },
   "edit-success": {
     "good-job": "Good job!",
