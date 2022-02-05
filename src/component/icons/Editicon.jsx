@@ -29,7 +29,10 @@ const Editicon = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isName, setIsName] = React.useState(false);
+  const [message, setMessage] = React.useState(null);
+
   const { item, config, api, settingName } = props;
+
   function openModal() {
     setIsOpen(true);
   }
@@ -51,7 +54,7 @@ const Editicon = (props) => {
     initialValues.name = item ? item.name : "";
     inputName = "url";
     labelName = t("modal-edit.url");
-    inputType = "url"
+    inputType = "url";
   } else if (api === "user/socialUser") {
     initialValues.url = item ? item.url : "";
     inputName = "url";
@@ -81,7 +84,9 @@ const Editicon = (props) => {
     }
   } else if (api === "user/settings/update") {
     initialValues.email = item ? item.email : "";
+    newItemId = "";
     inputName = "email";
+    method = axios.post;
   }
 
   const validationSchema = Yup.object({});
@@ -92,6 +97,7 @@ const Editicon = (props) => {
         values,
         config
       ).then((res) => {
+        setMessage(null);
         props.onSaveData();
 
         sucesesEdit();
@@ -99,7 +105,10 @@ const Editicon = (props) => {
           window.location.reload();
         }
       });
-    } catch (error) {}
+    } catch (error) {
+      const message = error.response.data.status.message;
+      setMessage(message);
+    }
   };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -139,6 +148,12 @@ const Editicon = (props) => {
         ariaHideApp={false}
       >
         <div>
+          {message ? (
+            <div className="alert alert-danger" role="alert">
+              <h5 className=" m-0">{message}</h5>
+            </div>
+          ) : null}
+
           <h4 ref={(_subtitle) => (subtitle = _subtitle)}>
             {t("modal-edit.edit")}
           </h4>

@@ -36,12 +36,18 @@ const ImgUpload = (props) => {
             // write your building UI
             <div className="upload__image-wrapper">
               <button
+                className="btn"
                 style={isDragging ? { color: "red" } : undefined}
                 onClick={onImageUpload}
                 {...dragProps}
               >
-                         
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quas, maiores culpa sequi deleniti voluptates. Error exercitationem et doloremque, dolorem perferendis repudiandae explicabo? Quod non inventore facere. Ipsam, consequuntur officia.</span>
+                <span>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Eveniet quas, maiores culpa sequi deleniti voluptates. Error
+                  exercitationem et doloremque, dolorem perferendis repudiandae
+                  explicabo? Quod non inventore facere. Ipsam, consequuntur
+                  officia.
+                </span>
                 <AddPhotoAlternateIcon />
               </button>
               &nbsp;

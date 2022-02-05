@@ -83,7 +83,7 @@ const UploadImg = (props) => {
           // write your building UI
           <div className="upload__image-wrapper">
             <div>
-              <button onClick={onImageUpload} {...dragProps}>
+              <button className="btn" onClick={onImageUpload} {...dragProps}>
                 <div className="img-upload">
                   {uploadType === "link" ? (
                     item.img ? (
