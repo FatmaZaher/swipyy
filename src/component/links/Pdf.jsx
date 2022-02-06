@@ -109,18 +109,22 @@ const Pdf = (props) => {
     setIsOpen(false);
     getFiles();
   }
+  const handleEditData = (key, e) => {
+    props.onStartRequest(false);
+
+    getFiles();
+  };
   const onSubmit = async (values) => {
     try {
       await axios
         .post(
-          `https://swipyy.com/api/${"user/files/update"}/${
-            openEditlItem.id
-          }`,
+          `https://swipyy.com/api/${"user/files/update"}/${openEditlItem.id}`,
           values,
           config
         )
         .then((res) => {
           sucesesEdit();
+          handleEditData()
         });
     } catch (error) {}
   };
@@ -160,11 +164,7 @@ const Pdf = (props) => {
   useEffect(() => {
     getFiles();
   }, []);
-  const handleEditData = (key, e) => {
-    props.onStartRequest(false);
 
-    getFiles();
-  };
   const handleOpenModal = (item) => {
     setOpenEditlItem(item);
     setIsOpen(true);

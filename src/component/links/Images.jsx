@@ -121,6 +121,8 @@ const Images = (props) => {
     getAllSlider();
   }, []);
   const handleEditData = (key, e) => {
+    props.onStartRequest(true);
+
     getAllSlider();
   };
   return (
