@@ -14,8 +14,14 @@
       border: none;
       outline: none;
       background-color: transparent;
-      margin: 0 5px;
-      color: $grad-color;
+      color: #969ba3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      width: 49px;
+      height: 49px;
+      margin: 0;
     }
     .image-item {
       display: inline-block;
@@ -59,6 +65,7 @@
       position: relative;
       svg {
         width: 25px;
+        height: 25px;
       }
     }
     .images-uploads {

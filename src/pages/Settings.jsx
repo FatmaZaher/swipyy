@@ -13,6 +13,8 @@ import axios from "axios";
 
 import withReactContent from "sweetalert2-react-content";
 import Success from "../component/icons/Success";
+import Editticons from "../component/icons/Editticons";
+import UploadImg from "../component/UploadImg";
 const MySwal = withReactContent(Swal);
 const config = JSON.parse(localStorage.getItem("headers"));
 
@@ -58,7 +60,9 @@ const Settings = (props) => {
   function openModal() {
     setIsOpen(true);
   }
-
+  const editImage = () => {
+    document.querySelector('.image-image [type="file"]').click();
+  };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
@@ -69,11 +73,9 @@ const Settings = (props) => {
 
   const getAllSettings = async () => {
     try {
-      axios
-        .get("https://swipyy.com/api/user/settings", config)
-        .then((res) => {
-          setSettings(res.data.data.Settings);
-        });
+      axios.get("https://swipyy.com/api/user/settings", config).then((res) => {
+        setSettings(res.data.data.Settings);
+      });
     } catch (error) {}
   };
   const handleEditData = (key, e) => {
@@ -101,7 +103,7 @@ const Settings = (props) => {
             config={config}
             onSaveData={() => handleEditData()}
             api="user/settings/update"
-            t= {t}
+            t={t}
           />
         </div>
       </div>
@@ -174,10 +176,29 @@ const Settings = (props) => {
           </div>
         </div>
       </div>
+      <div className="single-item mb-3">
+        <div className="single-item-img image-image">
+          <UploadImg
+            config={config}
+            uploadType="profile_image"
+            item={settings}
+            onSaveData={() => handleEditData()}
+          />
+        </div>
+        <div className="link-and-icon imgg">
+          <div className="single-item-info">
+            <p className="name-from-link">{t("settings.image")}</p>
+            {/* <span className="the-link">{settings.email}</span> */}
+          </div>
+        </div>
+        <div className="link-action">
+          <div class="edit-icon" onClick={() => editImage()}>
+            <Editticons />
+          </div>
+        </div>
+      </div>
       <div className="high-header">
-        <p>
-        {t("settings.turn-on-of-notf")}
-        </p>
+        <p>{t("settings.turn-on-of-notf")}</p>
         <SwitchButton />
       </div>
     </div>

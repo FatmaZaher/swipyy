@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import personal from "../assets/images/personal.png";
+import personal from "../assets/images/personal.jpg";
 import group from "../assets/images/Group.png";
 import LinksIcon from "./icons/LinkIcon";
 import LogoutIcon from "./icons/LogoutIcon";
@@ -76,7 +76,7 @@ const HomeHeader = (props) => {
           </p>
         </div>
         <div className="personal-pho" onClick={showPersonalList}>
-          <img src={currentUser.cover_img || personal} alt="" />
+          <img src={currentUser.image || personal} alt="" />
           <div
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >

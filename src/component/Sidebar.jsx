@@ -79,7 +79,7 @@ const Sidebar = (props) => {
       ></div>
       <div className={sidebar ? "sidebar show" : "sidebar"}>
         <div className="logo">
-          <Link to="/">
+          <Link to="/links">
             <img src={logo} alt="logo" />
           </Link>
           <div className="close-icon">

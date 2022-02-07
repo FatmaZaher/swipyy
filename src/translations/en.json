@@ -241,6 +241,8 @@
     "password-security": "PASSWORD & SECURITY",
     "current-email": "Current Email",
     "password": "Password",
+    "image": "Personal picture",
+
     "change-password": "Change Password",
     "type-current-password": "type current password here..",
     "current-password": "Current Password*",

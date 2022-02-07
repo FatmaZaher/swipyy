@@ -53,6 +53,11 @@ const UploadImg = (props) => {
         cover_img: imageList[0].file,
       };
       api = "https://swipyy.com/api/user/appearance/update";
+    } else if (uploadType === "profile_image") {
+      data = {
+        image: imageList[0].file,
+      };
+      api = "https://swipyy.com/api/user/settings/update";
     }
     const img = toFormData(data);
     try {
@@ -107,10 +112,21 @@ const UploadImg = (props) => {
                       <ImageDrop />
                     )
                   ) : null}
-                  {uploadType === "cover_img" ? (
-                    item.cover_img ? (
+                  {uploadType === "avatar" ? (
+                    item.avatar ? (
                       <img
-                        src={item.cover_img}
+                        src={item.avatar}
+                        className="img-uploadded"
+                        alt={item.username}
+                      />
+                    ) : (
+                      <ImageDrop />
+                    )
+                  ) : null}
+                  {uploadType === "profile_image" ? (
+                    item.image ? (
+                      <img
+                        src={item.image}
                         className="img-uploadded"
                         alt={item.username}
                       />
