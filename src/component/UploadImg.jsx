@@ -112,21 +112,21 @@ const UploadImg = (props) => {
                       <ImageDrop />
                     )
                   ) : null}
-                  {uploadType === "avatar" ? (
-                    item.avatar ? (
+                  {uploadType === "profile_image" ? (
+                    item.profile_image ? (
                       <img
-                        src={item.avatar}
+                        src={item.profile_image}
                         className="img-uploadded"
-                        alt={item.username}
+                        alt={item.email}
                       />
                     ) : (
                       <ImageDrop />
                     )
                   ) : null}
-                  {uploadType === "profile_image" ? (
-                    item.image ? (
+                  {uploadType === "cover_img" ? (
+                    item.cover_img ? (
                       <img
-                        src={item.image}
+                        src={item.cover_img}
                         className="img-uploadded"
                         alt={item.username}
                       />
