@@ -92,7 +92,7 @@ const Sidebar = (props) => {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="list-item">
-                <NavLink to={val.link}>
+                <NavLink to={val.link} onClick={() => showSidebar()}>
                   <div className="icon">{val.icon}</div>
                   <div className="title">{val.title}</div>
                 </NavLink>

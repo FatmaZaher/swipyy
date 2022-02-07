@@ -85,10 +85,10 @@ const HomeHeader = (props) => {
               <br />
               {/* <span>{currentUser.email}</span> */}
             </p>
-            <a to="/appearance" className="link-icon form-button">
+            <Link to="/appearance" className="link-icon form-button">
               <AppearanceIcon />
               <span>{t("sidebar.appearance")}</span>
-            </a>
+            </Link>
             <Link to="/settings" className="link-icon form-button">
               <SettingsIcon />
               <span>{t("sidebar.settings")}</span>
