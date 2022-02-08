@@ -121,6 +121,6 @@
 .mobile-side.show {
   @include mobile {
     right: 0;
-    z-index: 9;
+    z-index: 10;
   }
 }

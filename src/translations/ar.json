@@ -34,7 +34,8 @@
     "password_confirm_valid": "أدخل تأكيد كلمة المرور",
     "agree": "أوافق على شروط الخدمة وسياسة الخصوصية",
     "btn": "تسجيل",
-
+    "signup_by_google": "التسجيل باستخدام Google",
+    "signup_by_facebook": "التسجيل باستخدام Facebook",
     "is_remember": " هل أنت عضو؟ ",
     "sign_in": "تسجيل الدخول"
   },

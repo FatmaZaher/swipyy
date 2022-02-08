@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import SidebarData from "./SidebarData";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
@@ -59,13 +59,26 @@ const Sidebar = (props) => {
   }
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const [width, setWidth] = useState(window.innerWidth);
+
   const config = JSON.parse(localStorage.getItem("headers"));
 
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
   const Logout = () => {
     localStorage.removeItem("headers");
     localStorage.removeItem("user_token");
     window.location.replace("/login");
   };
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
   return (
     <>
       <div className="icon-mobile">
@@ -74,10 +87,16 @@ const Sidebar = (props) => {
         </button>
       </div>
       <div
-        className={sidebar ? "overlay show" : "overlay"}
+        className={
+          isMobile ? (sidebar ? "overlay show" : "overlay") : "overlay"
+        }
         onClick={showSidebar}
       ></div>
-      <div className={sidebar ? "sidebar show" : "sidebar"}>
+      <div
+        className={
+          isMobile ? (sidebar ? "sidebar show" : "sidebar") : "sidebar"
+        }
+      >
         <div className="logo">
           <Link to="/links">
             <img src={logo} alt="logo" />

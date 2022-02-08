@@ -46,7 +46,7 @@
       }
       .other-login {
         .other-link {
-          @include flex(center, start);
+          @include flex(center, center);
           @include linkInput(
             100%,
             transparent,

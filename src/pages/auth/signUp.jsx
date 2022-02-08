@@ -15,7 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import { useHistory } from "react-router-dom";
 import LanguageSelector from "../../component/LanguageSelector ";
+import { loginSocial } from "../../actions/auth";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
+import { GoogleLogin } from "react-google-login";
 const SignUp = () => {
   const { t } = useTranslation();
 
@@ -24,7 +27,47 @@ const SignUp = () => {
   const { message } = useSelector((state) => state.message);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const responseGoogle = (response) => {
+    console.log(response);
 
+    if (Object.keys(response).length > 1) {
+      setSuccessful(false);
+      dispatch(
+        loginSocial(
+          response.profileObj.name,
+          response.profileObj.email,
+          response.profileObj.imageUrl,
+          response.accessToken
+        )
+      ).then((res) => {
+        if (res.status.code === "200") {
+          window.location.replace("/links");
+        }
+        setSuccessful(true);
+      });
+    }
+
+    console.log(JSON.stringify(response));
+  };
+  const responseFacebook = (response) => {
+    console.log(response);
+    if (Object.keys(response).length > 1) {
+      setSuccessful(false);
+      dispatch(
+        loginSocial(
+          response.name,
+          response.email,
+          response.picture.data.url,
+          response.accessToken
+        )
+      ).then((res) => {
+        if (res.status.status === "true") {
+          window.location.replace("/links");
+        }
+        setSuccessful(true);
+      });
+    }
+  };
   const initialValues = {
     // name: "",
     email: "",
@@ -142,7 +185,7 @@ const SignUp = () => {
                   </div>
                   <div className="login-btn my-3">
                     <button type="submit" disabled={!formik.isValid}>
-                    {t("register.btn")}
+                      {t("register.btn")}
                     </button>
                   </div>
                   {message && (
@@ -163,25 +206,48 @@ const SignUp = () => {
               )}
             </Formik>
             <div className="other-login text-center">
-              {/* <p>or</p> */}
-              {/* <Link to="/" className="link other-link mb-3">
-                <div className="img-link">
-                  <img src={google} alt="" />
-                </div>
-                <span> Sign in with Google</span>
-              </Link>
-              <Link to="/" className="link other-link mb-3">
-                <div className="img-link">
-                  <img src={facebook} alt="" />
-                </div>
-                <span>Sign in with Facebook</span>
-              </Link> */}
+              <p>{t("login.or")}</p>
+
+              <GoogleLogin
+                clientId="920258247825-124qt28gas3buqomvf6lksmkush8t8o3.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    className="link other-link mb-3"
+                  >
+                    <div className="img-link">
+                      <img src={google} alt="" />
+                    </div>
+                    <span> {t("register.signup_by_google")}</span>
+                  </button>
+                )}
+              />
+              <FacebookLogin
+                appId="355571643079716"
+                fields="name,email,picture"
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    className="link other-link mb-3"
+                  >
+                    <div className="img-link">
+                      <img src={facebook} alt="" />
+                    </div>
+                    <span>{t("register.signup_by_facebook")}</span>
+                  </button>
+                )}
+              />
             </div>
             <div className="not-member text-center my-3">
               <p>
-              {t("register.is_remember")}
+                {t("register.is_remember")}
                 <Link to="/login" className="link sign-login">
-                {t("register.sign_in")}
+                  {t("register.sign_in")}
                 </Link>
               </p>
             </div>
