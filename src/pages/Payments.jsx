@@ -199,7 +199,6 @@ const Payments = (props) => {
                   buttontext={t("payments.update")}
                   onClick={() => submitPay(packageHalf.id)}
                 />
-                <span className="the-best">{t("payments.best-sell")}</span>
               </div>
 
               <div className="single-pay-card">
@@ -223,6 +222,7 @@ const Payments = (props) => {
                   buttontext={t("payments.update")}
                   onClick={() => submitPay(packageYearly.id)}
                 />
+                <span className="the-best">{t("payments.best-sell")}</span>
               </div>
             </div>
           </div>

@@ -207,7 +207,14 @@
     "count": "Click counts ",
     "type": "type ",
     "url": "url ",
-    "links": "Links"
+    "links": "Links",
+    "pro_1": "Advanced analytics is available on the PRO plan.",
+    "pro_2": "Please upgrade",
+    "pro_3": "here",
+    "info_box_1": "Metric shows how many times  a particular page / link was viewed",
+    "info_box_2": "Metric shows how many unique visitors visited  a particular page / link",
+    "info_box_3": "Metric shows how many times visitors clicked on the a particular page / link",
+    "info_box_4": "CTR = Clicks / Views"
   },
   "payments": {
     "time-turn": "It's time to turn PRO",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -10,6 +11,7 @@ import MouseIcon from "@mui/icons-material/Mouse";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import { useTable } from "react-table";
 import { Table } from "react-bootstrap";
+import QuestionIcon from "../component/icons/QuestionIcon";
 
 import Chart from "react-apexcharts";
 import MapChart from "../component/MapChart";
@@ -31,12 +33,19 @@ const allDate = [
 const Analytic = (props) => {
   const { t } = props;
 
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const [settings, setSettings] = useState({});
   const [viewsGlobal, setViewsGlobal] = useState(null);
   const [uniqueChart, setUniqueChart] = useState(null);
   const [globalMarket, setGlobalMarket] = useState(null);
   const [viewsChart, setViewsChart] = useState(null);
   const [clicksChart, setClicksChart] = useState(null);
+  const [ctrChart, setCtrChart] = useState(null);
+
   const [countryTable, setCountryTable] = useState([]);
   const [cityTable, setCityTable] = useState([]);
   const [deviceTable, setDeviceTable] = useState([]);
@@ -51,69 +60,45 @@ const Analytic = (props) => {
       title: t("analytic.views"),
       icon: <RemoveRedEyeIcon />,
       number: settings.views_count,
+      info: "info_box_1",
     },
     {
       title: t("analytic.unique-visitors"),
       icon: <GroupsIcon />,
       number: settings.unique_visitor_count,
+      info: "info_box_2",
     },
     {
       title: t("analytic.clicks"),
       icon: <MouseIcon />,
       number: settings.clicks,
+      info: "info_box_3",
     },
     {
       title: t("analytic.ctr"),
       icon: <AutoGraphIcon />,
       number: Math.round(settings.ctr),
+      info: "info_box_4",
     },
   ];
 
-  const clicksOption = {
-    series: [
-      {
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: t("analytic.clicks"),
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: [
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-        ],
-      },
-    },
+  const checkIsPro = () => {
+    if (currentUser.is_pro === false) {
+      console.log(currentUser);
+
+      return (
+        <div className="locked-content__component">
+          <div className="locked-content-header">
+            <div className="locked-content-header-image"></div>
+            <div className="locked-content-header-text">
+              {t("analytic.pro_1")} <br />
+              {t("analytic.pro_2")} <a href="/billing">{t("analytic.pro_3")}</a>
+            </div>
+          </div>
+          <div className="locked-content-wrapper"></div>
+        </div>
+      );
+    }
   };
 
   const ctrOption = {
@@ -279,7 +264,7 @@ const Analytic = (props) => {
         labels,
         chart: {
           type: "donut",
-          height:100
+          height: 100,
         },
         responsive: [
           {
@@ -318,6 +303,7 @@ const Analytic = (props) => {
           setViewsChart(handleViewsChart(data.views_chart, "Views"));
           setUniqueChart(handleViewsChart(data.unique_chart, "unique Views"));
           setClicksChart(handleViewsChart(data.clicks_chart, "Clicks"));
+          setCtrChart(handleViewsChart(data.ctr_chart, "ctr"));
 
           setCountryTable(handleTable(data.country_table));
           setCityTable(handleTable(data.city_table));
@@ -330,7 +316,6 @@ const Analytic = (props) => {
           setGlobalMarket(handleGlobalMarket(data.views_global));
 
           props.onFinishRequest(false);
-
         });
     } catch (error) {}
   };
@@ -369,7 +354,9 @@ const Analytic = (props) => {
     getAllSettings();
   }, []);
   return (
-    <div className="analytic">
+    <div
+      className={` analytic ${!currentUser.is_pro ? "not-pro-analytic" : null}`}
+    >
       <div className="analytic-header">
         <Formik
           initialValues={initialValues}
@@ -397,6 +384,14 @@ const Analytic = (props) => {
                 <div className="info">
                   <div className="title">{val.title}</div>
                   <div className="number">{val.number}</div>
+                </div>
+                <div className="info-box">
+                  <div className="info-box-icon">
+                    <QuestionIcon />
+                  </div>
+                  <div className="info-box-text">
+                    <span>{t("analytic." + val.info)}</span>
+                  </div>
                 </div>
               </li>
             );
@@ -439,16 +434,19 @@ const Analytic = (props) => {
             ) : null}
           </div>
           <div id="ctr">
-            <Chart
-              options={ctrOption.options}
-              series={ctrOption.series}
-              type="line"
-              height={350}
-            />
+            {ctrChart ? (
+              <Chart
+                options={ctrChart.options}
+                series={ctrChart.series}
+                type="line"
+                height={350}
+              />
+            ) : null}
           </div>
         </div>
       </div>
       <div className="mobile-device final mb-3">
+        {checkIsPro()}
         <p className="your-links-header mb-3 mb-m-5">{t("analytic.links")}</p>
         <Table responsive>
           <thead>
@@ -462,7 +460,7 @@ const Analytic = (props) => {
             {linkTable
               ? linkTable.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.url}</td>
+                    <td> <span className="text-truc" dir="ltr">{item.url}</span> </td>
                     <td>{item.type}</td>
                     <td>{item.count}</td>
                   </tr>
@@ -470,18 +468,21 @@ const Analytic = (props) => {
               : null}
           </tbody>
         </Table>
-        <div className="black-btn mt-5">
-          <LinkButton
-            type=""
-            buttontext={t("analytic.export")}
-            exportIcon="true"
-            onClick={() => exportLinks()}
-          />
-        </div>
+        {currentUser.is_pro ? (
+          <div className="black-btn mt-5">
+            <LinkButton
+              type=""
+              buttontext={t("analytic.export")}
+              exportIcon="true"
+              onClick={() => exportLinks()}
+            />
+          </div>
+        ) : null}
       </div>
       <div className="row-2">
-        {" "}
         <div className="device-category-charts mb-3" dir="ltr">
+          {checkIsPro()}
+
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.link-date")}
           </p>
@@ -494,10 +495,12 @@ const Analytic = (props) => {
           ) : null}
         </div>
         <div className="mobile-device mb-3">
+          {checkIsPro()}
+
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.mobile-devices")}
           </p>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th></th>
@@ -523,6 +526,8 @@ const Analytic = (props) => {
       <div className="">
         {" "}
         <div className="device-category-charts mb-3">
+        {checkIsPro()}
+
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-global")}
           </p>
@@ -544,10 +549,12 @@ const Analytic = (props) => {
       </div>
       <div className="row-2">
         <div className="mobile-device mb-3">
+        {checkIsPro()}
+
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-country")}
           </p>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th>{t("analytic.country")}</th>
@@ -568,10 +575,12 @@ const Analytic = (props) => {
           </table>
         </div>
         <div className="mobile-device mb-3">
+        {checkIsPro()}
+
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-city")}
           </p>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th>Cite</th>
@@ -594,10 +603,12 @@ const Analytic = (props) => {
         </div>
       </div>
       <div className="mobile-device final mb-3">
+      {checkIsPro()}
+
         <p className="your-links-header mb-3 mb-m-5">
           {t("analytic.views-referre")}
         </p>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>{t("analytic.referre")}</th>
@@ -616,14 +627,16 @@ const Analytic = (props) => {
               : null}
           </tbody>
         </table>
-        <div className="black-btn mt-5">
-          <LinkButton
-            type=""
-            buttontext={t("analytic.export")}
-            exportIcon="true"
-            onClick={() => exportReferrer()}
-          />
-        </div>
+        {currentUser.is_pro ? (
+          <div className="black-btn mt-5">
+            <LinkButton
+              type=""
+              buttontext={t("analytic.export")}
+              exportIcon="true"
+              onClick={() => exportReferrer()}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );

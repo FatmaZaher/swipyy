@@ -12,9 +12,11 @@
 .appearance-page,
 .messages,
 .index {
+  position: relative;
   background-color: $white-color;
   padding: 30px;
   border-radius: $btn-input-radius;
+  overflow: hidden;
   @include mobile {
     padding: 15px;
   }
@@ -70,6 +72,13 @@
   //   }
   // }
 }
+.not-pro-analytic {
+  .mobile-device,
+  .device-category-chart {
+    min-height: 300px;
+  }
+}
+
 .eQWBcd {
   svg {
     width: 10px !important;
@@ -118,12 +127,12 @@
           margin-bottom: 5px;
           svg {
             height: 35px;
-            filter: invert(62%) sepia(22%) saturate(367%) hue-rotate(194deg) brightness(86%) contrast(90%);
-
+            filter: invert(62%) sepia(22%) saturate(367%) hue-rotate(194deg)
+              brightness(86%) contrast(90%);
           }
         }
-        strong{
-          color:#878cac
+        strong {
+          color: #878cac;
         }
       }
     }
@@ -135,13 +144,13 @@
         background-color: #8055f0;
       }
       svg {
-        filter:none !important;
+        filter: none !important;
         path {
           fill: $white-color;
         }
       }
-      strong{
-        color:#8055f0 !important
+      strong {
+        color: #8055f0 !important;
       }
     }
   }

@@ -27,6 +27,7 @@
         border-radius: $btn-input-radius;
         color: $text-color;
         background-color: $white-color;
+        position: relative;
         @include flex(center, start);
         cursor: pointer;
         transition: $transition;

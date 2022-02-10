@@ -180,6 +180,7 @@ const Editicon = (props) => {
                   type={inputType}
                   name={inputName}
                   placeholder=""
+                  minlength="4"
                   error="true"
                   label={labelName}
                 />

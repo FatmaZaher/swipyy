@@ -430,7 +430,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                    swipyy.com/<a href="#">{settings.username}</a>
+                      swipyy.com/<a href="#">{settings.username}</a>
                     </span>
                   </p>
                 </div>
@@ -454,7 +454,7 @@ const Appearance = (props) => {
                 <div className="my-link">
                   <p className="link-text">
                     <span>
-                    swipyy.com/<a href="#">{settings.short_name}</a>
+                      swipyy.com/<a href="#">{settings.short_name}</a>
                     </span>
                   </p>
                 </div>
@@ -853,7 +853,7 @@ const Appearance = (props) => {
                     return (
                       <div
                         className={`avatar-back ${
-                          avatar_type.is_pro ? "align-pro" : null
+                          parseInt(avatar_type.is_pro)  ? "align-pro" : null
                         }`}
                       >
                         <div
@@ -1190,7 +1190,7 @@ const Appearance = (props) => {
                         return (
                           <div
                             className={`avatar-back ${
-                              background.is_pro ? "align-pro" : null
+                              parseInt(background.is_pro) ? "align-pro" : null
                             }`}
                           >
                             <div
@@ -1241,7 +1241,9 @@ const Appearance = (props) => {
                                   ? "checked"
                                   : "nott"} */}
 
-                                {background.is_pro ? <ProBtn /> : null}
+                                {parseInt(background.is_pro) ? (
+                                  <ProBtn />
+                                ) : null}
                               </label>
                             </div>
                           </div>
@@ -1290,7 +1292,7 @@ const Appearance = (props) => {
                         return (
                           <div
                             className={`avatar-back ${
-                              font.is_pro ? "align-pro" : null
+                              parseInt(font.is_pro) ? "align-pro" : null
                             }`}
                           >
                             <div
