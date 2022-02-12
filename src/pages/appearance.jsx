@@ -815,7 +815,7 @@ const Appearance = (props) => {
                               className="drag-img"
                             />
                             <div className="icon">{renderIcon(item)}</div>
-                            <div className="title">{item}</div>
+                            <div className="title">{t(`links.header.${item}`)}{}</div>
                           </div>
                         )}
                       </Draggable>
@@ -837,7 +837,7 @@ const Appearance = (props) => {
             </DragDropContext>
             <button
               type="button"
-              className="form-button"
+              className="form-button main-btn"
               onClick={() => changePlacement()}
             >
               {t("apperance.placement-manager.button")}

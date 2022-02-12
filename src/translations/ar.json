@@ -60,8 +60,10 @@
       "links": "روابط",
       "social": "اجتماعي",
       "location": "موقع",
-      "images": "صور",
-      "banks": "بنوك"
+      "slider": "صور",
+      "banks": "بنوك",
+      "files": "PDF",
+      "messages": "الرسائل"
     },
     "link": {
       "button-placholder": "الصق الرابط الخاص بك هنا",

@@ -55,6 +55,9 @@
   border: none;
   outline: none;
   transition: $transition;
+  &.main-btn{
+    background: $main-color;
+  }
   &:hover {
     background-color: #64c1c7;
   }

@@ -159,7 +159,7 @@ const Links = (props) => {
               </div>
 
               <div>
-                <strong>{t("links.header.images")}</strong>
+                <strong>{t("links.header.slider")}</strong>
               </div>
             </div>
           }

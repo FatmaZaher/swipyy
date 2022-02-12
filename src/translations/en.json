@@ -60,8 +60,10 @@
       "links": "Links",
       "social": "Social",
       "location": "Location",
-      "images": "Images",
-      "banks": "Banks"
+      "slider": "Images",
+      "banks": "Banks",
+      "files": "PDF",
+      "messages": "Messages"
     },
     "link": {
       "button-placholder": "Type your link here",
