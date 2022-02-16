@@ -79,16 +79,18 @@ const Payments = (props) => {
     } catch (error) {}
   };
   const submitPay = async (packageId) => {
-    try {
-      axios
-        .post("https://swipyy.com/api/user/payment/" + packageId, {}, config)
-        .then((res) => {
-          window.location.replace(res.data.data.url);
+    await window.open('https://swipyy.store/%D8%A8%D8%A7%D9%82%D8%A9-pro/p489955748', "_blank").focus();
 
-          // setPackageMonthly(res.data.data.data[0]);
-          // setSettings(res.data.data.Settings);
-        });
-    } catch (error) {}
+    // try {
+    //   axios
+    //     .post("https://swipyy.com/api/user/payment/" + packageId, {}, config)
+    //     .then((res) => {
+    //       window.location.replace(res.data.data.url);
+
+    //       // setPackageMonthly(res.data.data.data[0]);
+    //       // setSettings(res.data.data.Settings);
+    //     });
+    // } catch (error) {}
   };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
