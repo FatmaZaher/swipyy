@@ -101,86 +101,6 @@ const Analytic = (props) => {
     }
   };
 
-  const ctrOption = {
-    series: [
-      {
-        name: "Desktops",
-        data: [10, 71, 35, 51, 149, 62, 69, 191, 148],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: t("analytic.ctr"),
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: [
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-          "2021-11-06",
-        ],
-      },
-    },
-  };
-
-  const data = React.useMemo(
-    () => [
-      {
-        id: "1",
-        device: "Apple iPhone	",
-        views: "3 (90%)",
-      },
-      {
-        id: "2",
-        device: "Androied",
-        views: "1 (10%)",
-      },
-    ],
-    []
-  );
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "",
-        accessor: "id", // accessor is the "key" in the data
-      },
-      {
-        Header: "Device",
-        accessor: "device",
-      },
-      {
-        Header: "Views",
-        accessor: "views",
-      },
-    ],
-    []
-  );
   const config = JSON.parse(localStorage.getItem("headers"));
   const handleViewsChart = (values, text) => {
     const categories = Object.keys(values);
@@ -207,7 +127,7 @@ const Analytic = (props) => {
           curve: "straight",
         },
         title: {
-          text,
+          text: t("analytic." + text),
           align: "left",
         },
         grid: {
@@ -300,9 +220,11 @@ const Analytic = (props) => {
         .then((res) => {
           const data = res.data.data;
           setSettings(res.data.data);
-          setViewsChart(handleViewsChart(data.views_chart, "Views"));
-          setUniqueChart(handleViewsChart(data.unique_chart, "unique Views"));
-          setClicksChart(handleViewsChart(data.clicks_chart, "Clicks"));
+          setViewsChart(handleViewsChart(data.views_chart, "views"));
+          setUniqueChart(
+            handleViewsChart(data.unique_chart, "unique-visitors")
+          );
+          setClicksChart(handleViewsChart(data.clicks_chart, "clicks"));
           setCtrChart(handleViewsChart(data.ctr_chart, "ctr"));
 
           setCountryTable(handleTable(data.country_table));
@@ -460,7 +382,12 @@ const Analytic = (props) => {
             {linkTable
               ? linkTable.map((item, index) => (
                   <tr key={index}>
-                    <td> <span className="text-truc" dir="ltr">{item.url}</span> </td>
+                    <td>
+                      {" "}
+                      <span className="text-truc" dir="ltr">
+                        {item.url}
+                      </span>{" "}
+                    </td>
                     <td>{item.type}</td>
                     <td>{item.count}</td>
                   </tr>
@@ -526,7 +453,7 @@ const Analytic = (props) => {
       <div className="">
         {" "}
         <div className="device-category-charts mb-3">
-        {checkIsPro()}
+          {checkIsPro()}
 
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-global")}
@@ -549,7 +476,7 @@ const Analytic = (props) => {
       </div>
       <div className="row-2">
         <div className="mobile-device mb-3">
-        {checkIsPro()}
+          {checkIsPro()}
 
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-country")}
@@ -575,7 +502,7 @@ const Analytic = (props) => {
           </table>
         </div>
         <div className="mobile-device mb-3">
-        {checkIsPro()}
+          {checkIsPro()}
 
           <p className="your-links-header mb-3 mb-m-5">
             {t("analytic.views-city")}
@@ -603,7 +530,7 @@ const Analytic = (props) => {
         </div>
       </div>
       <div className="mobile-device final mb-3">
-      {checkIsPro()}
+        {checkIsPro()}
 
         <p className="your-links-header mb-3 mb-m-5">
           {t("analytic.views-referre")}

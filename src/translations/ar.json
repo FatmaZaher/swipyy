@@ -141,7 +141,7 @@
       "button": "حفظ"
     },
     "custom-avatars": "صورة مخصصة",
-    "theme": "ثيم",
+    "theme": "سمات",
     "buttons": {
       "title": "أزرار",
       "buttons-style": "تنسيق الأزرار",
@@ -178,7 +178,7 @@
     "apperance": "المظهر",
     "message-text": "نص الرسالة",
     "success": "نص نجاح الرسالة",
-    "input-text": "نص حقل الإدخل",
+    "input-text": "نص حقل الإدخال",
     "your-name": "الاسم",
     "your-email": "الإيميل",
     "your-phone": "رقم الهاتف",
@@ -249,9 +249,9 @@
   },
   "settings": {
     "password-security": "كلمة المرور و الأمان",
-    "current-email": "الايميل الحالي",
+    "current-email": "الإيميل الحالي",
     "password": "كلمة المرور",
-    "image": "ألصورة الشخصية",
+    "image": "الصورة الشخصية",
 
     "change-password": "تغيير كلمة المرور",
     "type-current-password": "اكتب كلمة المرور الحالية هنا..",
