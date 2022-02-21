@@ -10,6 +10,8 @@ import withReactContent from "sweetalert2-react-content";
 import paypal from "../assets/images/paypal.png";
 import creditCard from "../assets/images/creditCard.png";
 import Datepicker from "../component/form/Datepicker";
+import ImgCrop from "../component/ImgCrop";
+
 import clock from "../assets/images/clock.png";
 import axios from "axios";
 
@@ -79,18 +81,22 @@ const Payments = (props) => {
     } catch (error) {}
   };
   const submitPay = async (packageId) => {
-    await window.open('https://swipyy.store/%D8%A8%D8%A7%D9%82%D8%A9-pro/p489955748', "_blank").focus();
+    // await window.open('https://swipyy.store/%D8%A8%D8%A7%D9%82%D8%A9-pro/p489955748', "_blank").focus();
 
-    // try {
-    //   axios
-    //     .post("https://swipyy.com/api/user/payment/" + packageId, {}, config)
-    //     .then((res) => {
-    //       window.location.replace(res.data.data.url);
+    try {
+      axios
+        .post(
+          "https://swipyy.com/api/user/myfatoorah/payment/" + packageId,
+          {},
+          config
+        )
+        .then((res) => {
+          window.location.replace(res.data.data.url);
 
-    //       // setPackageMonthly(res.data.data.data[0]);
-    //       // setSettings(res.data.data.Settings);
-    //     });
-    // } catch (error) {}
+          // setPackageMonthly(res.data.data.data[0]);
+          // setSettings(res.data.data.Settings);
+        });
+    } catch (error) {}
   };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -116,6 +122,7 @@ const Payments = (props) => {
   }, []);
   return (
     <div className="payments">
+      <ImgCrop t={t} />
       <Tabs
         defaultActiveKey="PRO"
         id="uncontrolled-tab-example"

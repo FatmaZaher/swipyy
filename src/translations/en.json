@@ -110,6 +110,8 @@
     "analytic": "Analytic",
     "payments": "Payments & Subscription",
     "settings": "Settings",
+    "smart-products": "Our smart products",
+
     "logout": "Logout"
   },
   "apperance": {
@@ -296,5 +298,6 @@
   "bigger-than": "a file is bigger than 150kb go to ",
   "go-to": "bigger than 150kb go to ",
   "upload": "Upload",
-  "select-file": "Select a file to show details"
+  "select-file": "Select a file to show details",
+  "save": "Save"
 }

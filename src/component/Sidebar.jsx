@@ -12,6 +12,9 @@ import AppearanceIcon from "./icons/AppearanceIcon";
 import MessageIcon from "./icons/MessageIcon";
 import AnalyticIcon from "./icons/AnalyticIcon";
 import PaymentIcon from "./icons/PaymentIcon";
+import ArtificialIcon from "./icons/ArtificialIcon";
+
+
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -44,6 +47,13 @@ const Sidebar = (props) => {
       title: t("sidebar.payments"),
       icon: <PaymentIcon />,
       link: "/payments",
+    },
+    ,
+    {
+      title: t("sidebar.smart-products"),
+      icon: <ArtificialIcon />,
+      link: "out",
+      fullLink: "https://swipyy.store/",
     },
     ,
     {
@@ -111,10 +121,17 @@ const Sidebar = (props) => {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="list-item">
-                <NavLink to={val.link} onClick={() => showSidebar()}>
-                  <div className="icon">{val.icon}</div>
-                  <div className="title">{val.title}</div>
-                </NavLink>
+                {val.link === "out" ? (
+                  <a href={val.fullLink} target="_blank" onClick={() => showSidebar()}>
+                    <div className="icon">{val.icon}</div>
+                    <div className="title">{val.title}</div>
+                  </a>
+                ) : (
+                  <NavLink to={val.link} onClick={() => showSidebar()}>
+                    <div className="icon">{val.icon}</div>
+                    <div className="title">{val.title}</div>
+                  </NavLink>
+                )}
               </li>
             );
           })}
