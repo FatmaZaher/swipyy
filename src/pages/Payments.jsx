@@ -122,7 +122,7 @@ const Payments = (props) => {
   }, []);
   return (
     <div className="payments">
-      <ImgCrop t={t} />
+      {/* <ImgCrop t={t} /> */}
       <Tabs
         defaultActiveKey="PRO"
         id="uncontrolled-tab-example"
