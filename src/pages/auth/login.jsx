@@ -56,21 +56,25 @@ const Login = (props) => {
 
     if (Object.keys(response).length > 1) {
       setLoading(true);
-      dispatch(
-        loginSocial(
-          response.profileObj.name,
-          response.profileObj.email,
-          response.profileObj.imageUrl,
-          response.accessToken
-        )
-      ).then((res) => {
-        if (res.status.code === "200") {
-          window.location.replace("/links");
-        } else {
-          setNewMessage(res.status.message);
-        }
-        setLoading(false);
-      });
+      if (response.profileObj) {
+        dispatch(
+          loginSocial(
+            response.profileObj.name,
+            response.profileObj.email,
+            response.profileObj.imageUrl,
+            response.accessToken
+          )
+        ).then((res) => {
+          if (res.status.code === "200") {
+            window.location.replace("/links");
+          } else {
+            setNewMessage(res.status.message);
+          }
+          setLoading(false);
+        });
+      }else{
+        setLoading(false)
+      }
     }
 
     console.log(JSON.stringify(response));
@@ -226,6 +230,8 @@ const Login = (props) => {
                 clientId="920258247825-124qt28gas3buqomvf6lksmkush8t8o3.apps.googleusercontent.com"
                 buttonText="Login"
                 onSuccess={responseGoogle}
+                autoLoad={false}
+
                 onFailure={responseGoogle}
                 render={(renderProps) => (
                   <button

@@ -72,6 +72,33 @@ export const verify = (code) => (dispatch) => {
     }
   );
 };
+export const verifyUrl = (token) => (dispatch) => {
+  return AuthService.verifyUrl(token).then(
+    (data) => {
+
+      return dispatch(user());
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: VERIFY_FAIL,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
 export const login = (email, password) => (dispatch) => {
   return AuthService.login(email, password).then(
     (data) => {

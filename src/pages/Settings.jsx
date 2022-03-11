@@ -15,6 +15,7 @@ import withReactContent from "sweetalert2-react-content";
 import Success from "../component/icons/Success";
 import Editticons from "../component/icons/Editticons";
 import UploadImg from "../component/UploadImg";
+import ImgCrop from "../component/ImgCrop";
 const MySwal = withReactContent(Swal);
 const config = JSON.parse(localStorage.getItem("headers"));
 
@@ -89,7 +90,7 @@ const Settings = (props) => {
     <div className="settings">
       <p className="your-links-header mb-3 mb-m-5">
         {t("settings.password-security")}
-      </p>{" "}
+      </p>
       <div className="single-item mb-3">
         <div className="link-and-icon">
           <div className="single-item-info">
@@ -178,9 +179,10 @@ const Settings = (props) => {
       </div>
       <div className="single-item mb-3">
         <div className="single-item-img image-image">
-          <UploadImg
+          <ImgCrop
+            t={t}
             config={config}
-            uploadType="profile_image"
+            uploadType="cover_img"
             item={settings}
             onSaveData={() => handleEditData()}
           />

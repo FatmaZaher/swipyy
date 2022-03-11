@@ -26,6 +26,8 @@
     "title": "التسجيل",
     "email_label": "عنوان البريد الإلكتروني **",
     "email_placeholder": "أدخل عنوان البريد الإلكتروني",
+    "phone_label": " رقم الهاتف **",
+    "phone_placeholder": "أدخل  رقم الهاتف",
     "email_valid": "أدخل بريدك الإلكتروني *",
     "password_label": "كلمة المرور *",
     "password_valid": "أدخل كلمة المرور الخاصة بك *",
@@ -61,6 +63,8 @@
       "social": "اجتماعي",
       "location": "موقع",
       "slider": "صور",
+      "menu": "قائمة",
+
       "banks": "بنوك",
       "files": "PDF",
       "messages": "الرسائل"
@@ -87,6 +91,10 @@
       "button": "إضافة الموقع",
       "location-header": "المواقع",
       "add-your-link": "أضف الموقع*"
+    },
+    "menu": {
+      "button": " Add Menu or Price List",
+      "location-header": "Menus"
     },
     "images": {
       "image-sliders": "Image Sliders",

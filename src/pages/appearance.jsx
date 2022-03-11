@@ -40,8 +40,11 @@ import axios from "axios";
 import UploadImg from "../component/UploadImg";
 import LockModal from "../component/LockModal";
 import ProBtn from "../component/ProBtn";
+import NewBtn from "../component/NewBtn";
+
 import Editticons from "../component/icons/Editticons";
 import BankIcon from "../component/icons/BankIcon";
+import ImgCrop from "../component/ImgCrop";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -105,13 +108,14 @@ const Appearance = (props) => {
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [placements, setPlacements] = useState([
-    "slider",
-    "location",
     "social",
-    "links",
+    "location",
+    "menu",
     "messages",
+    "links",
     "banks",
     "files",
+    "slider",
   ]);
   const [themes, setThemes] = useState([]);
 
@@ -519,7 +523,8 @@ const Appearance = (props) => {
                 <div className="avatar-title">
                   <div className="single-item mb-3">
                     <div className="single-item-img cover-cover">
-                      <UploadImg
+                      <ImgCrop
+                      t={t}
                         config={config}
                         uploadType="cover_img"
                         item={settings}
@@ -598,7 +603,8 @@ const Appearance = (props) => {
                 <div className="avatar-title">
                   <div className="single-item mb-3">
                     <div className="single-item-img avatar-avatar">
-                      <UploadImg
+                      <ImgCrop
+                        t={t}
                         config={config}
                         uploadType="avatar"
                         item={settings}
@@ -815,7 +821,10 @@ const Appearance = (props) => {
                               className="drag-img"
                             />
                             <div className="icon">{renderIcon(item)}</div>
-                            <div className="title">{t(`links.header.${item}`)}{}</div>
+                            <div className="title">
+                              {t(`links.header.${item}`)}
+                              {}
+                            </div>
                           </div>
                         )}
                       </Draggable>
@@ -851,11 +860,7 @@ const Appearance = (props) => {
               {settings.avatars_type
                 ? settings.avatars_type.map((avatar_type, avatar_typeIndex) => {
                     return (
-                      <div
-                        className={`avatar-back ${
-                          parseInt(avatar_type.is_pro)  ? "align-pro" : null
-                        }`}
-                      >
+                      <div className={`avatar-back align-pro`}>
                         <div
                           className="avatar"
                           key={avatar_type.id}
@@ -889,6 +894,7 @@ const Appearance = (props) => {
                             />
                             <img src={avatar_type.img} alt="" />
                             {parseInt(avatar_type.is_pro) ? <ProBtn /> : null}
+                            {parseInt(avatar_type.is_new) ? <NewBtn /> : null}
                           </label>
                         </div>
                       </div>
@@ -904,11 +910,7 @@ const Appearance = (props) => {
             <div className="custom-avatars theme-style">
               {themes.map((theme, themeIndex) => {
                 return (
-                  <div
-                    className={`avatar-back ${
-                      parseInt(theme.is_pro) ? "align-pro" : null
-                    }`}
-                  >
+                  <div className={`avatar-back align-pro`}>
                     <div className="avatar" key={theme.id} index={themeIndex}>
                       <input
                         type="radio"
@@ -929,6 +931,7 @@ const Appearance = (props) => {
                         </div>
                         <p className="mt-2">{theme.name}</p>
                         {parseInt(theme.is_pro) ? <ProBtn /> : null}
+                        {parseInt(theme.is_new) ? <NewBtn /> : null}
                       </label>
                     </div>
                   </div>
@@ -1054,6 +1057,8 @@ const Appearance = (props) => {
                                             <ProBtn />
                                           </div>
                                         ) : null}
+                                        {/* {parseInt(buttonIcon.is_new) ? ( */}
+                                        {/* ) : null} */}
                                       </label>
                                     </div>
                                   </div>
@@ -1188,11 +1193,7 @@ const Appearance = (props) => {
                   {settings.background_animated
                     ? settings.background_animated.map((background, index) => {
                         return (
-                          <div
-                            className={`avatar-back ${
-                              parseInt(background.is_pro) ? "align-pro" : null
-                            }`}
-                          >
+                          <div className={`avatar-back  align-pro`}>
                             <div
                               className="avatar buttons-style-shap-list"
                               key={background.id}
@@ -1244,6 +1245,9 @@ const Appearance = (props) => {
                                 {parseInt(background.is_pro) ? (
                                   <ProBtn />
                                 ) : null}
+                                {parseInt(background.is_new) ? (
+                                  <NewBtn />
+                                ) : null}
                               </label>
                             </div>
                           </div>
@@ -1269,7 +1273,16 @@ const Appearance = (props) => {
                       <label htmlFor="changeBackgroundColor"></label>
                     </div>
                   </div>
-
+                  <div className="input-color-box-parent">
+                    <h3>{t("Bacjground img")}</h3>
+                    <ImgCrop
+                      t={t}
+                      config={config}
+                      uploadType="background"
+                      item={settings}
+                      onSaveData={() => handleEditData()}
+                    />
+                  </div>
                   <div>
                     {/* <p className="mt-4">Upload Image</p> */}
                     {/* <UploadImg
@@ -1290,11 +1303,7 @@ const Appearance = (props) => {
                   {settings.fonts
                     ? settings.fonts.map((font, index) => {
                         return (
-                          <div
-                            className={`avatar-back ${
-                              parseInt(font.is_pro) ? "align-pro" : null
-                            }`}
-                          >
+                          <div className={`avatar-back align-pro`}>
                             <div
                               className="avatar buttons-style-shap-list"
                               key={font.id}
@@ -1326,6 +1335,8 @@ const Appearance = (props) => {
                                 <img height="100px" src={font.img} alt="" />
                                 <p className="mt-2">{font.name}</p>
                                 {parseInt(font.is_pro) ? <ProBtn /> : null}
+
+                                {parseInt(font.is_new) ? <NewBtn /> : null}
                               </label>
                             </div>
                           </div>

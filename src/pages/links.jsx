@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Tabs, Tab } from "react-bootstrap";
@@ -7,6 +7,8 @@ import Social from "../component/links/Social";
 import Location from "../component/links/Location";
 import Images from "../component/links/Images";
 import Banks from "../component/links/Banks";
+import Menu from "../component/links/Menu";
+
 // import LinkIcon from "@mui/cons-material/Link";
 import SocialDistanceOutlinedIcon from "@mui/icons-material/SocialDistanceOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -19,6 +21,11 @@ import SocialIcon from "../component/icons/SocialIcon";
 import LocationIcon from "../component/icons/LocationIcon";
 import ImagesIcon from "../component/icons/ImagesIcon";
 import BankIcon from "../component/icons/BankIcon";
+import MenuIcon from "../component/icons/MenuIcon";
+import axios from "axios";
+import NewBtn from "../component/NewBtn";
+
+const config = JSON.parse(localStorage.getItem("headers"));
 
 const Links = (props) => {
   // const { user: currentUser } = useSelector((state) => state.auth);
@@ -26,30 +33,10 @@ const Links = (props) => {
   // if (!currentUser) {
   //   return <Redirect to="/login" />;
   // }
-  const { t } = props;
-  const LinksHeaderData = [
-    {
-      title: "Social",
-      icon: <SocialDistanceOutlinedIcon />,
-    },
-    {
-      title: "Links",
-      icon: <LinkIcon />,
-    },
+  const [nav, setNav] = useState({});
 
-    {
-      title: "Location",
-      icon: <LocationOnOutlinedIcon />,
-    },
-    {
-      title: "Images",
-      icon: <ImageOutlinedIcon />,
-    },
-    {
-      title: "Banks",
-      icon: <AccountBalanceIcon />,
-    },
-  ];
+  const { t } = props;
+
   const handleEditData = (key, e) => {
     console.log("log from linkss");
     props.onSaveData();
@@ -61,6 +48,19 @@ const Links = (props) => {
   const finishRequest = (key, e) => {
     props.onFinishRequest(false);
   };
+  const getMenu = async () => {
+    try {
+      await axios
+        .get("https://swipyy.com/api/user/home", config)
+        .then((res) => {
+          setNav(res.data.data[0]);
+          console.log(res);
+        });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getMenu();
+  }, []);
   return (
     <div className="links-page">
       {/* <header className="jumbotron">
@@ -89,10 +89,10 @@ const Links = (props) => {
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-         <Tab
+        <Tab
           eventKey="social"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <SocialIcon />
               </div>
@@ -112,7 +112,7 @@ const Links = (props) => {
         <Tab
           eventKey="link"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <LinkIcon />
               </div>
@@ -120,6 +120,7 @@ const Links = (props) => {
               <div>
                 <strong>{t("links.header.links")}</strong>
               </div>
+              {nav.links == 1 ? <NewBtn /> : null}
             </div>
           }
         >
@@ -129,11 +130,11 @@ const Links = (props) => {
             t={t}
           />
         </Tab>
-       
+
         <Tab
           eventKey="location"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <LocationIcon />
               </div>
@@ -141,6 +142,7 @@ const Links = (props) => {
               <div>
                 <strong>{t("links.header.location")}</strong>
               </div>
+              {nav.locations == 1 ? <NewBtn /> : null}
             </div>
           }
         >
@@ -153,7 +155,7 @@ const Links = (props) => {
         <Tab
           eventKey="images"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <ImagesIcon />
               </div>
@@ -161,6 +163,7 @@ const Links = (props) => {
               <div>
                 <strong>{t("links.header.slider")}</strong>
               </div>
+              {nav.images == 1 ? <NewBtn /> : null}
             </div>
           }
         >
@@ -171,9 +174,30 @@ const Links = (props) => {
           />
         </Tab>
         <Tab
+          eventKey="menu"
+          title={
+            <div className="align-pro">
+              <div className="link-svg">
+                <MenuIcon />
+              </div>
+
+              <div>
+                <strong>{t("links.header.menu")}</strong>
+              </div>
+              {nav.menu == 1 ? <NewBtn /> : null}
+            </div>
+          }
+        >
+          <Menu
+            onStartRequest={() => startRequest()}
+            onFinishRequest={() => finishRequest()}
+            t={t}
+          />
+        </Tab>
+        <Tab
           eventKey="pdf"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <AttachFileIcon />
               </div>
@@ -181,6 +205,7 @@ const Links = (props) => {
               <div>
                 <strong>PDF</strong>
               </div>
+              {nav.pdf == 1 ? <NewBtn /> : null}
             </div>
           }
         >
@@ -193,7 +218,7 @@ const Links = (props) => {
         <Tab
           eventKey="banks"
           title={
-            <div>
+            <div className="align-pro">
               <div className="link-svg">
                 <BankIcon />
               </div>
@@ -201,6 +226,7 @@ const Links = (props) => {
               <div>
                 <strong>{t("links.header.banks")}</strong>
               </div>
+              {nav.bank == 1 ? <NewBtn /> : null}
             </div>
           }
         >

@@ -19,6 +19,8 @@ import checkCode from "./pages/auth/checkCode";
 import resetPassword from "./pages/auth/resetPassword";
 import Login from "./pages/auth/login";
 import Verify from "./pages/auth/verify";
+import VerifyUrl from "./pages/auth/VerifyUrl";
+
 import LoginLayoutRoute from "./layouts/LoginLayoutRoute ";
 import Links from "./pages/links";
 import Appearance from "./pages/appearance";
@@ -26,7 +28,6 @@ import Messages from "./pages/messages";
 import Analytic from "./pages/Analytic";
 import Payments from "./pages/Payments";
 import PaymentsSuccess from "./pages/PaymentsSuccess";
-
 
 import Settings from "./pages/Settings";
 import ViewLayout from "./layouts/ViewLayout";
@@ -56,7 +57,10 @@ function App() {
         url === "/signUp" ||
         url === "/forget" ||
         url === "/reset" ||
-        url === "/check"
+        url === "/verfiy/user" ||
+        url === "/verify" ||
+
+        url === "/check" 
       ) {
       } else {
         window.location.replace("/login");
@@ -73,6 +77,7 @@ function App() {
           </Route>
           <LoginLayoutRoute path="/login" component={Login} />
           <LoginLayoutRoute path="/signUp" component={SignUp} />
+          <LoginLayoutRoute path="/verfiy/user" component={VerifyUrl} />
 
           <LoginLayoutRoute path="/verify" component={Verify} />
 

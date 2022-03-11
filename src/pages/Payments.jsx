@@ -134,7 +134,7 @@ const Payments = (props) => {
               <div className="single-pay-card">
                 <p className="title-card">{t("payments.starter")}</p>
                 <p className="price-card">
-                  00.00 {t("payments.sar")}{" "}
+                  00.00 {t("payments.sar")}
                   <span>\{t("payments.forever")}</span>
                 </p>
                 {/* <ul className="list-card">
@@ -142,25 +142,25 @@ const Payments = (props) => {
                         <span>
                           <CheckCircleOutlineIcon />
                         </span>
-                        Lorem ipsum dolor{" "}
+                        Lorem ipsum dolor
                       </li>
                       <li className="list-card-item">
                         <span>
                           <CheckCircleOutlineIcon />
                         </span>
-                        Lorem ipsum dolor{" "}
+                        Lorem ipsum dolor
                       </li>
                       <li className="list-card-item">
                         <span>
                           <CheckCircleOutlineIcon />
                         </span>
-                        Lorem ipsum dolor{" "}
+                        Lorem ipsum dolor
                       </li>
                       <li className="list-card-item">
                         <span>
                           <CheckCircleOutlineIcon />
                         </span>
-                        Lorem ipsum dolor{" "}
+                        Lorem ipsum dolor
                       </li>
                     </ul> */}
                 <LinkButton type="" buttontext={t("payments.currnet-plan")} />
@@ -276,9 +276,9 @@ const Payments = (props) => {
                       </div>
                       <div className="col-sm text-sm-right text-6 font-weight-500">
                         <span className="room-single-price">
-                          {" "}
+                          
                           {t("payments.sar")} {packageDetails.amount}
-                        </span>{" "}
+                        </span>
                       </div>
                     </div>
                   </div>

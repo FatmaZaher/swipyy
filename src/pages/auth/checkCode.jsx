@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ReactPinField from "react-pin-field";
 
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
@@ -27,25 +28,20 @@ const Verify = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const [newMessage, setNewMessage] = useState(null);
+  const [otp, setOtp] = useState(null);
 
   const dispatch = useDispatch();
 
   const length = 4;
-  const [code, setCode] = useState([...Array(length)].map(() => ""));
   const [loading, setLoading] = useState(false);
 
-  const newCode = code.reduce((t, s) => {
-    return t + s;
-  });
-  const inputs = useRef([]);
+ 
   // Typescript
   // useRef<(HTMLInputElement | null)[]>([])
-
-  const initialValues = {
-    code: newCode,
+  const handleOtp = (otp) => {
+    setOtp(otp);
   };
 
-  const validationSchema = Yup.object({});
   const onSubmit = async (code) => {
     setLoadingg(true);
 
@@ -54,11 +50,11 @@ const Verify = () => {
       await axios
         .post("https://swipyy.com/api/auth/check/code", {
           email,
-          code: code || newCode,
+          code,
         })
         .then((res) => {
           if (res.data.status.code === "200") {
-            localStorage.setItem("code-reset", code || newCode);
+            localStorage.setItem("code-reset", code);
 
             history.push("/reset");
           }
@@ -67,8 +63,8 @@ const Verify = () => {
       setLoadingg(false);
     }
   };
-  const onComplete = (code) => {
-    onSubmit(code);
+  const onComplete = (e) => {
+    onSubmit(otp);
     setLoading(true);
     setTimeout(() => setLoading(false), 10000);
   };
@@ -76,31 +72,9 @@ const Verify = () => {
     return history.push("/links");
   }
 
-  const processInput = (e, slot) => {
-    const num = e.target.value;
-    if (/[^0-9]/.test(num)) return;
-    const newCode = [...code];
-    newCode[slot] = num;
-    setCode(newCode);
-    if (slot !== length - 1) {
-      inputs.current[slot + 1].focus();
-    }
-    if (newCode.every((num) => num !== "")) {
-      if (newCode.length === 4) {
-        console.log(newCode);
-        onComplete(newCode.join(""));
-      }
-    }
-  };
 
-  const onKeyUp = (e, slot) => {
-    if (e.keyCode === 8 && !code[slot] && slot !== 0) {
-      const newCode = [...code];
-      newCode[slot - 1] = "";
-      setCode(newCode);
-      inputs.current[slot - 1].focus();
-    }
-  };
+
+
 
   return (
     <div className="login-page">
@@ -120,16 +94,11 @@ const Verify = () => {
           <div className="login-section">
             <h2 className="login-head">{t("verify.title")}</h2>
             <p>{t("verify.note")}</p>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {(formik) => (
-                <Form className="login-form">
-                  <div className="code-input">
-                    <div className="code-inputs">
-                      {code.map((num, idx) => {
+
+            <form className="login-form">
+              <div className="code-input">
+                <div className="code-inputs">
+                  {/* {code.map((num, idx) => {
                         return (
                           <input
                             key={idx}
@@ -145,22 +114,32 @@ const Verify = () => {
                             ref={(ref) => inputs.current.push(ref)}
                           />
                         );
-                      })}
-                      {/* <ErrorMessage />  */}
-                    </div>
-                  </div>
-                  <div className="login-btn my-3">
-                    <button type="submit">
-                      {" "}
-                      {loading && (
-                        <span className="spinner-border spinner-border-sm"></span>
-                      )}
-                      {t("verify.btn")}
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                      })} */}
+                  <ReactPinField
+                    length={4}
+                    onChange={(e) => handleOtp(e)}
+                    onComplete={() => onComplete()}
+                    type="tel"
+                    inputMode="number"
+                    maxLength={1}
+                    style={{
+                      width: 52,
+                      height: 52,
+                    }}
+                  />
+                  {/* <ErrorMessage />  */}
+                </div>
+              </div>
+              <div className="login-btn my-3">
+                <button type="submit">
+                  {loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  {t("verify.btn")}
+                </button>
+              </div>
+            </form>
+
             <div className="not-member text-center my-3">
               <p>
                 {t("verify.is_remember")}

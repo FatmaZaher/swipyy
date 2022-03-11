@@ -193,7 +193,7 @@ const Pdf = (props) => {
                  <p>Filetype: {selectedFile.type}</p>
                  <p>Size in bytes: {selectedFile.size}</p>
                  <p>
-                   lastModifiedDate:{" "}
+                   lastModifiedDate:
                    {selectedFile.lastModifiedDate.toLocaleDateString()}
                  </p> */}
                 </div>

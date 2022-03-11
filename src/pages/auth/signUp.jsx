@@ -32,19 +32,21 @@ const SignUp = () => {
 
     if (Object.keys(response).length > 1) {
       setSuccessful(false);
-      dispatch(
-        loginSocial(
-          response.profileObj.name,
-          response.profileObj.email,
-          response.profileObj.imageUrl,
-          response.accessToken
-        )
-      ).then((res) => {
-        if (res.status.code === "200") {
-          window.location.replace("/links");
-        }
-        setSuccessful(true);
-      });
+      if (response.profileObj) {
+        dispatch(
+          loginSocial(
+            response.profileObj.name,
+            response.profileObj.email,
+            response.profileObj.imageUrl,
+            response.accessToken
+          )
+        ).then((res) => {
+          if (res.status.code === "200") {
+            window.location.replace("/links");
+          }
+          setSuccessful(true);
+        });
+      }
     }
 
     console.log(JSON.stringify(response));
@@ -72,6 +74,7 @@ const SignUp = () => {
     // name: "",
     email: "",
     password: "",
+    phone: "",
     password_confirmation: "",
   };
 
@@ -150,30 +153,48 @@ const SignUp = () => {
                     placeholder="user name"
                     error="true"
                   /> */}
-                  <FormikControl
-                    control="input"
-                    type="email"
-                    name="email"
-                    label={t("register.email_label")}
-                    placeholder={t("register.email_placeholder")}
-                    error="true"
-                  />
-                  <FormikControl
-                    control="input"
-                    type="password"
-                    name="password"
-                    label={t("register.password_label")}
-                    placeholder="*************"
-                    error="true"
-                  />
-                  <FormikControl
-                    control="input"
-                    type="password"
-                    name="password_confirmation"
-                    label={t("register.password_confirm_label")}
-                    placeholder="*************"
-                    error="true"
-                  />
+                  <div className="row">
+                    <div className="col-md-12">
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        name="email"
+                        label={t("register.email_label")}
+                        placeholder={t("register.email_placeholder")}
+                        error="true"
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        name="phone"
+                        label={t("register.phone_label")}
+                        placeholder={t("register.phone_placeholder")}
+                        error="true"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="password"
+                        label={t("register.password_label")}
+                        placeholder="*************"
+                        error="true"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="password_confirmation"
+                        label={t("register.password_confirm_label")}
+                        placeholder="*************"
+                        error="true"
+                      />
+                    </div>
+                  </div>
 
                   <div className="remmeber-forget">
                     <FormikControl

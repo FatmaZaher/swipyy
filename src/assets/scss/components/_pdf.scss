@@ -26,7 +26,8 @@
 .more-size {
   @include flex(center, center);
 }
-.pro-btn {
+.pro-btn,
+.new-btn {
   display: inline-block;
   .form-button {
     width: auto;
@@ -41,8 +42,13 @@
     color: $white-color;
   }
 }
+.new-btn {
+  .form-button {
+    background: #00ce67;
+  }
+}
 .file-info,
-.images-uploads{
+.images-uploads {
   // border-top: 1px solid $border-color;
   text-align: left;
 }

@@ -6,6 +6,9 @@ import axios from "axios";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import Editticons from "./icons/Editticons";
+import UploadLoading from "../assets/images/UploadLoading.svg";
+
+import ImageDrop from "./icons/ImageDrop";
 const MySwal = withReactContent(Swal);
 const config = JSON.parse(localStorage.getItem("headers"));
 
@@ -43,38 +46,18 @@ const toFormData = (fromdata) => {
   return toFormDataInner(fromdata);
 };
 
-const UploadImg = (url) => {
-  let data = {};
-  let api = {};
-  fetch(url)
-    .then((res) => res.blob())
-    .then((blob) => {
-      let file = new File([blob], "File name", { type: "image/png" });
-
-      data = {
-        image: file,
-      };
-      api = "https://swipyy.com/api/user/settings/update";
-
-      const img = toFormData(data);
-      try {
-        axios.post(api, img, config).then((res) => {
-          // props.onSaveData("ee");
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    });
-};
 const dataURLtoFile = (url) => {
   let file;
 };
 
 const ImgCrop = (props) => {
-  const { t } = props;
+  const { t, item, config, uploadType } = props;
+
   const cropperRef = useRef(null);
   const [cropper, setCropper] = useState({});
   const [cropData, setCropData] = useState({});
+  const [isUpoad, setIsUpload] = useState(false);
+
   const [image, setImage] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [message, setMessage] = React.useState(null);
@@ -89,6 +72,55 @@ const ImgCrop = (props) => {
         ? void 0
         : imageElement.cropper;
     // console.log(cropper.getCroppedCanvas().toDataURL());
+  };
+  const UploadImg = (url) => {
+    let data = {};
+    let api = {};
+
+    fetch(url)
+      .then((res) => res.blob())
+      .then((blob) => {
+        let file = new File([blob], "File name", { type: "image/png" });
+        if (uploadType === "link") {
+          data = {
+            img: file,
+            url: item.url,
+            _method: "patch",
+          };
+          api = "https://swipyy.com/api/user/link/" + item.id;
+        } else if (uploadType === "avatar") {
+          data = {
+            avatar: file,
+          };
+          api = "https://swipyy.com/api/user/appearance/update";
+        } else if (uploadType === "cover_img") {
+          data = {
+            cover_img: file,
+          };
+          api = "https://swipyy.com/api/user/appearance/update";
+        } else if (uploadType === "profile_image") {
+          data = {
+            image: file,
+          };
+          api = "https://swipyy.com/api/user/settings/update";
+        } else if (uploadType === "background") {
+          data = {
+            background_img: file,
+          };
+          api = "https://swipyy.com/api/user/appearance/update";
+        }
+
+        const img = toFormData(data);
+        try {
+          axios.post(api, img, config).then((res) => {
+            setIsOpen(false);
+            sucesesEdit();
+            props.onSaveData();
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      });
   };
   const onChange = (e) => {
     e.preventDefault();
@@ -119,11 +151,11 @@ const ImgCrop = (props) => {
     setIsOpen(false);
   }
   function sucesesEdit() {
-    // Swal.fire(
-    //   t("modal-edit.good-job"),
-    //   t("modal-edit.edited-success"),
-    //   t("modal-edit.success")
-    // );
+    Swal.fire(
+      t("modal-edit.good-job"),
+      t("modal-edit.edited-success"),
+      t("modal-edit.success")
+    );
     setIsOpen(false);
   }
   function afterOpenModal() {
@@ -134,10 +166,62 @@ const ImgCrop = (props) => {
       <div className="edit-icon">
         <label className="img-upload-btn btn">
           <input type="file" className="d-none" onChange={onChange} />
-          <img
+          {/* <img
             src="https://swipyy.com/swipy/storage/app/public/avatars/3u9mlgwXE5eGWHoXmVbuDMvEDrOD2tVemNEjQOdR.png"
             alt=""
-          />
+          /> */}
+
+          {uploadType === "link" ? (
+            item.img ? (
+              <img src={item.img} className="img-uploadded" alt={item.id} />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
+          {uploadType === "avatar" ? (
+            item.avatar ? (
+              <img
+                src={item.avatar}
+                className="img-uploadded"
+                alt={item.username}
+              />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
+          {uploadType === "profile_image" ? (
+            item.profile_image ? (
+              <img
+                src={item.profile_image}
+                className="img-uploadded"
+                alt={item.email}
+              />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
+          {uploadType === "cover_img" ? (
+            item.cover_img ? (
+              <img
+                src={item.cover_img}
+                className="img-uploadded"
+                alt={item.username}
+              />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
+          {uploadType === "background" ? (
+            item.background_img ? (
+              <img
+                src={item.background_img}
+                className="img-uploadded"
+                alt={item.background_img}
+              />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
         </label>
       </div>
       <Modal
@@ -167,8 +251,17 @@ const ImgCrop = (props) => {
               setCropper(instance);
             }}
           />
+          {isUpoad ? (
+            <div className="text-center">
+              <img src={UploadLoading} alt="" />
+            </div>
+          ) : null}
           <div className="btn-save-box">
-            <button className="btn btn-save form-button" onClick={getCropData}>
+            <button
+              disabled={isUpoad}
+              className="btn btn-save form-button"
+              onClick={getCropData}
+            >
               {t("save")}
             </button>
           </div>

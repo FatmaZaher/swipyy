@@ -129,7 +129,7 @@ const DropImg = (props) => {
                       remove all images
                     </button> */}
                     <p>
-                      {t("supports")}: JPG,PNG, PDF{" "}
+                      {t("supports")}: JPG,PNG, PDF
                       <span className="pro-btn">
                         <Link to="/payments">
                           <LinkButton type="" buttontext="PRO" />

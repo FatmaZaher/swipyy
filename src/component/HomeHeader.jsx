@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -20,10 +20,12 @@ const HomeHeader = (props) => {
   const [personalList, setPersonalList] = useState(false);
   const showPersonalList = () => setPersonalList(!personalList);
   const { user } = useSelector((state) => state.auth);
+
   let currentUser = {};
   if (user) {
     currentUser = user.data;
   }
+ 
   const copyUserName = async () => {
     await navigator.clipboard.writeText("swipyy.com/" + currentUser.username);
     showLinkList();
@@ -39,6 +41,7 @@ const HomeHeader = (props) => {
     localStorage.removeItem("user_token");
     window.location.replace("/login");
   };
+ 
   return (
     <>
       <div className="home-header">
@@ -76,7 +79,7 @@ const HomeHeader = (props) => {
           </p>
         </div>
         <div className="personal-pho" onClick={showPersonalList}>
-          <img src={currentUser.image || personal} alt="" />
+          <img src={currentUser.cover_img || personal} alt="" />
           <div
             className={personalList ? "link-icon-list" : "link-icon-list show"}
           >

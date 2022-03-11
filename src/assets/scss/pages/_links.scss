@@ -9,6 +9,7 @@
 .settings,
 .images,
 .pdf,
+.menu-page,
 .appearance-page,
 .messages,
 .index {
@@ -113,6 +114,7 @@
   .nav-item {
     .nav-link {
       width: 85px;
+      position: relative;
       > div {
         // @include flex(center, spdace-between);
         font-size: 14px;

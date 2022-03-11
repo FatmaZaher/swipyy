@@ -24,6 +24,8 @@ const BankModal = (props) => {
   });
 
   const initialValues = {
+    account_number: bank.name,
+
     account_number: bank.account_number,
     iban: bank.iban,
     bank_id: bank.bank_id,
@@ -109,6 +111,14 @@ const BankModal = (props) => {
                   onChange={(e) =>
                     formik.setFieldValue("bank_id", e.target.value)
                   }
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="name"
+                  placeholder="type your bank name here..."
+                  error="true"
+                  label="Account name"
                 />
                 <FormikControl
                   control="input"

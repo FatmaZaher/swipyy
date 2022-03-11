@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import "image-upload-react/dist/index.css";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -15,6 +18,7 @@ import ImageUploading from "react-images-uploading";
 import axios from "axios";
 import UploadImg from "../UploadImg";
 import { useTranslation } from "react-i18next";
+import PlusIcon from "../icons/PlusIcon";
 
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -30,6 +34,7 @@ const Link = (props) => {
 
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [items, setItems] = useState([]);
+  const [isPhone, setIsPhone] = useState(null);
 
   const sortItems = (values) => {
     const ides = values.map((item) => item.id);
@@ -96,15 +101,17 @@ const Link = (props) => {
 
   const initialValues = {
     url: "",
+    type: "link",
   };
 
   const onSubmit = (values) => {
-    props.onStartRequest(true);
-    axios
-      .post("https://swipyy.com/api/user/link", values, config)
-      .then((res) => {
-        getLinks();
-      });
+    console.log(values);
+    // props.onStartRequest(true);
+    // axios
+    //   .post("https://swipyy.com/api/user/link", values, config)
+    //   .then((res) => {
+    //     getLinks();
+    //   });
   };
 
   const validationSchema = Yup.object({
@@ -139,6 +146,22 @@ const Link = (props) => {
         getLinks();
       });
   };
+  const handlePhone = (value, func) => {
+    func("type", "phone");
+
+    func("url", value);
+  };
+  const handleLink = (e, func) => {
+    func("type", "link");
+
+    func("url", e.target.value);
+  };
+  const setPhone = (value, func) => {
+    setIsPhone(value);
+
+    func("url", null);
+  };
+
   return (
     <div className="link-page">
       <Formik
@@ -147,21 +170,51 @@ const Link = (props) => {
         onSubmit={onSubmit}
       >
         {(formik) => (
-          <Form className="form-page">
-            <FormikControl
-              control="input"
-              type="url"
-              name="url"
-              placeholder={t("links.link.button-placholder")}
-              error="true"
-            />
-            <LinkButton
-              type="submit"
-              buttontext={t("links.link.button")}
-              icon="yes"
-              disabled={formik.values.url === "" ? true : false}
-            />
-          </Form>
+          <>
+            <Form className="form-page">
+              {isPhone ? (
+                <PhoneInput
+                  country={"us"}
+                  value={formik.values.url}
+                  onChange={(e) => handlePhone(e, formik.setFieldValue)}
+                  enableSearch={true}
+                />
+              ) : (
+                <FormikControl
+                  control="input"
+                  type="url"
+                  value={formik.values.url}
+                  placeholder={t("links.link.button-placholder")}
+                  onChange={(e) => handleLink(e, formik.setFieldValue)}
+                />
+              )}
+
+              <LinkButton
+                type="submit"
+                buttontext={t("links.link.button")}
+                icon="yes"
+                disabled={formik.values.url === "" ? true : false}
+              />
+            </Form>
+
+            {isPhone ? (
+              <button
+                className="add-phone-link btn"
+                onClick={() => setPhone(false, formik.setFieldValue)}
+              >
+                <PlusIcon />
+                <span> Add Link</span>
+              </button>
+            ) : (
+              <button
+                className="add-phone-link btn"
+                onClick={() => setPhone(true, formik.setFieldValue)}
+              >
+                <PlusIcon />
+                <span> Add Phone number</span>
+              </button>
+            )}
+          </>
         )}
       </Formik>
 

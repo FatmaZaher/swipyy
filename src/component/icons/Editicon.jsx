@@ -10,6 +10,7 @@ import LinkButton from "../form/LinkButton";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
+import PhoneInput from "react-phone-input-2";
 const MySwal = withReactContent(Swal);
 
 const customStyles = {
@@ -29,6 +30,8 @@ const Editicon = (props) => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isName, setIsName] = React.useState(false);
+  const [isPhone, setIsPhone] = React.useState(false);
+
   const [message, setMessage] = React.useState(null);
 
   const { item, config, api, settingName } = props;
@@ -62,6 +65,9 @@ const Editicon = (props) => {
     initialValues.name = item ? item.name : "";
     inputName = "name";
     method = axios.post;
+  } else if (api === "user/menu") {
+    initialValues.name = item ? item.name : "";
+    inputName = "name";
   } else if (api === "user/location") {
     initialValues.url = item ? item.url : "";
     initialValues.name = item ? item.location : "";
@@ -125,13 +131,26 @@ const Editicon = (props) => {
     );
     setIsOpen(false);
   }
-
+  const handlePhone = (value, func) => {
+    func("url", value);
+  };
   useEffect(() => {
     if (api === "user/link") {
       setIsName(true);
     }
     if (api === "user/location") {
       setIsName(true);
+    }
+
+    if (api === "user/socialUser") {
+      if (item.social === "whatsapp") {
+        setIsPhone(true);
+      }
+    }
+    if (api === "user/link") {
+      if (item.type === "phone") {
+        setIsPhone(true);
+      }
     }
   }, []);
   return (
@@ -175,15 +194,30 @@ const Editicon = (props) => {
                     label={t("modal-edit.name")}
                   />
                 ) : null}
-                <FormikControl
-                  control="input"
-                  type={inputType}
-                  name={inputName}
-                  placeholder=""
-                  minlength="4"
-                  error="true"
-                  label={labelName}
-                />
+                {isPhone ? (
+                  <div className="form-control">
+                    <PhoneInput
+                      country={"us"}
+                      value={formik.values.url}
+                      onChange={(e) => handlePhone(e, formik.setFieldValue)}
+                      enableSearch={true}
+                    />
+                    <div className="error-mes">
+                      <ErrorMessage name={"url"}></ErrorMessage>
+                    </div>
+                  </div>
+                ) : (
+                  <FormikControl
+                    control="input"
+                    type={inputType}
+                    name={inputName}
+                    placeholder=""
+                    minlength="4"
+                    error="true"
+                    label={labelName}
+                  />
+                )}
+
                 <div className="edit-btn">
                   <div className="login-btn">
                     <LinkButton

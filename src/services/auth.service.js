@@ -50,7 +50,29 @@ const verify = (code) => {
       return response.data;
     });
 };
-
+const verifyUrl = (token) => {
+  return axios
+    .post(
+      API_URL + "auth/verify/url",
+      {
+        token_data: token,
+      },
+      { headers: authHeader() }
+    )
+    .then((response) => {
+      const token = response.data.data.access_token;
+      if (token) {
+        localStorage.setItem("user_token", token);
+        const headers = JSON.stringify({
+          headers: {
+            Authorization: "Bearer " + response.data.data.access_token,
+          },
+        });
+        localStorage.setItem("headers", headers);
+      }
+      return response.data;
+    });
+};
 const login = (email, password) => {
   return axios
     .post(
@@ -112,5 +134,7 @@ export default {
   logout,
   user,
   verify,
+  verifyUrl,
+
   loginSocial,
 };

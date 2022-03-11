@@ -383,10 +383,10 @@ const Analytic = (props) => {
               ? linkTable.map((item, index) => (
                   <tr key={index}>
                     <td>
-                      {" "}
+                      
                       <span className="text-truc" dir="ltr">
                         {item.url}
-                      </span>{" "}
+                      </span>
                     </td>
                     <td>{item.type}</td>
                     <td>{item.count}</td>
@@ -451,7 +451,7 @@ const Analytic = (props) => {
         </div>
       </div>
       <div className="">
-        {" "}
+        
         <div className="device-category-charts mb-3">
           {checkIsPro()}
 

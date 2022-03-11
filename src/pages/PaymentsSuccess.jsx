@@ -81,7 +81,7 @@ const Payments = (props) => {
                 </div>
                 <div className="col-sm text-sm-right text-6 font-weight-500">
                   <span className="room-single-price">
-                    {" "}
+                    
                     {payment.amount} {t("payments.sar")}
                   </span>
                 </div>

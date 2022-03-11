@@ -300,3 +300,129 @@ ul {
   line-height: 1;
   background: var(--bs-indigo);
 }
+
+.form-group-category {
+  position: relative;
+  margin: 0 10px;
+
+  label {
+    font-size: 11px;
+    position: absolute;
+    background: #8055f0;
+    top: -8px;
+    left: 10px;
+    color: #fff;
+    padding: 0px 5px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    padding-top: 12px;
+    outline: navajowhite;
+  }
+}
+
+
+
+.single-item-menu-body {
+  padding: 15px;
+  border: 1px solid rgba(222 , 227 ,237 ,0.54);
+  border-top: navajowhite;
+  margin-bottom: 30px;
+  .list-menu-items{
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.list-menu-items > h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+
+}
+
+.list-menu-item {
+  display: flex;
+}
+
+.list-menu-item-inputs {
+  flex: 1;
+}
+
+.list-menu-item-inputs-top {
+  display: flex;
+  margin-bottom: 20px;
+}
+.list-menu-item-inputs-top > div{
+  width: 100%;
+}
+.list-menu-item-inputs-top input{
+  width: 100%;
+  height: 50px;
+  background: #f4f5f9;
+  border: none;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.list-menu-item-inputs-top .list-menu-item-inputs-item-price  {
+  width: 200px;
+}
+.list-menu-item-inputs-top .list-menu-item-inputs-item-price input  {
+  width: 200px;
+}
+.react-tel-input .form-control {
+  border-radius: 6px;
+  background-color: #f3f3f39c !important;
+  color: #969ba3;
+  outline: none;
+  border: none;
+  height: 48px !important;
+  line-height: 48px !important;
+  display: block;
+  width: 100% !important;
+  &:focus{
+    box-shadow: none !important;
+  }
+}
+
+.add-more-item {
+  display: flex;
+  align-items: center;
+  background: #163152;
+  margin-top: 40px;
+  svg {
+    margin: 0 5px;
+    path {
+      fill: #fff;
+    }
+  }
+  span {
+    margin: 0 5px;
+    color: #fff;
+  }
+}
+
+.add-phone-link{
+  background: none;
+  border: none;
+  margin-top: 10px;
+  color: #03a9f4;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  width: 100%;
+
+}

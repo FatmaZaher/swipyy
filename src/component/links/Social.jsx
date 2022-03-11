@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, FieldArray, Field } from "formik";
+import { Formik, Form, FieldArray, Field, ErrorMessage } from "formik";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 import * as Yup from "yup";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import LinkButton from "../../component/form/LinkButton";
@@ -104,7 +107,7 @@ const Social = (props) => {
               value: item.name,
               icon: item.icon,
               id: item.id,
-              placeholder:item.placeholder
+              placeholder: item.placeholder,
             };
           });
           setSocialPlatforms(newPlatforms);
@@ -125,20 +128,22 @@ const Social = (props) => {
     social_id: Yup.string().required(t("links.social.add-your-link")),
   });
   const getSocials = () => {
-    axios
-      .get("https://swipyy.com/api/user/socialUser", config)
-      .then((res) => {
-        setItems(res.data.data);
-        props.onFinishRequest(false);
-      });
+    axios.get("https://swipyy.com/api/user/socialUser", config).then((res) => {
+      setItems(res.data.data);
+      props.onFinishRequest(false);
+    });
   };
   const handleSocialPlatform = (value, func) => {
     func("social_id", value.id);
-    func("url", '');
+    func("url", "");
 
     console.log(value);
     setSocialPlaceholder(value.placeholder);
   };
+  const handlePhone = (value, func) => {
+    func("url", value);
+  };
+
   useEffect(() => {
     getSocials();
     getAllSocialPlatforms();
@@ -227,15 +232,29 @@ const Social = (props) => {
               error="true"
             /> */}
 
-            <FormikControl
-              control="input"
-              type="text"
-              name="url"
-              placeholder={
-                socialPlaceholder || t("links.social.button-placholder")
-              }
-              error="true"
-            />
+            {formik.values.social_id == 2 ? (
+              <div className="form-control">
+                <PhoneInput
+                  country={"us"}
+                  value={formik.values.url}
+                  onChange={(e) => handlePhone(e, formik.setFieldValue)}
+                  enableSearch={true}
+                />
+                <div className="error-mes">
+                  <ErrorMessage name={"url"}></ErrorMessage>
+                </div>
+              </div>
+            ) : (
+              <FormikControl
+                control="input"
+                type="text"
+                name="url"
+                placeholder={
+                  socialPlaceholder || t("links.social.button-placholder")
+                }
+                error="true"
+              />
+            )}
 
             <LinkButton
               type="submit"
@@ -384,7 +403,7 @@ const Social = (props) => {
                             </Formik>
                             <div className="d-flex">
                               <div className="mx-3">
-                                {" "}
+                                
                                 <Editicon
                                   item={social}
                                   config={config}
