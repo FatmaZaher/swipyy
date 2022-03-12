@@ -103,9 +103,16 @@ const ImgCrop = (props) => {
             image: file,
           };
           api = "https://swipyy.com/api/user/settings/update";
-        } else if (uploadType === "background") {
+        } else if (uploadType === "portrait_img") {
           data = {
-            background_img: file,
+            portrait_img: file,
+            theme_id: 0,
+            background_final: "empty",
+          };
+          api = "https://swipyy.com/api/user/appearance/update";
+        } else if (uploadType === "landscape_img") {
+          data = {
+            landscape_img: file,
             theme_id: 0,
             background_final: "empty",
           };

@@ -1283,13 +1283,38 @@ const Appearance = (props) => {
                     </div>
                   </div>
                   <div className="input-color-box-parent background-back">
-                    <h3>{t("Bacjground img")}</h3>
+                    <h3>{t("Portrait Image")}</h3>
                     <div className="align-pro position-relative">
                       {currentUser.is_pro == 1 ? (
                         <ImgCrop
                           t={t}
                           config={config}
-                          uploadType="background"
+                          uploadType="portrait_img"
+                          item={settings}
+                          onSaveData={() => handleEditData()}
+                        />
+                      ) : (
+                        <div
+                          className="edit-icon"
+                          onClick={() => changeBackgroundImg()}
+                        >
+                          <label className="img-upload-btn btn">
+                            <ImageDrop />
+                          </label>
+                        </div>
+                      )}
+
+                      <ProBtn />
+                    </div>
+                  </div>
+                    <div className="input-color-box-parent background-back">
+                    <h3>{t("Landscape  Image")}</h3>
+                    <div className="align-pro position-relative">
+                      {currentUser.is_pro == 1 ? (
+                        <ImgCrop
+                          t={t}
+                          config={config}
+                          uploadType="landscape_img"
                           item={settings}
                           onSaveData={() => handleEditData()}
                         />

@@ -84,159 +84,161 @@ const Links = (props) => {
       </ul> */}
       {/* <LinksHeader /> */}
       {/* {t("intro.label")} */}
-      <Tabs
-        defaultActiveKey="link"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
-        <Tab
-          eventKey="social"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <SocialIcon />
-              </div>
-
-              <div>
-                <strong>{t("links.header.social")}</strong>
-              </div>
-            </div>
-          }
+      <div className="links-page-nav">
+        <Tabs
+          defaultActiveKey="link"
+          id="uncontrolled-tab-example"
+          className="mb-3"
         >
-          <Social
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-        <Tab
-          eventKey="link"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <LinkIcon />
-              </div>
+          <Tab
+            eventKey="social"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <SocialIcon />
+                </div>
 
-              <div>
-                <strong>{t("links.header.links")}</strong>
+                <div>
+                  <strong>{t("links.header.social")}</strong>
+                </div>
               </div>
-              {nav.links == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Link
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
+            }
+          >
+            <Social
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+          <Tab
+            eventKey="link"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <LinkIcon />
+                </div>
 
-        <Tab
-          eventKey="location"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <LocationIcon />
+                <div>
+                  <strong>{t("links.header.links")}</strong>
+                </div>
+                {nav.links == 1 ? <NewBtn /> : null}
               </div>
+            }
+          >
+            <Link
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
 
-              <div>
-                <strong>{t("links.header.location")}</strong>
-              </div>
-              {nav.locations == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Location
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-        <Tab
-          eventKey="images"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <ImagesIcon />
-              </div>
+          <Tab
+            eventKey="location"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <LocationIcon />
+                </div>
 
-              <div>
-                <strong>{t("links.header.slider")}</strong>
+                <div>
+                  <strong>{t("links.header.location")}</strong>
+                </div>
+                {nav.locations == 1 ? <NewBtn /> : null}
               </div>
-              {nav.images == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Images
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-        <Tab
-          eventKey="menu"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <MenuIcon />
-              </div>
+            }
+          >
+            <Location
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+          <Tab
+            eventKey="images"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <ImagesIcon />
+                </div>
 
-              <div>
-                <strong>{t("links.header.menu")}</strong>
+                <div>
+                  <strong>{t("links.header.slider")}</strong>
+                </div>
+                {nav.images == 1 ? <NewBtn /> : null}
               </div>
-              {nav.menu == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Menu
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-        <Tab
-          eventKey="pdf"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <AttachFileIcon />
-              </div>
+            }
+          >
+            <Images
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+          <Tab
+            eventKey="menu"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <MenuIcon />
+                </div>
 
-              <div>
-                <strong>PDF</strong>
+                <div>
+                  <strong>{t("links.header.menu")}</strong>
+                </div>
+                {nav.menu == 1 ? <NewBtn /> : null}
               </div>
-              {nav.pdf == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Pdf
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-        <Tab
-          eventKey="banks"
-          title={
-            <div className="align-pro">
-              <div className="link-svg">
-                <BankIcon />
-              </div>
+            }
+          >
+            <Menu
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+          <Tab
+            eventKey="pdf"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <AttachFileIcon />
+                </div>
 
-              <div>
-                <strong>{t("links.header.banks")}</strong>
+                <div>
+                  <strong>PDF</strong>
+                </div>
+                {nav.pdf == 1 ? <NewBtn /> : null}
               </div>
-              {nav.bank == 1 ? <NewBtn /> : null}
-            </div>
-          }
-        >
-          <Banks
-            onStartRequest={() => startRequest()}
-            onFinishRequest={() => finishRequest()}
-            t={t}
-          />
-        </Tab>
-      </Tabs>
+            }
+          >
+            <Pdf
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+          <Tab
+            eventKey="banks"
+            title={
+              <div className="align-pro">
+                <div className="link-svg">
+                  <BankIcon />
+                </div>
+
+                <div>
+                  <strong>{t("links.header.banks")}</strong>
+                </div>
+                {nav.bank == 1 ? <NewBtn /> : null}
+              </div>
+            }
+          >
+            <Banks
+              onStartRequest={() => startRequest()}
+              onFinishRequest={() => finishRequest()}
+              t={t}
+            />
+          </Tab>
+        </Tabs>
+      </div>
     </div>
   );
 };
