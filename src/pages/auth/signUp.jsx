@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import "../../assets/scss/index.scss";
 import logo from "../../assets/images/logo.svg";
 import shap1 from "../../assets/images/shap1.svg";
@@ -93,7 +94,7 @@ const SignUp = () => {
     setSuccessful(false);
 
     dispatch(
-      register(values.email, values.password, values.password_confirmation)
+      register(values)
     )
       .then((res) => {
         setSuccessful(true);
@@ -111,6 +112,9 @@ const SignUp = () => {
       .catch(() => {
         setSuccessful(false);
       });
+  };
+  const handlePhone = (value, func) => {
+    func("phone", value);
   };
   if (isLoggedIn) {
     return history.push("/links");
@@ -165,14 +169,15 @@ const SignUp = () => {
                       />
                     </div>
                     <div className="col-md-12">
-                      <FormikControl
-                        control="input"
-                        type="text"
-                        name="phone"
-                        label={t("register.phone_label")}
-                        placeholder={t("register.phone_placeholder")}
-                        error="true"
-                      />
+                      <div className="form-control mb-3">
+                        <label htmlFor="" className="mb-2">{t("register.phone_label")}</label>
+                        <PhoneInput
+                          country={"us"}
+                          value={formik.values.phone}
+                          onChange={(e) => handlePhone(e, formik.setFieldValue)}
+                          enableSearch={true}
+                        />
+                      </div>
                     </div>
                     <div className="col-md-6">
                       <FormikControl

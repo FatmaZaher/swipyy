@@ -6,15 +6,17 @@ const API_URL = "https://swipyy.com/api/";
 //   'Content-Type': 'application/json',
 //   'Authorization': 'JWT fefege...'
 // }
-const register = (email, password, password_confirmation) => {
+const register = (values) => {
   return axios
     .post(
       API_URL + "auth/signup",
       {
         // name,
-        email,
-        password,
-        password_confirmation,
+        email: values.email,
+        phone: values.phone,
+
+        password: values.password,
+        password_confirmation: values.password_confirmation,
       },
       { headers: authHeader() }
     )

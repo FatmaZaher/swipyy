@@ -106,6 +106,8 @@ const ImgCrop = (props) => {
         } else if (uploadType === "background") {
           data = {
             background_img: file,
+            theme_id: 0,
+            background_final: "empty",
           };
           api = "https://swipyy.com/api/user/appearance/update";
         }

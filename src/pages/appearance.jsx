@@ -45,6 +45,7 @@ import NewBtn from "../component/NewBtn";
 import Editticons from "../component/icons/Editticons";
 import BankIcon from "../component/icons/BankIcon";
 import ImgCrop from "../component/ImgCrop";
+import ImageDrop from "../component/icons/ImageDrop";
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -97,6 +98,7 @@ const Appearance = (props) => {
   let currentUser = {};
   if (user) {
     currentUser = user.data;
+    currentUser.is_pro = false
   }
   const [settings, setSettings] = useState({});
 
@@ -315,6 +317,9 @@ const Appearance = (props) => {
 
     const swipy_logo_status = value === true ? 1 : 0;
     apiChange({ swipy_logo_status });
+  };
+  const changeBackgroundImg = (value) => {
+    if (checkIsPro(1) === false) return;
   };
 
   useEffect(() => {
@@ -1277,15 +1282,30 @@ const Appearance = (props) => {
                       <label htmlFor="changeBackgroundColor"></label>
                     </div>
                   </div>
-                  <div className="input-color-box-parent">
+                  <div className="input-color-box-parent background-back">
                     <h3>{t("Bacjground img")}</h3>
-                    <ImgCrop
-                      t={t}
-                      config={config}
-                      uploadType="background"
-                      item={settings}
-                      onSaveData={() => handleEditData()}
-                    />
+                    <div className="align-pro position-relative">
+                      {currentUser.is_pro == 1 ? (
+                        <ImgCrop
+                          t={t}
+                          config={config}
+                          uploadType="background"
+                          item={settings}
+                          onSaveData={() => handleEditData()}
+                        />
+                      ) : (
+                        <div
+                          className="edit-icon"
+                          onClick={() => changeBackgroundImg()}
+                        >
+                          <label className="img-upload-btn btn">
+                            <ImageDrop />
+                          </label>
+                        </div>
+                      )}
+
+                      <ProBtn />
+                    </div>
                   </div>
                   <div>
                     {/* <p className="mt-4">Upload Image</p> */}
