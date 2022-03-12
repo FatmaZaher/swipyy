@@ -524,7 +524,7 @@ const Appearance = (props) => {
                   <div className="single-item mb-3">
                     <div className="single-item-img cover-cover">
                       <ImgCrop
-                      t={t}
+                        t={t}
                         config={config}
                         uploadType="cover_img"
                         item={settings}
@@ -970,7 +970,11 @@ const Appearance = (props) => {
                                       type="radio"
                                       id={"button-" + button.id}
                                       name="buttonStyle"
-                                      className="by-checked"
+                                      className={`${
+                                        button.id == settings.button_type_id
+                                          ? "input-active"
+                                          : null
+                                      }`}
                                       value={button.id}
                                       onChange={() => changeButton(button.id)}
                                       checked={

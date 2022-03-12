@@ -826,7 +826,7 @@ const Link = (props) => {
                                                 )
                                               }
                                               onBlur={(e) =>
-                                                handleMenuFontColor(
+                                                handleMenuBtnColor(
                                                   menu.id,
                                                   e.target.value
                                                 )
@@ -851,12 +851,12 @@ const Link = (props) => {
                                               onChange={(e) =>
                                                 menuChange(
                                                   index,
-                                                  "button_color",
+                                                  "font_color",
                                                   e.target.value
                                                 )
                                               }
                                               onBlur={(e) =>
-                                                handleMenuBtnColor(
+                                                handleMenuFontColor(
                                                   menu.id,
                                                   e.target.value
                                                 )
