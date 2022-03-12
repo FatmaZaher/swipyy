@@ -102,16 +102,17 @@ const Link = (props) => {
   const initialValues = {
     url: "",
     type: "link",
+    name: "",
   };
 
   const onSubmit = (values) => {
     console.log(values);
-    // props.onStartRequest(true);
-    // axios
-    //   .post("https://swipyy.com/api/user/link", values, config)
-    //   .then((res) => {
-    //     getLinks();
-    //   });
+    props.onStartRequest(true);
+    axios
+      .post("https://swipyy.com/api/user/link", values, config)
+      .then((res) => {
+        getLinks();
+      });
   };
 
   const validationSchema = Yup.object({
@@ -148,11 +149,13 @@ const Link = (props) => {
   };
   const handlePhone = (value, func) => {
     func("type", "phone");
+    func("name", "انقر للاتصال بنا");
 
     func("url", value);
   };
   const handleLink = (e, func) => {
     func("type", "link");
+    func("name", null);
 
     func("url", e.target.value);
   };
