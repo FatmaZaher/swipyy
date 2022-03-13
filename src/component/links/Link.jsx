@@ -151,7 +151,7 @@ const Link = (props) => {
     func("type", "phone");
     func("name", "انقر للاتصال بنا");
 
-    func("url", value);
+    func("url", '+' + value);
   };
   const handleLink = (e, func) => {
     func("type", "link");

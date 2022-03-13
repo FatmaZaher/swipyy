@@ -132,7 +132,7 @@ const Editicon = (props) => {
     setIsOpen(false);
   }
   const handlePhone = (value, func) => {
-    func("url", value);
+    func("url", '+' + value);
   };
   useEffect(() => {
     if (api === "user/link") {

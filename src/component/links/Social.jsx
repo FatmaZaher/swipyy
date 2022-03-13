@@ -141,7 +141,7 @@ const Social = (props) => {
     setSocialPlaceholder(value.placeholder);
   };
   const handlePhone = (value, func) => {
-    func("url", value);
+    func("url", '+' +  value);
   };
 
   useEffect(() => {
