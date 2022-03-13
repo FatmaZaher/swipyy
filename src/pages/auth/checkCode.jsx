@@ -30,16 +30,15 @@ const Verify = () => {
   const [newMessage, setNewMessage] = useState(null);
   const [otp, setOtp] = useState(null);
 
-  const dispatch = useDispatch();
-
-  const length = 4;
   const [loading, setLoading] = useState(false);
 
- 
   // Typescript
   // useRef<(HTMLInputElement | null)[]>([])
   const handleOtp = (otp) => {
     setOtp(otp);
+    if (otp.length === 4) {
+      onComplete(otp);
+    }
   };
 
   const onSubmit = async (code) => {
@@ -58,23 +57,18 @@ const Verify = () => {
 
             history.push("/reset");
           }
+          setLoadingg(false);
         });
     } catch (error) {
       setLoadingg(false);
     }
   };
-  const onComplete = (e) => {
-    onSubmit(otp);
-    setLoading(true);
-    setTimeout(() => setLoading(false), 10000);
+  const onComplete = (code) => {
+    onSubmit(code);
   };
   if (isLoggedIn) {
     return history.push("/links");
   }
-
-
-
-
 
   return (
     <div className="login-page">
@@ -98,27 +92,10 @@ const Verify = () => {
             <form className="login-form">
               <div className="code-input">
                 <div className="code-inputs">
-                  {/* {code.map((num, idx) => {
-                        return (
-                          <input
-                            key={idx}
-                            type="text"
-                            className="form-control"
-                            inputMode="numeric"
-                            maxLength={1}
-                            value={num}
-                            autoFocus={!code[0].length && idx === 0}
-                            readOnly={loading}
-                            onChange={(e) => processInput(e, idx)}
-                            onKeyUp={(e) => onKeyUp(e, idx)}
-                            ref={(ref) => inputs.current.push(ref)}
-                          />
-                        );
-                      })} */}
+               
                   <ReactPinField
                     length={4}
                     onChange={(e) => handleOtp(e)}
-                    onComplete={() => onComplete()}
                     type="tel"
                     inputMode="number"
                     maxLength={1}
@@ -131,7 +108,7 @@ const Verify = () => {
                 </div>
               </div>
               <div className="login-btn my-3">
-                <button type="submit">
+                <button type="button"  onClick={() => onSubmit(otp)}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}

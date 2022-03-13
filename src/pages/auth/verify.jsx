@@ -33,36 +33,33 @@ const Verify = () => {
 
   const [loading, setLoading] = useState(false);
 
-  
   const handleOtp = (otp) => {
     setOtp(otp);
+    if (otp.length === 4) {
+      onComplete(otp);
+    }
   };
- 
 
-  const onSubmit = (otp) => {
+  const onSubmit = (code) => {
     // setLoadingg(true);
-    dispatch(verify(otp))
+    setLoading(true);
+    dispatch(verify(code))
       .then((res) => {
         if (res.status.status === "true") {
           window.location.replace("/links");
         }
+        setLoading(false);
       })
       .catch(() => {
         setLoadingg(false);
       });
   };
-  const onComplete = () => {
-    onSubmit(otp);
-    setLoading(true);
-    setTimeout(() => setLoading(false), 10000);
+  const onComplete = (code) => {
+    onSubmit(code);
   };
   if (isLoggedIn) {
     return history.push("/links");
   }
-
-
-
-
 
   return (
     <div className="login-page">
@@ -83,30 +80,12 @@ const Verify = () => {
             <h2 className="login-head">{t("verify.title")}</h2>
             <p>{t("verify.note")}</p>
 
-            <frm className="login-form">
+            <form className="login-form">
               <div className="code-input">
                 <div className="code-inputs">
-                  {/* {code.map((num, idx) => {
-                        return (
-                          <input
-                            key={idx}
-                            type="text"
-                            className="form-control"
-                            inputMode="numeric"
-                            maxLength={1}
-                            value={num}
-                            autoFocus={!code[0].length && idx === 0}
-                            readOnly={loading}
-                            onChange={(e) => processInput(e, idx)}
-                            onKeyUp={(e) => onKeyUp(e, idx)}
-                            ref={(ref) => inputs.current.push(ref)}
-                          />
-                        );
-                      })} */}
                   <ReactPinField
                     length={4}
                     onChange={(e) => handleOtp(e)}
-                    onComplete={() => onComplete()}
                     type="tel"
                     inputMode="number"
                     maxLength={1}
@@ -115,19 +94,17 @@ const Verify = () => {
                       height: 52,
                     }}
                   />
-
-                  {/* <ErrorMessage />  */}
                 </div>
               </div>
               <div className="login-btn my-3">
-                <button type="submit">
+                <button type="button" onClick={() => onSubmit(otp)}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
                   {t("verify.btn")}
                 </button>
               </div>
-            </frm>
+            </form>
 
             <div className="not-member text-center my-3">
               <p>
