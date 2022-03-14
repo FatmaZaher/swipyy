@@ -98,7 +98,6 @@ const Appearance = (props) => {
   let currentUser = {};
   if (user) {
     currentUser = user.data;
-    currentUser.is_pro = false
   }
   const [settings, setSettings] = useState({});
 
