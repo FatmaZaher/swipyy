@@ -55,7 +55,7 @@
   },
   "verify": {
     "title": "Identity Verification",
-    "note": "Please check your neglected Junk mail if you do not find the activation code in the Inbox",
+    "note": "Please check your junk mail or phone messages if you can't find the activation code in the Inbox",
     "btn": "Verify",
     "is_remember": "Are you a member ?",
     "sign_in": "Sign in"

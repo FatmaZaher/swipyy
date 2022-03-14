@@ -7,19 +7,16 @@ const API_URL = "https://swipyy.com/api/";
 //   'Authorization': 'JWT fefege...'
 // }
 const register = (values) => {
+  const newValues = {};
+  newValues.password = values.password;
+  newValues.password_confirmation = values.password_confirmation;
+  if (values.phone) {
+    newValues.phone = '+' + values.phone;
+  } else if (values.email) {
+    newValues.email = values.email;
+  }
   return axios
-    .post(
-      API_URL + "auth/signup",
-      {
-        // name,
-        email: values.email,
-        phone: values.phone,
-
-        password: values.password,
-        password_confirmation: values.password_confirmation,
-      },
-      { headers: authHeader() }
-    )
+    .post(API_URL + "auth/signup", newValues, { headers: authHeader() })
     .then((response) => {
       console.log(response);
       const token = response.data.data.access_token;

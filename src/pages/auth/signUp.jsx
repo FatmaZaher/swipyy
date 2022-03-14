@@ -93,9 +93,9 @@ const SignUp = () => {
     setSuccessful(false);
     let newValues = values;
     if (key === "email") {
-      newValues.phone = "";
+      newValues.phone = null;
     } else if (key === "phone") {
-      newValues.email = "";
+      newValues.email = null;
     }
     dispatch(register(newValues))
       .then((res) => {
