@@ -32,10 +32,15 @@ import LinkBlue from "../component/icons/LinkBlue";
 import SocialBlue from "../component/icons/SocialBlue";
 import SliderBlue from "../component/icons/SliderBlue";
 import MeasssssBlue from "../component/icons/MeasssssBlue";
+import MenuIcon from "../component/icons/MenuIcon";
+
+
 import LocationBlue from "../component/icons/LocationBlue";
 import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
+
+
 import axios from "axios";
 import UploadImg from "../component/UploadImg";
 import LockModal from "../component/LockModal";
@@ -335,6 +340,8 @@ const Appearance = (props) => {
       return <SliderBlue />;
     } else if (icon === "messages") {
       return <MeasssssBlue />;
+    }else if (icon === "menu") {
+      return <MenuIcon />;
     } else if (icon === "location") {
       return <LocationBlue />;
     } else if (icon === "banks") {
