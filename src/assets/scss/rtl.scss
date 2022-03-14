@@ -188,6 +188,13 @@
     transform: translate(50%);
     left: auto;
   }
+  .form-group-category label {
+    right: 10px;
+    left: auto;
+  }
+  .social-icon .with-border {
+    padding: 20px 20px 20px 0;
+  }
   @media (max-width: 700px) {
     .info-box-text {
       left: 0;
@@ -195,4 +202,7 @@
       transform: translate(0);
     }
   }
+  .file-info, .images-uploads {
+    text-align: right;
+}
 }

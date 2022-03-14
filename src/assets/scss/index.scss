@@ -436,3 +436,20 @@ ul {
     }
   }
 }
+.login-section .nav .nav-item {
+  width: 50%;
+}
+
+.login-section .nav .nav-item button {
+  width: 90%;
+  border-bottom: 2px solid #ccc !important;
+  border-radius: 0;
+}
+
+.login-section .nav .nav-item button.active {
+  border: navajowhite;
+  border-radius: 10px;
+}
+.react-tel-input{
+  direction: ltr;
+}

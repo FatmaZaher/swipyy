@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 // import SwitchButton from "../../component/SwitchButton";
 // import  Form from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import Editicon from "../icons/Editicon";
 import Deleteicon from "../icons/Deleteicon";
-import { useSelector } from "react-redux";
 
 import DropImg from "../form/DropImg";
 import { Accordion } from "react-bootstrap";

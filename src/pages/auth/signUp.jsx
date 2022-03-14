@@ -20,8 +20,10 @@ import { loginSocial } from "../../actions/auth";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import { GoogleLogin } from "react-google-login";
+import { Tab, Tabs } from "react-bootstrap";
 const SignUp = () => {
   const { t } = useTranslation();
+  const [key, setKey] = useState("email");
 
   const history = useHistory();
   const [successful, setSuccessful] = useState(false);
@@ -88,10 +90,14 @@ const SignUp = () => {
     // name: Yup.string().required("Enter Your Name*"),
   });
   const onSubmit = (values) => {
-    console.log(values);
     setSuccessful(false);
-
-    dispatch(register(values))
+    let newValues = values;
+    if (key === "email") {
+      newValues.phone = "";
+    } else if (key === "phone") {
+      newValues.email = "";
+    }
+    dispatch(register(newValues))
       .then((res) => {
         setSuccessful(true);
         console.log("register done");
@@ -153,51 +159,87 @@ const SignUp = () => {
                     placeholder="user name"
                     error="true"
                   /> */}
-                  <div className="row">
-                    <div className="col-md-12">
-                      <FormikControl
-                        control="input"
-                        type="text"
-                        name="email"
-                        label={t("register.email_label")}
-                        placeholder={t("register.email_placeholder")}
-                        error="true"
-                      />
-                    </div>
-                    <div className="col-md-12">
-                      <div className="form-control mb-3">
-                        <label htmlFor="" className="mb-2">
-                          {t("register.phone_label")}
-                        </label>
-                        <PhoneInput
-                          country={"us"}
-                          value={formik.values.phone}
-                          onChange={(e) => handlePhone(e, formik.setFieldValue)}
-                          enableSearch={true}
-                        />
+                  <Tabs
+                    defaultActiveKey="profile"
+                    id="uncontrolled-tab-example"
+                    className="mb-3"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                  >
+                    <Tab eventKey="email" title={t("register.email")}>
+                      <div className="row pt-3">
+                        <div className="col-md-12">
+                          <FormikControl
+                            control="input"
+                            type="text"
+                            name="email"
+                            label={t("register.email_label")}
+                            placeholder={t("register.email_placeholder")}
+                            error="true"
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <FormikControl
+                            control="input"
+                            type="password"
+                            name="password"
+                            label={t("register.password_label")}
+                            placeholder="*************"
+                            error="true"
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <FormikControl
+                            control="input"
+                            type="password"
+                            name="password_confirmation"
+                            label={t("register.password_confirm_label")}
+                            placeholder="*************"
+                            error="true"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-6">
-                      <FormikControl
-                        control="input"
-                        type="password"
-                        name="password"
-                        label={t("register.password_label")}
-                        placeholder="*************"
-                        error="true"
-                      />
-                    </div>
-                    <div className="col-md-6">
-                      <FormikControl
-                        control="input"
-                        type="password"
-                        name="password_confirmation"
-                        label={t("register.password_confirm_label")}
-                        placeholder="*************"
-                        error="true"
-                      />
-                    </div>
-                  </div>
+                    </Tab>
+                    <Tab eventKey="phone" title={t("register.phone")}>
+                      <div className="row pt-3">
+                        <div className="col-md-12">
+                          <div className="form-control mb-3">
+                            <label htmlFor="" className="mb-2">
+                              {t("register.phone_label")}
+                            </label>
+                            <PhoneInput
+                              country={"us"}
+                              value={formik.values.phone}
+                              onChange={(e) =>
+                                handlePhone(e, formik.setFieldValue)
+                              }
+                              enableSearch={true}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <FormikControl
+                            control="input"
+                            type="password"
+                            name="password"
+                            label={t("register.password_label")}
+                            placeholder="*************"
+                            error="true"
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <FormikControl
+                            control="input"
+                            type="password"
+                            name="password_confirmation"
+                            label={t("register.password_confirm_label")}
+                            placeholder="*************"
+                            error="true"
+                          />
+                        </div>
+                      </div>
+                    </Tab>
+                  </Tabs>
 
                   <div className="remmeber-forget">
                     <FormikControl

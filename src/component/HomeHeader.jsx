@@ -30,7 +30,7 @@ const HomeHeader = (props) => {
   const copyUserName = async () => {
     await navigator.clipboard.writeText("swipyy.com/" + currentUser.username);
     Swal.fire({
-      title: "Done copy",
+      title: "copied done",
       text: "swipyy.com/" + currentUser.username,
       icon: "success",
       confirmButtonText: "close",
@@ -40,7 +40,7 @@ const HomeHeader = (props) => {
   const copyShortName = async () => {
     await navigator.clipboard.writeText("swipyy.com/" + currentUser.short_name);
     Swal.fire({
-      title: "Done copy",
+      title: "copied done",
       text: "swipyy.com/" + currentUser.short_name,
       icon: "success",
       confirmButtonText: "close",

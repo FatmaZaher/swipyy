@@ -27,6 +27,9 @@
     "email_label": "عنوان البريد الإلكتروني **",
     "email_placeholder": "أدخل عنوان البريد الإلكتروني",
     "phone_label": " رقم الهاتف **",
+    "phone": " رقم الهاتف",
+    "email": "البريد الإلكتروني",
+
     "phone_placeholder": "أدخل  رقم الهاتف",
     "email_valid": "أدخل بريدك الإلكتروني *",
     "password_label": "كلمة المرور *",
@@ -297,6 +300,25 @@
     "deleted": "تم الحذف!",
     "text": "تم حذف ملفك.",
     "success": "نجاح"
+  },
+  "menu": {
+    "add-menu-btn": "إضافة قائمة",
+
+    "category": "التصنيف",
+    "items-prices": "الأصناف والأسعار",
+    "item": "الصنف",
+    "price": "السعر",
+    "add-item": "إضافة صنف جديد",
+    "more-details": "تفاصيل أخرى ",
+
+    "currency": "العملة",
+    "choose-currency": "إختر العملة",
+    "expand-title": "قم بتوسيع القائمة أو قائمة الأسعار",
+    "add-link-title": "إضافة ارتباط / URL",
+    "link-text": "نص الارتباط",
+    "link-url": "URL رابط",
+    "button-color": "لون الزر",
+    "font-color": "لون الخط"
   },
   "view-live": "عرض مباشر",
   "leave-here": "أفلت هنا",

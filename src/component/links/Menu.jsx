@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useSelector } from "react-redux";
+
 import * as Yup from "yup";
 import "image-upload-react/dist/index.css";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
@@ -37,7 +39,11 @@ const Link = (props) => {
   const [items, setItems] = useState([]);
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
+  const { user } = useSelector((state) => state.auth);
+  let currentUser = {};
+  if (user) {
+    currentUser = user.data;
+  }
   const settings = {
     slider_status: "1",
     title: "My camere",
@@ -306,6 +312,8 @@ const Link = (props) => {
   };
 
   const onSubmit = (values) => {
+    if (checkIsPro(1) === false) return;
+
     props.onStartRequest(true);
     axios
       .post("https://swipyy.com/api/user/menu", values, config)
@@ -368,14 +376,14 @@ const Link = (props) => {
         });
     } catch (error) {}
   };
-  // const checkIsPro = (value) => {
-  //   if (value === 1) {
-  //     if (currentUser.is_pro === false) {
-  //       setIsLockModalOpen(true);
-  //       return false;
-  //     }
-  //   }
-  // };
+  const checkIsPro = (value) => {
+    if (value === 1) {
+      if (currentUser.is_pro === false) {
+        setIsLockModalOpen(true);
+        return false;
+      }
+    }
+  };
   const handleMenuStatus = (id, value) => {
     const newValue = value === true ? "1" : "0";
     apiChange(id, { status: newValue });
@@ -472,7 +480,7 @@ const Link = (props) => {
             />
             <LinkButton
               type="submit"
-              buttontext={t("links.menu.button")}
+              buttontext={t("menu.add-menu-btn")}
               icon="yes"
               disabled={formik.values.name === "" ? true : false}
             />
@@ -540,7 +548,7 @@ const Link = (props) => {
                                 </div>
                                 <div className="link-action">
                                   <div className="form-group-category">
-                                    <label htmlFor="">Category</label>
+                                    <label htmlFor="">{t("menu.category")}</label>
                                     <select
                                       name=""
                                       id=""
@@ -578,7 +586,7 @@ const Link = (props) => {
                               </div>
                               <div className="single-item-menu-body">
                                 <div className="list-menu-items">
-                                  <h2>Items & Prices</h2>
+                                  <h2>{t("menu.items-prices")}</h2>
                                   {menu.items.map((item, item_index) => (
                                     <div
                                       key={item_index}
@@ -587,7 +595,7 @@ const Link = (props) => {
                                       <div className="list-menu-item-inputs">
                                         <div className="list-menu-item-inputs-top">
                                           <div className="form-group-category list-menu-item-inputs-item-name">
-                                            <label htmlFor="">item</label>
+                                            <label htmlFor="">{t("menu.item")}</label>
                                             <input
                                               type="text"
                                               className="form-control"
@@ -609,7 +617,7 @@ const Link = (props) => {
                                             />
                                           </div>
                                           <div className="form-group-category list-menu-item-inputs-item-price">
-                                            <label htmlFor="">Price</label>
+                                            <label htmlFor="">{t("menu.price")}</label>
                                             <input
                                               type="text"
                                               className="form-control "
@@ -660,24 +668,24 @@ const Link = (props) => {
                                     onClick={() => addItemInMenu(menu.id)}
                                   >
                                     <PlusIcon />
-                                    <span>Add new item</span>
+                                    <span>{t("menu.add-item")}</span>
                                   </button>
                                 </div>
                                 <Accordion defaultActiveKey="0">
                                   <Accordion.Item eventKey="0">
                                     <Accordion.Header>
-                                      More details
+                                    {t("menu.more-details")}
                                     </Accordion.Header>
                                     <Accordion.Body>
                                       <div className="form-group">
                                         <div className="row">
                                           <div className="col-3">
-                                            <h5 htmlFor="">Currency</h5>
+                                            <h5 htmlFor="">{t("menu.currency")}</h5>
                                           </div>
                                           <div className="col-9">
                                             <div className="form-group-category">
                                               <label htmlFor="">
-                                                Choose currency
+                                              {t("menu.choose-currency")}
                                               </label>
                                               <select
                                                 name=""
@@ -709,7 +717,7 @@ const Link = (props) => {
                                       <div className="social-icon">
                                         <div className="high-title with-border">
                                           <p>
-                                            {t("Expand the menu or price list")}
+                                          {t("menu.expand-title")}
                                             <ProBtn />
                                           </p>
 
@@ -737,7 +745,7 @@ const Link = (props) => {
                                       <div className="social-icon">
                                         <div className="high-title with-border">
                                           <p>
-                                            {t(" Add link / URL")}
+                                          {t("menu.add-link-title")}
                                             <ProBtn />
                                           </p>
 
@@ -765,7 +773,7 @@ const Link = (props) => {
                                       {menu.url_status == 1 ? (
                                         <div className="list-menu-item-inputs-top">
                                           <div className="form-group-category w-50">
-                                            <label htmlFor="">Link text</label>
+                                            <label htmlFor="">{t("menu.link-text")}</label>
                                             <input
                                               type="text"
                                               className="form-control "
@@ -785,7 +793,7 @@ const Link = (props) => {
                                             />
                                           </div>
                                           <div className="form-group-category w-50">
-                                            <label htmlFor="">Link url</label>
+                                            <label htmlFor="">{t("menu.link-url")}</label>
                                             <input
                                               type="text"
                                               className="form-control "
@@ -809,7 +817,7 @@ const Link = (props) => {
 
                                       <div className="button-color my-3">
                                         <div className="input-color-box-parent">
-                                          <h3>{t("Button color")}</h3>
+                                          <h3>{t("menu.button-color")}</h3>
                                           <div
                                             className="input-color-box"
                                              style={{ background: menu.button_color }}
@@ -837,7 +845,7 @@ const Link = (props) => {
                                           </div>
                                         </div>
                                         <div className="input-color-box-parent">
-                                          <h3>{t("Font color")}</h3>
+                                          <h3>{t("menu.font-color")}</h3>
 
                                           <div
                                             className="input-color-box"
