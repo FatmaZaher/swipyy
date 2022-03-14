@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import AppearanceIcon from "./icons/AppearanceIcon";
 import PaymentIcon from "./icons/PaymentIcon";
 import { useSelector } from "react-redux";
 import LanguageSelector from "./LanguageSelector ";
+import Swal from "sweetalert2";
 
 const HomeHeader = (props) => {
   const { t } = props;
@@ -25,13 +26,25 @@ const HomeHeader = (props) => {
   if (user) {
     currentUser = user.data;
   }
- 
+
   const copyUserName = async () => {
     await navigator.clipboard.writeText("swipyy.com/" + currentUser.username);
+    Swal.fire({
+      title: "Done copy",
+      text: "swipyy.com/" + currentUser.username,
+      icon: "success",
+      confirmButtonText: "close",
+    });
     showLinkList();
   };
   const copyShortName = async () => {
     await navigator.clipboard.writeText("swipyy.com/" + currentUser.short_name);
+    Swal.fire({
+      title: "Done copy",
+      text: "swipyy.com/" + currentUser.short_name,
+      icon: "success",
+      confirmButtonText: "close",
+    });
     showLinkList();
   };
   const config = JSON.parse(localStorage.getItem("headers"));
@@ -41,7 +54,7 @@ const HomeHeader = (props) => {
     localStorage.removeItem("user_token");
     window.location.replace("/login");
   };
- 
+
   return (
     <>
       <div className="home-header">

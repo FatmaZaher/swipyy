@@ -80,9 +80,7 @@ const SignUp = () => {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email(t("register.email_valid"))
-      .required(t("register.email_required")),
+    email: Yup.string().email(t("register.email_valid")),
     password: Yup.string().required(t("register.password_valid")),
     password_confirmation: Yup.string().required(
       t("register.password_confirm_valid")
@@ -93,9 +91,7 @@ const SignUp = () => {
     console.log(values);
     setSuccessful(false);
 
-    dispatch(
-      register(values)
-    )
+    dispatch(register(values))
       .then((res) => {
         setSuccessful(true);
         console.log("register done");
@@ -170,7 +166,9 @@ const SignUp = () => {
                     </div>
                     <div className="col-md-12">
                       <div className="form-control mb-3">
-                        <label htmlFor="" className="mb-2">{t("register.phone_label")}</label>
+                        <label htmlFor="" className="mb-2">
+                          {t("register.phone_label")}
+                        </label>
                         <PhoneInput
                           country={"us"}
                           value={formik.values.phone}

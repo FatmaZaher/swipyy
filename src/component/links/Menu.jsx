@@ -663,7 +663,7 @@ const Link = (props) => {
                                     <span>Add new item</span>
                                   </button>
                                 </div>
-                                <Accordion>
+                                <Accordion defaultActiveKey="0">
                                   <Accordion.Item eventKey="0">
                                     <Accordion.Header>
                                       More details

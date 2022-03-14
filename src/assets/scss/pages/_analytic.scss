@@ -74,7 +74,7 @@
     }
   }
   .row-2 {
-    @include flex(center, space-between);
+    display: flex;
     .device-category-charts,
     .mobile-device {
       display: inline-block;

@@ -16,6 +16,7 @@ import QuestionIcon from "../component/icons/QuestionIcon";
 import Chart from "react-apexcharts";
 import MapChart from "../component/MapChart";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   theDate: "",
@@ -84,15 +85,16 @@ const Analytic = (props) => {
 
   const checkIsPro = () => {
     if (currentUser.is_pro === false) {
-      console.log(currentUser);
-
       return (
         <div className="locked-content__component">
           <div className="locked-content-header">
             <div className="locked-content-header-image"></div>
             <div className="locked-content-header-text">
               {t("analytic.pro_1")} <br />
-              {t("analytic.pro_2")} <a href="/billing">{t("analytic.pro_3")}</a>
+              {t("analytic.pro_2")}
+              <Link to="/payments">
+                <a>{t("analytic.pro_3")}</a>
+              </Link>
             </div>
           </div>
           <div className="locked-content-wrapper"></div>
@@ -383,7 +385,6 @@ const Analytic = (props) => {
               ? linkTable.map((item, index) => (
                   <tr key={index}>
                     <td>
-                      
                       <span className="text-truc" dir="ltr">
                         {item.url}
                       </span>
@@ -451,7 +452,6 @@ const Analytic = (props) => {
         </div>
       </div>
       <div className="">
-        
         <div className="device-category-charts mb-3">
           {checkIsPro()}
 
@@ -547,7 +547,11 @@ const Analytic = (props) => {
               ? referrer.map((item, index) => (
                   <tr key={index}>
                     {item.map((referrerItem, referrerIndex) => (
-                      <td key={referrerIndex}>{referrerItem}</td>
+                      <td key={referrerIndex}>
+                        <span className="text-truc" dir="ltr">
+                          {referrerItem}
+                        </span>
+                      </td>
                     ))}
                   </tr>
                 ))
