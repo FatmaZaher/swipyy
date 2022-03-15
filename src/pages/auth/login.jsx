@@ -18,6 +18,8 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 
 import { GoogleLogin } from "react-google-login";
 import LanguageSelector from "../../component/LanguageSelector ";
+import { Tab, Tabs } from "react-bootstrap";
+import PhoneInput from "react-phone-input-2";
 
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // const clientId =
@@ -49,6 +51,7 @@ const Login = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const [newMessage, setNewMessage] = useState(null);
+  const [key, setKey] = useState("email");
 
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
@@ -72,8 +75,8 @@ const Login = (props) => {
           }
           setLoading(false);
         });
-      }else{
-        setLoading(false)
+      } else {
+        setLoading(false);
       }
     }
 
@@ -103,10 +106,12 @@ const Login = (props) => {
     password: "",
   };
   const validationSchema = Yup.object({
-    login_input: Yup.string()
-      .required(t("login.email_required")),
+    login_input: Yup.string().required(t("login.email_required")),
     password: Yup.string().required(t("login.password_valid")),
   });
+  const handlePhone = (value, func) => {
+    func("login_input", "+" + value);
+  };
   const onSubmit = (values) => {
     console.log(values);
     setLoading(true);
@@ -114,6 +119,8 @@ const Login = (props) => {
       if (res.status.code === "200") {
         window.location.replace("/links");
       } else {
+        setLoading(false);
+
         setNewMessage(res.status.message);
         setTimeout(() => {
           if (res.status.message == "Please Active your account ") {
@@ -136,6 +143,11 @@ const Login = (props) => {
       }
       setLoading(false);
     });
+  };
+  const setKeySelect = (k, func) => {
+    func("login_input", "");
+    console.log(k);
+    setKey(k);
   };
   if (isLoggedIn) {
     return history.push("/links");
@@ -167,22 +179,55 @@ const Login = (props) => {
             >
               {(formik) => (
                 <Form className="login-form">
-                  <FormikControl
-                    control="input"
-                    type="text"
-                    name="login_input"
-                    label={t("login.email_label")}
-                    placeholder={t("login.email_placeholder")}
-                    error="true"
-                  />
-                  <FormikControl
-                    control="input"
-                    type="password"
-                    name="password"
-                    label={t("login.password_label")}
-                    placeholder="*************"
-                    error="true"
-                  />
+                  <Tabs
+                    defaultActiveKey="profile"
+                    id="uncontrolled-tab-example"
+                    className="mb-3"
+                    activeKey={key}
+                    onSelect={(k) => setKeySelect(k, formik.setFieldValue)}
+                  >
+                    <Tab eventKey="email" title={t("register.email")}>
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        name="login_input"
+                        label={t("login.email_label")}
+                        placeholder={t("login.email_placeholder")}
+                        error="true"
+                      />
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="password"
+                        label={t("login.password_label")}
+                        placeholder="*************"
+                        error="true"
+                      />
+                    </Tab>
+                    <Tab eventKey="phone" title={t("register.phone")}>
+                      <div className="form-control mb-3">
+                        <label htmlFor="" className="mb-2">
+                          {t("register.phone_label")}
+                        </label>
+                        <PhoneInput
+                          country={"us"}
+                          value={formik.values.phone}
+                          onChange={(e) => handlePhone(e, formik.setFieldValue)}
+                          enableSearch={true}
+                        />
+                      </div>
+
+                      <FormikControl
+                        control="input"
+                        type="password"
+                        name="password"
+                        label={t("login.password_label")}
+                        placeholder="*************"
+                        error="true"
+                      />
+                    </Tab>
+                  </Tabs>
+
                   <div className="remmeber-forget">
                     <FormikControl
                       control="checkbox"
@@ -230,7 +275,6 @@ const Login = (props) => {
                 buttonText="Login"
                 onSuccess={responseGoogle}
                 autoLoad={false}
-
                 onFailure={responseGoogle}
                 render={(renderProps) => (
                   <button

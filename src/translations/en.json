@@ -5,8 +5,8 @@
   },
   "login": {
     "title": "Sign in",
-    "email_label": "Email address or user name**",
-    "email_placeholder": "Enter email address or username or phone",
+    "email_label": "Email address or username**",
+    "email_placeholder": "Enter email address or username ",
     "email_required": "The field required*",
 
     "password_label": "Enter password*    ",
