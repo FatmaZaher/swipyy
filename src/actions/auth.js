@@ -99,8 +99,8 @@ export const verifyUrl = (token) => (dispatch) => {
     }
   );
 };
-export const login = (email, password) => (dispatch) => {
-  return AuthService.login(email, password).then(
+export const login = (login_input, password) => (dispatch) => {
+  return AuthService.login(login_input, password).then(
     (data) => {
       console.log(data);
 

@@ -72,12 +72,12 @@ const verifyUrl = (token) => {
       return response.data;
     });
 };
-const login = (email, password) => {
+const login = (login_input, password) => {
   return axios
     .post(
       API_URL + "auth/login",
       {
-        email,
+        login_input,
         password,
       },
       { headers: authHeader() }

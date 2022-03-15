@@ -99,18 +99,18 @@ const Login = (props) => {
     }
   };
   const initialValues = {
-    email: "",
+    login_input: "",
     password: "",
   };
   const validationSchema = Yup.object({
-    email: Yup.string()
+    login_input: Yup.string()
       .required(t("login.email_required")),
     password: Yup.string().required(t("login.password_valid")),
   });
   const onSubmit = (values) => {
     console.log(values);
     setLoading(true);
-    dispatch(login(values.email, values.password)).then((res) => {
+    dispatch(login(values.login_input, values.password)).then((res) => {
       if (res.status.code === "200") {
         window.location.replace("/links");
       } else {
@@ -170,7 +170,7 @@ const Login = (props) => {
                   <FormikControl
                     control="input"
                     type="text"
-                    name="email"
+                    name="login_input"
                     label={t("login.email_label")}
                     placeholder={t("login.email_placeholder")}
                     error="true"
