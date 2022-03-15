@@ -6,7 +6,7 @@
   "login": {
     "title": "Sign in",
     "email_label": "Email address or user name**",
-    "email_placeholder": "Enter email address or user name",
+    "email_placeholder": "Enter email address or username or phone",
     "email_valid": "Enter Your Email*",
     "email_required": "Enter Your Email*",
 

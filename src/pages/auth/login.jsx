@@ -104,7 +104,6 @@ const Login = (props) => {
   };
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email(t("login.email_valid"))
       .required(t("login.email_required")),
     password: Yup.string().required(t("login.password_valid")),
   });
@@ -170,7 +169,7 @@ const Login = (props) => {
                 <Form className="login-form">
                   <FormikControl
                     control="input"
-                    type="email"
+                    type="text"
                     name="email"
                     label={t("login.email_label")}
                     placeholder={t("login.email_placeholder")}
