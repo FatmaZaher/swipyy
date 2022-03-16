@@ -185,7 +185,7 @@ const Links = (props) => {
                 <div>
                   <strong>{t("links.header.menu")}</strong>
                 </div>
-                {nav.menu == 1 ? <NewBtn /> : null}
+                {nav.menues == 1 ? <NewBtn /> : null}
               </div>
             }
           >
