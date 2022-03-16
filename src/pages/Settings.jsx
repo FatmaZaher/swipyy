@@ -104,6 +104,25 @@ const Settings = (props) => {
             config={config}
             onSaveData={() => handleEditData()}
             api="user/settings/update"
+            settingName="email"
+            t={t}
+          />
+        </div>
+      </div>
+      <div className="single-item mb-3">
+        <div className="link-and-icon">
+          <div className="single-item-info">
+            <p className="name-from-link">{t("settings.current-phone")}</p>
+            <span className="the-link">{settings.phone}</span>
+          </div>
+        </div>
+        <div className="link-action">
+          <Editicon
+            item={settings}
+            config={config}
+            onSaveData={() => handleEditData()}
+            api="user/settings/update"
+            settingName="phone"
             t={t}
           />
         </div>

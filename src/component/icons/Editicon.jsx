@@ -31,6 +31,7 @@ const Editicon = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isName, setIsName] = React.useState(false);
   const [isPhone, setIsPhone] = React.useState(false);
+  const [phoneField, setPhoneField] = React.useState(null);
 
   const [message, setMessage] = React.useState(null);
 
@@ -89,9 +90,15 @@ const Editicon = (props) => {
       inputName = "title";
     }
   } else if (api === "user/settings/update") {
-    initialValues.email = item ? item.email : "";
     newItemId = "";
-    inputName = "email";
+
+    if (settingName === "email") {
+      inputName = "email";
+      initialValues.email = item ? item.email : "";
+    } else if (settingName === "phone") {
+      inputName = "phone";
+      initialValues.phone = item ? item.phone : "";
+    }
     method = axios.post;
   }
 
@@ -132,7 +139,7 @@ const Editicon = (props) => {
     setIsOpen(false);
   }
   const handlePhone = (value, func) => {
-    func("url", '+' + value);
+    func(phoneField, "+" + value);
   };
   useEffect(() => {
     if (api === "user/link") {
@@ -144,11 +151,21 @@ const Editicon = (props) => {
 
     if (api === "user/socialUser") {
       if (item.social === "whatsapp") {
+        setPhoneField("url");
         setIsPhone(true);
       }
     }
     if (api === "user/link") {
       if (item.type === "phone") {
+        setPhoneField("url");
+
+        setIsPhone(true);
+      }
+    }
+    if (api === "user/settings/update") {
+      if (settingName === "phone") {
+        setPhoneField("phone");
+
         setIsPhone(true);
       }
     }
@@ -198,7 +215,7 @@ const Editicon = (props) => {
                   <div className="form-control">
                     <PhoneInput
                       country={"us"}
-                      value={formik.values.url}
+                      value={formik.values[phoneField]}
                       onChange={(e) => handlePhone(e, formik.setFieldValue)}
                       enableSearch={true}
                     />

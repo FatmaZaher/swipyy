@@ -262,6 +262,8 @@
   "settings": {
     "password-security": "PASSWORD & SECURITY",
     "current-email": "Current Email",
+    "current-phone": "Current Phone",
+
     "password": "Password",
     "image": "Personal picture",
 

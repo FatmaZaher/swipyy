@@ -220,12 +220,23 @@ const ImgCrop = (props) => {
               <ImageDrop />
             )
           ) : null}
-          {uploadType === "background" ? (
-            item.background_img ? (
+          {uploadType === "landscape_img" ? (
+            item.landscape_img ? (
               <img
-                src={item.background_img}
+                src={item.landscape_img}
                 className="img-uploadded"
-                alt={item.background_img}
+                alt={item.landscape_img}
+              />
+            ) : (
+              <ImageDrop />
+            )
+          ) : null}
+          {uploadType === "portrait_img" ? (
+            item.portrait_img ? (
+              <img
+                src={item.portrait_img}
+                className="img-uploadded"
+                alt={item.portrait_img}
               />
             ) : (
               <ImageDrop />

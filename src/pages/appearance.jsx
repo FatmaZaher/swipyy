@@ -34,12 +34,10 @@ import SliderBlue from "../component/icons/SliderBlue";
 import MeasssssBlue from "../component/icons/MeasssssBlue";
 import MenuIcon from "../component/icons/MenuIcon";
 
-
 import LocationBlue from "../component/icons/LocationBlue";
 import LeftAlign from "../component/icons/LeftAlign";
 import CenterAlign from "../component/icons/CenterAlign";
 import RightAlign from "../component/icons/RightAlign";
-
 
 import axios from "axios";
 import UploadImg from "../component/UploadImg";
@@ -340,7 +338,7 @@ const Appearance = (props) => {
       return <SliderBlue />;
     } else if (icon === "messages") {
       return <MeasssssBlue />;
-    }else if (icon === "menu") {
+    } else if (icon === "menu") {
       return <MenuIcon />;
     } else if (icon === "location") {
       return <LocationBlue />;
@@ -1028,7 +1026,6 @@ const Appearance = (props) => {
                               (buttonIcon, index) => {
                                 return (
                                   <div
-                                    className="avatar-back"
                                     className={`avatar-back ${
                                       buttonIcon.is_pro ? "align-pro" : null
                                     }`}
@@ -1313,7 +1310,7 @@ const Appearance = (props) => {
                       <ProBtn />
                     </div>
                   </div>
-                    <div className="input-color-box-parent background-back">
+                  <div className="input-color-box-parent background-back">
                     <h3>{t("Landscape  Image")}</h3>
                     <div className="align-pro position-relative">
                       {currentUser.is_pro == 1 ? (

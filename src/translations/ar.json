@@ -262,6 +262,8 @@
   "settings": {
     "password-security": "كلمة المرور و الأمان",
     "current-email": "الإيميل الحالي",
+    "current-phone": "رقم الهاتف الحالي",
+
     "password": "كلمة المرور",
     "image": "الصورة الشخصية",
 
