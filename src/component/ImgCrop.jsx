@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -51,12 +51,13 @@ const dataURLtoFile = (url) => {
 };
 
 const ImgCrop = (props) => {
-  const { t, item, config, uploadType } = props;
+  const { t, item, config, uploadType, initialAspectRatioProp } = props;
 
   const cropperRef = useRef(null);
   const [cropper, setCropper] = useState({});
   const [cropData, setCropData] = useState({});
   const [isUpoad, setIsUpload] = useState(false);
+  const [initialAspectRatio, setInitialAspectRatio] = useState(16 / 9);
 
   const [image, setImage] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -81,6 +82,7 @@ const ImgCrop = (props) => {
       .then((res) => res.blob())
       .then((blob) => {
         let file = new File([blob], "File name", { type: "image/png" });
+        console.log(file);
         if (uploadType === "link") {
           data = {
             img: file,
@@ -170,6 +172,11 @@ const ImgCrop = (props) => {
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
+  useEffect(() => {
+    if (initialAspectRatioProp) {
+      setInitialAspectRatio(initialAspectRatioProp);
+    }
+  }, []);
   return (
     <div>
       <div className="edit-icon">
@@ -263,7 +270,7 @@ const ImgCrop = (props) => {
             src={image}
             style={{ height: 400, width: "100%" }}
             // Cropper.js options
-            initialAspectRatio={16 / 9}
+            initialAspectRatio={initialAspectRatio}
             guides={false}
             crop={onCrop}
             ref={cropperRef}

@@ -27,6 +27,8 @@ const SignUp = () => {
 
   const history = useHistory();
   const [successful, setSuccessful] = useState(false);
+
+
   const { message } = useSelector((state) => state.message);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -83,7 +85,7 @@ const SignUp = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string().email(t("register.email_valid")),
-    password: Yup.string().required(t("register.password_valid")),
+    password: Yup.string(),
     password_confirmation: Yup.string().required(
       t("register.password_confirm_valid")
     ),
@@ -254,6 +256,10 @@ const SignUp = () => {
                       {t("register.btn")}
                     </button>
                   </div>
+                  <h1>
+                  {JSON.stringify(formik.values)}
+
+                  </h1>
                   {message && (
                     <div className="form-group">
                       <div

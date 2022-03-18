@@ -1294,6 +1294,7 @@ const Appearance = (props) => {
                           config={config}
                           uploadType="portrait_img"
                           item={settings}
+                          initialAspectRatioProp={9 / 16}
                           onSaveData={() => handleEditData()}
                         />
                       ) : (
