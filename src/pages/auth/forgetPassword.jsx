@@ -15,8 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import axios from "axios";
 import LanguageSelector from "../../component/LanguageSelector ";
+import PhoneInput from "react-phone-input-2";
+import { Tab, Tabs } from "react-bootstrap";
 const SignUp = () => {
   const { t } = useTranslation();
+  const [key, setKey] = useState("email");
 
   const history = useHistory();
   const [successful, setSuccessful] = useState(false);
@@ -27,31 +30,43 @@ const SignUp = () => {
   const initialValues = {
     // name: "",
     email: "",
+    phone: "",
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email(t("reset.email_valid"))
-      .required(t("reset.email_required")),
+    email: Yup.string().email(t("reset.email_valid")),
 
     // name: Yup.string().required("Enter Your Name*"),
   });
   const onSubmit = async (values) => {
     console.log(values);
     setSuccessful(false);
+    let newValues = values;
+    if (key === "email") {
+      newValues = { email: values.email };
+    } else if (key === "phone") {
+      newValues = { phone: '+' + values.phone };
+    }
     try {
       await axios
-        .post("https://swipyy.com/api/auth/forget", { email: values.email })
+        .post("https://swipyy.com/api/auth/forget", newValues)
         .then((res) => {
           setSuccessful(true);
-          localStorage.setItem("email-reset", values.email);
+          if (key === "email") {
+            localStorage.setItem("reset-value", newValues.email);
+          } else if (key === "phone") {
+            localStorage.setItem("reset-value",  newValues.phone);
+          }
+          localStorage.setItem("reset-type", key);
+
           setMessage(res.data.status.message);
           history.push("/check");
-
         });
     } catch (error) {}
   };
-
+  const handlePhone = (value, func) => {
+    func("phone", value);
+  };
   return (
     <div className="login-page">
       <div className="left-login-side">
@@ -76,22 +91,47 @@ const SignUp = () => {
             >
               {(formik) => (
                 <Form className="login-form">
-                  {/* <FormikControl
-                    control="input"
-                    type="text"
-                    name="name"
-                    label="User Name*"
-                    placeholder="user name"
-                    error="true"
-                  /> */}
-                  <FormikControl
-                    control="input"
-                    type="email"
-                    name="email"
-                    label={t("reset.email_label")}
-                    placeholder={t("reset.email_placeholder")}
-                    error="true"
-                  />
+                  <Tabs
+                    defaultActiveKey="profile"
+                    id="uncontrolled-tab-example"
+                    className="mb-3"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                  >
+                    <Tab eventKey="email" title={t("register.email")}>
+                      <div className="row pt-3">
+                        <div className="col-md-12">
+                          <FormikControl
+                            control="input"
+                            type="email"
+                            name="email"
+                            label={t("reset.email_label")}
+                            placeholder={t("reset.email_placeholder")}
+                            error="true"
+                          />
+                        </div>
+                      </div>
+                    </Tab>
+                    <Tab eventKey="phone" title={t("register.phone")}>
+                      <div className="row pt-3">
+                        <div className="col-md-12">
+                          <div className="form-control mb-3">
+                            <label htmlFor="" className="mb-2">
+                              {t("register.phone_label")}
+                            </label>
+                            <PhoneInput
+                              country={"us"}
+                              value={formik.values.phone}
+                              onChange={(e) =>
+                                handlePhone(e, formik.setFieldValue)
+                              }
+                              enableSearch={true}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Tab>
+                  </Tabs>
 
                   <div className="login-btn my-3">
                     <button type="submit" disabled={!formik.isValid}>

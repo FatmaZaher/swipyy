@@ -44,13 +44,23 @@ const Verify = () => {
   const onSubmit = async (code) => {
     setLoadingg(true);
 
-    const email = localStorage.getItem("email-reset");
+    const reset_value = localStorage.getItem("reset-value");
+    const reset_type = localStorage.getItem("reset-type");
+    let full_detail = {};
+    if (reset_type === "email") {
+      full_detail = {
+        email: reset_value,
+        code,
+      };
+    } else if (reset_type === "phone") {
+      full_detail = {
+        phone: reset_value,
+        code,
+      };
+    }
     try {
       await axios
-        .post("https://swipyy.com/api/auth/check/code", {
-          email,
-          code,
-        })
+        .post("https://swipyy.com/api/auth/check/code", full_detail)
         .then((res) => {
           if (res.data.status.code === "200") {
             localStorage.setItem("code-reset", code);
@@ -92,7 +102,6 @@ const Verify = () => {
             <form className="login-form">
               <div className="code-input">
                 <div className="code-inputs">
-               
                   <ReactPinField
                     length={4}
                     onChange={(e) => handleOtp(e)}
@@ -108,7 +117,7 @@ const Verify = () => {
                 </div>
               </div>
               <div className="login-btn my-3">
-                <button type="button"  onClick={() => onSubmit(otp)}>
+                <button type="button" onClick={() => onSubmit(otp)}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}

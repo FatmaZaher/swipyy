@@ -35,20 +35,35 @@ const ChangePassword = (props) => {
   const onSubmit = async (values) => {
     console.log(values);
     try {
-      const email = localStorage.getItem("email-reset");
+      const reset_value = localStorage.getItem("reset-value");
+      const reset_type = localStorage.getItem("reset-type");
       const code = localStorage.getItem("code-reset");
 
-      await axios
-        .post("https://swipyy.com/api/auth/reset/password", {
-          email,
+      let full_detail = {};
+      if (reset_type === "email") {
+        full_detail = {
+          email: reset_value,
           code,
           password: values.password,
           password_confirmation: values.password_confirmation,
-        })
+        };
+      } else if (reset_type === "phone") {
+        full_detail = {
+          phone: reset_value,
+          code,
+          password: values.password,
+          password_confirmation: values.password_confirmation,
+        };
+      }
+
+      await axios
+        .post("https://swipyy.com/api/auth/reset/password", full_detail)
         .then((res) => {
           if (res.data.status.code === "200") {
             localStorage.removeItem("code-reset");
-            localStorage.removeItem("email-reset");
+            localStorage.removeItem("reset-value");
+            localStorage.removeItem("reset-type");
+
             sucesesChange();
 
             setTimeout(() => {
