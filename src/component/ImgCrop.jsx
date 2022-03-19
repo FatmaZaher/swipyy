@@ -55,6 +55,8 @@ const ImgCrop = (props) => {
 
   const cropperRef = useRef(null);
   const [cropper, setCropper] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const [cropData, setCropData] = useState({});
   const [isUpoad, setIsUpload] = useState(false);
   const [initialAspectRatio, setInitialAspectRatio] = useState(16 / 9);
@@ -75,6 +77,10 @@ const ImgCrop = (props) => {
     // console.log(cropper.getCroppedCanvas().toDataURL());
   };
   const UploadImg = (url) => {
+
+    setLoading(true)
+    setIsUpload(true)
+    
     let data = {};
     let api = {};
 
@@ -124,11 +130,15 @@ const ImgCrop = (props) => {
         const img = toFormData(data);
         try {
           axios.post(api, img, config).then((res) => {
+            setLoading(false)
+            setIsUpload(false)
             setIsOpen(false);
             sucesesEdit();
             props.onSaveData();
           });
         } catch (error) {
+          setLoading(false)
+          setIsUpload(false)
           console.log(error);
         }
       });
@@ -149,14 +159,13 @@ const ImgCrop = (props) => {
     setIsOpen(true);
   };
   const getCropData = () => {
+   
     if (typeof cropper !== "undefined") {
       UploadImg(cropper.getCroppedCanvas().toDataURL());
       setCropData(cropper.getCroppedCanvas().toDataURL());
     }
   };
-  function openModal() {
-    setIsOpen(true);
-  }
+
 
   function closeModal() {
     setIsOpen(false);
@@ -289,6 +298,9 @@ const ImgCrop = (props) => {
               className="btn btn-save form-button"
               onClick={getCropData}
             >
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
               {t("save")}
             </button>
           </div>
