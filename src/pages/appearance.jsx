@@ -536,6 +536,7 @@ const Appearance = (props) => {
                         t={t}
                         config={config}
                         uploadType="cover_img"
+                        initialAspectRatioProp={1 / 1}
                         item={settings}
                         onSaveData={() => handleEditData()}
                       />
@@ -616,6 +617,7 @@ const Appearance = (props) => {
                         t={t}
                         config={config}
                         uploadType="avatar"
+                        initialAspectRatioProp={1 / 1}
                         item={settings}
                         onSaveData={() => handleEditData()}
                       />

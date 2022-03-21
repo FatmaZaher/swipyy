@@ -202,6 +202,7 @@ const Settings = (props) => {
             t={t}
             config={config}
             uploadType="cover_img"
+            initialAspectRatioProp="1 / 1"
             item={settings}
             onSaveData={() => handleEditData()}
           />

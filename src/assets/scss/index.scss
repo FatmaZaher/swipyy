@@ -453,3 +453,29 @@ ul {
 .react-tel-input{
   direction: ltr;
 }
+
+
+.btn-save-box button b {
+    margin: 0 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-save-box button  span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-save-box-bg {
+    display: block;
+    position: absolute;
+    background: #6610f2;
+    height: 100%;
+    top: 0;
+    border-radius: 5px;
+    left: 0;
+}
+
+.btn-save-box button {
+    position: relative;
+}

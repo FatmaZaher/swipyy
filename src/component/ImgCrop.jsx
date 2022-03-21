@@ -58,6 +58,8 @@ const ImgCrop = (props) => {
   const [loading, setLoading] = useState(false);
 
   const [cropData, setCropData] = useState({});
+  const [updateProgressBarValue, setUpdateProgressBarValue] = useState(0);
+
   const [isUpoad, setIsUpload] = useState(false);
   const [initialAspectRatio, setInitialAspectRatio] = useState(16 / 9);
 
@@ -77,10 +79,9 @@ const ImgCrop = (props) => {
     // console.log(cropper.getCroppedCanvas().toDataURL());
   };
   const UploadImg = (url) => {
+    setLoading(true);
+    setIsUpload(true);
 
-    setLoading(true)
-    setIsUpload(true)
-    
     let data = {};
     let api = {};
 
@@ -129,21 +130,39 @@ const ImgCrop = (props) => {
 
         const img = toFormData(data);
         try {
-          axios.post(api, img, config).then((res) => {
-            setLoading(false)
-            setIsUpload(false)
-            setIsOpen(false);
-            sucesesEdit();
-            props.onSaveData();
-          });
+          axios
+            .post(api, img, {
+              ...config,
+              onUploadProgress: (progressEvent) => {
+                console.log(progressEvent);
+                var percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
+
+                setUpdateProgressBarValue(percentCompleted);
+                // setInterval(() => {
+                //   console.log(
+                //     Math.round((progressEvent.loaded * 100) / totalLength)
+                //   );
+                // }, 1000);
+              },
+            })
+            .then((res) => {
+              setLoading(false);
+              setIsUpload(false);
+              setIsOpen(false);
+              sucesesEdit();
+              props.onSaveData();
+            });
         } catch (error) {
-          setLoading(false)
-          setIsUpload(false)
+          setLoading(false);
+          setIsUpload(false);
           console.log(error);
         }
       });
   };
   const onChange = (e) => {
+    console.log(e);
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -159,13 +178,11 @@ const ImgCrop = (props) => {
     setIsOpen(true);
   };
   const getCropData = () => {
-   
     if (typeof cropper !== "undefined") {
       UploadImg(cropper.getCroppedCanvas().toDataURL());
       setCropData(cropper.getCroppedCanvas().toDataURL());
     }
   };
-
 
   function closeModal() {
     setIsOpen(false);
@@ -185,12 +202,12 @@ const ImgCrop = (props) => {
     if (initialAspectRatioProp) {
       setInitialAspectRatio(initialAspectRatioProp);
     }
-  }, []);
+  }, [UploadImg]);
   return (
     <div>
       <div className="edit-icon">
         <label className="img-upload-btn btn">
-          <input type="file" className="d-none" onChange={onChange} />
+          <input type="file" className="d-none" onChange={(e) => onChange(e)} />
           {/* <img
             src="https://swipyy.com/swipy/storage/app/public/avatars/3u9mlgwXE5eGWHoXmVbuDMvEDrOD2tVemNEjQOdR.png"
             alt=""
@@ -287,21 +304,25 @@ const ImgCrop = (props) => {
               setCropper(instance);
             }}
           />
-          {isUpoad ? (
-            <div className="text-center">
-              <img src={UploadLoading} alt="" />
-            </div>
-          ) : null}
+
           <div className="btn-save-box">
             <button
               disabled={isUpoad}
               className="btn btn-save form-button"
               onClick={getCropData}
             >
+              {isUpoad ? (
+                <div
+                  className="btn-save-box-bg"
+                  style={{ width: updateProgressBarValue + "%" }}
+                ></div>
+              ) : null}
+
               {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
+                <span className="spinner-border spinner-border-sm mx-1"></span>
               )}
-              {t("save")}
+              <span> {t("save")}</span>
+              {isUpoad ? <b>{updateProgressBarValue}%</b> : null}
             </button>
           </div>
         </div>
