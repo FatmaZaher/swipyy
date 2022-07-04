@@ -76,7 +76,6 @@ const ImgCrop = (props) => {
       imageElement === null || imageElement === void 0
         ? void 0
         : imageElement.cropper;
-    // console.log(cropper.getCroppedCanvas().toDataURL());
   };
   const UploadImg = (url) => {
     setLoading(true);
@@ -89,7 +88,6 @@ const ImgCrop = (props) => {
       .then((res) => res.blob())
       .then((blob) => {
         let file = new File([blob], "File name", { type: "image/png" });
-        console.log(file);
         if (uploadType === "link") {
           data = {
             img: file,
@@ -134,14 +132,12 @@ const ImgCrop = (props) => {
             .post(api, img, {
               ...config,
               onUploadProgress: (progressEvent) => {
-                console.log(progressEvent);
                 var percentCompleted = Math.round(
                   (progressEvent.loaded * 100) / progressEvent.total
                 );
 
                 setUpdateProgressBarValue(percentCompleted);
                 // setInterval(() => {
-                //   console.log(
                 //     Math.round((progressEvent.loaded * 100) / totalLength)
                 //   );
                 // }, 1000);
@@ -157,12 +153,10 @@ const ImgCrop = (props) => {
         } catch (error) {
           setLoading(false);
           setIsUpload(false);
-          console.log(error);
         }
       });
   };
   const onChange = (e) => {
-    console.log(e);
     e.preventDefault();
     let files;
     if (e.dataTransfer) {

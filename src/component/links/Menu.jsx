@@ -339,14 +339,11 @@ const Link = (props) => {
     setItems(newItems);
   };
   const itemChange = (menuIndex, itemIndex, property, value) => {
-    console.log({ menuIndex, itemIndex, property, value });
 
-    // console.log(Array.isArray(items) ? "items true" : "items false");
 
     let oldItems = [...items];
     oldItems[menuIndex]["items"][itemIndex][property] = value;
     let newItems = oldItems;
-    console.log(newItems);
     setItems(newItems);
   };
 

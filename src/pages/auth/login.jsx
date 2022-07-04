@@ -30,13 +30,11 @@ const Login = (props) => {
   // const [showloginButton, setShowloginButton] = useState(true);
   // const [showlogoutButton, setShowlogoutButton] = useState(false);
   // const onLoginSuccess = (res) => {
-  //   console.log("Login Success:", res.profileObj);
   //   setShowloginButton(false);
   //   setShowlogoutButton(true);
   // };
 
   // const onLoginFailure = (res) => {
-  //   console.log("Login Failed:", res);
   // };
 
   // const onSignoutSuccess = () => {
@@ -55,7 +53,6 @@ const Login = (props) => {
 
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
-    console.log(response);
 
     if (Object.keys(response).length > 1) {
       setLoading(true);
@@ -80,10 +77,8 @@ const Login = (props) => {
       }
     }
 
-    console.log(JSON.stringify(response));
   };
   const responseFacebook = (response) => {
-    console.log(response);
     if (Object.keys(response).length > 1) {
       setLoading(true);
       dispatch(
@@ -113,7 +108,6 @@ const Login = (props) => {
     func("login_input", "+" + value);
   };
   const onSubmit = (values) => {
-    console.log(values);
     setLoading(true);
     dispatch(login(values.login_input, values.password)).then((res) => {
       if (res.status.code === "200") {
@@ -128,9 +122,7 @@ const Login = (props) => {
               setNewMessage("You will be redirect to activate your account");
 
               setTimeout(() => {
-                console.log("res.data.data.access_token");
                 const token = res.data.access_token;
-                console.log(token);
 
                 if (token) {
                   localStorage.setItem("user_token", token);
@@ -146,7 +138,6 @@ const Login = (props) => {
   };
   const setKeySelect = (k, func) => {
     func("login_input", "");
-    console.log(k);
     setKey(k);
   };
   if (isLoggedIn) {

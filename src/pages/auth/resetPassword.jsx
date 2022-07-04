@@ -33,7 +33,6 @@ const ChangePassword = (props) => {
     Swal.fire("Good job", "edit success");
   }
   const onSubmit = async (values) => {
-    console.log(values);
     try {
       const reset_value = localStorage.getItem("reset-value");
       const reset_type = localStorage.getItem("reset-type");

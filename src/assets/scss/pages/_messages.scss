@@ -3,33 +3,46 @@
     padding: 30px;
     border-radius: $btn-input-radius;
     border: 1px solid $border-color;
+
     .switch {
       @include flex(center, start);
       font-size: 13px;
     }
+
     .form-control .label {
       color: $grad-color;
     }
+
     .with-border {
       .form-control .form-input {
         background-color: transparent;
       }
+
       @include flex(center, space-between);
       border: 1px solid $border-color;
       border-radius: 6px;
     }
   }
+
   // .form-control{
   //   width: 100% !important
   // }
 }
+
 .index {
   .index-header {
     @include flex(center, space-between);
+
     .form-button {
       background-color: $text-color;
       font-size: 13px;
       width: 154px;
     }
   }
+}
+
+.message-color {
+  color: #969ba3;
+  font-size: 14px;
+  font-weight: 400;
 }

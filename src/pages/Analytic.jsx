@@ -236,7 +236,6 @@ const Analytic = (props) => {
           setReferrer(handleTable(data.referrer));
           setLinkTable(data.link);
           setDevicesChart(handleDevicesChart(data.device_category));
-          console.log(handleDevicesChart(data.device_category));
           setGlobalMarket(handleGlobalMarket(data.views_global));
 
           props.onFinishRequest(false);

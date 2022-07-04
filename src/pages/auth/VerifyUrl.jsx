@@ -47,7 +47,6 @@ const VerifyUrl = () => {
     const queryString = window.location.search;
     const query = decodeURIComponent(queryString).replace("?", "");
     var str = qs.parse(query);
-    console.log(str);
     setToken(str.token);
     VerifyUser(str.token);
   }, []);

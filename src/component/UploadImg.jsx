@@ -65,7 +65,6 @@ const UploadImg = (props) => {
         props.onSaveData("ee");
       });
     } catch (error) {
-      console.log(error);
     }
   };
   return (

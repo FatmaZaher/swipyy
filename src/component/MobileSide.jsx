@@ -39,17 +39,12 @@ const MobileSide = (props) => {
   }
   const { isRender } = props;
   const showMobileSide = () => setMobileSide(!mobileSide);
-  const renderIframe = () => {
-    setTimeout(() => {
-      console.log("ameer");
-    }, 2000);
-  };
+
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoad(false);
     }, 5000);
-    
   }, []);
   return (
     <>

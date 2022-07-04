@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import EditIcon from "@mui/icons-material/Edit";
 import ShareIcon from "@mui/icons-material/Share";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
 import { useSelector } from "react-redux";
 
 import { Tabs, Tab } from "react-bootstrap";
@@ -63,7 +67,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const queryAttr = "data-rbd-drag-handle-draggable-id";
 
 const onSubmit = (values) => {
-  console.log(values);
   // axios
   //   .post("https://swipyy.com/api/user/link", values, config)
   //   .then((res) => {
@@ -109,6 +112,12 @@ const Appearance = (props) => {
   const [color3, setColor3] = useState("#000000");
   const [color4, setColor4] = useState("#000000");
   const [color5, setColor5] = useState("#000000");
+
+  const [btnBorderColor, setBtnBorderColor] = useState("#000000");
+
+  const [showPortraitDeleteBtn, setShowPortraitDeleteBtn] = useState(false);
+  const [showLandscapeDeleteBtn, setShowLandscapeDeleteBtn] = useState(false);
+
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [placements, setPlacements] = useState([
@@ -138,6 +147,9 @@ const Appearance = (props) => {
           setColor3(res.data.data.Settings.titile_descreption_color);
           setColor4(res.data.data.Settings.background_color);
           setColor5(res.data.data.Settings.social_icons_color);
+
+          setBtnBorderColor(res.data.data.Settings.button_border_color);
+
           let themes = res.data.data.Settings.themes;
           themes.splice(0, 0, {
             class: "theme-class-01",
@@ -145,6 +157,7 @@ const Appearance = (props) => {
             img: customTheme,
             name: "Custom theme",
           });
+
           if (res.data.data.Settings.placement.length) {
             setPlacements(res.data.data.Settings.placement);
           }
@@ -153,6 +166,7 @@ const Appearance = (props) => {
         });
     } catch (error) {}
   };
+
   const initialValues = {
     description: "",
   };
@@ -183,7 +197,8 @@ const Appearance = (props) => {
         .then((res) => {
           getAllSettings();
         });
-    } catch (error) {}
+    } catch (error) {
+    }
   };
   const checkIsPro = (value) => {
     if (value === 1) {
@@ -194,7 +209,6 @@ const Appearance = (props) => {
     }
   };
   const changeLayout = (layout, isPro) => {
-    console.log(layout);
     if (checkIsPro(isPro) === false) return;
     apiChange({ layout });
   };
@@ -252,6 +266,20 @@ const Appearance = (props) => {
   const changebtn_font_color = () => {
     apiChange({ btn_font_color: color2 });
   };
+
+  const changebutton_border_color = () => {
+    apiChange({ button_border_color: btnBorderColor });
+  };
+
+  const deletePortraitImg = () => {
+    apiChange({ portrait_img: null });
+    setShowPortraitDeleteBtn(true);
+  };
+  const deleteLandscapeImg = () => {
+    apiChange({ landscape_img: null });
+    setShowLandscapeDeleteBtn(true);
+  };
+
   const changetitile_descreption_color = () => {
     apiChange({ titile_descreption_color: color3 });
   };
@@ -327,6 +355,19 @@ const Appearance = (props) => {
   useEffect(() => {
     getAllSettings();
   }, []);
+
+  useEffect(() => {
+    settings.portrait_img !== null
+      ? setShowPortraitDeleteBtn(true)
+      : setShowPortraitDeleteBtn(false);
+  }, [settings.portrait_img]);
+
+  useEffect(() => {
+    settings.landscape_img !== null
+      ? setShowLandscapeDeleteBtn(true)
+      : setShowLandscapeDeleteBtn(false);
+  }, [settings.landscape_img]);
+
   const [placeholderProps, setPlaceholderProps] = useState({});
 
   const renderIcon = (icon) => {
@@ -401,7 +442,6 @@ const Appearance = (props) => {
     });
   };
   const sumbitDetails = async (item) => {
-    console.log(item);
     try {
       if (item.newItem) {
         apiChange({ details: [item.detail] });
@@ -524,87 +564,87 @@ const Appearance = (props) => {
           </div>
           <div className="col-md-6">
             {settings.layout === "cover" ? (
-              <div>
-                <div className="apperance-head">
-                  {t("apperance.cover-image-title")}
-                </div>
+                <div>
+                  <div className="apperance-head">
+                    {t("apperance.cover-image-title")}
+                  </div>
 
-                <div className="avatar-title">
-                  <div className="single-item mb-3">
-                    <div className="single-item-img cover-cover">
-                      <ImgCrop
-                        t={t}
-                        config={config}
-                        uploadType="cover_img"
-                        initialAspectRatioProp={1 / 1}
-                        item={settings}
-                        onSaveData={() => handleEditData()}
-                      />
-                    </div>
-                    <div className="link-and-icon">
-                      <div className="single-item-switch">
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            name="cover_img_status"
-                            checked={
-                              settings.cover_img_status == 1 ? true : false
-                            }
-                            onChange={(e) =>
-                              changeCoverStatus(e.target.checked)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className="link-action"
-                        onClick={() => editCoverImage()}
-                      >
-                        <div className="edit-icon">
-                          <Editticons />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="single-item mb-3">
-                    <div className="single-item-info">
-                      <div className="my-link">
-                        <div className="link-text">
-                          <p className="profile-title m-0">{settings.title}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="link-and-icon">
-                      <div className="single-item-switch">
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            name="title_status"
-                            checked={settings.title_status == 1 ? true : false}
-                            onChange={(e) =>
-                              changeTitleStatus(e.target.checked)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="link-action">
-                        <Editicon
-                          settingName="title"
-                          item={settings}
-                          config={config}
-                          onSaveData={() => handleEditData()}
-                          api="user/appearance/update"
+                  <div className="avatar-title">
+                    <div className="single-item mb-3">
+                      <div className="single-item-img cover-cover">
+                        <ImgCrop
                           t={t}
+                          config={config}
+                          uploadType="cover_img"
+                          initialAspectRatioProp={1 / 1}
+                          item={settings}
+                          onSaveData={() => handleEditData()}
                         />
-                        {/* <Sharicon /> */}
+                      </div>
+                      <div className="link-and-icon">
+                        <div className="single-item-switch">
+                          <div className="checkbox">
+                            <input
+                              type="checkbox"
+                              name="cover_img_status"
+                              checked={
+                                settings.cover_img_status == 1 ? true : false
+                              }
+                              onChange={(e) =>
+                                changeCoverStatus(e.target.checked)
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="link-action"
+                          onClick={() => editCoverImage()}
+                        >
+                          <div className="edit-icon">
+                            <Editticons />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="single-item mb-3">
+                      <div className="single-item-info">
+                        <div className="my-link">
+                          <div className="link-text">
+                            <p className="profile-title m-0">{settings.title}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="link-and-icon">
+                        <div className="single-item-switch">
+                          <div className="checkbox">
+                            <input
+                              type="checkbox"
+                              name="title_status"
+                              checked={settings.title_status == 1 ? true : false}
+                              onChange={(e) =>
+                                changeTitleStatus(e.target.checked)
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="link-action">
+                          <Editicon
+                            settingName="title"
+                            item={settings}
+                            config={config}
+                            onSaveData={() => handleEditData()}
+                            api="user/appearance/update"
+                            t={t}
+                          />
+                          {/* <Sharicon /> */}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : //   </Accordion.Body>
-            // </Accordion.Item>
-            null}
+              ) : //   </Accordion.Body>
+              // </Accordion.Item>
+              null}
             {settings.layout === "avatar" ? (
               <div>
                 <div className="apperance-head">
@@ -870,47 +910,47 @@ const Appearance = (props) => {
             <div className="custom-avatars">
               {settings.avatars_type
                 ? settings.avatars_type.map((avatar_type, avatar_typeIndex) => {
-                    return (
-                      <div className={`avatar-back align-pro`}>
-                        <div
-                          className="avatar"
-                          key={avatar_type.id}
-                          index={avatar_typeIndex}
+                  return (
+                    <div className={`avatar-back align-pro`}>
+                      <div
+                        className="avatar"
+                        key={avatar_type.id}
+                        index={avatar_typeIndex}
+                      >
+                        <input
+                          type="radio"
+                          id={"avatar_type-" + avatar_type.id}
+                          name="avatar_type"
+                          value={avatar_type.id}
+                          className={`${
+                            avatar_type.id == settings.avtar_type_id
+                              ? "input-active"
+                              : null
+                          }`}
+                          onChange={() =>
+                            changeAvatarType(
+                              avatar_type.id,
+                              parseInt(avatar_type.is_pro)
+                            )
+                          }
+                        />
+                        <label
+                          htmlFor={"avatar_type-" + avatar_type.id}
+                          className="d-block"
                         >
-                          <input
-                            type="radio"
-                            id={"avatar_type-" + avatar_type.id}
-                            name="avatar_type"
-                            value={avatar_type.id}
-                            className={`${
-                              avatar_type.id == settings.avtar_type_id
-                                ? "input-active"
-                                : null
-                            }`}
-                            onChange={() =>
-                              changeAvatarType(
-                                avatar_type.id,
-                                parseInt(avatar_type.is_pro)
-                              )
-                            }
+                          <img
+                            src={checkIcon}
+                            alt=""
+                            className="check-icon"
                           />
-                          <label
-                            htmlFor={"avatar_type-" + avatar_type.id}
-                            className="d-block"
-                          >
-                            <img
-                              src={checkIcon}
-                              alt=""
-                              className="check-icon"
-                            />
-                            <img src={avatar_type.img} alt="" />
-                            {parseInt(avatar_type.is_pro) ? <ProBtn /> : null}
-                            {parseInt(avatar_type.is_new) ? <NewBtn /> : null}
-                          </label>
-                        </div>
+                          <img src={avatar_type.img} alt="" />
+                          {parseInt(avatar_type.is_pro) ? <ProBtn /> : null}
+                          {parseInt(avatar_type.is_new) ? <NewBtn /> : null}
+                        </label>
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : null}
             </div>
           </Accordion.Body>
@@ -966,54 +1006,54 @@ const Appearance = (props) => {
                       <div className="custom-avatars">
                         {settings.buttons
                           ? settings.buttons.map((button, index) => {
-                              return (
+                            return (
+                              <div
+                                className={`avatar-back ${
+                                  button.is_pro ? "align-pro" : null
+                                }`}
+                              >
                                 <div
-                                  className={`avatar-back ${
-                                    button.is_pro ? "align-pro" : null
-                                  }`}
+                                  className="avatar buttons-style-shap-list"
+                                  key={button.id}
+                                  index={index}
                                 >
-                                  <div
-                                    className="avatar buttons-style-shap-list"
-                                    key={button.id}
-                                    index={index}
+                                  <input
+                                    type="radio"
+                                    id={"button-" + button.id}
+                                    name="buttonStyle"
+                                    className={`${
+                                      button.id == settings.button_type_id
+                                        ? "input-active"
+                                        : null
+                                    }`}
+                                    value={button.id}
+                                    onChange={() => changeButton(button.id)}
+                                    checked={
+                                      button.id ===
+                                      parseInt(settings.button_type_id)
+                                        ? true
+                                        : null
+                                    }
+                                  />
+                                  <label
+                                    htmlFor={"button-" + button.id}
+                                    className="d-block"
                                   >
-                                    <input
-                                      type="radio"
-                                      id={"button-" + button.id}
-                                      name="buttonStyle"
-                                      className={`${
-                                        button.id == settings.button_type_id
-                                          ? "input-active"
-                                          : null
-                                      }`}
-                                      value={button.id}
-                                      onChange={() => changeButton(button.id)}
-                                      checked={
-                                        button.id ===
-                                        parseInt(settings.button_type_id)
-                                          ? true
-                                          : null
-                                      }
+                                    <img
+                                      src={checkIcon}
+                                      alt=""
+                                      className="check-icon"
                                     />
-                                    <label
-                                      htmlFor={"button-" + button.id}
-                                      className="d-block"
-                                    >
-                                      <img
-                                        src={checkIcon}
-                                        alt=""
-                                        className="check-icon"
-                                      />
-                                      <img
-                                        src={button.img}
-                                        height="40px"
-                                        alt=""
-                                      />
-                                    </label>
-                                  </div>
+                                    <img
+                                      src={button.img}
+                                      height="40px"
+                                      alt=""
+                                    />
+                                  </label>
                                 </div>
-                              );
-                            })
+                              </div>
+                            );
+                          })
                           : null}
                       </div>
                     </div>
@@ -1025,60 +1065,60 @@ const Appearance = (props) => {
                       <div className="custom-avatars">
                         {settings.button_icon_style
                           ? settings.button_icon_style.map(
-                              (buttonIcon, index) => {
-                                return (
+                            (buttonIcon, index) => {
+                              return (
+                                <div
+                                  className={`avatar-back ${
+                                    buttonIcon.is_pro ? "align-pro" : null
+                                  }`}
+                                >
                                   <div
-                                    className={`avatar-back ${
-                                      buttonIcon.is_pro ? "align-pro" : null
-                                    }`}
+                                    className="avatar buttons-style-shap-list"
+                                    key={buttonIcon.id}
+                                    index={index}
                                   >
-                                    <div
-                                      className="avatar buttons-style-shap-list"
-                                      key={buttonIcon.id}
-                                      index={index}
+                                    <input
+                                      type="radio"
+                                      id={"button_style" + buttonIcon.id}
+                                      name="button_style"
+                                      value={buttonIcon.id}
+                                      onChange={() =>
+                                        changeButtonIcon(buttonIcon.id)
+                                      }
+                                      className={`${
+                                        buttonIcon.id ==
+                                        settings.button_icon_style_id
+                                          ? "input-active"
+                                          : null
+                                      }`}
+                                    />
+                                    <label
+                                      htmlFor={"button_style" + buttonIcon.id}
+                                      className="d-block"
                                     >
-                                      <input
-                                        type="radio"
-                                        id={"button_style" + buttonIcon.id}
-                                        name="button_style"
-                                        value={buttonIcon.id}
-                                        onChange={() =>
-                                          changeButtonIcon(buttonIcon.id)
-                                        }
-                                        className={`${
-                                          buttonIcon.id ==
-                                          settings.button_icon_style_id
-                                            ? "input-active"
-                                            : null
-                                        }`}
+                                      <img
+                                        src={checkIcon}
+                                        alt=""
+                                        className="check-icon"
                                       />
-                                      <label
-                                        htmlFor={"button_style" + buttonIcon.id}
-                                        className="d-block"
-                                      >
-                                        <img
-                                          src={checkIcon}
-                                          alt=""
-                                          className="check-icon"
-                                        />
-                                        <img
-                                          height="40px"
-                                          src={buttonIcon.img}
-                                          alt=""
-                                        />
-                                        {buttonIcon.is_pro ? (
-                                          <div className="pro-btn">
-                                            <ProBtn />
-                                          </div>
-                                        ) : null}
-                                        {/* {parseInt(buttonIcon.is_new) ? ( */}
-                                        {/* ) : null} */}
-                                      </label>
-                                    </div>
+                                      <img
+                                        height="40px"
+                                        src={buttonIcon.img}
+                                        alt=""
+                                      />
+                                      {buttonIcon.is_pro ? (
+                                        <div className="pro-btn">
+                                          <ProBtn />
+                                        </div>
+                                      ) : null}
+                                      {/* {parseInt(buttonIcon.is_new) ? ( */}
+                                      {/* ) : null} */}
+                                    </label>
                                   </div>
-                                );
-                              }
-                            )
+                                </div>
+                              );
+                            }
+                          )
                           : null}
                       </div>
                     </div>
@@ -1120,6 +1160,7 @@ const Appearance = (props) => {
                       <label htmlFor="changebtn_font_color"></label>
                     </div>
                   </div>
+
                   <div className="input-color-box-parent">
                     <h3>
                       {t("apperance.buttons.title-description-font-color")}
@@ -1138,6 +1179,24 @@ const Appearance = (props) => {
                       />
                       <span>{color3}</span>
                       <label htmlFor="changetitile_descreption_color"></label>
+                    </div>
+                  </div>
+
+                  <div className="input-color-box-parent">
+                    <h3>Button Border Color</h3>
+                    <div
+                      className="input-color-box"
+                      style={{ background: btnBorderColor }}
+                    >
+                      <input
+                        type="color"
+                        id="changebutton_border_color"
+                        value={btnBorderColor}
+                        onChange={(e) => setBtnBorderColor(e.target.value)}
+                        onBlur={(e) => changebutton_border_color()}
+                      />
+                      <span>{btnBorderColor}</span>
+                      <label htmlFor="changebutton_border_color"></label>
                     </div>
                   </div>
                 </div>
@@ -1206,49 +1265,49 @@ const Appearance = (props) => {
                 <div className="custom-avatars">
                   {settings.background_animated
                     ? settings.background_animated.map((background, index) => {
-                        return (
-                          <div className={`avatar-back  align-pro`}>
-                            <div
-                              className="avatar buttons-style-shap-list"
-                              key={background.id}
-                              index={index}
-                            >
-                              <input
-                                type="checkbox"
-                                id={"background_animated" + background.id}
-                                name="animat"
-                                className={`${
-                                  background.id ==
-                                  settings.background_animated_id
-                                    ? "input-active"
-                                    : null
-                                }`}
-                                checked={
-                                  background.id ==
-                                  settings.background_animated_id
-                                }
-                                value={background.id}
-                                onChange={(e) =>
-                                  changeBackgroundAnimate(
-                                    e,
-                                    background.id,
-                                    parseInt(background.is_pro)
-                                  )
-                                }
-                              />
+                      return (
+                        <div className={`avatar-back  align-pro`}>
+                          <div
+                            className="avatar buttons-style-shap-list"
+                            key={background.id}
+                            index={index}
+                          >
+                            <input
+                              type="checkbox"
+                              id={"background_animated" + background.id}
+                              name="animat"
+                              className={`${
+                                background.id ==
+                                settings.background_animated_id
+                                  ? "input-active"
+                                  : null
+                              }`}
+                              checked={
+                                background.id ==
+                                settings.background_animated_id
+                              }
+                              value={background.id}
+                              onChange={(e) =>
+                                changeBackgroundAnimate(
+                                  e,
+                                  background.id,
+                                  parseInt(background.is_pro)
+                                )
+                              }
+                            />
 
-                              <label
-                                htmlFor={"background_animated" + background.id}
-                                className="d-block"
-                              >
-                                <img
-                                  src={checkIcon}
-                                  alt=""
-                                  className="check-icon"
-                                />
-                                <img src={background.img} alt="" />
-                                <p className="mt-2">{background.name}</p>
-                                {/* {background.id}
+                            <label
+                              htmlFor={"background_animated" + background.id}
+                              className="d-block"
+                            >
+                              <img
+                                src={checkIcon}
+                                alt=""
+                                className="check-icon"
+                              />
+                              <img src={background.img} alt="" />
+                              <p className="mt-2">{background.name}</p>
+                              {/* {background.id}
                                 <br />
                                 {settings.background_animated_id}
                                 {background.id ===
@@ -1256,20 +1315,20 @@ const Appearance = (props) => {
                                   ? "checked"
                                   : "nott"} */}
 
-                                {parseInt(background.is_pro) ? (
-                                  <ProBtn />
-                                ) : null}
-                                {parseInt(background.is_new) ? (
-                                  <NewBtn />
-                                ) : null}
-                              </label>
-                            </div>
+                              {parseInt(background.is_pro) ? (
+                                <ProBtn />
+                              ) : null}
+                              {parseInt(background.is_new) ? (
+                                <NewBtn />
+                              ) : null}
+                            </label>
                           </div>
-                        );
-                      })
+                        </div>
+                      );
+                    })
                     : null}
                 </div>
-                <div className="upload-button">
+                <div className="upload-button mt-4">
                   <div className="input-color-box-parent">
                     <h3>{t("apperance.background.background-color")}</h3>
                     <div
@@ -1287,26 +1346,40 @@ const Appearance = (props) => {
                       <label htmlFor="changeBackgroundColor"></label>
                     </div>
                   </div>
+                  {/* Custom */}
                   <div className="input-color-box-parent background-back">
                     <h3>{t("Portrait Image")}</h3>
                     <div className="align-pro position-relative">
                       {currentUser.is_pro == 1 ? (
-                        <ImgCrop
-                          t={t}
-                          config={config}
-                          uploadType="portrait_img"
-                          item={settings}
-                          initialAspectRatioProp={9 / 16}
-                          onSaveData={() => handleEditData()}
-                        />
+                        <>
+                          <ImgCrop
+                            t={t}
+                            config={config}
+                            uploadType="portrait_img"
+                            item={settings}
+                            initialAspectRatioProp={9 / 16}
+                            onSaveData={() => handleEditData()}
+                          />
+                          {showPortraitDeleteBtn && (
+                            <div class="delete-icon-wrap">
+                              <HighlightOffIcon
+                                onClick={() => deletePortraitImg()}
+                                style={{ color: "#163152" }}
+                              />
+                            </div>
+                          )}
+                        </>
                       ) : (
-                        <div
-                          className="edit-icon"
-                          onClick={() => changeBackgroundImg()}
-                        >
-                          <label className="img-upload-btn btn">
-                            <ImageDrop />
-                          </label>
+                        <div>
+                          <div
+                            className="edit-icon"
+                            onClick={() => changeBackgroundImg()}
+                          >
+                            <label className="img-upload-btn btn">
+                              <ImageDrop />
+                            </label>
+                          </div>
+                          <div></div>
                         </div>
                       )}
 
@@ -1317,13 +1390,24 @@ const Appearance = (props) => {
                     <h3>{t("Landscape  Image")}</h3>
                     <div className="align-pro position-relative">
                       {currentUser.is_pro == 1 ? (
-                        <ImgCrop
-                          t={t}
-                          config={config}
-                          uploadType="landscape_img"
-                          item={settings}
-                          onSaveData={() => handleEditData()}
-                        />
+                        <>
+                          <ImgCrop
+                            t={t}
+                            config={config}
+                            uploadType="landscape_img"
+                            item={settings}
+                            onSaveData={() => handleEditData()}
+                          />
+
+                          {showLandscapeDeleteBtn && (
+                            <div class="delete-icon-wrap">
+                              <HighlightOffIcon
+                                onClick={() => deleteLandscapeImg()}
+                                style={{ color: "#163152" }}
+                              />
+                            </div>
+                          )}
+                        </>
                       ) : (
                         <div
                           className="edit-icon"
@@ -1357,46 +1441,46 @@ const Appearance = (props) => {
                 <div className="custom-avatars">
                   {settings.fonts
                     ? settings.fonts.map((font, index) => {
-                        return (
-                          <div className={`avatar-back align-pro`}>
-                            <div
-                              className="avatar buttons-style-shap-list"
-                              key={font.id}
-                              index={index}
+                      return (
+                        <div className={`avatar-back align-pro`}>
+                          <div
+                            className="avatar buttons-style-shap-list"
+                            key={font.id}
+                            index={index}
+                          >
+                            <input
+                              type="radio"
+                              id={"font" + font.id}
+                              name="animat"
+                              value={font.id}
+                              onChange={() =>
+                                changeFont(font.id, parseInt(font.is_pro))
+                              }
+                              className={`${
+                                font.id == settings.font_id
+                                  ? "input-active"
+                                  : null
+                              }`}
+                            />
+                            <label
+                              htmlFor={"font" + font.id}
+                              className="d-block"
                             >
-                              <input
-                                type="radio"
-                                id={"font" + font.id}
-                                name="animat"
-                                value={font.id}
-                                onChange={() =>
-                                  changeFont(font.id, parseInt(font.is_pro))
-                                }
-                                className={`${
-                                  font.id == settings.font_id
-                                    ? "input-active"
-                                    : null
-                                }`}
+                              <img
+                                src={checkIcon}
+                                alt=""
+                                className="check-icon"
                               />
-                              <label
-                                htmlFor={"font" + font.id}
-                                className="d-block"
-                              >
-                                <img
-                                  src={checkIcon}
-                                  alt=""
-                                  className="check-icon"
-                                />
-                                <img height="100px" src={font.img} alt="" />
-                                <p className="mt-2">{font.name}</p>
-                                {parseInt(font.is_pro) ? <ProBtn /> : null}
+                              <img height="100px" src={font.img} alt="" />
+                              <p className="mt-2">{font.name}</p>
+                              {parseInt(font.is_pro) ? <ProBtn /> : null}
 
-                                {parseInt(font.is_new) ? <NewBtn /> : null}
-                              </label>
-                            </div>
+                              {parseInt(font.is_new) ? <NewBtn /> : null}
+                            </label>
                           </div>
-                        );
-                      })
+                        </div>
+                      );
+                    })
                     : null}
                 </div>
               </Accordion.Body>

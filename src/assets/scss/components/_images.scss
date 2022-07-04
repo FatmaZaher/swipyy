@@ -1,27 +1,41 @@
 .add-description {
   .high-header {
     font-weight: 600;
+
     p {
       font-size: 15px;
     }
   }
+
   .form-control {
     width: 100%;
     margin: 30px 0;
     font-size: 13px;
   }
 }
+
 .color-div {
   @include flex(center, space-between);
 }
-.input-color-box-parent{
+
+.input-color-box-parent {
   margin-bottom: 20px;
-  h3{
+
+  h3 {
     font-size: 13px;
     font-weight: bold;
     color: #222;
+    margin-bottom: 15px;
+  }
+
+  .delete-icon-wrap {
+    transform: translate(65px, -97px);
+
+    cursor: pointer;
+    display: inline-block;
   }
 }
+
 .input-color-box {
   position: relative;
   width: 150px;
@@ -43,6 +57,7 @@
     z-index: 4;
     cursor: pointer;
   }
+
   span {
     position: absolute;
     top: 50%;
@@ -50,8 +65,9 @@
     color: #000;
     font-size: 16px;
     z-index: 2;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
   }
+
   label {
     position: absolute;
     top: 0;

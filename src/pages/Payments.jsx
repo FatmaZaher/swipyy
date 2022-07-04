@@ -18,21 +18,10 @@ import axios from "axios";
 import MaskedInput from "react-text-mask";
 const config = JSON.parse(localStorage.getItem("headers"));
 
-const MySwal = withReactContent(Swal);
 
-const initialValues = {
-  accountNumber: "",
-  iban: "",
-};
 
-const onSubmit = (values) => {
-  console.log("values", values);
-};
 
-const validationSchema = Yup.object({
-  accountNumber: Yup.string().required("Select Your Bank*"),
-  iban: Yup.string().required("Select Your Bank*"),
-});
+
 
 const Payments = (props) => {
   const { t } = props;

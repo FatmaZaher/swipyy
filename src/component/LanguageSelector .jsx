@@ -31,7 +31,6 @@ const LanguageSelector = () => {
     setSwitchLang(false);
   };
   useEffect(() => {
-    console.log("Setting page stuff");
     document.body.dir = currentLanguage.dir || "ltr";
     document.title = t("swipyy");
   }, [currentLanguage, t]);

@@ -14,7 +14,6 @@ import AuthService from "../services/auth.service";
 export const register = (values) => (dispatch) => {
   return AuthService.register(values).then(
     (response) => {
-      console.log(response);
       dispatch({
         type: REGISTER_SUCCESS,
       });
@@ -28,7 +27,6 @@ export const register = (values) => (dispatch) => {
       return response;
     },
     (error) => {
-      console.log(error.response);
       const message = error.response.data.status.message;
 
       dispatch({
@@ -47,7 +45,6 @@ export const register = (values) => (dispatch) => {
 export const verify = (code) => (dispatch) => {
   return AuthService.verify(code).then(
     (data) => {
-      console.log(data);
 
       return dispatch(user());
     },
@@ -102,7 +99,6 @@ export const verifyUrl = (token) => (dispatch) => {
 export const login = (login_input, password) => (dispatch) => {
   return AuthService.login(login_input, password).then(
     (data) => {
-      console.log(data);
 
       localStorage.setItem("user_token", data.data.access_token);
       const headers = JSON.stringify({
@@ -119,7 +115,6 @@ export const login = (login_input, password) => (dispatch) => {
       return data;
     },
     (error) => {
-      console.log(error.response);
       const message = error.response.data.status.message;
 
       dispatch({
@@ -154,7 +149,6 @@ export const loginSocial = (name , email,  avatar_img , accessToken) => (dispatc
       return data;
     },
     (error) => {
-      console.log(error.response);
       const message = error.response.data.status.message;
 
       dispatch({

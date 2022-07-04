@@ -18,6 +18,15 @@ const Messages = (props) => {
 
   const [settings, setSettings] = useState({});
   const [messages, setMessages] = useState([]);
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [pickedColor, setPickedColor] = useState({
+    r: "241",
+    g: "112",
+    b: "19",
+    a: "1",
+  });
+
+  const [messageColor, setMessageColor] = useState("#000000");
 
   const config = JSON.parse(localStorage.getItem("headers"));
 
@@ -28,12 +37,12 @@ const Messages = (props) => {
       axios.get("https://swipyy.com/api/user/message", config).then((res) => {
         setSettings(res.data.data.Settings);
         setMessages(res.data.data.table);
+        setMessageColor(res.data.data.Settings.message_color_text);
         props.onFinishRequest(true);
       });
     } catch (error) {}
   };
   const settingsChange = (property, value) => {
-    console.log({ property, value });
     let oldSettings = { ...settings };
     oldSettings[property] = value;
     let newSettings = oldSettings;
@@ -60,14 +69,17 @@ const Messages = (props) => {
   const changeMessage_success = (message_success) => {
     apiChange({ message_success });
   };
+
+  const changemessage_color_text = () => {
+    apiChange({ message_color_text: messageColor });
+  };
   const changeMsg_name_status = (value) => {
-    console.log(value);
     const msg_name_status = value == true ? 1 : 0;
 
     apiChange({ msg_name_status });
   };
+
   const changeMsg_phone_status = (value) => {
-    console.log(value);
     const msg_phone_status = value == true ? 1 : 0;
 
     apiChange({ msg_phone_status });
@@ -86,9 +98,11 @@ const Messages = (props) => {
   const changePhoneLabel = (phone_label) => {
     apiChange({ phone_label });
   };
+
   useEffect(() => {
     getAllSettings();
   }, []);
+
   const exportCSV = async () => {
     try {
       axios
@@ -148,6 +162,24 @@ const Messages = (props) => {
                         onBlur={(e) => changMessage_text(e.target.value)}
                       />
                     </div>
+                    <div className="input-color-box-parent">
+                      <h5 className="message-color mb-3 mt-2">Message Color</h5>
+                      <div
+                        className="input-color-box"
+                        style={{ background: messageColor }}
+                      >
+                        <input
+                          type="color"
+                          id="changemessage_color_text"
+                          value={messageColor}
+                          onChange={(e) => setMessageColor(e.target.value)}
+                          onBlur={(e) => changemessage_color_text()}
+                        />
+                        <span>{messageColor}</span>
+                        <label htmlFor="changemessage_color_text"></label>
+                      </div>
+                    </div>
+
                     <div className="high-title">
                       <FormikControl
                         control="input"
@@ -287,24 +319,24 @@ const Messages = (props) => {
         <div className="index-content">
           <table className="table">
             <thead>
-              <tr>
-                <th>{t("messages.name")}</th>
+            <tr>
+              <th>{t("messages.name")}</th>
 
-                <th>{t("messages.email")}</th>
-                <th>{t("messages.phone")}</th>
-                <th>{t("messages.text")}</th>
-              </tr>
+              <th>{t("messages.email")}</th>
+              <th>{t("messages.phone")}</th>
+              <th>{t("messages.text")}</th>
+            </tr>
             </thead>
             <tbody>
-              {messages.map((message) => (
-                <tr>
-                  <td>{message.name}</td>
+            {messages.map((message) => (
+              <tr>
+                <td>{message.name}</td>
 
-                  <td>{message.email}</td>
-                  <td>{message.phone}</td>
-                  <td>{message.text}</td>
-                </tr>
-              ))}
+                <td>{message.email}</td>
+                <td>{message.phone}</td>
+                <td>{message.text}</td>
+              </tr>
+            ))}
             </tbody>
           </table>
         </div>

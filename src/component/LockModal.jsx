@@ -24,7 +24,6 @@ const LockModal = (props) => {
   }
 
   function closeModal() {
-    console.log("closeModal closeModal");
     props.onCloseLockModal();
   }
 

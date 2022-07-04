@@ -39,7 +39,6 @@ const SignUp = () => {
     // name: Yup.string().required("Enter Your Name*"),
   });
   const onSubmit = async (values) => {
-    console.log(values);
     setSuccessful(false);
     let newValues = values;
     if (key === "email") {

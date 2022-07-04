@@ -88,7 +88,7 @@ const Sidebar = (props) => {
     };
   }, []);
 
-  const isMobile = width <= 768;
+  const isMobile = width <= 1024;
   return (
     <>
       <div className="icon-mobile">

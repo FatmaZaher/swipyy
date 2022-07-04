@@ -38,7 +38,6 @@ const Links = (props) => {
   const { t } = props;
 
   const handleEditData = (key, e) => {
-    console.log("log from linkss");
     props.onSaveData();
   };
 
@@ -54,7 +53,6 @@ const Links = (props) => {
         .get("https://swipyy.com/api/user/home", config)
         .then((res) => {
           setNav(res.data.data[0]);
-          console.log(res);
         });
     } catch (error) {}
   };

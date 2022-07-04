@@ -26,7 +26,7 @@ const Settings = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [settings, setSettings] = useState({});
   const initialValues = {
-    password: "",
+    // password: "",
     new_password: "",
     new_password_confirmation: "",
   };
@@ -158,14 +158,14 @@ const Settings = (props) => {
                 >
                   {(formik) => (
                     <Form className="login-form">
-                      <FormikControl
+                      {/* <FormikControl
                         control="input"
                         type="password"
                         name="password"
                         placeholder={t("settings.type-current-password")}
                         error="true"
                         label={t("settings.current-password")}
-                      />
+                      /> */}
                       <FormikControl
                         control="input"
                         type="password"

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import UploadLoading from "../../assets/images/UploadLoading.svg";
 import LockModal from "../LockModal";
+import { ProgressBar } from "react-bootstrap";
 
 const DropImg = (props) => {
   const { t } = props;
@@ -17,6 +18,8 @@ const DropImg = (props) => {
   const [oldImages, setoldImages] = useState([]);
   const [isUpoad, setIsUpload] = useState(false);
   const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+  const [updateProgressBarValue, setUpdateProgressBarValue] = useState(0);
+
   const { user } = useSelector((state) => state.auth);
   let currentUser = {};
   if (user) {
@@ -62,7 +65,17 @@ const DropImg = (props) => {
         .post(
           "https://swipyy.com/api/user/menu/item/update/" + item.id,
           newValues,
-          config
+          {
+            ...config,
+            onUploadProgress: (progressEvent) => {
+             
+              var percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+  
+              setUpdateProgressBarValue(percentCompleted);
+            },
+          }
         )
         .then((res) => {
           setIsUpload(false);
@@ -144,8 +157,12 @@ const DropImg = (props) => {
                 )}
               </button>
               {isUpoad ? (
-                <div className="text-center">
-                  <img src={UploadLoading} alt="" />
+                    <div className="text-center mt-3">
+              
+                  <ProgressBar
+                    now={updateProgressBarValue}
+                    label={`${updateProgressBarValue}% completed`}
+                  />
                 </div>
               ) : null}
             </div>

@@ -40,12 +40,10 @@ const Editicon = (props) => {
   function openModal() {
     setIsOpen(true);
   }
-  if (props.openModal === true) {
-    console.log(props.openModalItem);
-    if ((item.id = props.openModalItem.id)) {
-      console.log(item);
-    }
-  }
+  // if (props.openModal === true) {
+  //   if ((item.id = props.openModalItem.id)) {
+  //   }
+  // }
   const initialValues = {};
   let inputName;
   let labelName = "";

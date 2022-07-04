@@ -18,7 +18,6 @@ const register = (values) => {
   return axios
     .post(API_URL + "auth/signup", newValues, { headers: authHeader() })
     .then((response) => {
-      console.log(response);
       const token = response.data.data.access_token;
       if (token) {
         localStorage.setItem("user_token", token);

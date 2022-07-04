@@ -19,17 +19,7 @@ const Home = ({ component: Component, ...rest }) => {
     setIsRender(false);
   };
 
-  // const showMobile = () => {
-  //   console.log("iframe");
-
-  //   console.log(iframe);
-  //   console.log("iframe");
-  //   if (iframe === true) {
-  //     return <MobileSide />;
-  //   } else {
-  //     return null;
-  //   }
-  // };
+ 
   return (
     <Route
       {...rest}

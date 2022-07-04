@@ -106,7 +106,7 @@ const Link = (props) => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
+   
     props.onStartRequest(true);
     axios
       .post("https://swipyy.com/api/user/link", values, config)

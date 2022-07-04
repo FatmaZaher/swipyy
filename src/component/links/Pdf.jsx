@@ -20,6 +20,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import FormikControl from "../form/FormikControl";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { ProgressBar } from "react-bootstrap";
 const customStyles = {
   content: {
     top: "50%",
@@ -73,6 +74,9 @@ const Pdf = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [items, setItems] = useState([]);
+
+  const [updateProgressBarValue, setUpdateProgressBarValue] = useState(0);
+
   const checkSize = (size) => {
     if (currentUser.is_pro === true) {
       return true;
@@ -124,7 +128,7 @@ const Pdf = (props) => {
         )
         .then((res) => {
           sucesesEdit();
-          handleEditData()
+          handleEditData();
         });
     } catch (error) {}
   };
@@ -132,7 +136,6 @@ const Pdf = (props) => {
     setSelectedFile(event.target.files[0]);
     const file = event.target.files[0];
 
-    console.log(file.size);
     if (checkSize(file.size) === false) return;
     const img = toFormData({
       src: event.target.files[0],
@@ -142,7 +145,17 @@ const Pdf = (props) => {
 
     try {
       await axios
-        .post("https://swipyy.com/api/user/files", img, config)
+        .post("https://swipyy.com/api/user/files", img, {
+          ...config,
+          onUploadProgress: (progressEvent) => {
+            var percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+
+            setUpdateProgressBarValue(percentCompleted);
+       
+          },
+        })
         .then((res) => {
           getFiles();
           setIsFilePicked(false);
@@ -151,7 +164,6 @@ const Pdf = (props) => {
         })
         .then((res) => {});
     } catch (error) {
-      console.log(error);
     }
   };
   const getFiles = () => {
@@ -188,7 +200,10 @@ const Pdf = (props) => {
             <div>
               {checkSize() ? (
                 <div className="file-info mt-3 pt-3 text-center">
-                  <img src={UploadLoading} alt="" />
+                  <ProgressBar
+                    now={updateProgressBarValue}
+                    label={`${updateProgressBarValue}% completed`}
+                  />
                   {/* <p>Filename: {selectedFile.name}</p>
                  <p>Filetype: {selectedFile.type}</p>
                  <p>Size in bytes: {selectedFile.size}</p>

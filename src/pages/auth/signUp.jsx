@@ -33,7 +33,6 @@ const SignUp = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
-    console.log(response);
 
     if (Object.keys(response).length > 1) {
       setSuccessful(false);
@@ -54,10 +53,8 @@ const SignUp = () => {
       }
     }
 
-    console.log(JSON.stringify(response));
   };
   const responseFacebook = (response) => {
-    console.log(response);
     if (Object.keys(response).length > 1) {
       setSuccessful(false);
       dispatch(
@@ -102,7 +99,6 @@ const SignUp = () => {
     dispatch(register(newValues))
       .then((res) => {
         setSuccessful(true);
-        console.log("register done");
         history.push("/verify");
       })
       .then((res) => {

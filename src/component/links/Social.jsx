@@ -115,7 +115,6 @@ const Social = (props) => {
     } catch (error) {}
   };
   const onSubmit = (values) => {
-    console.log(values);
     props.onStartRequest(false);
     axios
       .post("https://swipyy.com/api/user/socialUser", values, config)
@@ -137,7 +136,6 @@ const Social = (props) => {
     func("social_id", value.id);
     func("url", "");
 
-    console.log(value);
     setSocialPlaceholder(value.placeholder);
   };
   const handlePhone = (value, func) => {

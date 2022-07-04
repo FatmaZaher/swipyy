@@ -30,7 +30,6 @@ const BankModal = (props) => {
     iban: bank.iban,
     bank_id: bank.bank_id,
   };
-  console.log();
   const customStyles = {
     content: {
       top: "50%",
@@ -42,7 +41,6 @@ const BankModal = (props) => {
     },
   };
   const onSubmit = async (values) => {
-    console.log(values);
     try {
       await axios
         .put(
@@ -66,12 +64,10 @@ const BankModal = (props) => {
   }
 
   function closeModal() {
-    console.log("closeModal closeModal");
 
     setIsOpen(false);
   }
   function sucesesEdit() {
-    console.log('sucesesEdit sucesesEdit sucesesEdit');
     Swal.fire(
       t("edit-success.good-job"),
       t("edit-success.edited-success"),
